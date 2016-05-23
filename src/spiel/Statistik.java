@@ -1,9 +1,11 @@
 package spiel;
 
+import javax.swing.*;
+
 /**
  * Created by ehampel on 23.05.2016.
  */
-public class Statistik {
+public class Statistik extends JPanel{
     private String spielername ="";
     private int gewonneneRunden;
     private int verloreneHaelften;

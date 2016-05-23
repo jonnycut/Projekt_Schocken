@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3434913036">
+    <data-source source="LOCAL" name="PostgreSQL - db_schocken@localhost" uuid="55c9d757-89aa-42a2-93e4-9036b091b5a9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/db_schocken</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>

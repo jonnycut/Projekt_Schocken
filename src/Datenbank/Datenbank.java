@@ -18,7 +18,7 @@ import java.util.Properties;
 public class Datenbank {
     private static Datenbank datenbank;
     private static java.sql.Connection verbindung;
-    private static String ip = "";
+    private static String ip = "localhost";
 
     private Datenbank() {
 
@@ -50,7 +50,7 @@ public class Datenbank {
         if (renew) {
             String host = ip;
             int port = 5432;
-            String database = "db_schocken";
+            String database = "db_schocken2";
 
             try {
                 Socket socket = new Socket(host, port);
@@ -159,7 +159,7 @@ public class Datenbank {
 
         try {
             stmt.executeUpdate(
-                    "INSERT INTO t_spielleiter " +
+                    "INSERT INTO t_Spielleiter " +
                             " VALUES ('" + spielleiter + "')");
 
         } catch (SQLException e) {
@@ -192,10 +192,8 @@ public class Datenbank {
         ResultSet r =stmt.executeQuery(
                 "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = " + kennung + " AND "+ "Passwort = "+ passwort );
 
-        if(r.next())
-            return true;
-        else
-            return false;
+        return r.next();
+
     }
 
     /**
@@ -239,6 +237,20 @@ public class Datenbank {
         }
         else
             return 1;
+    }
+
+    public void insertTeilnehmer(String teilnehmer,int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+
+        try {
+            stmt.executeUpdate("INSERT INTO t_Spiel " +
+                    "(Spiel_ID,fk_t_Spieler_Kennung)" +
+                    " VALUES " + "('" + spielID + "','" + teilnehmer + "'");
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
 
     }
 
