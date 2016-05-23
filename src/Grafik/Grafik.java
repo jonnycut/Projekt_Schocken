@@ -45,7 +45,7 @@ public class Grafik {
     public static final Icon AVATAR_WUKI = new ImageIcon(Image.class.getResource("Avatar_WUKI.png"));
 
     public static final Icon AVATAR_YODA = new ImageIcon(Image.class.getResource("Avatar_YODA.png"));
-
+    //test
 
     //------------------------------------------------WÜRFEL----------------------------------------------------------
 

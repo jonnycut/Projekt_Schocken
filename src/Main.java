@@ -1,5 +1,4 @@
-import grafik.Grafik;
-import gui.GUI;
+import Grafik.Grafik;
 import spiel.Spieler;
 import spiel.SpielerPanel;
 
