@@ -65,14 +65,14 @@ public class SpielerPanel extends JPanel {
         if(s1[1].getWert()==1 && s1[2].getWert() ==1){
             if(s2[1].getWert()==1 &&s2[2].getWert()==1){
                 if(s1[0].getWert()>s2[0].getWert()){
-                    return
+                    return 1;
                 }
             }
         }else if (s2[1].getWert()==1 && s2[2].getWert() ==1){
-
+            return 1;
         }
 
-
+return 1;
     }
 
 }

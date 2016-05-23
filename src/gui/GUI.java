@@ -1,8 +1,6 @@
 package gui;
 
-import Grafik.Grafik;
-import netzwerk.Client;
-import netzwerk.Server;
+import grafik.Grafik;
 import spiel.SpielerPanel;
 
 import javax.swing.*;
@@ -20,26 +18,26 @@ public class GUI extends JFrame{
     private Anmeldung anmeldung = new Anmeldung();
     private Registrierung registrierung = new Registrierung();
     private Statistik statistik = new Statistik();
-    private Client client = new Client("");
-    private Server server = new Server();
+//    private Client client = new Client("");
+//    private Server server = new Server();
 
 
     public GUI(){
 
         super("Schocken");
 
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1024, 768);
         setLocationRelativeTo(null);
 
-        JPanel jp = new JPanel(new CardLayout());
-        JLabel jl = new JLabel();
-        jl.setIcon(Grafik.TISCH_LOGO);
-        jp.add(jl);
+        JPanel jp = new JPanel(new BorderLayout());
+        JButton jb = new JButton();
+        jb.setIcon(Grafik.TISCH_LOGO);
+        jp.add(jb,BorderLayout.CENTER);
 
 
 
-
+        add(jb);
         setVisible(true);
 
     }
