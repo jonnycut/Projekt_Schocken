@@ -1,6 +1,8 @@
 package gui;
 
 import Grafik.Grafik;
+import netzwerk.Client;
+import netzwerk.Server;
 import spiel.SpielerPanel;
 
 import javax.swing.*;
@@ -17,8 +19,8 @@ public class GUI extends JFrame{
     private Infobereich infobereich = new Infobereich();
     private Anmeldung anmeldung = new Anmeldung();
     private Registrierung registrierung = new Registrierung();
-    private Statisktik statistik = new Statistik();
-    private Client client = new Client();
+    private Statistik statistik = new Statistik();
+    private Client client = new Client("");
     private Server server = new Server();
 
 
