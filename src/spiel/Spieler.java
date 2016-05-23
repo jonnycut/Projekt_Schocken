@@ -12,13 +12,16 @@ import grafik.Grafik;
  */
 public class Spieler implements Comparable <Spieler>{
     private Becher becher;
+
+
+
     private int strafpunkte;
     private int haelfte;
-    private Grafik profilBild;
+    private ImageIcon profilBild;
     private String letztesBild;
     private String name;
 
-    public Spieler(String name, Grafik profilBild){
+    public Spieler(String name, ImageIcon profilBild){
 
         this.becher = new Becher();
         this.profilBild = profilBild;
@@ -32,12 +35,20 @@ public class Spieler implements Comparable <Spieler>{
         return letztesBild;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Becher getBecher(){
         return  this.becher;
     }
 
-    public Grafik getProfilBild() {
+    public ImageIcon getProfilBild() {
         return profilBild;
+    }
+
+    public int getStrafpunkte() {
+        return strafpunkte;
     }
 
     public void wuerfeln(){
