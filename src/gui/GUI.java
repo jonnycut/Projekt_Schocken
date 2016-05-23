@@ -6,6 +6,7 @@ import spiel.SpielerPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by dfleuren on 23.05.2016.
@@ -31,7 +32,14 @@ public class GUI extends JFrame{
         setLocationRelativeTo(null);
 
         JPanel jp = new JPanel(new BorderLayout());
+        ActionListener acl = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateView(e);
+                zustand = 2;
+            }
+        };
         JButton jb = new JButton();
+        jb.addActionListener(acl);
         jb.setIcon(Grafik.TISCH_LOGO);
         jp.add(jb,BorderLayout.CENTER);
 
@@ -47,6 +55,7 @@ public class GUI extends JFrame{
 
         switch (zustand){
 
+            case 1:
 
         }
 
