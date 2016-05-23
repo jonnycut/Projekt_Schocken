@@ -1,6 +1,5 @@
 package gui;
 
-import datenbank.DBErstellen;
 
 import javax.swing.*;
 
@@ -10,7 +9,6 @@ import javax.swing.*;
 public class Startbildschirm extends JPanel{
 
     private String dbAdresse = "";
-    private DBErstellen datenbank = new DBErstellen();
 
 
     public void pruefeDBInstanz(){

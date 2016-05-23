@@ -1,6 +1,6 @@
 package gui;
 
-import grafik.Grafik;
+import Grafik.Grafik;
 import spiel.SpielerPanel;
 
 import javax.swing.*;
