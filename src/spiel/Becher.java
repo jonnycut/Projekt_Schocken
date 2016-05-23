@@ -11,7 +11,9 @@ public class Becher {
     public Becher(){
 
         for(int i =0; i<3;i++){
-
+            wuerfel[i] = new Wuerfel();
         }
+
+        this.bild = null;
     }
 }
