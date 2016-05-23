@@ -1,6 +1,6 @@
 package gui;
 
-import grafik.Grafik;
+import Grafik.Grafik;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -68,10 +68,13 @@ public class Registrierung extends JPanel {
 
         jp.add(links, BorderLayout.WEST);
 
-        JPanel mitte = new JPanel();
+        JPanel mitte = new JPanel(new GridLayout(1,1));
         //JLabel jLMitte = new JLabel("<========>");
         //jLMitte.setForeground(Color.DARK_GRAY);
-        JButton ok = new JButton("WEITER");
+        JButton ok = new JButton("   WEITER   ");
+        ok.setForeground(Color.WHITE);
+        ok.setBorder(new LineBorder(Color.DARK_GRAY,1));
+        ok.setBackground(Color.DARK_GRAY);
 
         //mitte.add(jLMitte);
         mitte.add(ok, BorderLayout.CENTER);
