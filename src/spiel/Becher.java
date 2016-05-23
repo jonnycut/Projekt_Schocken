@@ -4,7 +4,7 @@ package spiel;
  * Created by KNapret on 23.05.2016.
  */
 public class Becher implements Comparable <Becher> {
-    private Wuerfel[] wuerfel;
+    private  Wuerfel[] wuerfel = new Wuerfel[3];
     private String bild;
     private int wurf;
 

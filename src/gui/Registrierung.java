@@ -1,6 +1,6 @@
 package gui;
 
-import grafik.Grafik;
+import Grafik.Grafik;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

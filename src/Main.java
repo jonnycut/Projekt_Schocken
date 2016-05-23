@@ -3,6 +3,7 @@ import spiel.Spieler;
 import spiel.SpielerPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,14 @@ public class Main {
         teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
 
         JFrame outline = new JFrame();
-        outline.add(new SpielerPanel(teilnehmer.get(0)));
-        outline.add(new SpielerPanel(teilnehmer.get(1)));
-        outline.add(new SpielerPanel(teilnehmer.get(2)));
-        outline.pack();
+        JPanel grundPanel = new JPanel(new GridLayout(1,3));
 
+        grundPanel.add(new SpielerPanel(teilnehmer.get(0)));
+        grundPanel.add(new SpielerPanel(teilnehmer.get(1)));
+        grundPanel.add(new SpielerPanel(teilnehmer.get(2)));
+
+        outline.add(grundPanel);
         outline.setVisible(true);
+        outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }

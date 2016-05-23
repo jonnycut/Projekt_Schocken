@@ -1,5 +1,7 @@
 package spiel;
 
+import Grafik.Grafik;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,6 +26,7 @@ public class SpielerPanel extends JPanel {
         this.spieler = spieler;
         this.auslage = new JPanel();
         this.wuerfel = new JPanel();
+        wuerfel.add(new JLabel(Grafik.WUERFELBECHER));
         this.strafpunkte = new JPanel();
         strafpunkte.add(new JLabel(""+this.spieler.getStrafpunkte()));
 
@@ -47,6 +50,7 @@ public class SpielerPanel extends JPanel {
         add(profilbild);
 
 
+        /*ToDo:EventListener für die Buttons, äußerer Rahmen 1024*768*/
 
 
 
