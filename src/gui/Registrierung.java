@@ -1,6 +1,6 @@
 package gui;
 
-import Grafik.Grafik;
+import grafik.Grafik;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -29,31 +29,33 @@ public class Registrierung extends JPanel {
         oben.add(jLoben);
         jp.add(oben, BorderLayout.NORTH);
 
-        JPanel linksUnten = new JPanel();
         JPanel links = new JPanel();
         links.setPreferredSize(new Dimension(400, 500));
         links.setBackground(Color.DARK_GRAY);
         links.setLayout(new BoxLayout(links, BoxLayout.Y_AXIS));
 
         JLabel jLName = new JLabel("Benutzername");
-        jLName.setPreferredSize(new Dimension());
+        jLName.setPreferredSize(new Dimension(0,50));
         jLName.setForeground(Color.WHITE);
         jLName.setHorizontalAlignment(SwingConstants.CENTER);
         JTextField jTName = new JTextField(20);
         JLabel jLPasswort = new JLabel("Passwort");
+        jLPasswort.setPreferredSize(new Dimension(0,50));
         jLPasswort.setForeground(Color.WHITE);
         jLPasswort.setHorizontalAlignment(SwingConstants.CENTER);
         JTextField jTPasswort = new JTextField(20);
         JLabel jLPasswortW = new JLabel("Passwort wiederholen");
+        jLPasswortW.setPreferredSize(new Dimension(0,50));
         jLPasswortW.setForeground(Color.WHITE);
         jLPasswortW.setHorizontalAlignment(SwingConstants.CENTER);
         JTextField jTPasswortW = new JTextField(20);
         JLabel jLProfil = new JLabel("Profilbild");
+        jLProfil.setPreferredSize(new Dimension(0,50));
         jLProfil.setForeground(Color.WHITE);
         jLProfil.setHorizontalAlignment(SwingConstants.CENTER);
         JButton jBProfil = new JButton();
         jBProfil.setBackground(Color.WHITE);
-        jBProfil.setPreferredSize(new Dimension(1,1));
+        jBProfil.setPreferredSize(new Dimension(130, 130));
 
         links.add(jLName);
         links.add(jTName);
@@ -67,10 +69,12 @@ public class Registrierung extends JPanel {
         jp.add(links, BorderLayout.WEST);
 
         JPanel mitte = new JPanel();
-        JLabel jLMitte = new JLabel("<========>");
-        jLMitte.setForeground(Color.DARK_GRAY);
+        //JLabel jLMitte = new JLabel("<========>");
+        //jLMitte.setForeground(Color.DARK_GRAY);
+        JButton ok = new JButton("WEITER");
 
-        mitte.add(jLMitte);
+        //mitte.add(jLMitte);
+        mitte.add(ok, BorderLayout.CENTER);
         mitte.setBackground(Color.DARK_GRAY);
 
         jp.add(mitte, BorderLayout.CENTER);
@@ -85,7 +89,7 @@ public class Registrierung extends JPanel {
 
                 JButton temp = (JButton)e.getSource();
                 jBProfil.setIcon(temp.getIcon());
-                jBProfil.setPreferredSize(new Dimension(100, 100));
+                jBProfil.setPreferredSize(new Dimension(130, 130));
                 links.add(jBProfil);
             }
         };

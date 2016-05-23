@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_BATMAN.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_BB8.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_BOBA.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_C3PO.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_C_AMERICA.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_DEADPOOL.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_FLASH.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_G_LANTERN.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_IRONMAN.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_R2D2.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_SPIDERMAN.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_SUPERMAN.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_THOR.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_TROOPER.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_VADER.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_WUKI.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Avatar_YODA.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Logo.jpg" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Tisch_BLANKO.jpg" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Tisch_LOGO.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Wuerfel_1.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Wuerfel_2.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Wuerfel_3.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Wuerfel_4.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Wuerfel_5.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/grafik/Wuerfel_6.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_BATMAN.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_BB8.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_BOBA.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_C3PO.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_C_AMERICA.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_DEADPOOL.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_FLASH.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_G_LANTERN.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_IRONMAN.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_R2D2.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_SPIDERMAN.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_SUPERMAN.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_THOR.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_TROOPER.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_VADER.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_WUKI.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_YODA.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Logo.jpg" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Tisch_BLANKO.jpg" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Tisch_LOGO.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Wuerfel_1.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Wuerfel_2.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Wuerfel_3.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Wuerfel_4.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Wuerfel_5.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Grafik/Wuerfel_6.png" charset="UTF-8" />
   </component>
 </project>
