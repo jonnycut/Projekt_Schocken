@@ -31,32 +31,40 @@ public class GUI extends JFrame{
         setSize(1024, 768);
         setLocationRelativeTo(null);
 
-        JPanel jp = new JPanel(new BorderLayout());
+        JPanel jp = new JPanel();
+
+        JPanel start = new JPanel(new BorderLayout());
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                updateView(e);
-                zustand = 2;
+                updateView(e, jp);
             }
         };
         JButton jb = new JButton();
         jb.addActionListener(acl);
         jb.setIcon(Grafik.TISCH_LOGO);
-        jp.add(jb,BorderLayout.CENTER);
+        start.add(jb, BorderLayout.CENTER);
+
+        //jp.add(anmeldung,"Anmeldung");
+        jp.add(registrierung);
 
 
-
-        add(jb);
+        add(jp);
         setVisible(true);
 
     }
 
 
-    public void updateView(ActionEvent e){
+    public void updateView(ActionEvent e, JPanel jp){
 
         switch (zustand){
 
             case 1:
-
+                ((CardLayout) jp.getLayout()).show(jp, "Anmeldung");
+                zustand = 2;
+                updateView(null,null);
+                break;
+            case 2:
+                break;
         }
 
 

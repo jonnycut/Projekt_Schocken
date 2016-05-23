@@ -13,11 +13,13 @@ public class Anmeldung extends JPanel {
     public Anmeldung(){
         super();
 
+        JPanel jp = new JPanel(new BorderLayout());
+
         JPanel oben = new JPanel();
         JLabel jLoben = new JLabel("Herzlich Willkommen");
         oben.add(jLoben);
 
-        add(oben, BorderLayout.NORTH);
+        jp.add(oben, BorderLayout.NORTH);
 
 
         JPanel links = new JPanel(new GridLayout(8,1));
@@ -28,7 +30,7 @@ public class Anmeldung extends JPanel {
         JButton ok = new JButton("OK");
         JLabel jLProfil = new JLabel("Profilbild");
         JButton jBProfil = new JButton();
-        jBProfil.setPreferredSize(new Dimension(200, 200));
+        jBProfil.setPreferredSize(new Dimension(150, 150));
         JButton jBWeiter = new JButton("WEITER");
 
         links.add(jBWeiter);
@@ -40,18 +42,19 @@ public class Anmeldung extends JPanel {
         links.add(jTName);
         links.add(jLName);
 
-        add(links, BorderLayout.EAST);
+        jp.add(links, BorderLayout.EAST);
 
         JPanel mitte = new JPanel();
-        JLabel jLMitte = new JLabel(Grafik.LOGO);
-        mitte.add(jLMitte);
-        add(mitte, BorderLayout.CENTER);
+        //JLabel jLMitte = new JLabel(Grafik.LOGO);
+        //mitte.add(jLMitte);
+
+        jp.add(mitte, BorderLayout.CENTER);
 
         JPanel rechts = new JPanel();
         JButton jBReg = new JButton("Registrieren");
 
         rechts.add(jBReg);
-        add(rechts, BorderLayout.WEST);
+        jp.add(rechts, BorderLayout.WEST);
 
         JPanel unten = new JPanel(new GridLayout(1,3));
         JPanel jPProjekt = new JPanel();
@@ -62,7 +65,7 @@ public class Anmeldung extends JPanel {
         JLabel jLPGruppe = new JLabel("Projektgruppe: U.F.O");
         jPGruppe.add(jLPGruppe);
 
-        JPanel jPFsbw = new JPanel();
+        JPanel jPFsbw = new JPanel(new FlowLayout());
         JLabel jLFsbw = new JLabel("FSBwIT 2016");
         jPFsbw.add(jLFsbw);
 
@@ -70,7 +73,9 @@ public class Anmeldung extends JPanel {
         unten.add(jPGruppe);
         unten.add(jPProjekt);
 
-        add(unten, BorderLayout.SOUTH);
+        jp.add(unten, BorderLayout.SOUTH);
+
+        add(jp);
     }
 
 
