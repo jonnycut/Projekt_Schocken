@@ -16,7 +16,20 @@ public class Stock {
         return this.strafpunkte;
     }
 
-    public void popStrafpunkt(){
-        this.strafpunkte--;
+    public int popStrafpunkt(int anzahl){
+
+        if(this.strafpunkte>= anzahl){
+            this.strafpunkte-=anzahl;
+            return anzahl;
+
+        }else if(this.strafpunkte<anzahl){
+            int puffer = strafpunkte;
+            strafpunkte = 0;
+            return puffer;
+        }else{
+            return 0;
+        }
+
+
     }
 }

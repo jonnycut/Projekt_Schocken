@@ -3,7 +3,7 @@ package spiel;
 /**
  * Created by KNapret on 23.05.2016.
  */
-public class Wuerfel {
+public class Wuerfel implements Comparable<Wuerfel> {
     private int wert;
     private boolean draussen;
 
@@ -40,6 +40,7 @@ public class Wuerfel {
      * Wert = 0 wenn gleichgroß
      * Wert < 0 wenn WuerfelWert < Vergleichswuerfel
      */
+    @Override
     public int compareTo(Wuerfel w2){
 
         return this.wert - w2.getWert();

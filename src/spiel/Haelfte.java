@@ -7,10 +7,11 @@ public class Haelfte {
 
     private Stock stock;
     private Runde runde;
-    private SpielerPanel verlierer;
+    private Spieler verlierer;
     private String art;
 
     public Haelfte(){
+        //ToDo: Art der Häfte wird wo festgelegt?
 
         this.stock = new Stock();
         this.runde = new Runde(this.stock);
