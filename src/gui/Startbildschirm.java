@@ -1,6 +1,6 @@
 package gui;
 
-import Datenbank.DBErstellen;
+import datenbank.DBErstellen;
 
 import javax.swing.*;
 

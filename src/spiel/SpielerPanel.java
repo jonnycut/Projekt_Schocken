@@ -1,78 +1,56 @@
 package spiel;
 
 import javax.swing.*;
-
+import java.awt.*;
 
 
 /**
  * Created by KNapret on 23.05.2016.
  */
 public class SpielerPanel extends JPanel {
-    private Becher becher;
-    private int strafpunkte;
-    private int haelfte;
 
-    private String letztesBild;
-    private String name;
+    private Spieler spieler;
+    private JPanel auslage;
+    private JPanel wuerfel;
+    private JPanel strafpunkte;
+    private JPanel buttons;
+    private JButton wuerfeln;
+    private JButton fertig;
+    private JPanel name;
+    private JPanel profilbild;
 
-    public SpielerPanel(String name, Icon profilBild){
-        super(/*profilBild*/);
-        this.becher = new Becher();
-        this.strafpunkte = 0;
-        this.haelfte = 0;
-        this.letztesBild = null;
-        this.name = name;
-    }
+    public SpielerPanel(Spieler spieler){
+        super(new GridLayout(6,1));
+        this.spieler = spieler;
+        this.auslage = new JPanel();
+        this.wuerfel = new JPanel();
+        this.strafpunkte = new JPanel();
+        strafpunkte.add(new JLabel(""+this.spieler.getStrafpunkte()));
 
-    public  String getLetztesBild(){
-        return letztesBild;
-    }
+        this.buttons = new JPanel();
+        this.wuerfeln = new JButton("Würfeln");
+        this.fertig = new JButton("Fertig");
+        buttons.add(wuerfeln);
+        buttons.add(fertig);
 
-    public Becher getBecher(){
-        return  this.becher;
-    }
+        this.name = new JPanel();
+        name.add(new JLabel(this.spieler.getName()));
 
-    public void wuerfeln(){
-        this.becher.wuerfeln();
-        this.letztesBild = this.becher.getBild();
+        this.profilbild = new JPanel();
+        profilbild.add(new JLabel(spieler.getProfilBild()));
 
-    }
+        add(auslage);
+        add(wuerfel);
+        add(strafpunkte);
+        add(buttons);
+        add(name);
+        add(profilbild);
 
-    public void popStrafpunkte(int anzahl){
 
-        this.strafpunkte -= anzahl;
 
-    }
 
-    public void pushStrafpunkte(int anzahl){
-
-        this.strafpunkte += anzahl;
-    }
-
-    public String beginnerWuerfeln(){
-
-        this.becher.wuerfeln();
-        this.letztesBild = this.becher.getBild();
-        return this.letztesBild;
 
     }
 
-    public int compareTo(SpielerPanel s){
-
-        Wuerfel[] s1 = this.becher.getWuerfel();
-        Wuerfel[] s2 = s.getBecher().getWuerfel();
-
-        if(s1[1].getWert()==1 && s1[2].getWert() ==1){
-            if(s2[1].getWert()==1 &&s2[2].getWert()==1){
-                if(s1[0].getWert()>s2[0].getWert()){
-                    return 1;
-                }
-            }
-        }else if (s2[1].getWert()==1 && s2[2].getWert() ==1){
-            return 1;
-        }
-
-return 1;
-    }
 
 }
