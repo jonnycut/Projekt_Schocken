@@ -7,7 +7,7 @@ public class Becher implements Comparable <Becher> {
     private  Wuerfel[] wuerfel = new Wuerfel[3];
     private String bild;
     private int wurf;
-
+    //ToDo: Test
 
     public Becher(){
 
