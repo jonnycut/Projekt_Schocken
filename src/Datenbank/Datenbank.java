@@ -1,4 +1,4 @@
-package db;
+package Datenbank;
 
 /**
  * Created by ehampel on 23.05.2016.
