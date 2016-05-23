@@ -19,7 +19,7 @@ public class Spieler implements Comparable <Spieler>{
     private Becher becher;
     private int strafpunkte;
     private int haelfte;
-    private ImageIcon profilBild;
+    private Icon profilBild;
     private String letztesBild;
     private String name;
 
@@ -29,7 +29,7 @@ public class Spieler implements Comparable <Spieler>{
      * @param name - Spielername
      * @param profilBild - ProfilBild des Spielers
      */
-    public Spieler(String name, ImageIcon profilBild){
+    public Spieler(String name, Icon profilBild){
 
         this.becher = new Becher();
         this.profilBild = profilBild;
@@ -67,7 +67,7 @@ public class Spieler implements Comparable <Spieler>{
      * Liefert das Profilbild des Spielers
      * @return Object ImageIcon
      */
-    public ImageIcon getProfilBild() {
+    public Icon getProfilBild() {
         return profilBild;
     }
 
