@@ -1,10 +1,6 @@
 package spiel;
 
 import javax.swing.*;
-import grafik.Grafik;
-
-
-
 
 
 /**

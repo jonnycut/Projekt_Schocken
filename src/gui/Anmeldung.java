@@ -1,7 +1,5 @@
 package gui;
 
-import grafik.Grafik;
-
 import javax.swing.*;
 import java.awt.*;
 
