@@ -112,6 +112,7 @@ public class Registrierung extends JPanel {
         untenLinks.setBackground(Color.DARK_GRAY);
 
         JButton jBWeiter = new JButton("WEITER");
+        jBWeiter.setEnabled(false);
         JPanel jBPweiter = new JPanel(new FlowLayout());
         jBPweiter.setBackground(Color.DARK_GRAY);
         jBPweiter.add(jBWeiter);
@@ -123,16 +124,6 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
-//        JPanel mitte = new JPanel(new GridLayout(1,1));
-//        JButton ok1 = new JButton("   WEITER   ");
-//        ok1.setForeground(Color.WHITE);
-//        ok1.setBorder(new LineBorder(Color.BLACK,1));
-//        ok1.setBackground(Color.BLACK);
-//
-//        mitte.add(ok1, BorderLayout.CENTER);
-//        mitte.setBackground(Color.DARK_GRAY);
-//
-//        jp.add(mitte, BorderLayout.CENTER);
 
         JPanel mitte = new JPanel();
         mitte.setBackground(Color.DARK_GRAY);
@@ -153,6 +144,9 @@ public class Registrierung extends JPanel {
                 jBPProfil.add(jBProfil);
                 jLMitte.setIcon(Grafik.BLOCK);
                 mitte.add(jLMitte);
+                //ToDo: Überarbeiten!!!
+                if(jTName.getText().length() != 0 && jTPasswort.getText().length() != 0 && jTPasswortW.getText().length() != 0)
+                jBWeiter.setEnabled(true);
             }
         };
 
