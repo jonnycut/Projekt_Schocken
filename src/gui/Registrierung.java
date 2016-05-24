@@ -123,14 +123,21 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
-        JPanel mitte = new JPanel(new GridLayout(1,1));
-        JButton ok1 = new JButton("   WEITER   ");
-        ok1.setForeground(Color.WHITE);
-        ok1.setBorder(new LineBorder(Color.BLACK,1));
-        ok1.setBackground(Color.BLACK);
+//        JPanel mitte = new JPanel(new GridLayout(1,1));
+//        JButton ok1 = new JButton("   WEITER   ");
+//        ok1.setForeground(Color.WHITE);
+//        ok1.setBorder(new LineBorder(Color.BLACK,1));
+//        ok1.setBackground(Color.BLACK);
+//
+//        mitte.add(ok1, BorderLayout.CENTER);
+//        mitte.setBackground(Color.DARK_GRAY);
+//
+//        jp.add(mitte, BorderLayout.CENTER);
 
-        mitte.add(ok1, BorderLayout.CENTER);
+        JPanel mitte = new JPanel();
         mitte.setBackground(Color.DARK_GRAY);
+        JLabel jLMitte = new JLabel(Grafik.BLOCK_LOGO);
+        mitte.add(jLMitte);
 
         jp.add(mitte, BorderLayout.CENTER);
 
@@ -144,6 +151,8 @@ public class Registrierung extends JPanel {
                 JButton tempB = (JButton)e.getSource();
                 jBProfil.setIcon(tempB.getIcon());
                 jBPProfil.add(jBProfil);
+                jLMitte.setIcon(Grafik.BLOCK);
+                mitte.add(jLMitte);
             }
         };
 
@@ -191,6 +200,7 @@ public class Registrierung extends JPanel {
         jp.add(unten, BorderLayout.SOUTH);
 
 
+        //-------------------------------------SUPER-PANEL-------------------------------------------------------------
         add(jp, BorderLayout.CENTER);
     }
 

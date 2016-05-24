@@ -73,9 +73,11 @@ public class Anmeldung extends JPanel {
 
         ActionListener weiterButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //Schaltet weiter und gibt das Spiel frei
+                //ToDo: Schaltet weiter und gibt das Spiel frei
             }
         };
+        jBWeiter.addActionListener(weiterButton);
+
         JPanel jBPok = new JPanel(new FlowLayout());
         jBPok.setBackground(Color.DARK_GRAY);
         JButton ok = new JButton("OK");
@@ -84,7 +86,7 @@ public class Anmeldung extends JPanel {
 
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //Prüfung in der DB auf Name, Passwort und Profiblid
+                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid
                 jBWeiter.setEnabled(true);
             }
         };
