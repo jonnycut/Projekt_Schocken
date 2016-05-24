@@ -10,6 +10,14 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by KNapret on 23.05.2016.
+ *
+ * <pre>
+ * Spielerpanel
+ *
+ * Sorgt fuer die grafische Darstellung des Spielers
+ * Enthaelt die noetigen Listener fuer den Spielverlauf
+ * (wuerfeln, aufdecken, fertig)
+ * </pre>
  */
 public class SpielerPanel extends JPanel {
 
@@ -47,7 +55,10 @@ public class SpielerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 auslage.add((JButton) e.getSource());
+
                 wuerfelAnsicht.remove((JButton) e.getSource());
+                ((JButton) e.getSource()).removeActionListener(this);
+                wuerfelAnsicht.add(new JButton());
                 wuerfelAnsicht.revalidate();
 
                 if(e.getSource().equals(w1)){
@@ -84,19 +95,35 @@ public class SpielerPanel extends JPanel {
         becher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((CardLayout)wuerfel.getLayout()).show(wuerfel,"wuerfel");
+                if(spieler.getBecher().getWurf()<2){
+                    //ToDo: MaxWuerfe anhand des Beginners begrenzen
+                    ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
+                }else{
+
+                    JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
+                }
+
             }
         });
 
         wuerfeln.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((CardLayout)wuerfel.getLayout()).show(wuerfel,"becher");
 
-                spieler.getBecher().wuerfeln();
-                w1.setIcon(spieler.getBecher().getWuerfel()[0].getGrafik());
-                w2.setIcon(spieler.getBecher().getWuerfel()[1].getGrafik());
-                w3.setIcon(spieler.getBecher().getWuerfel()[2].getGrafik());
+                if(spieler.getBecher().getWurf() <3){
+                    //ToDo: MaxWuerfe anhand des Beginners begrenzen
+
+                    ((CardLayout)wuerfel.getLayout()).show(wuerfel,"becher");
+
+                    spieler.getBecher().wuerfeln();
+                    w1.setIcon(spieler.getBecher().getWuerfel()[0].getGrafik());
+                    w2.setIcon(spieler.getBecher().getWuerfel()[1].getGrafik());
+                    w3.setIcon(spieler.getBecher().getWuerfel()[2].getGrafik());
+                }else{
+
+                    JOptionPane.showMessageDialog(null,"Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
+                }
+
 
             }
         });

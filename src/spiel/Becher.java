@@ -2,6 +2,11 @@ package spiel;
 
 /**
  * Created by KNapret on 23.05.2016.
+ * <pre>
+ *     Becherklasse
+ *     Enthaelt wuerfel
+ *     kenn die Anzahl seiner Wuerfe
+ * </pre>
  */
 public class Becher implements Comparable <Becher> {
     private  Wuerfel[] wuerfel = new Wuerfel[3];
@@ -9,7 +14,8 @@ public class Becher implements Comparable <Becher> {
     private int wurf;
 
     /**
-     * <pre>Constuctor der Becherklasse
+     * <pre>
+     * Erstellt einen neuen Becher:
      * Das Wuerfelarray wird mit 3 Wuerfeln gefuellt
      * Bild wird initial auf null gesetzt
      * Anzahl Wuerfe wird mit 0 initialisiert</pre>
@@ -30,6 +36,15 @@ public class Becher implements Comparable <Becher> {
      */
     public String getBild() {
         return bild;
+    }
+
+    /**
+     * Getter fuer die Anzahl der Wuerfe des Bechers
+     *
+     * @return Int - 0 - 3 (Da 3 Max)
+     */
+    public int getWurf(){
+        return this.wurf;
     }
 
     /**

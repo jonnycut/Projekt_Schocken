@@ -5,10 +5,14 @@ import javax.swing.*;
 
 /**
  * Created by KNapret on 23.05.2016.
- */
-
-/**
+ * <pre>
  * Hauptklasse des Spielers
+ *
+ * Enthaelt alle noetigen Daten eines Spielers
+ *
+ * </pre>
+ *
+ *
  */
 public class Spieler implements Comparable <Spieler>{
 
@@ -20,7 +24,7 @@ public class Spieler implements Comparable <Spieler>{
     private String name;
 
     /**
-     * Constructor Spieler
+     * Erstellt einen neuen Spieler mit dem angegeben Namen und Profilbild
      * Becher wird erstellt, Strafpunkte und Hälfte auf 0 gesetzt
      * @param name - Spielername
      * @param profilBild - ProfilBild des Spielers

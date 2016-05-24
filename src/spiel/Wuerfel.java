@@ -6,6 +6,10 @@ import javax.swing.*;
 
 /**
  * Created by KNapret on 23.05.2016.
+ * <pre>
+ * Wuerfelklasse
+ * </pre>
+ *
  */
 public class Wuerfel implements Comparable<Wuerfel> {
     private int wert;
@@ -14,7 +18,8 @@ public class Wuerfel implements Comparable<Wuerfel> {
     private Icon[] bilder ={Grafik.WUERFEL_1, Grafik.WUERFEL_2, Grafik.WUERFEL_3,Grafik.WUERFEL_4,Grafik.WUERFEL_5,Grafik.WUERFEL_6};
 
     /**
-     * <pre>Constructor Wuerfel
+     * <pre>
+     * Erstellt einen neuen Wuerfel
      * Setzt den Wert des Wuerfels auf eine Zufallszahl zwischen 1 und 6
      * Setzt das Bild des Wuerfels auf die entsprechende Grafik.
      * Setzt draussen auf false
