@@ -80,6 +80,10 @@ public class Wuerfel implements Comparable<Wuerfel> {
 
     }
 
+    public String toString(){
+        return ""+this.wert;
+    }
+
     /**
      * <pre>conpareTo(ein anderer Becher)
      * Vergleicht zwei Wuerfel anhand ihrer Werte.
@@ -95,7 +99,7 @@ public class Wuerfel implements Comparable<Wuerfel> {
     @Override
     public int compareTo(Wuerfel w2){
 
-        return this.wert - w2.getWert();
+        return w2.getWert()-this.wert;
     }
 
 
