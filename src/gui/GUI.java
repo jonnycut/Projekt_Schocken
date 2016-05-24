@@ -1,6 +1,8 @@
 package gui;
 
 import Grafik.Grafik;
+import netzwerk.Client;
+import netzwerk.Server;
 import spiel.SpielerPanel;
 
 import javax.swing.*;
@@ -33,8 +35,6 @@ public class GUI extends JFrame{
         setSize(1024, 768);
         setLocationRelativeTo(null);
 
-        //JPanel jp = new JPanel(new CardLayout());
-
         JPanel start = new JPanel(new BorderLayout());
 
         JButton jb = new JButton();
@@ -43,6 +43,10 @@ public class GUI extends JFrame{
 
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+
+
+
                 updateView(e);
             }
         };
@@ -58,14 +62,10 @@ public class GUI extends JFrame{
         jp.add(anmeldungP, "Anmeldung");
         jp.add(registrierungP, "Registrierung");
 
-
-
         add(jp);
 
         pack();
         setVisible(true);
-
-
     }
 
 
@@ -78,15 +78,15 @@ public class GUI extends JFrame{
                 break;
             case 2:
                 //ToDo: Dinge die in der Anmeldung stattfinden
-                System.out.println("Pimmellim");
+                System.out.println("Test Anmeldung");
                 break;
             case 3:
                 ((CardLayout) jp.getLayout()).show(jp, "Registrierung");
-                zustand = 3;
+                zustand = 4;
                 break;
+            case 4:
+                //ToDo: Dinge die bei Registrierung laufen
         }
-
-
     }
 
 

@@ -1,12 +1,17 @@
 package gui;
 
+import Datenbank.Datenbank;
 import Grafik.Grafik;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
@@ -15,7 +20,7 @@ public class Registrierung extends JPanel {
 
     public Registrierung(GUI gui) {
         super();
-        Icon[] avatare = {Grafik.AVATAR_R2D2, Grafik.AVATAR_BB8, Grafik.AVATAR_BOBA, Grafik.AVATAR_C3PO, Grafik.AVATAR_TROOPER, Grafik.AVATAR_VADER, Grafik.AVATAR_WUKI, Grafik.AVATAR_YODA, Grafik.AVATAR_BATMAN,  Grafik.AVATAR_C_AMERICA, Grafik.AVATAR_DEADPOOL, Grafik.AVATAR_FLASH, Grafik.AVATAR_IRONMAN, Grafik.AVATAR_SPIDERMAN, Grafik.AVATAR_SUPERMAN, Grafik.AVATAR_THOR};
+        Icon[] avatare = {Grafik.AVATAR_R2D2, Grafik.AVATAR_BB8, Grafik.AVATAR_BOBA, Grafik.AVATAR_C3PO, Grafik.AVATAR_TROOPER, Grafik.AVATAR_VADER, Grafik.AVATAR_WUKI, Grafik.AVATAR_YODA, Grafik.AVATAR_BATMAN, Grafik.AVATAR_C_AMERICA, Grafik.AVATAR_DEADPOOL, Grafik.AVATAR_FLASH, Grafik.AVATAR_IRONMAN, Grafik.AVATAR_SPIDERMAN, Grafik.AVATAR_SUPERMAN, Grafik.AVATAR_THOR};
 
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
@@ -56,6 +61,7 @@ public class Registrierung extends JPanel {
         JPanel jPTName = new JPanel(new FlowLayout());
         jPTName.setBackground(Color.DARK_GRAY);
         JTextField jTName = new JTextField(20);
+        jTName.setDocument(new JTextFieldLimit(30));
         jPTName.add(jTName);
 
         JPanel jPPasswort = new JPanel(new FlowLayout());
@@ -66,7 +72,8 @@ public class Registrierung extends JPanel {
 
         JPanel jPTPasswort = new JPanel();
         jPTPasswort.setBackground(Color.DARK_GRAY);
-        JTextField jTPasswort = new JTextField(20);
+        JPasswordField jTPasswort = new JPasswordField(20);
+        jTPasswort.setDocument(new JTextFieldLimit(30));
         jPTPasswort.add(jTPasswort);
 
         JPanel jPPasswortW = new JPanel(new FlowLayout());
@@ -77,7 +84,8 @@ public class Registrierung extends JPanel {
 
         JPanel jPTPasswortW = new JPanel();
         jPTPasswortW.setBackground(Color.DARK_GRAY);
-        JTextField jTPasswortW = new JTextField(20);
+        JPasswordField jTPasswortW = new JPasswordField(20);
+        jTPasswortW.setDocument(new JTextFieldLimit(30));
         jPTPasswortW.add(jTPasswortW);
 
         JPanel jPProfil = new JPanel(new FlowLayout());
@@ -113,9 +121,44 @@ public class Registrierung extends JPanel {
 
         ActionListener weiter = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(jTName.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "Bitte Benutzername eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
+
+                char[] zeichen = jTPasswort.getPassword();
+                String passwort = new String(zeichen);
+                if(passwort.equals("")){
+                    JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
+
+                zeichen = jTPasswortW.getPassword();
+                String passwortW = new String(zeichen);
+                if(passwortW.equals("")){
+                    JOptionPane.showMessageDialog(null, "Bitte Passwort wiederholen", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
+
+                if (passwort.equals(passwortW)){
+                    try {
+                        gui.setZustand(1);
+                        gui.updateView(e);
+                        Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
+                    } catch (SQLException e1) {
+                        System.out.println(e1.getMessage());
+                        JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    } catch (ClassNotFoundException e1) {
+                        JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden","Fehler", JOptionPane.ERROR_MESSAGE);
+                    }
+
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
 
             }
         };
+
+        jBWeiter.addActionListener(weiter);
         jBWeiter.setEnabled(false);
         JPanel jBPweiter = new JPanel(new FlowLayout());
         jBPweiter.setBackground(Color.DARK_GRAY);
@@ -138,19 +181,20 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
-        JPanel rechts = new JPanel(new GridLayout(4,4));
+        JPanel rechts = new JPanel(new GridLayout(4, 4));
 
         ActionListener profilbild = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                JButton tempB = (JButton)e.getSource();
+                JButton tempB = (JButton) e.getSource();
                 jBProfil.setIcon(tempB.getIcon());
                 jBPProfil.add(jBProfil);
                 jLMitte.setIcon(Grafik.BLOCK);
                 mitte.add(jLMitte);
-                //ToDo: �berarbeiten!!!
-                if(jTName.getText().length() != 0 && jTPasswort.getText().length() != 0 && jTPasswortW.getText().length() != 0)
-                jBWeiter.setEnabled(true);
+                //ToDo: Überarbeiten!!!
+                if (jBProfil.getIcon() != null) {
+                    jBWeiter.setEnabled(true);
+                }
             }
         };
 
@@ -170,7 +214,7 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
-        JPanel unten = new JPanel(new GridLayout(1,3));
+        JPanel unten = new JPanel(new GridLayout(1, 3));
         unten.setBackground(Color.BLACK);
 
         JPanel jPProjekt = new JPanel();
@@ -212,5 +256,21 @@ public class Registrierung extends JPanel {
         return true;
     }
 
+    public class JTextFieldLimit extends PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            if (str == null) return;
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
+    }
 
 }

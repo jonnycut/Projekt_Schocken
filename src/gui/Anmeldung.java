@@ -1,11 +1,16 @@
 package gui;
 
+import Datenbank.Datenbank;
 import Grafik.Grafik;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
@@ -50,6 +55,7 @@ public class Anmeldung extends JPanel {
         JPanel jPTName = new JPanel(new FlowLayout());
         jPTName.setBackground(Color.DARK_GRAY);
         JTextField jTName = new JTextField(20);
+        jTName.setDocument(new JTextFieldLimit(30));
         jPTName.add(jTName);
 
         JPanel jPPasswort = new JPanel(new FlowLayout());
@@ -61,6 +67,7 @@ public class Anmeldung extends JPanel {
         JPanel jPTPasswort = new JPanel();
         jPTPasswort.setBackground(Color.DARK_GRAY);
         JTextField jTPasswort = new JTextField(20);
+        jTPasswort.setDocument(new JTextFieldLimit(30));
         jPTPasswort.add(jTPasswort);
 
 
@@ -84,14 +91,6 @@ public class Anmeldung extends JPanel {
         jBPok.setBackground(Color.DARK_GRAY);
         jBPok.setPreferredSize(new Dimension(0, 80));
 
-        ActionListener okButton = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid
-                jBWeiter.setEnabled(true);
-            }
-        };
-
-        ok.addActionListener(okButton);
         jBPok.add(ok);
 
         JPanel jPProfil = new JPanel(new FlowLayout());
@@ -122,6 +121,28 @@ public class Anmeldung extends JPanel {
         untenLinks.setBackground(Color.DARK_GRAY);
 
         untenLinks.add(jBPweiter);
+
+        ActionListener okButton = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid
+                try {
+                    if(Datenbank.getInstance().selectNutzerkennung(jTName.getText(),jTPasswort.getText())){
+                       // jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName));
+                        jBPProfil.add(jBProfil);
+                        jBWeiter.setEnabled(true);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (SQLException e1) {
+                    System.out.println(e1.getMessage());
+                } catch (ClassNotFoundException e1) {
+                    JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden","Fehler", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        };
+
+        ok.addActionListener(okButton);
 
         links.add(untenLinks, BorderLayout.SOUTH);
         jp.add(links, BorderLayout.WEST);
@@ -224,4 +245,23 @@ public class Anmeldung extends JPanel {
     public void erstelleServer(){
 
     }
+
+    public class JTextFieldLimit extends PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+
+        public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+            if (str == null) return;
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
+    }
 }
+
+
