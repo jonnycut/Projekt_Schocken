@@ -7,8 +7,13 @@ public class Becher implements Comparable <Becher> {
     private  Wuerfel[] wuerfel = new Wuerfel[3];
     private String bild;
     private int wurf;
-    //ToDo: Test
 
+    /**
+     * <pre>Constuctor der Becherklasse
+     * Das Wuerfelarray wird mit 3 Wuerfeln gefuellt
+     * Bild wird initial auf null gesetzt
+     * Anzahl Wuerfe wird mit 0 initialisiert</pre>
+     */
     public Becher(){
 
         for(int i =0; i<3;i++){
@@ -19,15 +24,34 @@ public class Becher implements Comparable <Becher> {
         this.wurf = 0;
     }
 
+    /**
+     * Getter fuer das aktuelle Bild des Bechers
+     * @return String : {Schock | General | Strasse | Zahl}
+     */
     public String getBild() {
         return bild;
     }
 
+    /**
+     * Getter fuer das Wuerfelarray
+     * @return Wuerfel[3]
+     */
     public Wuerfel[] getWuerfel(){
         return  this.wuerfel;
     }
 
-
+    /**
+     * <pre>
+     * Nutzt die Wuerfel.wuerfeln() und weist damit jedem Wuerfel eine Zufallszahl
+     * zwischen 1 und 6 zu.
+     * Das Wuerfelarray wird absteigend sortiert.
+     * Bild wird, je nach Wuerfelkombination auf
+     *
+     * {Schock | General | Strasse | Zahl}
+     *
+     * gesetzt</pre>
+     *
+     */
     public void wuerfeln() {
 
         //wuerfel[] vielleicht besser als ArrayList? --> Collections.sort...?
@@ -63,7 +87,13 @@ public class Becher implements Comparable <Becher> {
     }
 
 
-
+    /**<pre>
+     * Setzt alle Wuerfel auf draussen.
+     * Nutzbar, wenn Wurf in Gaenze stehen gelassen wird.
+     *
+     * </pre>
+     *
+     */
     public void aufdecken(){
 
         for(Wuerfel w : this.wuerfel){
@@ -72,6 +102,21 @@ public class Becher implements Comparable <Becher> {
         }
     }
 
+    /**
+     * <pre>CompareTo(ein anderer Becher)
+     *  Vergleicht einen Becher mit einem anderen Becher (b2)
+     *  Wertigkeit:
+     *  Schock > General > Strasse > Zahl
+     *  Sind beide Bilder gleich (z.B. beide Schock)
+     *  wird anhand der hoechsten zaehlbaren Zahl entschieden:
+     *  Schock 6 > Schock 3 | General 3 > General 2 | Strasse 456 > Strasse 345 | Zahl 521 > Zahl 421
+     * </pre>
+     * @param b2 Object Becher, mit dem verglichen wird
+     * @return Int - negative Zahl: Becher < b2 <br></br>
+     *               positive Zahl: Becher > b2
+     *               0 :            Becher = b2
+     *               ToDo: Anzahl Wuerfe auswerten
+     */
     @Override
     public int compareTo(Becher b2) {
 
