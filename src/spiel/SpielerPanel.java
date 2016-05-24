@@ -40,28 +40,48 @@ public class SpielerPanel extends JPanel {
         super(new GridLayout(6,1));
         this.spieler = spieler;
         this.auslage = new JPanel(new GridLayout(1,3));
+        //Platzhalter in Auslage einfuegen
+        auslage.add(new JButton());
+        auslage.add(new JButton());
+        auslage.add(new JButton());
+
+
         this.wuerfel = new JPanel(new CardLayout());
 
         this.becher = new JButton(Grafik.WUERFELBECHER);
 
 
+        //Wuerfelansicht bauen
         this.wuerfelAnsicht = new JPanel(new GridLayout(1,3));
 
+        //WuerfelButtons mit dem entsprechenden Bild und Text versehen
         this.w1 = new JButton(spieler.getBecher().getWuerfel()[0].getGrafik());
+        w1.setText("0");
         this.w2 = new JButton(spieler.getBecher().getWuerfel()[1].getGrafik());
+        w2.setText("1");
         this.w3 = new JButton(spieler.getBecher().getWuerfel()[2].getGrafik());
+        w3.setText("2");
+
+        //WuerfelListener um einen Wuerfel vom Becher in die Auslage zu legen
+        //-> Entsprechender Wuerfel wird mit leerem Button ersetzt (Design)
 
         ActionListener wuerfelListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                auslage.add((JButton) e.getSource());
+                JButton pufferBtn = (JButton) e.getSource();
+                int btnIndex = Integer.parseInt(pufferBtn.getText());
 
-                wuerfelAnsicht.remove((JButton) e.getSource());
-                ((JButton) e.getSource()).removeActionListener(this);
-                wuerfelAnsicht.add(new JButton());
+                auslage.remove(btnIndex);
+                auslage.add(pufferBtn,btnIndex);
+
+                wuerfelAnsicht.remove(pufferBtn);
+                pufferBtn.removeActionListener(this);
+                wuerfelAnsicht.add(new JButton(),btnIndex);
                 wuerfelAnsicht.revalidate();
 
-                if(e.getSource().equals(w1)){
+                //Rausgelegten wuerfel auf draussen= true, damit dieser nicht mehr gewuerfelt wird
+
+                if(pufferBtn.equals(w1)){
                     spieler.getBecher().getWuerfel()[0].setDraussen(true);
                 }else if(e.getSource().equals(w2)){
                     spieler.getBecher().getWuerfel()[1].setDraussen(true);
@@ -75,9 +95,11 @@ public class SpielerPanel extends JPanel {
         w2.addActionListener(wuerfelListener);
         w3.addActionListener(wuerfelListener);
 
-        wuerfelAnsicht.add(w1);
-        wuerfelAnsicht.add(w2);
-        wuerfelAnsicht.add(w3);
+        //WuerfelButtons in die Ansicht einfuegen
+
+        wuerfelAnsicht.add(w1,0);
+        wuerfelAnsicht.add(w2,1);
+        wuerfelAnsicht.add(w3,2);
 
 
 
@@ -154,8 +176,19 @@ public class SpielerPanel extends JPanel {
 
 
 
-        /*ToDo:EventListener für die Buttons, äußerer Rahmen 1024*768*/
 
+
+
+
+    }
+
+    /**
+     * Setzt den aktuellen wert von Spieler.strafPunkte in das entsprechende Panel ein
+     */
+    public void updateStrafPunkte(){
+
+        strafpunkte.removeAll();
+        strafpunkte.add(new JLabel(""+this.spieler.getStrafpunkte()));
 
 
     }
