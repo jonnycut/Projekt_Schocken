@@ -13,6 +13,14 @@ public class Wuerfel implements Comparable<Wuerfel> {
     private Icon grafik;
     private Icon[] bilder ={Grafik.WUERFEL_1, Grafik.WUERFEL_2, Grafik.WUERFEL_3,Grafik.WUERFEL_4,Grafik.WUERFEL_5,Grafik.WUERFEL_6};
 
+    /**
+     * <pre>Constructor Wuerfel
+     * Setzt den Wert des Wuerfels auf eine Zufallszahl zwischen 1 und 6
+     * Setzt das Bild des Wuerfels auf die entsprechende Grafik.
+     * Setzt draussen auf false
+     *
+     * </pre>
+     */
     public Wuerfel(){
 
         this.wert = (int)(Math.random()*6)+1;
@@ -21,22 +29,42 @@ public class Wuerfel implements Comparable<Wuerfel> {
 
     }
 
+    /**
+     * Aendert "draussen" auf den ubergebenen Wert.
+     * @param wert boolean {true | false]}
+     */
     public void setDraussen(boolean wert) {
         this.draussen = wert;
     }
 
+    /**
+     * Liefert die aktuelle Grafik des Bildes
+     * @return Icon - Die Grafik des Wuerfels
+     */
     public Icon getGrafik(){
         return this.grafik;
     }
 
+    /**
+     * Liefert "draussen" des Wuerfels
+     * @return boolean - {true | false}
+     */
     public boolean getDraussen(){
         return this.draussen;
     }
 
+    /**
+     * Liefert den aktuellen Wert des Wuerfels
+     * @return Int - {1 | 2 | 3 | 4 | 5 | 6}
+     */
     public int getWert(){
         return this.wert;
     }
 
+    /**
+     * Weist dem Wuerfel eine Zufallszahl zwischen 1 und 6 zu<br></br>
+     * und setzt die Grafik des Wuerfels entsprechend.
+     */
 
     public void wuerfeln() {
 
@@ -48,9 +76,16 @@ public class Wuerfel implements Comparable<Wuerfel> {
     }
 
     /**
-     * Liefert Wert >0  wenn WuerfelWert > Vergleichswürfel
-     * Wert = 0 wenn gleichgroß
-     * Wert < 0 wenn WuerfelWert < Vergleichswuerfel
+     * <pre>conpareTo(ein anderer Becher)
+     * Vergleicht zwei Wuerfel anhand ihrer Werte.
+     *
+     *
+     * </pre>
+     * @param w2 - Object: ein anderer Wuerfel
+     * @return Int - <br></br>  negativ:     wuerfel < w2 <br></br>
+     *               positiv:   wuerfel > w2 <br></br>
+     *               0:         wuefel = w2 <br></br>
+     *
      */
     @Override
     public int compareTo(Wuerfel w2){

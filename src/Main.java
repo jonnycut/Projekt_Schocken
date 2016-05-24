@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) {
         //new GUI();
 
+
         List <Spieler> teilnehmer = new ArrayList<>();
 
         teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
