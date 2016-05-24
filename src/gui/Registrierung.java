@@ -121,46 +121,50 @@ public class Registrierung extends JPanel {
 
         ActionListener weiter = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(jTName.getText().equals("")){
+                if (jTName.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Bitte Benutzername eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
                 char[] zeichen = jTPasswort.getPassword();
                 String passwort = new String(zeichen);
-                if(passwort.equals("")){
+                if (passwort.equals("")) {
                     JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
                 zeichen = jTPasswortW.getPassword();
                 String passwortW = new String(zeichen);
-                if(passwortW.equals("")){
+                if (passwortW.equals("")) {
                     JOptionPane.showMessageDialog(null, "Bitte Passwort wiederholen", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
+                try {
+                    if (!Datenbank.getInstance().selectNutzerKennungReg(jTName.getText()))
+                        if (passwort.equals(passwortW) && !jTName.getText().equals("")) {
+                            try {
+                                gui.setZustand(1);
+                                gui.updateView(e);
+                                Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
+                                Datenbank.getInstance().insertProfilbild(jTName.getText(), jBProfil.getIcon());
+                            } catch (SQLException e1) {
+                                System.out.println(e1.getMessage());
+                                JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            } catch (ClassNotFoundException e1) {
+                                JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            }
 
-                if (passwort.equals(passwortW) && !jTName.getText().equals("")){
-                    try {
-                        gui.setZustand(1);
-                        gui.updateView(e);
-                        Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
-                        Datenbank.getInstance().insertProfilbild(jTName.getText(),jBProfil.getIcon());
-                    } catch (SQLException e1) {
-                        System.out.println(e1.getMessage());
-                        JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
-                    } catch (ClassNotFoundException e1) {
-                        JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden","Fehler", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            if (jTName.getText().equals("")) {
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Benutzername bereits vorhanden", "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
-
-
-                }
-                else {
-                    if(jTName.getText().equals("")){
-                        //JOptionPane.showMessageDialog(null, "Bitte Benutzername eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                    else {
-                        JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
-                    }
+                } catch (SQLException e1) {
+                    System.out.println(e1);
+                } catch (ClassNotFoundException e1) {
+                    JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -254,16 +258,17 @@ public class Registrierung extends JPanel {
         add(jp, BorderLayout.CENTER);
     }
 
+    /*ToDo: Krebs fragen ob es ok ist das über die Button zu machen, oder mit den Methoden. Wenn ja, aus dem UML streichen*/
+//    public void spielerAnlegen(String name, String passwort) {
+//
+//    }
+//
+//    public boolean pruefeSpielerKennung(String name) {
+//
+//        return true;
+//    }
 
-    public void spielerAnlegen(String name, String passwort) {
-
-    }
-
-    public boolean pruefeSpielerKennung(String name) {
-
-        return true;
-    }
-
+    // aus dem Internet
     public class JTextFieldLimit extends PlainDocument {
         private int limit;
 

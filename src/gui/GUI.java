@@ -29,7 +29,7 @@ public class GUI extends JFrame{
 
     public GUI(){
 
-        super("Schocken, das Würfelspiel für zwischendurch!");
+        super("Schocken, das WÃ¼rfelspiel fÃ¼r zwischendurch!");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1024, 768);
