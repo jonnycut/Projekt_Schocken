@@ -169,7 +169,15 @@ public class Datenbank {
         try {
             stmt.executeUpdate(
 
-                    String.format("INSERT  INTO t_Spiel (Status,fk_t_Spielleiter_Kennung,fk_t_Spieler_Kennung)  VALUES ('1','%s','%s')", spielleiter, spielleiter));
+                    String.format("INSERT  INTO t_Spiel (Status,fk_t_Spielleiter_Kennung)  VALUES ('1','%s')", spielleiter));
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        try {
+            stmt.executeUpdate(
+                    String.format("INSERT INTO t_ist_client  VALUES ('%s',(SELECT Spiel_ID from t_Spiel Where fk_t_Spielleiter_Kennung ='%s'))", spielleiter, spielleiter));
+
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -232,17 +240,52 @@ public class Datenbank {
     public void insertTeilnehmer(String teilnehmer,int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
+
         try {
             stmt.executeUpdate(
-                    String.format("INSERT INTO t_Spiel  (fk_t_Spieler_Kennung,spiel_id,status) VALUES ('%s', %d,1)", teilnehmer, spielID)
+                    String.format("INSERT INTO t_ist_client  VALUES ('%s','%d')", teilnehmer, spielID));
 
-            );}
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void dropDB(String database) throws SQLException {
+        Statement stmt =verbindung.createStatement();
+        stmt.executeUpdate("DROP DATABASE " + database
+        );
+    }
+
+    public String selectServerIP()throws SQLException{
+        Statement stmt = verbindung.createStatement();
+
+        ResultSet r=stmt.executeQuery("SELECT IP \n" +
+                "FROM (t_Spieler INNER JOIN t_Spielleiter ON Kennung=fk_t_Spieler_Kennung),t_Spiel \n" +
+                "WHERE Status=1");
 
 
     }
+
+    public void insertProfilbild(String name, Icon icon) throws SQLException {
+        Statement stmt =verbindung.createStatement();
+        stmt.executeUpdate(
+                "UPDATE  t_Spieler" +
+                        " SET Profilbild=" + Icon +
+                        " WHERE Kennung='" + name + "'"
+        );
+
+
+        //ToDo: OPA bitte erstellen
+    }
+
+    public Icon selectProfilBild(String name) {
+        //ToDo: OPA bitte erstellen
+        return null;
+    }
+
+
+
+
 
 
 
@@ -375,15 +418,7 @@ public class Datenbank {
         if (r.next())
             return r.getBinaryStream(1);
         return null;
-    }
+    }}
 
-    public void insertProfilbild(String name, Icon icon) {
-        //ToDo: OPA bitte erstellen
-    }
 
-    public Icon selectProfilBild(String name) {
-        //ToDo: OPA bitte erstellen
-        return null;
-    }
-}
 
