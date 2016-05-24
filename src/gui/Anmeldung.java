@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  */
 public class Anmeldung extends JPanel {
 
-    public Anmeldung(){
+    public Anmeldung(GUI gui){
         super();
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
@@ -138,15 +138,28 @@ public class Anmeldung extends JPanel {
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
         JPanel rechts = new JPanel();
+        rechts.setPreferredSize(new Dimension(240,0));
         rechts.setBackground(Color.DARK_GRAY);
         rechts.setLayout(new BoxLayout(rechts, BoxLayout.Y_AXIS));
+
         JPanel obenRechts = new JPanel(new FlowLayout());
         obenRechts.setBackground(Color.DARK_GRAY);
         JLabel jLObenRechts = new JLabel("");
         obenRechts.add(jLObenRechts);
+
         JPanel untenRechts = new JPanel(new FlowLayout());
         untenRechts.setBackground(Color.DARK_GRAY);
         JButton jBReg = new JButton("Registrieren");
+
+        ActionListener reg = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                gui.setZustand(3);
+                gui.updateView(e);
+
+            }
+        };
+
+        jBReg.addActionListener(reg);
         untenRechts.add(jBReg);
 
         rechts.add(obenRechts);

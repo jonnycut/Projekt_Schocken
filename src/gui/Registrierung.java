@@ -13,9 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class Registrierung extends JPanel {
 
-    private String fehler = "";
-
-    public Registrierung() {
+    public Registrierung(GUI gui) {
         super();
         Icon[] avatare = {Grafik.AVATAR_R2D2, Grafik.AVATAR_BB8, Grafik.AVATAR_BOBA, Grafik.AVATAR_C3PO, Grafik.AVATAR_TROOPER, Grafik.AVATAR_VADER, Grafik.AVATAR_WUKI, Grafik.AVATAR_YODA, Grafik.AVATAR_BATMAN,  Grafik.AVATAR_C_AMERICA, Grafik.AVATAR_DEADPOOL, Grafik.AVATAR_FLASH, Grafik.AVATAR_IRONMAN, Grafik.AVATAR_SPIDERMAN, Grafik.AVATAR_SUPERMAN, Grafik.AVATAR_THOR};
 
@@ -112,6 +110,12 @@ public class Registrierung extends JPanel {
         untenLinks.setBackground(Color.DARK_GRAY);
 
         JButton jBWeiter = new JButton("WEITER");
+
+        ActionListener weiter = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
         jBWeiter.setEnabled(false);
         JPanel jBPweiter = new JPanel(new FlowLayout());
         jBPweiter.setBackground(Color.DARK_GRAY);

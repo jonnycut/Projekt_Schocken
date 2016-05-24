@@ -4,6 +4,7 @@ import Grafik.Grafik;
 import spiel.SpielerPanel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,54 +17,72 @@ public class GUI extends JFrame{
     private int zustand = 1;
     private SpielerPanel[] spieler = new SpielerPanel[8];
     private Infobereich infobereich = new Infobereich();
-    private Anmeldung anmeldung = new Anmeldung();
-    private Registrierung registrierung = new Registrierung();
+    private Anmeldung anmeldung = new Anmeldung(this);
+    private Registrierung registrierung = new Registrierung(this);
     private Statistik statistik = new Statistik();
+    private JPanel jp = new JPanel(new CardLayout());
 //    private Client client = new Client("");
 //    private Server server = new Server();
 
 
     public GUI(){
 
-        super("Schocken");
+        super("Schocken, das Würfelspiel für zwischendurch!");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1024, 768);
         setLocationRelativeTo(null);
 
-        JPanel jp = new JPanel();
+        //JPanel jp = new JPanel(new CardLayout());
 
         JPanel start = new JPanel(new BorderLayout());
+
+        JButton jb = new JButton();
+        jb.setBackground(Color.BLACK);
+        jb.setBorder(new LineBorder(null));
+
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                updateView(e, jp);
+                updateView(e);
             }
         };
-        JButton jb = new JButton();
+
         jb.addActionListener(acl);
         jb.setIcon(Grafik.TISCH_LOGO);
         start.add(jb, BorderLayout.CENTER);
 
-        //jp.add(anmeldung);
-        jp.add(registrierung);
+        JPanel anmeldungP = anmeldung;
+        JPanel registrierungP = registrierung;
+
+        jp.add(start,"Start");
+        jp.add(anmeldungP, "Anmeldung");
+        jp.add(registrierungP, "Registrierung");
+
 
 
         add(jp);
+
+        pack();
         setVisible(true);
+
 
     }
 
 
-    public void updateView(ActionEvent e, JPanel jp){
+    public void updateView(ActionEvent e){
 
         switch (zustand){
 
             case 1:
                 ((CardLayout) jp.getLayout()).show(jp, "Anmeldung");
-                zustand = 2;
-                updateView(null,null);
                 break;
             case 2:
+                //ToDo: Dinge die in der Anmeldung stattfinden
+                System.out.println("Pimmellim");
+                break;
+            case 3:
+                ((CardLayout) jp.getLayout()).show(jp, "Registrierung");
+                zustand = 3;
                 break;
         }
 
@@ -87,5 +106,9 @@ public class GUI extends JFrame{
 
     public void startPosition(){
 
+    }
+
+    public void setZustand(int zustand) {
+        this.zustand = zustand;
     }
 }
