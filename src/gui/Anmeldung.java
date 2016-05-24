@@ -4,6 +4,8 @@ import Grafik.Grafik;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by dfleuren on 23.05.2016.
@@ -13,9 +15,12 @@ public class Anmeldung extends JPanel {
     public Anmeldung(){
         super();
 
+        //-------------------------------------GRUND-PANEL-------------------------------------------------------------
         JPanel jp = new JPanel(new BorderLayout());
         jp.setBackground(Color.BLACK);
 
+
+        //-------------------------------------OBEN-PANEL--------------------------------------------------------------
         JPanel oben = new JPanel();
         oben.setBackground(Color.BLACK);
         JLabel jLoben = new JLabel("Herzlich Willkommen");
@@ -25,6 +30,7 @@ public class Anmeldung extends JPanel {
         jp.add(oben, BorderLayout.NORTH);
 
 
+        //-------------------------------------LINKS-PANEL-------------------------------------------------------------
         JPanel links = new JPanel(new BorderLayout());
         links.setBackground(Color.DARK_GRAY);
 
@@ -57,17 +63,38 @@ public class Anmeldung extends JPanel {
         JTextField jTPasswort = new JTextField(20);
         jPTPasswort.add(jTPasswort);
 
+
+        JButton jBWeiter = new JButton("START");
+        // Nur drückbar wenn die DB Abfrage erfolgreich war
+        jBWeiter.setEnabled(false);
+        JPanel jBPweiter = new JPanel(new FlowLayout());
+        jBPweiter.setBackground(Color.DARK_GRAY);
+        jBPweiter.add(jBWeiter);
+
+        ActionListener weiterButton = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Schaltet weiter und gibt das Spiel frei
+            }
+        };
         JPanel jBPok = new JPanel(new FlowLayout());
         jBPok.setBackground(Color.DARK_GRAY);
         JButton ok = new JButton("OK");
         jBPok.setBackground(Color.DARK_GRAY);
         jBPok.setPreferredSize(new Dimension(0, 80));
+
+        ActionListener okButton = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Prüfung in der DB auf Name, Passwort und Profiblid
+                jBWeiter.setEnabled(true);
+            }
+        };
+
+        ok.addActionListener(okButton);
         jBPok.add(ok);
 
         JPanel jPProfil = new JPanel(new FlowLayout());
         jPProfil.setBackground(Color.DARK_GRAY);
         JLabel jLProfil = new JLabel("Profilbild");
-        //jLProfil.setPreferredSize(new Dimension(0, 50));
         jLProfil.setForeground(Color.WHITE);
         jPProfil.add(jLProfil);
 
@@ -92,17 +119,13 @@ public class Anmeldung extends JPanel {
         JPanel untenLinks = new JPanel(new BorderLayout());
         untenLinks.setBackground(Color.DARK_GRAY);
 
-        JButton jBWeiter = new JButton("WEITER");
-        JPanel jBPweiter = new JPanel(new FlowLayout());
-        jBPweiter.setBackground(Color.DARK_GRAY);
-        jBPweiter.add(jBWeiter);
-
         untenLinks.add(jBPweiter);
 
         links.add(untenLinks, BorderLayout.SOUTH);
         jp.add(links, BorderLayout.WEST);
 
 
+        //-------------------------------------MITTE-PANEL-------------------------------------------------------------
         JPanel mitte = new JPanel();
         mitte.setBackground(Color.DARK_GRAY);
         JLabel jLMitte = new JLabel(Grafik.LOGO1);
@@ -110,6 +133,8 @@ public class Anmeldung extends JPanel {
 
         jp.add(mitte, BorderLayout.CENTER);
 
+
+        //-------------------------------------RECHTS-PANEL------------------------------------------------------------
         JPanel rechts = new JPanel();
         rechts.setBackground(Color.DARK_GRAY);
         rechts.setLayout(new BoxLayout(rechts, BoxLayout.Y_AXIS));
@@ -127,6 +152,8 @@ public class Anmeldung extends JPanel {
 
         jp.add(rechts, BorderLayout.EAST);
 
+
+        //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
         JPanel unten = new JPanel(new GridLayout(1,3));
         unten.setBackground(Color.BLACK);
 
@@ -152,8 +179,10 @@ public class Anmeldung extends JPanel {
         unten.add(jPGruppe);
         unten.add(jPFsbw);
 
-
         jp.add(unten, BorderLayout.SOUTH);
+
+
+        //-------------------------------------SUPER-PANEL-------------------------------------------------------------
 
         add(jp,BorderLayout.CENTER);
     }

@@ -13,81 +13,137 @@ import java.awt.event.ActionListener;
  */
 public class Registrierung extends JPanel {
 
+    private String fehler = "";
+
     public Registrierung() {
         super();
-
         Icon[] avatare = {Grafik.AVATAR_R2D2, Grafik.AVATAR_BB8, Grafik.AVATAR_BOBA, Grafik.AVATAR_C3PO, Grafik.AVATAR_TROOPER, Grafik.AVATAR_VADER, Grafik.AVATAR_WUKI, Grafik.AVATAR_YODA, Grafik.AVATAR_BATMAN,  Grafik.AVATAR_C_AMERICA, Grafik.AVATAR_DEADPOOL, Grafik.AVATAR_FLASH, Grafik.AVATAR_IRONMAN, Grafik.AVATAR_SPIDERMAN, Grafik.AVATAR_SUPERMAN, Grafik.AVATAR_THOR};
 
-        JPanel jp = new JPanel(new BorderLayout());
 
+        //-------------------------------------GRUND-PANEL-------------------------------------------------------------
+        JPanel jp = new JPanel(new BorderLayout());
+        jp.setBackground(Color.BLACK);
+
+
+        //-------------------------------------OBEN-PANEL--------------------------------------------------------------
         JPanel oben = new JPanel();
-        oben.setBorder(new LineBorder(Color.BLACK, 2));
+        oben.setBackground(Color.BLACK);
         JLabel jLoben = new JLabel("REGISTRIERUNG");
         jLoben.setForeground(Color.WHITE);
-        oben.setBackground(Color.BLACK);
-        jLoben.setHorizontalAlignment(SwingConstants.CENTER);
         oben.add(jLoben);
+
         jp.add(oben, BorderLayout.NORTH);
 
-        JPanel links = new JPanel();
-        links.setPreferredSize(new Dimension(400, 500));
-        links.setBackground(Color.DARK_GRAY);
-        links.setLayout(new BoxLayout(links, BoxLayout.Y_AXIS));
 
+        //-------------------------------------LINKS-PANEL-------------------------------------------------------------
+
+        JPanel links = new JPanel(new BorderLayout());
+        links.setBackground(Color.DARK_GRAY);
+
+        JPanel obenLinks = new JPanel();
+        obenLinks.setBackground(Color.DARK_GRAY);
+        obenLinks.setLayout(new BoxLayout(obenLinks, BoxLayout.Y_AXIS));
+
+        JLabel temp = new JLabel("");
+        temp.setPreferredSize(new Dimension(0, 50));
+        JLabel temp1 = new JLabel("");
+        temp1.setPreferredSize(new Dimension(0, 50));
+
+        JPanel jPName = new JPanel(new FlowLayout());
+        jPName.setBackground(Color.DARK_GRAY);
         JLabel jLName = new JLabel("Benutzername");
-        jLName.setPreferredSize(new Dimension(0,50));
         jLName.setForeground(Color.WHITE);
-        jLName.setHorizontalAlignment(SwingConstants.CENTER);
+        jPName.add(jLName);
+
+        JPanel jPTName = new JPanel(new FlowLayout());
+        jPTName.setBackground(Color.DARK_GRAY);
         JTextField jTName = new JTextField(20);
+        jPTName.add(jTName);
+
+        JPanel jPPasswort = new JPanel(new FlowLayout());
+        jPPasswort.setBackground(Color.DARK_GRAY);
         JLabel jLPasswort = new JLabel("Passwort");
-        jLPasswort.setPreferredSize(new Dimension(0,50));
         jLPasswort.setForeground(Color.WHITE);
-        jLPasswort.setHorizontalAlignment(SwingConstants.CENTER);
+        jPPasswort.add(jLPasswort);
+
+        JPanel jPTPasswort = new JPanel();
+        jPTPasswort.setBackground(Color.DARK_GRAY);
         JTextField jTPasswort = new JTextField(20);
-        JLabel jLPasswortW = new JLabel("Passwort wiederholen");
-        jLPasswortW.setPreferredSize(new Dimension(0,50));
+        jPTPasswort.add(jTPasswort);
+
+        JPanel jPPasswortW = new JPanel(new FlowLayout());
+        jPPasswortW.setBackground(Color.DARK_GRAY);
+        JLabel jLPasswortW = new JLabel("Passwort wierderholen");
         jLPasswortW.setForeground(Color.WHITE);
-        jLPasswortW.setHorizontalAlignment(SwingConstants.CENTER);
+        jPPasswortW.add(jLPasswortW);
+
+        JPanel jPTPasswortW = new JPanel();
+        jPTPasswortW.setBackground(Color.DARK_GRAY);
         JTextField jTPasswortW = new JTextField(20);
+        jPTPasswortW.add(jTPasswortW);
+
+        JPanel jPProfil = new JPanel(new FlowLayout());
+        jPProfil.setBackground(Color.DARK_GRAY);
         JLabel jLProfil = new JLabel("Profilbild");
-        jLProfil.setPreferredSize(new Dimension(0,50));
         jLProfil.setForeground(Color.WHITE);
-        jLProfil.setHorizontalAlignment(SwingConstants.CENTER);
+        jPProfil.add(jLProfil);
+
+        JPanel jBPProfil = new JPanel(new FlowLayout());
+        jBPProfil.setBackground(Color.DARK_GRAY);
         JButton jBProfil = new JButton();
         jBProfil.setBackground(Color.WHITE);
-        jBProfil.setPreferredSize(new Dimension(130, 130));
+        jBProfil.setPreferredSize(new Dimension(150, 150));
+        jBPProfil.add(jBProfil);
 
-        links.add(jLName);
-        links.add(jTName);
-        links.add(jLPasswort);
-        links.add(jTPasswort);
-        links.add(jLPasswortW);
-        links.add(jTPasswortW);
-        links.add(jLProfil);
-        links.add(jBProfil);
+        obenLinks.add(temp);
+        obenLinks.add(jPName);
+        obenLinks.add(jPTName);
+        obenLinks.add(jPPasswort);
+        obenLinks.add(jPTPasswort);
+        obenLinks.add(jPPasswortW);
+        obenLinks.add(jPTPasswortW);
+        obenLinks.add(temp1);
+        obenLinks.add(jPProfil);
+        obenLinks.add(jBPProfil);
 
+        links.add(obenLinks, BorderLayout.NORTH);
+
+        JPanel untenLinks = new JPanel(new BorderLayout());
+        untenLinks.setBackground(Color.DARK_GRAY);
+
+        JButton jBWeiter = new JButton("WEITER");
+        JPanel jBPweiter = new JPanel(new FlowLayout());
+        jBPweiter.setBackground(Color.DARK_GRAY);
+        jBPweiter.add(jBWeiter);
+
+        untenLinks.add(jBPweiter);
+
+        links.add(untenLinks, BorderLayout.SOUTH);
         jp.add(links, BorderLayout.WEST);
 
-        JPanel mitte = new JPanel(new GridLayout(1,1));
-        JButton ok = new JButton("   WEITER   ");
-        ok.setForeground(Color.WHITE);
-        ok.setBorder(new LineBorder(Color.BLACK,1));
-        ok.setBackground(Color.BLACK);
 
-        mitte.add(ok, BorderLayout.CENTER);
+        //-------------------------------------MITTE-PANEL-------------------------------------------------------------
+        JPanel mitte = new JPanel(new GridLayout(1,1));
+        JButton ok1 = new JButton("   WEITER   ");
+        ok1.setForeground(Color.WHITE);
+        ok1.setBorder(new LineBorder(Color.BLACK,1));
+        ok1.setBackground(Color.BLACK);
+
+        mitte.add(ok1, BorderLayout.CENTER);
         mitte.setBackground(Color.DARK_GRAY);
 
         jp.add(mitte, BorderLayout.CENTER);
 
+
+        //-------------------------------------RECHTS-PANEL------------------------------------------------------------
         JPanel rechts = new JPanel(new GridLayout(4,4));
 
-        ActionListener acl = new ActionListener() {
+        ActionListener profilbild = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                JButton temp = (JButton)e.getSource();
-                jBProfil.setIcon(temp.getIcon());
-                jBProfil.setPreferredSize(new Dimension(130, 130));
-                links.add(jBProfil);
+                JButton tempB = (JButton)e.getSource();
+                jBProfil.setIcon(tempB.getIcon());
+                jBPProfil.add(jBProfil);
             }
         };
 
@@ -99,21 +155,42 @@ public class Registrierung extends JPanel {
             jb.setPreferredSize(new Dimension(130, 130));
             jb.setBackground(Color.DARK_GRAY);
             jb.setBorder(new LineBorder(null));
-            jb.addActionListener(acl);
+            jb.addActionListener(profilbild);
             rechts.add(jb);
         }
 
         jp.add(rechts, BorderLayout.EAST);
 
-        JPanel unten = new JPanel();
-        unten.setBackground(Color.BLACK);
-        JLabel jLInfos = new JLabel();
-        String fehler = "Bla Bla Bla";
-        jLInfos.setText(fehler);
-        jLInfos.setForeground(Color.RED);
 
-        unten.add(jLInfos);
+        //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
+        JPanel unten = new JPanel(new GridLayout(1,3));
+        unten.setBackground(Color.BLACK);
+
+        JPanel jPProjekt = new JPanel();
+        jPProjekt.setBackground(Color.BLACK);
+        JLabel jLProjekt = new JLabel("Projekt: SCHOCKEN");
+        jLProjekt.setForeground(Color.WHITE);
+        jPProjekt.add(jLProjekt);
+
+        JPanel jPGruppe = new JPanel();
+        jPGruppe.setBackground(Color.BLACK);
+        JLabel jLPGruppe = new JLabel("Projektgruppe: U.F.O");
+        jLPGruppe.setForeground(Color.WHITE);
+        jPGruppe.add(jLPGruppe);
+
+        JPanel jPFsbw = new JPanel(new FlowLayout());
+        jPFsbw.setBackground(Color.BLACK);
+        JLabel jLFsbw = new JLabel("FSBwIT 2016");
+        jLFsbw.setForeground(Color.WHITE);
+        jPFsbw.add(jLFsbw);
+
+        unten.add(jPProjekt);
+        unten.add(jPGruppe);
+        unten.add(jPFsbw);
+
         jp.add(unten, BorderLayout.SOUTH);
+
+
         add(jp, BorderLayout.CENTER);
     }
 
