@@ -4,6 +4,7 @@ package Datenbank;
  * Created by ehampel on 23.05.2016.
  */
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -373,6 +374,15 @@ public class Datenbank {
         );
         if (r.next())
             return r.getBinaryStream(1);
+        return null;
+    }
+
+    public void insertProfilbild(String name, Icon icon) {
+        //ToDo: OPA bitte erstellen
+    }
+
+    public Icon selectProfilBild(String name) {
+        //ToDo: OPA bitte erstellen
         return null;
     }
 }

@@ -137,11 +137,13 @@ public class Registrierung extends JPanel {
                     JOptionPane.showMessageDialog(null, "Bitte Passwort wiederholen", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
-                if (passwort.equals(passwortW)){
+
+                if (passwort.equals(passwortW) && !jTName.getText().equals("")){
                     try {
                         gui.setZustand(1);
                         gui.updateView(e);
                         Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
+                        Datenbank.getInstance().insertProfilbild(jTName.getText(),jBProfil.getIcon());
                     } catch (SQLException e1) {
                         System.out.println(e1.getMessage());
                         JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -152,7 +154,13 @@ public class Registrierung extends JPanel {
 
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    if(jTName.getText().equals("")){
+                        //JOptionPane.showMessageDialog(null, "Bitte Benutzername eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    else {
+                        JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
 
             }

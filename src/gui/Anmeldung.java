@@ -127,7 +127,7 @@ public class Anmeldung extends JPanel {
                 //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid
                 try {
                     if(Datenbank.getInstance().selectNutzerkennung(jTName.getText(),jTPasswort.getText())){
-                       // jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName));
+                        jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBWeiter.setEnabled(true);
                     }

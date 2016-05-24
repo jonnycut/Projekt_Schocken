@@ -21,7 +21,7 @@ public class GUI extends JFrame{
     private Infobereich infobereich = new Infobereich();
     private Anmeldung anmeldung = new Anmeldung(this);
     private Registrierung registrierung = new Registrierung(this);
-    private Statistik statistik = new Statistik();
+    //private Statistik statistik = new Statistik();
     private JPanel jp = new JPanel(new CardLayout());
 //    private Client client = new Client("");
 //    private Server server = new Server();
