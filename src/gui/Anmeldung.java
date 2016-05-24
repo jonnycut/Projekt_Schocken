@@ -152,6 +152,7 @@ public class Anmeldung extends JPanel {
         unten.add(jPGruppe);
         unten.add(jPFsbw);
 
+
         jp.add(unten, BorderLayout.SOUTH);
 
         add(jp,BorderLayout.CENTER);
