@@ -69,27 +69,21 @@ public class Registrierung extends JPanel {
         jp.add(links, BorderLayout.WEST);
 
         JPanel mitte = new JPanel(new GridLayout(1,1));
-        //JLabel jLMitte = new JLabel("<========>");
-        //jLMitte.setForeground(Color.DARK_GRAY);
         JButton ok = new JButton("   WEITER   ");
         ok.setForeground(Color.WHITE);
-        ok.setBorder(new LineBorder(Color.DARK_GRAY,1));
-        ok.setBackground(Color.DARK_GRAY);
+        ok.setBorder(new LineBorder(Color.BLACK,1));
+        ok.setBackground(Color.BLACK);
 
-        //mitte.add(jLMitte);
         mitte.add(ok, BorderLayout.CENTER);
         mitte.setBackground(Color.DARK_GRAY);
 
         jp.add(mitte, BorderLayout.CENTER);
-
-
 
         JPanel rechts = new JPanel(new GridLayout(4,4));
 
         ActionListener acl = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
                 JButton temp = (JButton)e.getSource();
                 jBProfil.setIcon(temp.getIcon());
                 jBProfil.setPreferredSize(new Dimension(130, 130));
@@ -117,7 +111,6 @@ public class Registrierung extends JPanel {
         String fehler = "Bla Bla Bla";
         jLInfos.setText(fehler);
         jLInfos.setForeground(Color.RED);
-
 
         unten.add(jLInfos);
         jp.add(unten, BorderLayout.SOUTH);

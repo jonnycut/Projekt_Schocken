@@ -44,7 +44,7 @@ public class GUI extends JFrame{
         jb.setIcon(Grafik.TISCH_LOGO);
         start.add(jb, BorderLayout.CENTER);
 
-        //jp.add(anmeldung,"Anmeldung");
+        //jp.add(anmeldung);
         jp.add(registrierung);
 
 
