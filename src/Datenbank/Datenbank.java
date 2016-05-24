@@ -17,8 +17,8 @@ import java.util.Properties;
 
 public class Datenbank {
     private static Datenbank datenbank;
-    private static java.sql.Connection verbindung;
-    private static String ip = "localhost";
+    private static Connection verbindung;
+    //private static String ip = "localhost";
 
     private Datenbank() {
 
@@ -48,9 +48,9 @@ public class Datenbank {
             }
         //wenn Verbindung besteht werden
         if (renew) {
-            String host = ip;
+            String host = "localhost";
             int port = 5432;
-            String database = "db_schocken2";
+            String database = "db_schocken";
 
             try {
                 Socket socket = new Socket(host, port);
@@ -75,14 +75,14 @@ public class Datenbank {
 
             } catch (SQLException e) {
                 throw new SQLException(
-                        "datenbank existiert nicht", e.getSQLState(), e);
+                        "Datenbank existiert nicht", e.getSQLState(), e);
             }
         }
         return datenbank;
     }
 
     public static Datenbank getInstance(String database) throws SQLException {
-        String host = ip;
+        String host = "localhost";
         int port = 5432;
 
         String url = "jdbc:postgresql://" + host + ":" + port + "/";
@@ -93,16 +93,17 @@ public class Datenbank {
         try {
             verbindung = DriverManager.getConnection(url, props);
             verbindung.createStatement().executeUpdate(
-                    "CREATE DATABASE " + database + " " +
-                            "WITH OWNER = postgres " +
-                            "Encoding = 'UTF-8' " +
-                            "LC_COLLATE = 'German_Germany.1252' " +
-                            "LC_CTYPE = 'German_Germany.1252' " +
-                            "CONNECTION LIMIT = -1; "
+                    "CREATE DATABASE " + database +
+                            "  WITH OWNER = postgres " +
+                            "  Encoding = 'UTF-8' " +
+                            "  LC_COLLATE = 'German_Germany.1252' " +
+                            "  LC_CTYPE = 'German_Germany.1252' " +
+                            "  CONNECTION LIMIT = -1; "
 
             );
             verbindung.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new SQLException("Zugriff verweigert", e.getSQLState());
         }
         try {
@@ -140,7 +141,7 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
 
         ResultSet r = stmt.executeQuery(
-                "SELECT Spiel_ID FROM t_Spiel WHERE Status ="+"'1'"
+                String.format("SELECT Spiel_ID FROM t_Spiel WHERE Status ='1'")
         );
         return r.getInt(1);
     }
@@ -159,8 +160,7 @@ public class Datenbank {
 
         try {
             stmt.executeUpdate(
-                    "INSERT INTO t_Spielleiter " +
-                            " VALUES ('" + spielleiter + "')");
+                    String.format("INSERT INTO t_Spielleiter  VALUES ('%s')", spielleiter));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -168,9 +168,7 @@ public class Datenbank {
         try {
             stmt.executeUpdate(
 
-                    "INSERT  INTO t_Spiel " +
-                            "(Status) " +
-                            " VALUES ('1')");
+                    String.format("INSERT  INTO t_Spiel (Status,fk_t_Spielleiter_Kennung,fk_t_Spieler_Kennung)  VALUES ('1','%s','%s')", spielleiter, spielleiter));
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -190,7 +188,7 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
 
         ResultSet r =stmt.executeQuery(
-                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = " + kennung + " AND "+ "Passwort = "+ passwort );
+                String.format("SELECT * FROM t_Spieler WHERE Kennung ='%s' AND Passwort ='%s'", kennung, passwort));
 
         return r.next();
 
@@ -202,10 +200,10 @@ public class Datenbank {
      * @return wenn der Nutzername bereits vergeben ist liefert die Methode false, sonst true
      * @throws SQLException
      */
-    private boolean selectNutzerKennungReg(String kennung) throws SQLException{
+    public boolean selectNutzerKennungReg(String kennung) throws SQLException{
         Statement stmt = verbindung.createStatement();
         ResultSet r =stmt.executeQuery(
-                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = " + kennung );
+                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = "+"'" + kennung+ "'" );
 
         if(r.next())
             return false;
@@ -219,34 +217,25 @@ public class Datenbank {
      * @return wurde der Spieler angelegt wird 0 zurück geliefert sonst 1
      * @throws SQLException
      */
-    public int insertNutzerKennung(String kennung,String passwort) throws SQLException {
-        if(selectNutzerKennungReg(kennung)){
-            Statement stmt = verbindung.createStatement();
+    public void insertNutzerKennung(String kennung, String passwort) throws SQLException {
+        Statement stmt = verbindung.createStatement();
 
-            try {
-                stmt.executeUpdate("INSERT INTO t_Spieler " +
-                        "(Kennung, Passwort)" +
-                        " VALUES "+"('"+kennung+"','"+passwort+"'");
-            }
-            catch (SQLException e){
-                e.printStackTrace();
-            }
-
-
-            return 0;
+        try {
+            stmt.executeUpdate(String.format("INSERT INTO t_Spieler (Kennung, Passwort) VALUES ('%s','%s')", kennung, passwort));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        else
-            return 1;
     }
+
 
     public void insertTeilnehmer(String teilnehmer,int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
         try {
-            stmt.executeUpdate("INSERT INTO t_Spiel " +
-                    "(Spiel_ID,fk_t_Spieler_Kennung)" +
-                    " VALUES " + "('" + spielID + "','" + teilnehmer + "'");
-        }
+            stmt.executeUpdate(
+                    String.format("INSERT INTO t_Spiel  (fk_t_Spieler_Kennung,spiel_id,status) VALUES ('%s', %d,1)", teilnehmer, spielID)
+
+            );}
         catch (SQLException e){
             e.printStackTrace();
         }

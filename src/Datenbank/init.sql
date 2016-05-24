@@ -21,7 +21,8 @@ CREATE TABLE t_Spiel(
   fk_t_spielleiter_Kennung VARCHAR(30)NOT NULL ,
   Status INT NOT NULL ,
   Zeit TIMESTAMP NOT NULL DEFAULT current_timestamp,
-  CONSTRAINT PK_t_Spiel PRIMARY KEY (Spiel_ID)
+  CONSTRAINT PK_t_Spiel PRIMARY KEY (Spiel_ID),
+  CONSTRAINT FK_t_Spielleiter_Kennung FOREIGN KEY (fk_t_spielleiter_Kennung) REFERENCES t_Spielleiter(fk_t_spielleiter_Kennung) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE t_Hälfte(
