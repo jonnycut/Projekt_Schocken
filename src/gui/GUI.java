@@ -21,10 +21,11 @@ public class GUI extends JFrame{
     private Infobereich infobereich = new Infobereich();
     private Anmeldung anmeldung = new Anmeldung(this);
     private Registrierung registrierung = new Registrierung(this);
+    private Administration administration = new Administration(this);
     //private Statistik statistik = new Statistik();
     private JPanel jp = new JPanel(new CardLayout());
-//    private Client client = new Client("");
-//    private Server server = new Server();
+    private Client client;
+    private Server server;
 
 
     public GUI(){
@@ -57,10 +58,13 @@ public class GUI extends JFrame{
 
         JPanel anmeldungP = anmeldung;
         JPanel registrierungP = registrierung;
+        JPanel administrationP = administration;
 
+        //jp.add(administrationP, "Administration");
         jp.add(start,"Start");
         jp.add(anmeldungP, "Anmeldung");
         jp.add(registrierungP, "Registrierung");
+        jp.add(administrationP, "Administration");
 
         add(jp);
 
@@ -86,8 +90,31 @@ public class GUI extends JFrame{
                 break;
             case 4:
                 //ToDo: Dinge die bei Registrierung laufen
+                break;
+            case 5:
+                ((CardLayout) jp.getLayout()).show(jp, "Administration");
+                break;
+
         }
     }
+
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
 
 
     public SpielerPanel getSpieler(){

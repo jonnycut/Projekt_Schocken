@@ -210,14 +210,15 @@ public class Datenbank {
      * @throws SQLException
      */
     public boolean selectNutzerKennungReg(String kennung) throws SQLException{
-        Statement stmt = verbindung.createStatement();
-        ResultSet r =stmt.executeQuery(
-                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = "+"'" + kennung+ "'" );
-
-        if(r.next())
+//        Statement stmt = verbindung.createStatement();
+//        ResultSet r =stmt.executeQuery(
+//                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = "+"'" + kennung+ "'" );
+//
+//        if(r.next())
+//            return true;
+//        else
+        System.out.println("bin durch und voll");
             return false;
-        else
-            return true;
     }
 
     /**Diese Methode legt einen neuen Spieler in der Relation t_Spieler an.
@@ -227,13 +228,13 @@ public class Datenbank {
      * @throws SQLException
      */
     public void insertNutzerKennung(String kennung, String passwort) throws SQLException {
-        Statement stmt = verbindung.createStatement();
-
-        try {
-            stmt.executeUpdate(String.format("INSERT INTO t_Spieler (Kennung, Passwort) VALUES ('%s','%s')", kennung, passwort));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        Statement stmt = verbindung.createStatement();
+//
+//        try {
+//            stmt.executeUpdate(String.format("INSERT INTO t_Spieler (Kennung, Passwort) VALUES ('%s','%s')", kennung, passwort));
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -264,16 +265,17 @@ public class Datenbank {
                 "WHERE Status=1");
 
 
+        return null;
     }
 
     public void insertProfilbild(String name, Icon icon) throws SQLException {
-        Statement stmt =verbindung.createStatement();
-        stmt.executeUpdate(
-                "UPDATE  t_Spieler" +
-                        " SET Profilbild=" + Icon +
-                        " WHERE Kennung='" + name + "'"
-        );
-
+//        Statement stmt =verbindung.createStatement();
+//        stmt.executeUpdate(
+//                "UPDATE  t_Spieler" +
+//                        " SET Profilbild=" + Icon +
+//                        " WHERE Kennung='" + name + "'"
+//        );
+//
 
         //ToDo: OPA bitte erstellen
     }
@@ -418,7 +420,10 @@ public class Datenbank {
         if (r.next())
             return r.getBinaryStream(1);
         return null;
-    }}
+    }
+
+
+}
 
 
 

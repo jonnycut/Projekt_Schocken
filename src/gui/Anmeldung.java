@@ -2,6 +2,8 @@ package gui;
 
 import Datenbank.Datenbank;
 import Grafik.Grafik;
+import netzwerk.Client;
+import netzwerk.Server;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -17,8 +19,11 @@ import java.sql.SQLException;
  */
 public class Anmeldung extends JPanel {
 
-    public Anmeldung(GUI gui){
+    GUI gui;
+
+    public Anmeldung(GUI gui) {
         super();
+        this.gui = gui;
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
         JPanel jp = new JPanel(new BorderLayout());
@@ -66,7 +71,7 @@ public class Anmeldung extends JPanel {
 
         JPanel jPTPasswort = new JPanel();
         jPTPasswort.setBackground(Color.DARK_GRAY);
-        JTextField jTPasswort = new JTextField(20);
+        JPasswordField jTPasswort = new JPasswordField(20);
         jTPasswort.setDocument(new JTextFieldLimit(30));
         jPTPasswort.add(jTPasswort);
 
@@ -124,20 +129,29 @@ public class Anmeldung extends JPanel {
 
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid
+                if (jTName.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Bitte Benutzername eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
+
+                char[] zeichen = jTPasswort.getPassword();
+                String passwort = new String(zeichen);
+                if (passwort.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
+
+                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid holen
                 try {
-                    if(Datenbank.getInstance().selectNutzerkennung(jTName.getText(),jTPasswort.getText())){
+                    if (!Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBWeiter.setEnabled(true);
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (SQLException e1) {
                     System.out.println(e1.getMessage());
                 } catch (ClassNotFoundException e1) {
-                    JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden","Fehler", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
             }
         };
@@ -159,7 +173,7 @@ public class Anmeldung extends JPanel {
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
         JPanel rechts = new JPanel();
-        rechts.setPreferredSize(new Dimension(240,0));
+        rechts.setPreferredSize(new Dimension(240, 0));
         rechts.setBackground(Color.DARK_GRAY);
         rechts.setLayout(new BoxLayout(rechts, BoxLayout.Y_AXIS));
 
@@ -168,20 +182,59 @@ public class Anmeldung extends JPanel {
         JLabel jLObenRechts = new JLabel("");
         obenRechts.add(jLObenRechts);
 
-        JPanel untenRechts = new JPanel(new FlowLayout());
+        JPanel untenRechts = new JPanel();
         untenRechts.setBackground(Color.DARK_GRAY);
+        untenRechts.setLayout(new BoxLayout(untenRechts, BoxLayout.Y_AXIS));
+
+        JPanel register = new JPanel(new FlowLayout());
+        register.setBackground(Color.DARK_GRAY);
         JButton jBReg = new JButton("Registrieren");
 
         ActionListener reg = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(3);
                 gui.updateView(e);
-
             }
         };
 
         jBReg.addActionListener(reg);
-        untenRechts.add(jBReg);
+        register.add(jBReg);
+
+        JPanel reset = new JPanel(new FlowLayout());
+        reset.setBackground(Color.DARK_GRAY);
+        JButton pwReset = new JButton("Passwort reseten");
+
+        ActionListener pwReseten = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                String richtigesPWD = "root";
+
+                JLabel jPassword = new JLabel("Passwort");
+                JTextField password = new JPasswordField();
+                Object[] ob = {jPassword, password};
+                int result = JOptionPane.showConfirmDialog(null, ob, "Bitte Passwort eingeben", JOptionPane.OK_CANCEL_OPTION);
+
+                if (result == JOptionPane.OK_OPTION) {
+                    String pwdEingabe = password.getText();
+                    if(pwdEingabe.equals(richtigesPWD)){
+                        gui.setZustand(5);
+                        gui.updateView(e);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Passwort falsch", "fehler",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    //Here is some validation code
+                }
+            }
+        };
+
+        pwReset.addActionListener(pwReseten);
+        reset.add(pwReset);
+
+        untenRechts.add(register);
+        untenRechts.add(reset);
+
 
         rechts.add(obenRechts);
         rechts.add(untenRechts);
@@ -190,7 +243,7 @@ public class Anmeldung extends JPanel {
 
 
         //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
-        JPanel unten = new JPanel(new GridLayout(1,3));
+        JPanel unten = new JPanel(new GridLayout(1, 3));
         unten.setBackground(Color.BLACK);
 
         JPanel jPProjekt = new JPanel();
@@ -220,31 +273,29 @@ public class Anmeldung extends JPanel {
 
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
 
-        add(jp,BorderLayout.CENTER);
+        add(jp, BorderLayout.CENTER);
     }
 
+    //------------------------------------------METHODEN---------------------------------------------------------------
 
-
-
-
-    public boolean pruefeNutzerkennung(String name, String passwort){
-
-
-
-        return true;
-    }
-
-    public void starteSpiel(){
+    public void starteSpiel() {
 
     }
 
-    public void pruefeSpiel(){
+    public void pruefeSpiel() {
 
     }
 
-    public void erstelleServer(){
-
+    public void erstelleServer() {
+        if (gui.getServer() == null) {
+            gui.setServer(new Server());
+            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
+        }else{
+            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
+        }
     }
+
+    //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
 
     public class JTextFieldLimit extends PlainDocument {
         private int limit;
@@ -254,7 +305,7 @@ public class Anmeldung extends JPanel {
             this.limit = limit;
         }
 
-        public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
             if (str == null) return;
 
             if ((getLength() + str.length()) <= limit) {

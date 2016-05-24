@@ -146,7 +146,7 @@ public class Registrierung extends JPanel {
                                 Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
                                 Datenbank.getInstance().insertProfilbild(jTName.getText(), jBProfil.getIcon());
                             } catch (SQLException e1) {
-                                System.out.println(e1.getMessage());
+                                System.out.println("123 " + e1.getMessage());
                                 JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (ClassNotFoundException e1) {
                                 JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -162,11 +162,10 @@ public class Registrierung extends JPanel {
                         JOptionPane.showMessageDialog(null, "Benutzername bereits vorhanden", "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (SQLException e1) {
-                    System.out.println(e1);
+                    System.out.println("456" + e1);
                 } catch (ClassNotFoundException e1) {
                     JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
         };
 
