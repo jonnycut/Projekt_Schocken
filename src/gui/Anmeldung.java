@@ -76,19 +76,19 @@ public class Anmeldung extends JPanel {
         jPTPasswort.add(jTPasswort);
 
 
-        JButton jBWeiter = new JButton("START");
-        // Nur drückbar wenn die DB Abfrage erfolgreich war
-        jBWeiter.setEnabled(false);
+        JButton jBStart = new JButton("START");
+        // Nur drÃ¼ckbar wenn die DB Abfrage erfolgreich war
+        jBStart.setEnabled(false);
         JPanel jBPweiter = new JPanel(new FlowLayout());
         jBPweiter.setBackground(Color.DARK_GRAY);
-        jBPweiter.add(jBWeiter);
+        jBPweiter.add(jBStart);
 
-        ActionListener weiterButton = new ActionListener() {
+        ActionListener startButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ToDo: Schaltet weiter und gibt das Spiel frei
             }
         };
-        jBWeiter.addActionListener(weiterButton);
+        jBStart.addActionListener(startButton);
 
         JPanel jBPok = new JPanel(new FlowLayout());
         jBPok.setBackground(Color.DARK_GRAY);
@@ -139,12 +139,12 @@ public class Anmeldung extends JPanel {
                     JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
-                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid holen
+                //ToDo: PrÃ¼fung in der DB auf Name, Passwort und Profiblid holen
                 try {
                     if (!Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         jBPProfil.add(jBProfil);
-                        jBWeiter.setEnabled(true);
+                        jBStart.setEnabled(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
@@ -172,15 +172,17 @@ public class Anmeldung extends JPanel {
 
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
-        JPanel rechts = new JPanel();
+        JPanel rechts = new JPanel(new BorderLayout());
         rechts.setPreferredSize(new Dimension(240, 0));
         rechts.setBackground(Color.DARK_GRAY);
-        rechts.setLayout(new BoxLayout(rechts, BoxLayout.Y_AXIS));
 
-        JPanel obenRechts = new JPanel(new FlowLayout());
+
+        JPanel obenRechts = new JPanel();
         obenRechts.setBackground(Color.DARK_GRAY);
         JLabel jLObenRechts = new JLabel("");
+        jLObenRechts.setPreferredSize(new Dimension(0, 200));
         obenRechts.add(jLObenRechts);
+        obenRechts.setLayout(new BoxLayout(obenRechts, BoxLayout.Y_AXIS));
 
         JPanel untenRechts = new JPanel();
         untenRechts.setBackground(Color.DARK_GRAY);
@@ -223,8 +225,6 @@ public class Anmeldung extends JPanel {
                     else{
                         JOptionPane.showMessageDialog(null, "Passwort falsch", "fehler",JOptionPane.ERROR_MESSAGE);
                     }
-
-                    //Here is some validation code
                 }
             }
         };
@@ -232,12 +232,12 @@ public class Anmeldung extends JPanel {
         pwReset.addActionListener(pwReseten);
         reset.add(pwReset);
 
-        untenRechts.add(register);
+        obenRechts.add(register);
         untenRechts.add(reset);
 
 
-        rechts.add(obenRechts);
-        rechts.add(untenRechts);
+        rechts.add(obenRechts, BorderLayout.CENTER);
+        rechts.add(untenRechts, BorderLayout.SOUTH);
 
         jp.add(rechts, BorderLayout.EAST);
 

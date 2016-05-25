@@ -103,14 +103,34 @@ public class Administration extends JPanel{
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-
+                char[] zeichen = jTPasswort.getPassword();
+                String passwort = new String(zeichen);
+                passwortReset(jTName.getText(),passwort);
             }
         };
 
         ok.addActionListener(okButton);
 
+        JButton jBZurueck = new JButton("ZURÜCK");
+
+        ActionListener zurueck = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                gui.setZustand(1);
+                gui.updateView(e);
+            }
+        };
+
+        jBZurueck.addActionListener(zurueck);
+        JPanel jBPweiter = new JPanel(new FlowLayout());
+        jBPweiter.setBackground(Color.DARK_GRAY);
+        jBPweiter.add(jBZurueck);
+
+        untenLinks.add(jBPweiter);
+
         links.add(untenLinks, BorderLayout.SOUTH);
         jp.add(links, BorderLayout.WEST);
+
+
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
@@ -167,12 +187,16 @@ public class Administration extends JPanel{
     //------------------------------------------METHODEN---------------------------------------------------------------
 
 
-    public String passwortReset(String name){
+    public void passwortReset(String name, String passwort){
+        try {
+            Datenbank.getInstance().updatePasswort(name, passwort);
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
 
-        String altesPasswort = "";//getPW aus DB
-        String neuesPasswort = "";
 
-        return neuesPasswort;
     }
 
 

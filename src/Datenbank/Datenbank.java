@@ -36,7 +36,7 @@ public class Datenbank {
             datenbank = new Datenbank();
         }
 
-        //Prüfen ob eine Verbindung zum DB Server aufgebaut ist
+        //PrÃ¼fen ob eine Verbindung zum DB Server aufgebaut ist
         boolean renew = verbindung == null;
         //wenn keine Verbindung besteht soll diese hergestellt werden
         if (!renew)
@@ -135,7 +135,7 @@ public class Datenbank {
 
     /**
      * Diese Methode sucht ein noch offenes Spiel und liefert die SpielID
-     * @return  1 für offen,2 für geschlossen,3 für abgebrochen
+     * @return  1 fÃ¼r offen,2 fÃ¼r geschlossen,3 fÃ¼r abgebrochen
      * @throws SQLException
      */
     public int selectOffenesSpiel() throws SQLException {
@@ -149,7 +149,7 @@ public class Datenbank {
 
     /**
      * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.
-     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezählt.
+     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezÃ¤hlt.
      * Die Kennung des Spielers wird in die Relation t_spielleiter geschrieben
      * Der Status des Spiels ird initial auf 1 gesetzt und die Zeit des Anlegens
      * wird mittels TIMESTAMP DEFAULT Current Timestamp auf die aktuelle Zeit gesetzt.
@@ -187,7 +187,7 @@ public class Datenbank {
 
     /**
      *
-     * @param kennung = der Spielername der sich anmelden möchte
+     * @param kennung = der Spielername der sich anmelden mÃ¶chte
      * @param passwort = Kennwort des anzumeldenden Spielers
      * @return liefert falls ein Eintrag dieser Kombination match ein true ansonsten false
      * @throws SQLException
@@ -204,8 +204,8 @@ public class Datenbank {
     }
 
     /**
-     * Diese Methode prüft bei der Registrierung ob ein Nutzer mit diesem Namen bereits vorhanden ist
-     * @param kennung = der geünschte Nutzermname
+     * Diese Methode prÃ¼ft bei der Registrierung ob ein Nutzer mit diesem Namen bereits vorhanden ist
+     * @param kennung = der geÃ¼nschte Nutzermname
      * @return wenn der Nutzername bereits vergeben ist liefert die Methode false, sonst true
      * @throws SQLException
      */
@@ -224,7 +224,7 @@ public class Datenbank {
     /**Diese Methode legt einen neuen Spieler in der Relation t_Spieler an.
      * @param kennung
      * @param passwort
-     * @return wurde der Spieler angelegt wird 0 zurück geliefert sonst 1
+     * @return wurde der Spieler angelegt wird 0 zurÃ¼ck geliefert sonst 1
      * @throws SQLException
      */
     public void insertNutzerKennung(String kennung, String passwort) throws SQLException {
@@ -297,9 +297,9 @@ public class Datenbank {
     //---------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Diese Methode löscht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
+     * Diese Methode lÃ¶scht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
      *
-     * @param tabellenName Der Name der Tabelle, die gelöscht werden soll.
+     * @param tabellenName Der Name der Tabelle, die gelÃ¶scht werden soll.
      * @throws SQLException Wenn beim Erstellen der Verbindung ein Fehler passiert.
      */
     public void dropIfExist(String tabellenName) throws SQLException {
@@ -349,7 +349,7 @@ public class Datenbank {
             max[i] = s.length();
 
         }
-        //Tabelleneinträge
+        //TabelleneintrÃ¤ge
         if (r.next())
             do {
                 for (int i = 0; i < col; i++) {
@@ -423,6 +423,9 @@ public class Datenbank {
     }
 
 
+    public void updatePasswort(String name, String passwort) {
+        //ToDO: OPA bitte erstellen
+    }
 }
 
 
