@@ -155,7 +155,7 @@ public class Registrierung extends JPanel {
                         } else {
                             if (jTName.getText().equals("")) {
                             } else {
-                                JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Passwort stimmt nicht Ã¼berein", "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     else{
@@ -175,7 +175,19 @@ public class Registrierung extends JPanel {
         jBPweiter.setBackground(Color.DARK_GRAY);
         jBPweiter.add(jBWeiter);
 
+        JButton jBZurueck = new JButton("ZURÜCK");
+
+        ActionListener zurueck = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                gui.setZustand(1);
+                gui.updateView(e);
+            }
+        };
+
+        jBZurueck.addActionListener(zurueck);
+        jBPweiter.add(jBZurueck);
         untenLinks.add(jBPweiter);
+
 
         links.add(untenLinks, BorderLayout.SOUTH);
         jp.add(links, BorderLayout.WEST);
@@ -202,7 +214,7 @@ public class Registrierung extends JPanel {
                 jBPProfil.add(jBProfil);
                 jLMitte.setIcon(Grafik.BLOCK);
                 mitte.add(jLMitte);
-                //ToDo: Überarbeiten!!!
+                //ToDo: Ãœberarbeiten!!!
                 if (jBProfil.getIcon() != null) {
                     jBWeiter.setEnabled(true);
                 }
@@ -257,7 +269,7 @@ public class Registrierung extends JPanel {
         add(jp, BorderLayout.CENTER);
     }
 
-    /*ToDo: Krebs fragen ob es ok ist das über die Button zu machen, oder mit den Methoden. Wenn ja, aus dem UML streichen*/
+    /*ToDo: Krebs fragen ob es ok ist das Ã¼ber die Button zu machen, oder mit den Methoden. Wenn ja, aus dem UML streichen*/
 //    public void spielerAnlegen(String name, String passwort) {
 //
 //    }
