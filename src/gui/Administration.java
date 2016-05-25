@@ -181,12 +181,19 @@ public class Administration extends JPanel{
 
     public void passwortReset(String name, String passwort){
         try {
-            Datenbank.getInstance().updatePasswort(name, passwort);
-        } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+            if(Datenbank.getInstance().selectNutzerKennungReg(name)) {
+                Datenbank.getInstance().updatePasswort(name, passwort);
+                JOptionPane.showMessageDialog(null, "Neues Passwort wurde erstellt", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Benutzername wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
+            }
+
+            } catch (ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
     }
 
 

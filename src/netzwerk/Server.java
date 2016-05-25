@@ -34,7 +34,7 @@ public class Server {
 
         } catch (IOException e) {
             //Kommt hier hin, wenn der Port schon belegt ist,
-            //oder mann darf keinen Port öffenen.
+            //oder mann darf keinen Port Ã¶ffenen.
             e.printStackTrace();
         }
 
