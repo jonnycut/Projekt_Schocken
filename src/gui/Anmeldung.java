@@ -79,13 +79,17 @@ public class Anmeldung extends JPanel {
         JButton jBStart = new JButton("START");
         // Nur drückbar wenn die DB Abfrage erfolgreich war
         jBStart.setEnabled(false);
-        JPanel jBPweiter = new JPanel(new FlowLayout());
-        jBPweiter.setBackground(Color.DARK_GRAY);
-        jBPweiter.add(jBStart);
+        JPanel jBPStart = new JPanel(new FlowLayout());
+        jBPStart.setBackground(Color.DARK_GRAY);
+        jBPStart.add(jBStart);
 
         ActionListener startButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ToDo: Schaltet weiter und gibt das Spiel frei
+                starteSpiel();
+                gui.setZustand(6);
+                gui.updateView(e);
+
             }
         };
         jBStart.addActionListener(startButton);
@@ -125,7 +129,7 @@ public class Anmeldung extends JPanel {
         JPanel untenLinks = new JPanel(new BorderLayout());
         untenLinks.setBackground(Color.DARK_GRAY);
 
-        untenLinks.add(jBPweiter);
+        untenLinks.add(jBPStart);
 
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -139,7 +143,6 @@ public class Anmeldung extends JPanel {
                     JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
-                //ToDo: Prüfung in der DB auf Name, Passwort und Profiblid holen
                 try {
                     if (!Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
@@ -280,6 +283,15 @@ public class Anmeldung extends JPanel {
 
     public void starteSpiel() {
 
+        try {
+            if(Datenbank.getInstance().selectOffenesSpiel() !=1){
+                gui.setSpielfeld(new Spielfeld(gui));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void pruefeSpiel() {

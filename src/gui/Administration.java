@@ -20,13 +20,9 @@ import java.util.List;
  */
 public class Administration extends JPanel{
 
-    private GUI gui;
-    private List alleSpielerDB = new ArrayList<>();
-
-
     public Administration(GUI gui) {
         super();
-        this.gui = gui;
+
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
         JPanel jp = new JPanel(new BorderLayout());
@@ -86,8 +82,6 @@ public class Administration extends JPanel{
 
         jBPok.add(ok);
 
-
-
         obenLinks.add(temp);
         obenLinks.add(jPName);
         obenLinks.add(jPTName);
@@ -129,8 +123,6 @@ public class Administration extends JPanel{
 
         links.add(untenLinks, BorderLayout.SOUTH);
         jp.add(links, BorderLayout.WEST);
-
-
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
@@ -195,8 +187,6 @@ public class Administration extends JPanel{
         } catch (SQLException e) {
             System.out.println(e);
         }
-
-
     }
 
 

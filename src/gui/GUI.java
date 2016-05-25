@@ -10,15 +10,18 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by dfleuren on 23.05.2016.
  */
-public class GUI extends JFrame{
+public class GUI extends JFrame {
 
     private int zustand = 1;
-    private SpielerPanel[] spieler = new SpielerPanel[8];
-    private Infobereich infobereich = new Infobereich();
+    private List<SpielerPanel> spieler = new ArrayList<>();
+    private Spielfeld spielfeld = new Spielfeld(this);
+    private Infobereich infobereich = new Infobereich(spielfeld);
     private Anmeldung anmeldung = new Anmeldung(this);
     private Registrierung registrierung = new Registrierung(this);
     private Administration administration = new Administration(this);
@@ -28,7 +31,7 @@ public class GUI extends JFrame{
     private Server server;
 
 
-    public GUI(){
+    public GUI() {
 
         super("Schocken, das Würfelspiel für zwischendurch!");
 
@@ -46,8 +49,6 @@ public class GUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
 
-
-
                 updateView(e);
             }
         };
@@ -59,12 +60,13 @@ public class GUI extends JFrame{
         JPanel anmeldungP = anmeldung;
         JPanel registrierungP = registrierung;
         JPanel administrationP = administration;
+        JPanel spielfeldP = spielfeld;
 
-        //jp.add(administrationP, "Administration");
-        jp.add(start,"Start");
+        jp.add(start, "Start");
         jp.add(anmeldungP, "Anmeldung");
         jp.add(registrierungP, "Registrierung");
         jp.add(administrationP, "Administration");
+        jp.add(spielfeldP, "Spielfeld");
 
         add(jp);
 
@@ -73,9 +75,9 @@ public class GUI extends JFrame{
     }
 
 
-    public void updateView(ActionEvent e){
+    public void updateView(ActionEvent e) {
 
-        switch (zustand){
+        switch (zustand) {
 
             case 1:
                 ((CardLayout) jp.getLayout()).show(jp, "Anmeldung");
@@ -93,6 +95,9 @@ public class GUI extends JFrame{
                 break;
             case 5:
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
+                break;
+            case 6:
+                ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
 
         }
@@ -115,9 +120,16 @@ public class GUI extends JFrame{
         this.client = client;
     }
 
+    public Spielfeld getSpielfeld() {
+        return spielfeld;
+    }
+
+    public void setSpielfeld(Spielfeld spielfeld) {
+        this.spielfeld = spielfeld;
+    }
 
 
-    public SpielerPanel getSpieler(){
+    public SpielerPanel getSpieler() {
 
         SpielerPanel spieler = null;
 
@@ -125,13 +137,13 @@ public class GUI extends JFrame{
     }
 
 
-    public SpielerPanel[] getAlleSpieler(){
+    public List<SpielerPanel> getAlleSpieler() {
 
         return this.spieler;
     }
 
 
-    public void startPosition(){
+    public void startPosition() {
 
     }
 
