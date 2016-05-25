@@ -48,7 +48,8 @@ public class SpielerPanel extends JPanel {
     public SpielerPanel(Spieler spieler, Runde runde){
         //super(new GridLayout(7, 1));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new LineBorder(Color.BLACK,2));
+        setBorder(new LineBorder(Color.BLACK, 2));
+        setBackground(Color.BLACK);
         setPreferredSize(new Dimension(0, 610));
 
         this.runde = runde;
@@ -157,10 +158,10 @@ public class SpielerPanel extends JPanel {
         this.strafpunkte = new JPanel();
         strafpunkte.setLayout(new FlowLayout());
         strafpunkte.setBackground(Color.DARK_GRAY);
-        strafpunkte.setBorder(new LineBorder(Color.BLACK, 1));
+        //strafpunkte.setBorder(new LineBorder(Color.BLACK, 1));
 
         JLabel jLStrafpunkteTitel = new JLabel("Strafpunkte:  ");
-        jLStrafpunkteTitel.setForeground(Color.WHITE);
+        jLStrafpunkteTitel.setForeground(Color.RED);
         strafpunkte.add(jLStrafpunkteTitel);
 
         JLabel jLStrafpunkte = new JLabel(""+this.spieler.getStrafpunkte());
@@ -235,30 +236,43 @@ public class SpielerPanel extends JPanel {
         buttons.add(wuerfeln);
         buttons.add(fertig);
 
-        this.name = new JPanel(new FlowLayout());
+        this.name = new JPanel();
         name.setBackground(Color.DARK_GRAY);
-        JLabel jLSpielerTitel = new JLabel("Spieler:  ");
-        jLSpielerTitel.setForeground(Color.WHITE);
+        name.setLayout(new BoxLayout(name, BoxLayout.Y_AXIS));
+
+        JPanel jPBox = new JPanel(new FlowLayout());
+        jPBox.setBackground(Color.DARK_GRAY);
         JLabel jLSpielerName = new JLabel(this.spieler.getName());
         jLSpielerName.setForeground(Color.WHITE);
-        name.add(jLSpielerTitel);
-        name.add(jLSpielerName);
+
+        jPBox.add(jLSpielerName);
+
+        name.add(jPBox);
+
 
         this.profilbild = new JPanel(new GridLayout(1,3));
         profilbild.setBackground(Color.DARK_GRAY);
         JLabel jLProfilbild = new JLabel(spieler.getProfilBild());
         //jLProfilbild.setBorder(new LineBorder(Color.BLACK, 1));
-        profilbild.add(name);
+        profilbild.add(jPBox);
         profilbild.add(jLProfilbild);
         profilbild.add(new JLabel());
+
+        JPanel jPTemp = new JPanel();
+        jPTemp.setPreferredSize(new Dimension(0,10));
+        jPTemp.setBackground(Color.DARK_GRAY);
+
+        JPanel jPTemp1 = new JPanel();
+        jPTemp1.setPreferredSize(new Dimension(0, 10));
+        jPTemp1.setBackground(Color.DARK_GRAY);
 
 
         add(auslage);
         add(wuerfel);
         add(strafpunkte);
-
+        add(jPTemp);
         add(profilbild);
-        //add(name);
+        add(jPTemp1);
         add(buttons);
 
 
