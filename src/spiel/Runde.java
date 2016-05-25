@@ -32,6 +32,7 @@ public class Runde {
 
     public void setTeilnehmer(List<Spieler> teilnehmer) {
         this.teilnehmer = teilnehmer;
+        this.beginner = teilnehmer.get(teilnehmer.size()-1);
     }
 
     /**
@@ -127,7 +128,7 @@ public class Runde {
      * @param anzahl    Int Anzahl der Strafchips
      */
     public void verteileStrafpunkte(Spieler gewinner, Spieler verlierer, int anzahl) {
-
+        //ToDo: Schock Aus = RundenEnde
         if (this.stock.getStrafpunkte() == 0) {
             gewinner.popStrafpunkte(anzahl);
             verlierer.pushStrafpunkte(anzahl);
