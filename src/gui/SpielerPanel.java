@@ -1,7 +1,10 @@
-package spiel;
+package gui;
 
 import Datenbank.Datenbank;
 import Grafik.Grafik;
+import spiel.Runde;
+import spiel.Spieler;
+import spiel.Wuerfel;
 
 import javax.swing.*;
 import java.awt.*;

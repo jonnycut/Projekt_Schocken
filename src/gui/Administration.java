@@ -2,7 +2,6 @@ package gui;
 
 import Datenbank.Datenbank;
 import Grafik.Grafik;
-import spiel.SpielerPanel;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -12,8 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dfleuren on 23.05.2016.
