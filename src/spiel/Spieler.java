@@ -1,6 +1,7 @@
 package spiel;
 
 import javax.swing.*;
+import java.util.Comparator;
 
 
 /**
@@ -147,4 +148,19 @@ public class Spieler implements Comparable <Spieler> {
     public int compareTo(Spieler s2) {
         return this.becher.compareTo(s2.getBecher());
     }
+
+    public static final Comparator<Spieler>
+            STRAFPUNKTE_ORDER = new Comparator<Spieler>(){
+        public int compare(Spieler s1, Spieler s2){
+            return s1.getStrafpunkte()-s2.getStrafpunkte();
+        }
+    };
+
+    public static final Comparator<Spieler>
+            NAME_ORDER = new Comparator<Spieler>() {
+        @Override
+        public int compare(Spieler s1, Spieler s2) {
+            return s1.getName().compareTo(s2.getName());
+        }
+    };
 }

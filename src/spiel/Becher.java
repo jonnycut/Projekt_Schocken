@@ -52,7 +52,7 @@ public class Becher implements Comparable<Becher> {
         return this.wurf;
     }
 
-    public void resetWurf(){
+    public void resetWurf() {
         this.wurf = 0;
     }
 
@@ -191,18 +191,18 @@ public class Becher implements Comparable<Becher> {
 
 
             case "Zahl-Zahl":
-                int ergebnis1 = (int) (w1[0].getWert()*Math.pow(10,2)) + w1[1].getWert()*10+w1[2].getWert();
-                int ergebnis2 = (int) (w2[0].getWert()*Math.pow(10,2)) + w2[1].getWert()*10+w2[2].getWert();
+                int ergebnis1 = (int) (w1[0].getWert() * Math.pow(10, 2)) + w1[1].getWert() * 10 + w1[2].getWert();
+                int ergebnis2 = (int) (w2[0].getWert() * Math.pow(10, 2)) + w2[1].getWert() * 10 + w2[2].getWert();
 
-                if (ergebnis1==ergebnis2) {
+                if (ergebnis1 == ergebnis2) {
                     if (wurf < b2.getWurf())
                         return 1;
                     else if (wurf > b2.getWurf())
                         return -1;
                     else
                         return 0;
-                } else{
-                    return ergebnis1-ergebnis2;
+                } else {
+                    return ergebnis1 - ergebnis2;
                 }
 
             case "Zahl-Schock aus":
@@ -216,6 +216,12 @@ public class Becher implements Comparable<Becher> {
             case "Straße-Schock":
                 return -1;
             case "General-Schock":
+                return -1;
+            case "Straße-Schock aus":
+                return -1;
+            case "Schock-Schock aus":
+                return -1;
+            case "Straße-General":
                 return -1;
             default:
                 return 1;

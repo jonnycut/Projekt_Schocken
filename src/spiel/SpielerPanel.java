@@ -227,7 +227,7 @@ public class SpielerPanel extends JPanel {
 
         strafpunkte.removeAll();
         strafpunkte.add(new JLabel("" + this.spieler.getStrafpunkte()));
-        strafpunkte.revalidate();
+        this.revalidate();
         Wuerfel[] wuerfelArray = spieler.getBecher().getWuerfel();
         JButton[] btnArray = {w1,w2,w3};
 
