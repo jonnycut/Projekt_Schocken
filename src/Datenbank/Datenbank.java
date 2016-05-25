@@ -6,6 +6,7 @@ package Datenbank;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
@@ -430,7 +431,19 @@ public class Datenbank {
         return null;
     }
 
-    public Icon selectProfilBild(String text) {
+    public Icon selectProfilBild(String text) throws SQLException, IOException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery(
+                "SELECT profilbild" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
+        );
+        if (r.next()) {
+            Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
+            return icon;
+        }
+
+
         return null;
     }
 
@@ -444,8 +457,14 @@ public class Datenbank {
     public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
 
 
-        BufferedImage image = new BufferedImage(icon.getIconWidth(),
-                icon.getIconHeight(),BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(
+                icon.getIconWidth(),
+                icon.getIconHeight(),
+                BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.createGraphics();
+// paint the Icon to the BufferedImage.
+        icon.paintIcon(null, g, 0,0);
+        g.dispose();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);

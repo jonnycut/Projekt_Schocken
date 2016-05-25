@@ -12,6 +12,7 @@ import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -155,6 +156,8 @@ public class Anmeldung extends JPanel {
                     System.out.println(e1.getMessage());
                 } catch (ClassNotFoundException e1) {
                     JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };

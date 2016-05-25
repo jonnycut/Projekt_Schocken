@@ -6,8 +6,15 @@ import spiel.Runde;
 import spiel.Spieler;
 import spiel.Stock;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +26,22 @@ public class Main {
     static List<Spieler> teilnehmer = new ArrayList<>();
 
 
-    public static void main(String[] args) {
-       new GUI();
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+       /*new GUI();
 
-        Datenbank.dbErstellen();
+        Datenbank.dbErstellen();*/
+        Icon icon2 = Datenbank.getInstance().selectProfilBild("jochen");
 
 
+        JOptionPane.showMessageDialog(
+                null, "Tolles Bild aus DB",
+                "Bildanzeige",
+                JOptionPane.INFORMATION_MESSAGE,
+                icon2
+        );
 
-
-        /*teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
+/*
+        teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
         teilnehmer.add(new Spieler("Hans", Grafik.AVATAR_BB8));
         teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
 
