@@ -1,5 +1,9 @@
 package spiel;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by KNapret on 23.05.2016.
  * <pre>
@@ -8,8 +12,8 @@ package spiel;
  *     kenn die Anzahl seiner Wuerfe
  * </pre>
  */
-public class Becher implements Comparable <Becher> {
-    private  Wuerfel[] wuerfel = new Wuerfel[3];
+public class Becher implements Comparable<Becher> {
+    private List<Wuerfel> wuerfel = new ArrayList<>();
     private String bild;
     private int wurf;
 
@@ -20,18 +24,19 @@ public class Becher implements Comparable <Becher> {
      * Bild wird initial auf null gesetzt
      * Anzahl Wuerfe wird mit 0 initialisiert</pre>
      */
-    public Becher(){
+    public Becher() {
 
-        for(int i =0; i<3;i++){
-            wuerfel[i] = new Wuerfel();
+        for (int i = 0; i < 3; i++) {
+            wuerfel.add(new Wuerfel());
         }
 
-        this.bild = null;
+        wuerfeln();
         this.wurf = 0;
     }
 
     /**
      * Getter fuer das aktuelle Bild des Bechers
+     *
      * @return String : {Schock | General | Strasse | Zahl}
      */
     public String getBild() {
@@ -43,16 +48,18 @@ public class Becher implements Comparable <Becher> {
      *
      * @return Int - 0 - 3 (Da 3 Max)
      */
-    public int getWurf(){
+    public int getWurf() {
         return this.wurf;
     }
 
     /**
      * Getter fuer das Wuerfelarray
+     *
      * @return Wuerfel[3]
      */
-    public Wuerfel[] getWuerfel(){
-        return  this.wuerfel;
+    public Wuerfel[] getWuerfel() {
+        sortiere();
+        return wuerfel.toArray(new Wuerfel[3]);
     }
 
     /**
@@ -65,7 +72,6 @@ public class Becher implements Comparable <Becher> {
      * {Schock | General | Strasse | Zahl}
      *
      * gesetzt</pre>
-     *
      */
     public void wuerfeln() {
 
@@ -73,27 +79,24 @@ public class Becher implements Comparable <Becher> {
 
         this.wurf++;
 
-        for(Wuerfel w : this.wuerfel){
+        for (Wuerfel w : this.wuerfel) {
             w.wuerfeln();
         }
 
-        Wuerfel pufferWuerfel;
-        for(int i=0; i<1;i++){
-            if(wuerfel[i].compareTo(wuerfel[i+1])<0){
-                pufferWuerfel = wuerfel[i];
-                wuerfel[i] = wuerfel[i+1];
-                wuerfel[i+1] = pufferWuerfel;
+        sortiere();
+    }
 
-            }
-        }
+    public void sortiere() {
+        Collections.sort(wuerfel);
 
-        if(wuerfel[0].getWert() ==1 && wuerfel[1].getWert()==1 && wuerfel[2].getWert()==1){
+
+        if (wuerfel.get(0).getWert() == 1 && wuerfel.get(1).getWert() == 1 && wuerfel.get(2).getWert() == 1) {
             bild = "Schock aus";
-        }else if(wuerfel[1].getWert() ==1 && wuerfel[2].getWert()==1){
+        } else if (wuerfel.get(1).getWert() == 1 && wuerfel.get(2).getWert() == 1) {
             bild = "Schock";
-        }else if(wuerfel[0].getWert() == wuerfel[1].getWert() && wuerfel[1].getWert()== wuerfel[2].getWert()){
+        } else if (wuerfel.get(0).getWert() == wuerfel.get(1).getWert() && wuerfel.get(1).getWert() == wuerfel.get(2).getWert()) {
             bild = "General";
-        }else if(wuerfel[0].getWert() == wuerfel[1].getWert()+1 && wuerfel[1].getWert()== wuerfel[2].getWert()+1){
+        } else if (wuerfel.get(0).getWert() == wuerfel.get(1).getWert() + 1 && wuerfel.get(1).getWert() == wuerfel.get(2).getWert() + 1) {
             bild = "Straße";
         } else {
             bild = "Zahl";
@@ -102,16 +105,16 @@ public class Becher implements Comparable <Becher> {
     }
 
 
-    /**<pre>
+    /**
+     * <pre>
      * Setzt alle Wuerfel auf draussen.
      * Nutzbar, wenn Wurf in Gaenze stehen gelassen wird.
      *
      * </pre>
-     *
      */
-    public void aufdecken(){
+    public void aufdecken() {
 
-        for(Wuerfel w : this.wuerfel){
+        for (Wuerfel w : this.wuerfel) {
             w.setDraussen(true);
 
         }
@@ -126,48 +129,90 @@ public class Becher implements Comparable <Becher> {
      *  wird anhand der hoechsten zaehlbaren Zahl entschieden:
      *  Schock 6 > Schock 3 | General 3 > General 2 | Strasse 456 > Strasse 345 | Zahl 521 > Zahl 421
      * </pre>
+     *
      * @param b2 Object Becher, mit dem verglichen wird
      * @return Int - negative Zahl: Becher < b2 <br></br>
-     *               positive Zahl: Becher > b2
-     *               0 :            Becher = b2
-     *               ToDo: Anzahl Wuerfe auswerten
+     * positive Zahl: Becher > b2
+     * 0 :            Becher = b2
+     * ToDo: Anzahl Wuerfe auswerten
      */
     @Override
     public int compareTo(Becher b2) {
-
-        Wuerfel[] w1 = this.wuerfel;
+        sortiere();
+        Wuerfel[] w1 = this.wuerfel.toArray(new Wuerfel[3]);
         Wuerfel[] w2 = b2.getWuerfel();
+        String vergleich = bild + "-" + b2.getBild();
 
-        if(w1[1].getWert()==1 && w1[2].getWert() ==1){
-            if(w2[1].getWert()==1 && w2[2].getWert() ==1){
-                return w1[0].getWert()-w2[0].getWert();
-            }else {
-                return w1[0].getWert();
-            }
+        switch (vergleich) {
+            case "Schock aus-Schock aus":
+                if (wurf <= b2.getWurf())
+                    return 1;
+                else
+                    return -1;
+
+            case "Schock-Schock":
+                if (w1[0].getWert() == w2[0].getWert())
+                    if (wurf < b2.getWurf())
+                        return 1;
+                    else if (wurf > b2.getWurf())
+                        return -1;
+                    else
+                        return w1[0].getWert() - w2[0].getWert();
+                else
+                    return w1[0].getWert() - w2[0].getWert();
 
 
-        }else if(w1[0].getWert()==w1[1].getWert() && w1[1].getWert()==w1[2].getWert()){
-            if(w2[0].getWert()==w2[1].getWert() && w2[1].getWert()==w2[2].getWert()){
-                return w1[0].getWert()-w2[0].getWert();
-            }else{
-                return w1[0].getWert();
-            }
+            case "General-General":
+                if (w1[0].getWert() == w2[0].getWert())
+                    if (wurf < b2.getWurf())
+                        return 1;
+                    else if (wurf > b2.getWurf())
+                        return -1;
+                    else
+                        return w1[0].getWert() - w2[0].getWert();
+                else
+                    return w1[0].getWert() - w2[0].getWert();
+
+            case "Straße-Straße":
+                if (w1[0].getWert() == w2[0].getWert()) {
+                    if (wurf < b2.getWurf())
+                        return 1;
+                    else if (wurf > b2.getWurf())
+                        return -1;
+                    else
+                        return w1[0].getWert() - w2[0].getWert();
+                } else {
+                    return w1[0].getWert() - w2[0].getWert();
+                }
 
 
-        } else if(w1[0].getWert()==w1[1].getWert()-1 && w1[1].getWert()==w1[2].getWert()-1){
-            if(w2[0].getWert()==w2[1].getWert()+1 && w2[1].getWert()==w2[2].getWert()+1){
-                return w1[0].getWert()-w2[0].getWert();
-            }else{
-                return w1[0].getWert();
-            }
-        } else if (w2[1].getWert() == 1 && w2[2].getWert()==1){
-            return 0-w2[0].getWert();
-        } else if (w2[0].getWert()== w2[1].getWert() && w2[1].getWert()==w2[2].getWert()){
-            return -30;
-        } else if (w2[0].getWert() == w2[1].getWert()+1 && w2[1].getWert() == w2[2].getWert()+1 ){
-            return -20;
-        } else {
-            return w1[0].getWert()-w2[0].getWert();
+            case "Zahl-Zahl":
+                int ergebnis1 = (int) (w1[0].getWert()*Math.pow(10,2)) + w1[1].getWert()*10+w1[2].getWert();
+                int ergebnis2 = (int) (w2[0].getWert()*Math.pow(10,2)) + w2[1].getWert()*10+w2[2].getWert();
+
+                if (ergebnis1==ergebnis2) {
+                    if (wurf < b2.getWurf())
+                        return 1;
+                    else if (wurf > b2.getWurf())
+                        return -1;
+                    else
+                        return 0;
+                } else{
+                    return ergebnis1-ergebnis2;
+                }
+
+            case "Zahl-Schock aus":
+                return -1;
+            case "Zahl-Schock":
+                return -1;
+            case "Zahl-General":
+                return -1;
+            case "Zahl-Straße":
+                return -1;
+            default:
+                return 1;
+
+
         }
     }
 }

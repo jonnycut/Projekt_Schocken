@@ -22,6 +22,7 @@ public class Spieler implements Comparable <Spieler>{
     private Icon profilBild;
     private String letztesBild;
     private String name;
+    private boolean fertig = false;
 
     /**
      * Erstellt einen neuen Spieler mit dem angegeben Namen und Profilbild
@@ -35,7 +36,7 @@ public class Spieler implements Comparable <Spieler>{
         this.profilBild = profilBild;
         this.strafpunkte = 0;
         this.haelfte = 0;
-        this.letztesBild = null;
+        this.letztesBild = becher.getBild();
         this.name = name;
     }
 
@@ -51,6 +52,14 @@ public class Spieler implements Comparable <Spieler>{
      * Liefert den Spielernamen
      * @return String
      */
+
+    public boolean getFertig(){
+        return this.fertig;
+    }
+
+    public void setFertig(){
+        this.fertig = true;
+    }
     public String getName() {
         return name;
     }
