@@ -33,6 +33,8 @@
     <file url="file://$PROJECT_DIR$/src/gui/Anmeldung.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/gui/GUI.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/gui/Registrierung.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/spiel/Spieler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/spiel/Stock.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

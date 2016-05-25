@@ -4,11 +4,10 @@ package Datenbank;
  * Created by ehampel on 23.05.2016.
  */
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.Socket;
 import java.sql.*;
 import java.util.ArrayList;
@@ -435,7 +434,47 @@ public class Datenbank {
         return null;
     }
 
-    public void insertProfilbild(String text, Icon icon) {
+    /**
+     * Fuegt ein Grafik.ICON in die Datenbank ein
+     * @param text Name des Bildes
+     * @param icon Object Grafik.ICON
+     * @throws SQLException Because Fuck u
+     * @throws IOException Because Fuck u more
+     */
+    public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
+
+
+        BufferedImage image = new BufferedImage(icon.getIconWidth(),
+                icon.getIconHeight(),BufferedImage.TYPE_INT_RGB);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", baos);
+        InputStream is = new ByteArrayInputStream(baos.toByteArray());
+
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery(
+                "SELECT name" +
+                        " FROM blob" +
+                        " WHERE name='" + text + "'"
+
+        );
+
+        if (r.next()) {
+            PreparedStatement ps = verbindung.prepareStatement(
+                    "UPDATE blob" +
+                            " SET blob= ?" +
+                            " WHERE name= '" + text + "'");
+            ps.setBinaryStream(1, is);
+            ps.executeUpdate();
+        } else {
+            PreparedStatement ps = verbindung.prepareStatement(
+                    "INSERT INTO blob VALUES (?,?)"
+            );
+            ps.setString(1, text);
+            ps.setBinaryStream(2, is);
+            ps.executeUpdate();
+        }
+
     }
 
     public void updatePasswort(String name, String passwort) {

@@ -2,6 +2,7 @@ package spiel;
 
 import javax.swing.*;
 import java.util.Comparator;
+import java.util.HashMap;
 
 
 /**
@@ -24,10 +25,11 @@ public class Spieler implements Comparable <Spieler> {
     private String letztesBild;
     private String name;
     private boolean fertig = false;
+    private HashMap<String,Integer> statistik = new HashMap<>();
 
     /**
      * Erstellt einen neuen Spieler mit dem angegeben Namen und Profilbild
-     * Becher wird erstellt, Strafpunkte und Hälfte auf 0 gesetzt
+     * Becher wird erstellt, Strafpunkte und HÃ¤lfte auf 0 gesetzt
      * @param name - Spielername
      * @param profilBild - ProfilBild des Spielers
      */
@@ -39,11 +41,16 @@ public class Spieler implements Comparable <Spieler> {
         this.haelfte = 0;
         this.letztesBild = becher.getBild();
         this.name = name;
+
+        String[] wuerfe = {"Schock aus","Schock","General","StraÃŸe","Zahl"};
+        for(String s: wuerfe){
+            this.statistik.put(s,0);
+        }
     }
 
     /**
-     * Liefert das letzte gewürfelte Bild als String zurücl
-     * @return String {Schock|General|Straße|Zahl}
+     * Liefert das letzte gewÃ¼rfelte Bild als String zurÃ¼cl
+     * @return String {Schock|General|StraÃŸe|Zahl}
      */
     public  String getLetztesBild(){
         return letztesBild;
@@ -89,13 +96,22 @@ public class Spieler implements Comparable <Spieler> {
         return strafpunkte;
     }
 
+    public HashMap<String,Integer> getStatistik(){
+        return this.statistik;
+    }
+
+    public void pushStatistik(String key, Integer value){
+        statistik.put(key,value);
+    }
+
     /**
      * Nutzt die wuerfeln() Methode des Bechers
-     * Ändert das Attribut letztesBild auf den aktuellen Wert
+     * Ã„ndert das Attribut letztesBild auf den aktuellen Wert
      */
     public void wuerfeln(){
         this.becher.wuerfeln();
         this.letztesBild = this.becher.getBild();
+        statistik.put(letztesBild,statistik.get(letztesBild)+1);
 
     }
 
@@ -110,7 +126,7 @@ public class Spieler implements Comparable <Spieler> {
     }
 
     /**
-     * Fügt dem Spieler [anzahl] Strafpunkte hinzu
+     * FÃ¼gt dem Spieler [anzahl] Strafpunkte hinzu
      * @param anzahl Anzahl Strafpunkte, die der Spieler bekommt
      */
 
@@ -121,9 +137,9 @@ public class Spieler implements Comparable <Spieler> {
 
     /**
      * <pre>
-     * Würfelmethode für das initiale Auswürfeln des Beginners.
-     * Liefert zum späteren, einfacheren Vergleich die Summe des Wurfs zurück</pre>
-     * @return Int Summe der 3 Würfel
+     * WÃ¼rfelmethode fÃ¼r das initiale AuswÃ¼rfeln des Beginners.
+     * Liefert zum spÃ¤teren, einfacheren Vergleich die Summe des Wurfs zurÃ¼ck</pre>
+     * @return Int Summe der 3 WÃ¼rfel
      */
     public int beginnerWuerfeln(){
 
@@ -136,7 +152,7 @@ public class Spieler implements Comparable <Spieler> {
     /**
      * <pre>
      * compareTo Methode um Spieler vergleichbar zu machen.
-     * Spieler werden anhand ihrer Würfe unterschieden.
+     * Spieler werden anhand ihrer WÃ¼rfe unterschieden.
      * Nutzt Becher.compareTo(becher2)</pre>
      * @param s2 Object Spieler, mit dem verglichen wird
      * @return int - negativ, wenn dieser Spieler einen schlechteren Wurf hat,<br></br>
