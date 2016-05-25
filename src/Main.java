@@ -1,3 +1,4 @@
+import Datenbank.Datenbank;
 import gui.GUI;
 import Grafik.Grafik;
 import gui.SpielerPanel;
@@ -19,7 +20,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-       // new GUI();
+//       new GUI();
+//
+//        Datenbank.dbErstellen();
 
 
 
@@ -47,8 +50,6 @@ public class Main {
         outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         outline.setPreferredSize(new Dimension(1024, 768));
         outline.pack();
-
-
     }
 
 }

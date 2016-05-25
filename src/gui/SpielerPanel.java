@@ -7,6 +7,7 @@ import spiel.Spieler;
 import spiel.Wuerfel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,20 +46,34 @@ public class SpielerPanel extends JPanel {
     private JPanel profilbild;
 
     public SpielerPanel(Spieler spieler, Runde runde){
-        super(new GridLayout(6,1));
+        //super(new GridLayout(7, 1));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        super.setPreferredSize(new Dimension(0, 610));
 
         this.runde = runde;
         this.spieler = spieler;
+
+
         this.auslage = new JPanel(new GridLayout(1,3));
         //Platzhalter in Auslage einfuegen
-        auslage.add(new JButton());
-        auslage.add(new JButton());
-        auslage.add(new JButton());
+        for (int i = 0; i <3 ; i++) {
+            JButton auslage1 = new JButton();
+            auslage1.setBackground(Color.WHITE);
+            auslage1.setBorder(new LineBorder(Color.BLACK, 1));
+            auslage.add(auslage1);
+        }
+
+//        auslage.add(new JButton());
+//        auslage.add(new JButton());
+//        auslage.add(new JButton());
 
 
         this.wuerfel = new JPanel(new CardLayout());
 
-        this.becher = new JButton(Grafik.WUERFELBECHER);
+        JButton becherBtn = new JButton(Grafik.WUERFELBECHER);
+        becherBtn.setBackground(Color.BLACK);
+        becherBtn.setBorder(new LineBorder(Color.BLACK,1));
+        this.becher = becherBtn;
 
 
         //Wuerfelansicht bauen
@@ -66,11 +81,17 @@ public class SpielerPanel extends JPanel {
 
         //WuerfelButtons mit dem entsprechenden Bild und Text versehen
         this.w1 = new JButton(spieler.getBecher().getWuerfel()[0].getGrafik());
-        w1.setText("0");
+        w1.setBackground(Color.WHITE);
+        w1.setBorder(new LineBorder(Color.BLACK, 1));
+        w1.setName("0");
         this.w2 = new JButton(spieler.getBecher().getWuerfel()[1].getGrafik());
-        w2.setText("1");
+        w2.setBackground(Color.WHITE);
+        w2.setBorder(new LineBorder(Color.BLACK, 1));
+        w2.setName("1");
         this.w3 = new JButton(spieler.getBecher().getWuerfel()[2].getGrafik());
-        w3.setText("2");
+        w3.setBackground(Color.WHITE);
+        w3.setBorder(new LineBorder(Color.BLACK, 1));
+        w3.setName("2");
 
         //WuerfelListener um einen Wuerfel vom Becher in die Auslage zu legen
         //-> Entsprechender Wuerfel wird mit leerem Button ersetzt (Design)
@@ -79,14 +100,18 @@ public class SpielerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton pufferBtn = (JButton) e.getSource();
-                int btnIndex = Integer.parseInt(pufferBtn.getText());
+                int btnIndex = Integer.parseInt(pufferBtn.getName());
 
                 auslage.remove(btnIndex);
-                auslage.add(pufferBtn,btnIndex);
+                auslage.add(pufferBtn, btnIndex);
 
                 wuerfelAnsicht.remove(pufferBtn);
                 pufferBtn.removeActionListener(this);
-                wuerfelAnsicht.add(new JButton(), btnIndex);
+
+                JButton pufferBtn2 = new JButton();
+                pufferBtn2.setBackground(Color.DARK_GRAY);
+                pufferBtn2.setBorder(new LineBorder(Color.DARK_GRAY,1));
+                wuerfelAnsicht.add(pufferBtn2, btnIndex);
                 wuerfelAnsicht.revalidate();
 
                 //Rausgelegten wuerfel auf draussen= true, damit dieser nicht mehr gewuerfelt wird
@@ -129,6 +154,8 @@ public class SpielerPanel extends JPanel {
 
 
         this.strafpunkte = new JPanel();
+        strafpunkte.setLayout(new FlowLayout());
+        strafpunkte.setBackground(Color.WHITE);
         strafpunkte.add(new JLabel(""+this.spieler.getStrafpunkte()));
 
         this.buttons = new JPanel();
@@ -168,7 +195,7 @@ public class SpielerPanel extends JPanel {
                         wuerfeln.setEnabled(false);
                 }else{
 
-                    JOptionPane.showMessageDialog(null,"Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
+                    JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
 
                 }
 
@@ -184,8 +211,8 @@ public class SpielerPanel extends JPanel {
                 spieler.setFertig();
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
-                if(runde.pruefeFertig()){
-                    ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
+                if (runde.pruefeFertig()) {
+                    ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     updatePanel();
 
                     //ToDo: Aufdecken aller Becher muss durch die GUI erfolgen
@@ -204,12 +231,14 @@ public class SpielerPanel extends JPanel {
         this.profilbild = new JPanel();
         profilbild.add(new JLabel(spieler.getProfilBild()));
 
+
         add(auslage);
         add(wuerfel);
         add(strafpunkte);
         add(buttons);
-        add(name);
         add(profilbild);
+        add(name);
+
 
 
 

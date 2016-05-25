@@ -11,6 +11,7 @@ import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -138,7 +139,7 @@ public class Registrierung extends JPanel {
                 }
 
                 try {
-                    if (!Datenbank.getInstance().selectNutzerKennungReg(jTName.getText()))
+                    if (Datenbank.getInstance().selectNutzerKennungReg(jTName.getText()))
                         if (passwort.equals(passwortW) && !jTName.getText().equals("")) {
                             try {
                                 gui.setZustand(1);
@@ -150,6 +151,8 @@ public class Registrierung extends JPanel {
                                 JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (ClassNotFoundException e1) {
                                 JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
                             }
 
                         } else {
@@ -214,7 +217,7 @@ public class Registrierung extends JPanel {
                 jBPProfil.add(jBProfil);
                 jLMitte.setIcon(Grafik.BLOCK);
                 mitte.add(jLMitte);
-                //ToDo: Ãœberarbeiten!!!
+                //ToDo: Überarbeiten!!!
                 if (jBProfil.getIcon() != null) {
                     jBWeiter.setEnabled(true);
                 }
