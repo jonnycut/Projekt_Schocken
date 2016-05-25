@@ -20,14 +20,14 @@ public class Main {
 
 
     public static void main(String[] args) {
-//       new GUI();
-//
-//        Datenbank.dbErstellen();
+       new GUI();
+
+        Datenbank.dbErstellen();
 
 
 
 
-        teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
+        /*teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
         teilnehmer.add(new Spieler("Hans", Grafik.AVATAR_BB8));
         teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
 
@@ -49,7 +49,7 @@ public class Main {
         outline.setVisible(true);
         outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         outline.setPreferredSize(new Dimension(1024, 768));
-        outline.pack();
+        outline.pack();*/
     }
 
 }

@@ -453,22 +453,22 @@ public class Datenbank {
 
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery(
-                "SELECT name" +
-                        " FROM blob" +
-                        " WHERE name='" + text + "'"
+                "SELECT kennung" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
 
         );
 
         if (r.next()) {
             PreparedStatement ps = verbindung.prepareStatement(
-                    "UPDATE blob" +
-                            " SET blob= ?" +
-                            " WHERE name= '" + text + "'");
+                    "UPDATE t_spieler" +
+                            " SET profilbild= ?" +
+                            " WHERE kennung= '" + text + "'");
             ps.setBinaryStream(1, is);
             ps.executeUpdate();
         } else {
             PreparedStatement ps = verbindung.prepareStatement(
-                    "INSERT INTO blob VALUES (?,?)"
+                    "INSERT INTO t_spieler VALUES (?,?)"
             );
             ps.setString(1, text);
             ps.setBinaryStream(2, is);
