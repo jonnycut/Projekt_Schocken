@@ -19,12 +19,31 @@ import java.util.Properties;
 public class Datenbank {
     private static Datenbank datenbank;
     private static Connection verbindung;
-    //private static String ip = "localhost";
+    private static String ip = "localhost";
 
-    private Datenbank() {
-
+    public Datenbank() {
+        
     }
 
+  public static void dbErstellen(){
+      Datenbank db =null;
+      try {
+          db = Datenbank.getInstance();
+      }
+      catch (ClassNotFoundException e) {
+          System.out.println("Datenbanktreiber nicht gefunden");
+      }
+      catch (SQLException e){
+          if(e.getMessage().startsWith("Datenbank existiert nicht"))
+              try {
+                  db = Datenbank.getInstance("db_schocken2");
+              }
+              catch (SQLException e1){
+                  System.out.println(e1.getMessage());
+                  e1.printStackTrace();
+              }
+
+  }}
     public static Datenbank getInstance() throws ClassNotFoundException, SQLException {
         //wenn die datenbank das erstemal geladen wird
         if (datenbank == null) {
@@ -36,7 +55,7 @@ public class Datenbank {
             datenbank = new Datenbank();
         }
 
-        //PrÃ¼fen ob eine Verbindung zum DB Server aufgebaut ist
+        //Prüfen ob eine Verbindung zum DB Server aufgebaut ist
         boolean renew = verbindung == null;
         //wenn keine Verbindung besteht soll diese hergestellt werden
         if (!renew)
@@ -49,9 +68,9 @@ public class Datenbank {
             }
         //wenn Verbindung besteht werden
         if (renew) {
-            String host = "localhost";
+            String host = ip;
             int port = 5432;
-            String database = "db_schocken";
+            String database = "db_schocken2";
 
             try {
                 Socket socket = new Socket(host, port);
@@ -83,7 +102,7 @@ public class Datenbank {
     }
 
     public static Datenbank getInstance(String database) throws SQLException {
-        String host = "localhost";
+        String host = ip;
         int port = 5432;
 
         String url = "jdbc:postgresql://" + host + ":" + port + "/";
@@ -134,8 +153,8 @@ public class Datenbank {
     }
 
     /**
-     * Diese Methode sucht ein noch offenes Spiel und liefert die SpielID
-     * @return  1 fÃ¼r offen,2 fÃ¼r geschlossen,3 fÃ¼r abgebrochen
+     * Diese Methode sucht ein noch offenes Spiel es kann immer nur ein offenes Spiel geben
+     * @return  Liefert die Spiel_ID des offenen Spiels
      * @throws SQLException
      */
     public int selectOffenesSpiel() throws SQLException {
@@ -146,10 +165,9 @@ public class Datenbank {
         );
         return r.getInt(1);
     }
-
     /**
      * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.
-     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezÃ¤hlt.
+     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezählt.
      * Die Kennung des Spielers wird in die Relation t_spielleiter geschrieben
      * Der Status des Spiels ird initial auf 1 gesetzt und die Zeit des Anlegens
      * wird mittels TIMESTAMP DEFAULT Current Timestamp auf die aktuelle Zeit gesetzt.
@@ -184,10 +202,9 @@ public class Datenbank {
         }
 
     }
-
-    /**
+    /**Methode zum Anmelden
      *
-     * @param kennung = der Spielername der sich anmelden mÃ¶chte
+     * @param kennung = der Spielername der sich anmelden möchte
      * @param passwort = Kennwort des anzumeldenden Spielers
      * @return liefert falls ein Eintrag dieser Kombination match ein true ansonsten false
      * @throws SQLException
@@ -202,88 +219,80 @@ public class Datenbank {
         return r.next();
 
     }
-
     /**
-     * Diese Methode prÃ¼ft bei der Registrierung ob ein Nutzer mit diesem Namen bereits vorhanden ist
-     * @param kennung = der geÃ¼nschte Nutzermname
+     * Diese Methode prüft bei der Registrierung ob ein Nutzer mit diesem Namen bereits vorhanden ist
+     * @param kennung = der gewünschte Nutzermname
      * @return wenn der Nutzername bereits vergeben ist liefert die Methode false, sonst true
      * @throws SQLException
      */
     public boolean selectNutzerKennungReg(String kennung) throws SQLException{
-//        Statement stmt = verbindung.createStatement();
-//        ResultSet r =stmt.executeQuery(
-//                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = "+"'" + kennung+ "'" );
-//
-//        if(r.next())
-//            return true;
-//        else
-        System.out.println("bin durch und voll");
-            return false;
-    }
+        Statement stmt = verbindung.createStatement();
+        ResultSet r =stmt.executeQuery(
+                "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = "+"'" + kennung+ "'" );
 
+        return !r.next();
+    }
     /**Diese Methode legt einen neuen Spieler in der Relation t_Spieler an.
      * @param kennung
      * @param passwort
-     * @return wurde der Spieler angelegt wird 0 zurÃ¼ck geliefert sonst 1
      * @throws SQLException
      */
     public void insertNutzerKennung(String kennung, String passwort) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//
-//        try {
-//            stmt.executeUpdate(String.format("INSERT INTO t_Spieler (Kennung, Passwort) VALUES ('%s','%s')", kennung, passwort));
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-    }
 
-
-    public void insertTeilnehmer(String teilnehmer,int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
-
         try {
-            stmt.executeUpdate(
-                    String.format("INSERT INTO t_ist_client  VALUES ('%s','%d')", teilnehmer, spielID));
-
+            stmt.executeUpdate(String.format("INSERT INTO t_Spieler (Kennung, Passwort) VALUES ('%s','%s')", kennung, passwort));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void dropDB(String database) throws SQLException {
-        Statement stmt =verbindung.createStatement();
-        stmt.executeUpdate("DROP DATABASE " + database
-        );
-    }
+    /**
+     * Ermöglicht die Teilnahme an einem offenen Spiel beim hinzufügen des 8 Spielers wird
+     * die Spalte Status in der Relation t_Spiel automatisch auf 2(begonnen) gesetzt
+     * @param teilnehmer = Kennung des Spielers
+     * @param spielID = ID des offenen Spiels , hier soll der Spieler hinzugefügt werden
+     * @throws SQLException
+     */
+    public void insertTeilnehmer(String teilnehmer,int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r =stmt.executeQuery("SELECT count(*) from t_ist_client WHERE fk_t_spiel_spiel_id= "+spielID);
 
-    public String selectServerIP()throws SQLException{
+        if (r.next())
+            System.out.println(r.getInt(1));
+        if (r.getInt(1) <7) {
+
+            try {
+                stmt.executeUpdate(String.format("INSERT INTO t_ist_client  VALUES ('%s','%d')", teilnehmer, spielID));
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                stmt.executeUpdate(String.format("INSERT INTO t_ist_client  VALUES ('%s','%d')", teilnehmer, spielID));
+                stmt.executeUpdate("UPDATE t_spiel SET status = 2 WHERE spiel_id=" + spielID);
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+    public String selectServerIP() throws SQLException {
         Statement stmt = verbindung.createStatement();
 
-        ResultSet r=stmt.executeQuery("SELECT IP \n" +
-                "FROM (t_Spieler INNER JOIN t_Spielleiter ON Kennung=fk_t_Spieler_Kennung),t_Spiel \n" +
-                "WHERE Status=1");
+        ResultSet r = stmt.executeQuery("SELECT IP FROM t_Spieler LEFT JOIN t_Spiel ON Kennung=fk_t_spielleiter_kennung WHERE status=1 ");
 
+        String ip = null;
+        while (r.next())
+            ip = r.getString(1);
 
-        return null;
+        return ip;
     }
 
-    public void insertProfilbild(String name, Icon icon) throws SQLException {
-//        Statement stmt =verbindung.createStatement();
-//        stmt.executeUpdate(
-//                "UPDATE  t_Spieler" +
-//                        " SET Profilbild=" + Icon +
-//                        " WHERE Kennung='" + name + "'"
-//        );
-//
-
-        //ToDo: OPA bitte erstellen
-    }
-
-    public Icon selectProfilBild(String name) {
-        //ToDo: OPA bitte erstellen
-        return null;
-    }
 
 
 
@@ -297,9 +306,9 @@ public class Datenbank {
     //---------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Diese Methode lÃ¶scht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
+     * Diese Methode löscht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
      *
-     * @param tabellenName Der Name der Tabelle, die gelÃ¶scht werden soll.
+     * @param tabellenName Der Name der Tabelle, die gelöscht werden soll.
      * @throws SQLException Wenn beim Erstellen der Verbindung ein Fehler passiert.
      */
     public void dropIfExist(String tabellenName) throws SQLException {
@@ -349,7 +358,7 @@ public class Datenbank {
             max[i] = s.length();
 
         }
-        //TabelleneintrÃ¤ge
+        //Tabelleneinträge
         if (r.next())
             do {
                 for (int i = 0; i < col; i++) {
@@ -422,11 +431,15 @@ public class Datenbank {
         return null;
     }
 
+    public Icon selectProfilBild(String text) {
+        return null;
+    }
+
+    public void insertProfilbild(String text, Icon icon) {
+    }
 
     public void updatePasswort(String name, String passwort) {
-        //ToDO: OPA bitte erstellen
+
     }
 }
-
-
 

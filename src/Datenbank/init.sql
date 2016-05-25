@@ -11,18 +11,24 @@ CREATE TABLE t_Spieler(
 );
 
 CREATE TABLE t_Spielleiter(
-  fk_t_spieler_Kennung VARCHAR(30),
-  CONSTRAINT FK_t_SPIELER_KENNUNG FOREIGN KEY(fk_t_spieler_Kennung) REFERENCES t_spieler(Kennung)ON UPDATE CASCADE ON DELETE CASCADE
+  fk_t_Spieler_Kennung VARCHAR(30),
+  CONSTRAINT PK_t_Spielerleiter_Kennung Primary KEY(fk_t_Spieler_Kennung),
+  CONSTRAINT FK_t_Spielerleiter_Kennung FOREIGN KEY (fk_t_Spieler_Kennung) REFERENCES t_Spieler(Kennung)ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE t_Spiel(
   Spiel_ID SERIAL,
-  fk_t_spieler_Kennung VARCHAR(30),
-  fk_t_spielleiter_Kennung VARCHAR(30)NOT NULL ,
+  fk_t_Spielleiter_Kennung VARCHAR(30),
   Status INT NOT NULL ,
   Zeit TIMESTAMP NOT NULL DEFAULT current_timestamp,
   CONSTRAINT PK_t_Spiel PRIMARY KEY (Spiel_ID),
-  CONSTRAINT FK_t_Spielleiter_Kennung FOREIGN KEY (fk_t_spielleiter_Kennung) REFERENCES t_Spielleiter(fk_t_spielleiter_Kennung) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT FK_t_Spiel FOREIGN KEY (fk_t_Spielleiter_Kennung) REFERENCES t_Spielleiter(fk_t_Spieler_Kennung)
+
+);
+CREATE TABLE t_ist_client(
+  fk_t_Spieler_Kennung VARCHAR(30),
+  fk_t_Spiel_Spiel_ID INT,
+  CONSTRAINT PK_t_ist_client PRIMARY KEY (fk_t_Spiel_Spiel_ID,fk_t_Spieler_Kennung)
 );
 
 CREATE TABLE t_Hälfte(
@@ -62,9 +68,3 @@ CREATE TABLE t_Durchgang(
 
 
 
-
-CREATE TRIGGER zeit_24_Stunden_zurücksetzen
-BEFORE INSERT OR UPDATE
-ON t_Spiel
-FOR EACH ROW
-EXECUTE PROCEDURE aktuelle_zeit_setzen();
