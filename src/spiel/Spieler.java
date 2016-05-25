@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  *
  */
-public class Spieler implements Comparable <Spieler>{
+public class Spieler implements Comparable <Spieler> {
 
     private Becher becher;
     private int strafpunkte;

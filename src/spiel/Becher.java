@@ -52,6 +52,10 @@ public class Becher implements Comparable<Becher> {
         return this.wurf;
     }
 
+    public void resetWurf(){
+        this.wurf = 0;
+    }
+
     /**
      * Getter fuer das Wuerfelarray
      *
@@ -208,6 +212,10 @@ public class Becher implements Comparable<Becher> {
             case "Zahl-General":
                 return -1;
             case "Zahl-Straße":
+                return -1;
+            case "Straße-Schock":
+                return -1;
+            case "General-Schock":
                 return -1;
             default:
                 return 1;

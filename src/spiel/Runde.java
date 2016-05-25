@@ -107,6 +107,10 @@ public class Runde {
                 "\n Verlierer hat "+verlierer.getStrafpunkte()+" bekommen";
         JOptionPane.showMessageDialog(null, ausgabe);
 
+        //Resetten der würfe, damit weitergespielt werden kann, wird später vond er GUI gemacht!
+        for(Spieler s: teilnehmer){
+            s.getBecher().resetWurf();
+        }
 
     }
 

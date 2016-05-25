@@ -25,6 +25,7 @@ public class SpielerPanel extends JPanel {
     private Runde runde; //TestAttribut
     //ToDo: Datenhaltung und Wiederherstellung über die Datenbank
     private Spieler spieler;
+    private boolean aufgedeckt = false;
     private JPanel auslage;
     private int auslageCount=0; //testzwecke, muss abgeändert werden
     private JPanel wuerfel;
@@ -137,6 +138,7 @@ public class SpielerPanel extends JPanel {
                 if(spieler.getBecher().getWurf()<2){
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen
                     ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
+                    aufgedeckt = true;
                 }else{
 
                     JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
@@ -153,6 +155,7 @@ public class SpielerPanel extends JPanel {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen
 
                     ((CardLayout)wuerfel.getLayout()).show(wuerfel, "becher");
+                    aufgedeckt = false;
 
                     spieler.wuerfeln();
                     w1.setIcon(spieler.getBecher().getWuerfel()[0].getGrafik());
@@ -180,7 +183,7 @@ public class SpielerPanel extends JPanel {
                 fertig.setEnabled(false);
                 if(runde.pruefeFertig()){
                     ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
-                    updateStrafPunkte();
+                    updatePanel();
 
                     //ToDo: Aufdecken aller Becher muss durch die GUI erfolgen
                 }
@@ -215,14 +218,44 @@ public class SpielerPanel extends JPanel {
     }
 
     /**
-     * Setzt den aktuellen wert von Spieler.strafPunkte in das entsprechende Panel ein
+     * Aktualisiert das SpielerPanel
+     * Loescht die Wuerfel in der Auslage und im Wuerfelbereich, sowie die Strafpunkte
+     * und schreibt diese neu.
      */
-    public void updateStrafPunkte(){
+
+    public void updatePanel(){
 
         strafpunkte.removeAll();
-        strafpunkte.add(new JLabel(""+this.spieler.getStrafpunkte()));
+        strafpunkte.add(new JLabel("" + this.spieler.getStrafpunkte()));
         strafpunkte.revalidate();
+        Wuerfel[] wuerfelArray = spieler.getBecher().getWuerfel();
+        JButton[] btnArray = {w1,w2,w3};
 
+
+
+        for(int i =0; i<3;i++){
+
+            btnArray[i].setIcon(wuerfelArray[i].getGrafik());
+
+            if(wuerfelArray[i].getDraussen()){
+                auslage.remove(i);
+                auslage.add(btnArray[i],i);
+
+            }else{
+                wuerfelAnsicht.remove(i);
+                wuerfelAnsicht.add(btnArray[i], i);
+
+            }
+        }
+
+        auslage.revalidate();
+        wuerfelAnsicht.revalidate();
+
+        if(aufgedeckt)
+            ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
+        else
+
+            ((CardLayout)wuerfel.getLayout()).show(wuerfel, "becher");
 
     }
 
