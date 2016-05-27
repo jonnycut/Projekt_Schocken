@@ -145,7 +145,7 @@ public class Anmeldung extends JPanel {
                 }
 
                 try {
-                    if (!Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
+                    if (Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
