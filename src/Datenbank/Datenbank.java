@@ -4,8 +4,11 @@ package Datenbank;
  * Created by ehampel on 23.05.2016.
  */
 
+import spiel.Spieler;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
@@ -54,7 +57,7 @@ public class Datenbank {
             datenbank = new Datenbank();
         }
 
-        //Prüfen ob eine Verbindung zum DB Server aufgebaut ist
+        //Prï¿½fen ob eine Verbindung zum DB Server aufgebaut ist
         boolean renew = verbindung == null;
         //wenn keine Verbindung besteht soll diese hergestellt werden
         if (!renew)
@@ -166,7 +169,7 @@ public class Datenbank {
     }
     /**
      * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.
-     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezählt.
+     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezï¿½hlt.
      * Die Kennung des Spielers wird in die Relation t_spielleiter geschrieben
      * Der Status des Spiels ird initial auf 1 gesetzt und die Zeit des Anlegens
      * wird mittels TIMESTAMP DEFAULT Current Timestamp auf die aktuelle Zeit gesetzt.
@@ -203,7 +206,7 @@ public class Datenbank {
     }
     /**Methode zum Anmelden
      *
-     * @param kennung = der Spielername der sich anmelden möchte
+     * @param kennung = der Spielername der sich anmelden mï¿½chte
      * @param passwort = Kennwort des anzumeldenden Spielers
      * @return liefert falls ein Eintrag dieser Kombination match ein true ansonsten false
      * @throws SQLException
@@ -219,8 +222,8 @@ public class Datenbank {
 
     }
     /**
-     * Diese Methode prüft bei der Registrierung ob ein Nutzer mit diesem Namen bereits vorhanden ist
-     * @param kennung = der gewünschte Nutzermname
+     * Diese Methode prï¿½ft bei der Registrierung ob ein Nutzer mit diesem Namen bereits vorhanden ist
+     * @param kennung = der gewï¿½nschte Nutzermname
      * @return wenn der Nutzername bereits vergeben ist liefert die Methode false, sonst true
      * @throws SQLException
      */
@@ -248,10 +251,10 @@ public class Datenbank {
     }
 
     /**
-     * Ermöglicht die Teilnahme an einem offenen Spiel beim hinzufügen des 8 Spielers wird
+     * Ermï¿½glicht die Teilnahme an einem offenen Spiel beim hinzufï¿½gen des 8 Spielers wird
      * die Spalte Status in der Relation t_Spiel automatisch auf 2(begonnen) gesetzt
      * @param teilnehmer = Kennung des Spielers
-     * @param spielID = ID des offenen Spiels , hier soll der Spieler hinzugefügt werden
+     * @param spielID = ID des offenen Spiels , hier soll der Spieler hinzugefï¿½gt werden
      * @throws SQLException
      */
     public void insertTeilnehmer(String teilnehmer,int spielID) throws SQLException {
@@ -305,9 +308,9 @@ public class Datenbank {
     //---------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Diese Methode löscht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
+     * Diese Methode lï¿½scht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
      *
-     * @param tabellenName Der Name der Tabelle, die gelöscht werden soll.
+     * @param tabellenName Der Name der Tabelle, die gelï¿½scht werden soll.
      * @throws SQLException Wenn beim Erstellen der Verbindung ein Fehler passiert.
      */
     public void dropIfExist(String tabellenName) throws SQLException {
@@ -357,7 +360,7 @@ public class Datenbank {
             max[i] = s.length();
 
         }
-        //Tabelleneinträge
+        //Tabelleneintrï¿½ge
         if (r.next())
             do {
                 for (int i = 0; i < col; i++) {
@@ -430,7 +433,19 @@ public class Datenbank {
         return null;
     }
 
-    public Icon selectProfilBild(String text) {
+    public Icon selectProfilBild(String text) throws SQLException, IOException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery(
+                "SELECT profilbild" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
+        );
+        if (r.next()) {
+            Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
+            return icon;
+        }
+
+
         return null;
     }
 
@@ -444,8 +459,16 @@ public class Datenbank {
     public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
 
 
-        BufferedImage image = new BufferedImage(icon.getIconWidth(),
-                icon.getIconHeight(),BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(
+                icon.getIconWidth(),
+                icon.getIconHeight(),
+                BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.createGraphics();
+// paint the Icon to the BufferedImage.
+        icon.paintIcon(null, g, 0,0);
+        g.dispose();
+
+
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);
@@ -478,6 +501,26 @@ public class Datenbank {
     }
 
     public void updatePasswort(String name, String passwort) {
+
+    }
+
+    public Spieler selectSpieler(String kennung) throws SQLException, IOException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery(
+                "SELECT *" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + kennung + "'"
+        );
+        if (r.next()) {
+           Spieler spieler = new Spieler(r.getString(1),new ImageIcon(ImageIO.read(r.getBinaryStream(4))));
+            if(r.getString(7)!=null)
+                spieler.setStrafpunkte(Integer.parseInt(r.getString(7)));
+
+            return spieler;
+        }
+
+
+        return null;
 
     }
 }

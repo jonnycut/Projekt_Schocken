@@ -90,6 +90,34 @@ public class Becher implements Comparable<Becher> {
         sortiere();
     }
 
+    /**<pre>
+     * Setzt die drei Wuerfel auf die uebergebenen int Werte
+     * und ruft sortiere() auf umd die Wuerfelliste zu sortieren
+     * und das aktuelle Bild zu bestimmen.
+     *
+     * Bei falschen Werten (wert <0 || wert > 6) wird der Wuerfel nicht veraendert.
+     * </pre>
+     * @param w1 int {1-6} Wert des ersten Wuerfels, 0 fuer nicht veraendern.
+     * @param w2 int {1-6} Wert des zweiten Wuerfels, 0 fuer nicht veraendern.
+     * @param w3 int {1-6} Wert des dritten Wuerfels, 0 fuer nicht veraendern.
+     */
+    public void setWurf(int w1, int w2, int w3) {
+        wuerfel.get(0).setWert(w1);
+        wuerfel.get(1).setWert(w2);
+        wuerfel.get(2).setWert(w3);
+
+        sortiere();
+
+
+    }
+
+    /**
+     * <pre>
+     *     Sortiert die WuerfelListe absteigend
+     *     und setzt das Aktuelle Bild auf
+     *     {Schock aus | Schock | General | Straße | Zahl}
+     * </pre>
+     */
     public void sortiere() {
         Collections.sort(wuerfel);
 
@@ -229,4 +257,6 @@ public class Becher implements Comparable<Becher> {
 
         }
     }
+
+
 }
