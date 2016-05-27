@@ -17,6 +17,9 @@ import java.util.HashMap;
 public class Spieler implements Comparable<Spieler> {
 
     private Becher becher;
+
+
+
     private int strafpunkte;
     private int haelfte;
     private Icon profilBild;
@@ -81,6 +84,10 @@ public class Spieler implements Comparable<Spieler> {
      */
     public Becher getBecher() {
         return this.becher;
+    }
+
+    public void setStrafpunkte(int strafpunkte) {
+        this.strafpunkte = strafpunkte;
     }
 
     /**

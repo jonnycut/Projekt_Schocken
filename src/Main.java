@@ -30,7 +30,9 @@ public class Main {
        /*new GUI();
 
         Datenbank.dbErstellen();*/
-        Icon icon2 = Datenbank.getInstance().selectProfilBild("jochen");
+
+
+       /* Icon icon2 = Datenbank.getInstance().selectProfilBild("jochen");
 
 
         JOptionPane.showMessageDialog(
@@ -38,11 +40,10 @@ public class Main {
                 "Bildanzeige",
                 JOptionPane.INFORMATION_MESSAGE,
                 icon2
-        );
+        );*/
 
-/*
-        teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
-        teilnehmer.add(new Spieler("Hans", Grafik.AVATAR_BB8));
+        teilnehmer.add(Datenbank.getInstance().selectSpieler("jochen"));
+        teilnehmer.add(Datenbank.getInstance().selectSpieler("Opa"));
         teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
 
 
@@ -63,7 +64,7 @@ public class Main {
         outline.setVisible(true);
         outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         outline.setPreferredSize(new Dimension(1024, 768));
-        outline.pack();*/
+        outline.pack();
     }
 
 }

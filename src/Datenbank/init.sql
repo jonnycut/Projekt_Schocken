@@ -4,8 +4,8 @@ CREATE TABLE t_Spieler(
   IP VARCHAR(15) ,
   Profilbild BYTEA,
   Aktiv BOOLEAN,
-  Abbrüche INT,
-  Strafpunkte INT,
+  AbbrÃ¼che INT,
+  Strafpunkte INT DEFAULT 0,
   Startwurf INT,
   CONSTRAINT PK_t_spieler PRIMARY KEY (Kennung)
 );
@@ -31,39 +31,39 @@ CREATE TABLE t_ist_client(
   CONSTRAINT PK_t_ist_client PRIMARY KEY (fk_t_Spiel_Spiel_ID,fk_t_Spieler_Kennung)
 );
 
-CREATE TABLE t_Hälfte(
+CREATE TABLE t_HÃ¤lfte(
   Art INT,
   fk_t_Spiel_Spiel_ID INT,
   Verlierer VARCHAR(30),
   Stock INT DEFAULT 13,
-  CONSTRAINT PK_t_Hälfte PRIMARY KEY(Art),
+  CONSTRAINT PK_t_HÃ¤lfte PRIMARY KEY(Art),
   CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY (fk_t_Spiel_Spiel_ID)REFERENCES t_Spiel(Spiel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE t_Runde(
   RundenNr INT,
   fk_t_Spiel_Spiel_ID INT,
-  fk_t_Hälfte_Art INT,
+  fk_t_HÃ¤lfte_Art INT,
   Beginner VARCHAR(30),
   Verlierer VARCHAR(30),
   Gewinner VARCHAR(30),
 
   CONSTRAINT PK_t_Runde PRIMARY KEY (RundenNr),
   CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY (fk_t_Spiel_Spiel_ID)REFERENCES t_Spiel(Spiel_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT FK_t_Hälfte_Art FOREIGN KEY (fk_t_Hälfte_Art)REFERENCES t_Hälfte(Art) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT FK_t_Hï¿½lfte_Art FOREIGN KEY (fk_t_HÃ¤lfte_Art)REFERENCES t_HÃ¤lfte(Art) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE t_Durchgang(
   fk_t_Spieler_Kennung VARCHAR(30),
   fk_t_Spiel_Spiel_ID INT,
-  fk_t_Hälfte_Art INT,
+  fk_t_Hï¿½lfte_Art INT,
   fk_t_Runde_RundenNr INT,
-  Würfel_1 INT,
-  Würfel_2 INT,
-  Würfel_3 INT,
-  Zähler INT,
+  WÃ¼rfel_1 INT,
+  WÃ¼rfel_2 INT,
+  WÃ¼rfel_3 INT,
+  ZÃ¤hler INT,
 
-  CONSTRAINT PK_t_Durchgang PRIMARY KEY (fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr)
+  CONSTRAINT PK_t_Durchgang PRIMARY KEY (fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_HÃ¤lfte_Art,fk_t_Runde_RundenNr)
 ) ;
 
 
