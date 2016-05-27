@@ -67,6 +67,26 @@ public class Wuerfel implements Comparable<Wuerfel> {
     }
 
     /**
+     * <pre>
+     *     Setzt den Wert des Wuerfels auf den uebergebenen Int
+     *     und passt die Grafik des Wuerfels an.
+     *
+     *     Wird ein falscher Wert übergeben wird, bricht die Methode ab.
+     * </pre>
+     * @param wert int {1 - 6}. 0 fuer nicht veraendern
+     */
+
+    public void setWert(int wert){
+        if(wert<= 6 && wert >=1){
+            this.wert = wert;
+            this.grafik = bilder[this.wert-1];
+        }else{
+            return;
+        }
+
+    }
+
+    /**
      * Weist dem Wuerfel eine Zufallszahl zwischen 1 und 6 zu<br></br>
      * und setzt die Grafik des Wuerfels entsprechend.
      */

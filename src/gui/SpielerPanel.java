@@ -48,7 +48,8 @@ public class SpielerPanel extends JPanel {
     public SpielerPanel(Spieler spieler, Runde runde){
         //super(new GridLayout(7, 1));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        super.setPreferredSize(new Dimension(0, 610));
+        setBorder(new LineBorder(Color.BLACK,2));
+        setPreferredSize(new Dimension(0, 610));
 
         this.runde = runde;
         this.spieler = spieler;
@@ -143,33 +144,42 @@ public class SpielerPanel extends JPanel {
 
         //WuerfelButtons in die Ansicht einfuegen
 
-        wuerfelAnsicht.add(w1,0);
+        wuerfelAnsicht.add(w1, 0);
         wuerfelAnsicht.add(w2,1);
-        wuerfelAnsicht.add(w3,2);
+        wuerfelAnsicht.add(w3, 2);
 
 
 
         wuerfel.add(becher,"becher");
-        wuerfel.add(wuerfelAnsicht,"wuerfel");
+        wuerfel.add(wuerfelAnsicht, "wuerfel");
 
 
         this.strafpunkte = new JPanel();
         strafpunkte.setLayout(new FlowLayout());
-        strafpunkte.setBackground(Color.WHITE);
-        strafpunkte.add(new JLabel(""+this.spieler.getStrafpunkte()));
+        strafpunkte.setBackground(Color.DARK_GRAY);
+        strafpunkte.setBorder(new LineBorder(Color.BLACK, 1));
+
+        JLabel jLStrafpunkteTitel = new JLabel("Strafpunkte:  ");
+        jLStrafpunkteTitel.setForeground(Color.WHITE);
+        strafpunkte.add(jLStrafpunkteTitel);
+
+        JLabel jLStrafpunkte = new JLabel(""+this.spieler.getStrafpunkte());
+        jLStrafpunkte.setForeground(Color.WHITE);
+        strafpunkte.add(jLStrafpunkte);
 
         this.buttons = new JPanel();
-        this.wuerfeln = new JButton("Würfeln");
-        this.fertig = new JButton("Fertig");
+        buttons.setBackground(Color.BLACK);
+        this.wuerfeln = new JButton("WÜRFELN");
+        this.fertig = new JButton("FERTIG");
 
         becher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(spieler.getBecher().getWurf()<2){
+                if (spieler.getBecher().getWurf() < 2) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen
-                    ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
+                    ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     aufgedeckt = true;
-                }else{
+                } else {
 
                     JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
                 }
@@ -181,19 +191,19 @@ public class SpielerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(spieler.getBecher().getWurf() <3){
+                if (spieler.getBecher().getWurf() < 3) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen
 
-                    ((CardLayout)wuerfel.getLayout()).show(wuerfel, "becher");
+                    ((CardLayout) wuerfel.getLayout()).show(wuerfel, "becher");
                     aufgedeckt = false;
 
                     spieler.wuerfeln();
                     w1.setIcon(spieler.getBecher().getWuerfel()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfel()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfel()[2].getGrafik());
-                    if(spieler.getBecher().getWurf()==3)
+                    if (spieler.getBecher().getWurf() == 3)
                         wuerfeln.setEnabled(false);
-                }else{
+                } else {
 
                     JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
 
@@ -225,19 +235,31 @@ public class SpielerPanel extends JPanel {
         buttons.add(wuerfeln);
         buttons.add(fertig);
 
-        this.name = new JPanel();
-        name.add(new JLabel(this.spieler.getName()));
+        this.name = new JPanel(new FlowLayout());
+        name.setBackground(Color.DARK_GRAY);
+        JLabel jLSpielerTitel = new JLabel("Spieler:  ");
+        jLSpielerTitel.setForeground(Color.WHITE);
+        JLabel jLSpielerName = new JLabel(this.spieler.getName());
+        jLSpielerName.setForeground(Color.WHITE);
+        name.add(jLSpielerTitel);
+        name.add(jLSpielerName);
 
-        this.profilbild = new JPanel();
-        profilbild.add(new JLabel(spieler.getProfilBild()));
+        this.profilbild = new JPanel(new GridLayout(1,3));
+        profilbild.setBackground(Color.DARK_GRAY);
+        JLabel jLProfilbild = new JLabel(spieler.getProfilBild());
+        //jLProfilbild.setBorder(new LineBorder(Color.BLACK, 1));
+        profilbild.add(name);
+        profilbild.add(jLProfilbild);
+        profilbild.add(new JLabel());
 
 
         add(auslage);
         add(wuerfel);
         add(strafpunkte);
-        add(buttons);
+
         add(profilbild);
-        add(name);
+        //add(name);
+        add(buttons);
 
 
 
