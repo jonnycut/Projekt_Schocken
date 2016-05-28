@@ -14,18 +14,12 @@ import java.util.List;
 /**
  * Created by dfleuren on 23.05.2016.
  */
-public class Main {
-    //testAttribute
-    static List<Spieler> teilnehmer = new ArrayList<>();
 
+public static void main(String[]args){
 
-    public static void main(String[] args) {
 //       new GUI();
 //
 //        Datenbank.dbErstellen();
-
-
-
 
         teilnehmer.add(new Spieler("jochen", Grafik.AVATAR_BATMAN));
         teilnehmer.add(new Spieler("Hans", Grafik.AVATAR_BB8));
@@ -58,6 +52,12 @@ public class Main {
         outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         outline.setPreferredSize(new Dimension(1024, 768));
         outline.pack();
-    }
+        }
 
-}
+
+//public class Main {
+//    //testAttribute
+//    static List<Spieler> teilnehmer = new ArrayList<>();
+//
+//
+//        }

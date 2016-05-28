@@ -65,11 +65,6 @@ public class SpielerPanel extends JPanel {
             auslage.add(auslage1);
         }
 
-//        auslage.add(new JButton());
-//        auslage.add(new JButton());
-//        auslage.add(new JButton());
-
-
         this.wuerfel = new JPanel(new CardLayout());
 
         JButton becherBtn = new JButton(Grafik.WUERFELBECHER);
@@ -146,7 +141,7 @@ public class SpielerPanel extends JPanel {
         //WuerfelButtons in die Ansicht einfuegen
 
         wuerfelAnsicht.add(w1, 0);
-        wuerfelAnsicht.add(w2,1);
+        wuerfelAnsicht.add(w2, 1);
         wuerfelAnsicht.add(w3, 2);
 
 
