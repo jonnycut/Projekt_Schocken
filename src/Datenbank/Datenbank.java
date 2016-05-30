@@ -136,7 +136,7 @@ public class Datenbank {
         return datenbank;
     }
 
-
+//----------------------------------------------------------------------------------------------------------------------
     /**
      * Methode zum Anmelden
      *
@@ -191,7 +191,8 @@ public class Datenbank {
 
     /**
      * Ermöglicht die Teilnahme an einem offenen Spiel beim hinzufügen des 8 Spielers wird
-     * die Spalte Status in der Relation t_Spiel automatisch auf 2(begonnen) gesetzt
+     * die Spalte Status in der Relation t_Spiel automatisch auf 2(begonnen) gesetzt. Ist kein oddenes Spiel vorhanden
+     * wird dieser Teilnehmer zum Spielleiter und öffnet ein neues Spiel
      *
      * @param teilnehmer = Kennung des Spielers
      * @throws SQLException
@@ -276,6 +277,7 @@ public class Datenbank {
      * @param haelftenArt - aktuelle Hälfte
      * @throws SQLException
      */
+    //ToDo Ich würde gern die Methode so erweitern das als Übergabeparameter nur noch die Kennung des Spielers übergebenwird. Damit würde ich die Aktualliesierung der Strafpunkte vom Spieler auch hier durchführen
     public void updateStock(int strafpunkte, int spielID, int haelftenArt) throws SQLException {
         Statement stmt = verbindung.createStatement();
         try {
@@ -286,6 +288,12 @@ public class Datenbank {
         }
     }
 
+    /**
+     * prüft in welchem Spiel sich ein Spieler befindet
+     * @param kennung
+     * @return spielID
+     * @throws SQLException
+     */
     public int getSpielID(String kennung) throws SQLException {
         Statement stmnt = verbindung.createStatement();
 
@@ -297,6 +305,12 @@ public class Datenbank {
         return spielID;
     }
 
+    /**
+     * über die SpielID kann abgefragt werden in welcher Hälfte sich das Spiel aktuell befindet
+     * @param spiel_ID
+     * @return 1 für erste Hälfte , 2 für zweite Hälfte ,3 für Finale
+     * @throws SQLException
+     */
     public int getAktuelleHaelfte(int spiel_ID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int aktuelleHaelfte = 0;
@@ -310,10 +324,13 @@ public class Datenbank {
         return aktuelleHaelfte;
     }
 
-
+    /**
+     * einen Spieler auf aktiv setzen erst dann ist der Spieler dran
+     * @param kennung
+     * @throws SQLException
+     */
     public void setAktiverSpieler(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
-
 
         try {
             stmt.executeUpdate("UPDATE t_spieler SET Aktiv=TRUE WHERE Kennung='" + kennung + "'");
@@ -322,25 +339,89 @@ public class Datenbank {
         }
     }
 
+    /**
+     * Methode um den Aktiven Spieler zu ermitteln. Erst werden alle Spieler die zu einem Spiel gehöhren ermittelt.danach
+     * wird der aktive spieler aus der Relation gefiltert ( es kann immer nur einen pro spiel geben)
+     *
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
     public String getAktiverSpieler(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         String aktiverSpieler = null;
         ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= " +
-                "'" + spielID + "') AS " + "Spieler im Spiel" +
-                " INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
-
+                "'" + spielID + "') AS " + "Spieler im Spiel" + " INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
         if (r.next())
             aktiverSpieler = r.getString(1);
-
         return aktiverSpieler;
+    }
+
+    /**
+     * Fügt in die Relation t_spieler das Ergebniss des auswürfeln in die Spalte Startwurf ein. Hierdurch
+     * wird im weiteren ermöglicht eine Spielerreihenfolge zugenerieren
+     *
+     * @param kennung   Spielerkennung dessen startwurf eingetragen werden soll
+     * @param startwurf Augenzahl der 3 Würfel
+     * @throws SQLException
+     */
+    public void insertStartwurf(String kennung, int startwurf) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        try {
+            stmt.executeUpdate("UPDATE t_spieler SET startwurf='" + startwurf + "' WHERE kennung='" + kennung + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**Liefert eine Liste von allen Spielern die sich in dem selben Spiel befinden
+     *
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<String> getSpielerImSpiel(int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet resultSet = stmt.executeQuery("SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id = '" + spielID + "'");
+        ArrayList<String> spielerImSpiel = new ArrayList<String>();
+        ResultSetMetaData metadata = resultSet.getMetaData();
+        int numberOfColumns = metadata.getColumnCount();
+
+        while (resultSet.next()) {
+            int i = 1;
+            while(i <= numberOfColumns) {
+                spielerImSpiel.add(resultSet.getString(i++));
+            }
+            System.out.println(resultSet.getString(1));
+        }
+        return spielerImSpiel;
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    public String[] spieler(int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int anzahl=0;
+        int i = 0;
+
+        ResultSet rs = stmt.executeQuery("SELECT count(fk_t_spieler_kennung) FROM t_ist_client Where fk_t_spiel_spiel_id='" + spielID + "'");
+        if (rs.next()) {
+            anzahl = rs.getInt(1);
+        }
+        ResultSet r = stmt.executeQuery("SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id='" + spielID + "'");
+        String[] spieler = new String[anzahl];
+        if (r.next()) {
+            spieler[i] = r.getString(1);
+            i++;
+        }
+        return spieler;
     }
 
     public Icon selectProfilBild(String text) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery(
-                "SELECT profilbild" +
-                        " FROM t_spieler" +
-                        " WHERE kennung='" + text + "'"
+        ResultSet r = stmt.executeQuery("SELECT profilbild" +
+                                        " FROM t_spieler" +
+                                        " WHERE kennung='" + text + "'"
         );
         if (r.next()) {
             Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
@@ -402,10 +483,6 @@ public class Datenbank {
 
     }
 
-    public void updatePasswort(String name, String passwort) {
-        //ToDo Machen
-    }
-
     public Spieler selectSpieler(String kennung) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery(
@@ -423,6 +500,9 @@ public class Datenbank {
         return null;
     }
 
+    public void updatePasswort(String name, String passwort) {
+        //ToDo Machen
+    }
 //-------------------------------------------Private Methoden-----------------------------------------------------------
 
     /**
@@ -529,11 +609,10 @@ public class Datenbank {
      * @return Liefert die Spiel_ID des offenen Spiels
      * @throws SQLException
      */
-    private int selectOffenesSpiel() throws SQLException {
+    public int selectOffenesSpiel() throws SQLException {
         Statement stmt = verbindung.createStatement();
         int offenesSpiel = 0;
-        ResultSet r = stmt.executeQuery(
-                String.format("SELECT Spiel_ID FROM t_Spiel WHERE Status ='1'")
+        ResultSet r = stmt.executeQuery("SELECT Spiel_ID FROM t_Spiel WHERE Status =1"
         );
         if (r.next()) {
             offenesSpiel = r.getInt(1);
