@@ -64,7 +64,10 @@ public class Runde {
      * der letzte der Verlierer -> erhält Anzahl Strafsteine.
      * Verteilung der Steine wird durch Aufruf von
      * verteileStrafpunkte(Spieler, Spieler)
-     * vorgenommen</pre>
+     * vorgenommen
+     *
+     * Wird durch das Spielfeld genutzt</pre>
+     * @see gui.Spielfeld
      */
     public void auswertenBilder() {
         Spieler gewinner = null;

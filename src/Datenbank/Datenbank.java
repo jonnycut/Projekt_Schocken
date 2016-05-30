@@ -540,6 +540,19 @@ public class Datenbank {
 
     //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
+    /**
+     * <pre>
+     *  Waehlt das Profilbild des Spielers mit der Uebergebenen Spielerkennung aus.
+     *  Bekommt einen BinaryStream aus der Datenbank und wandelt diesen in ein Icon um,
+     *  welches dann zurueckgegeben wird.
+     * </pre>
+     * @param text - String Spielerkennung
+     * @return Icon Das Profilbild des Spielers
+     * @throws SQLException
+     * @throws IOException
+     * @see ImageIO
+     *
+     */
     public Icon selectProfilBild(String text) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery("SELECT profilbild" +
@@ -555,13 +568,20 @@ public class Datenbank {
         return null;
     }
 
-    /**
-     * Fuegt ein Grafik.ICON in die Datenbank ein
+    /**<pre>
+     * Fuegt ein Grafik.ICON in die Datenbank ein.
+     * Wandelt das uebergebene Icon in ein BufferedImage und zeichnet das uebergebene Icon
+     * mithilfe der Graphics Klasse.
+     * Dieses BufferedImage wird dann als ByteArray in die Datenbank geschrieben.
+     * </pre>
+     *
      *
      * @param text Name des Bildes
      * @param icon Object Grafik.ICON
      * @throws SQLException Because Fuck u
      * @throws IOException  Because Fuck u more
+     * @see Graphics
+     * @see BufferedImage
      */
     public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
 
@@ -605,6 +625,19 @@ public class Datenbank {
 
     }
 
+
+    /**
+     * Holt den Spieler mit der uebergebenen Spielerkennung aus der Datenbank, erstellt
+     * ein neues Spieler Object, setzt Strafpunkte und die Statistik und gibt dieses zurueck.
+     *
+     * @param kennung Spielerkennung des gewuenschten Spielers
+     * @return Spieler Object
+     * @throws SQLException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @see Spieler
+     *
+     */
     public Spieler selectSpieler(String kennung) throws SQLException, IOException, ClassNotFoundException {
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery(

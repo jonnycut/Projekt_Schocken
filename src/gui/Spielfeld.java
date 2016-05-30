@@ -165,7 +165,15 @@ public class Spielfeld extends JPanel {
     }
 
     /**
-     * 
+     * <pre>
+     * Wird vom SpielerPanel aus aufgerufen und prueft alle Spieler, ob sie fertig sind.
+     * Wenn alle Spieler fertig sind, wird die Ansicht des Wuerfelfeldes aufgedeckt (wuerfel angezeigt)
+     * und Runde.Auswerten() wertet die Bilder aus und verteilt die Chips.
+     * </pre>
+     *
+     *
+     * @see spiel.Runde
+     *
      */
     public void pruefeFertig(){
         int counter = 0;

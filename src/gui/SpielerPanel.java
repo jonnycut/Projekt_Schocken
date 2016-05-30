@@ -349,9 +349,18 @@ public class SpielerPanel extends JPanel {
 
     /**
      *
-     * @param pufferBtn
-     * @param btnIndex
-     * @param wuerfelListener
+     * <pre>
+     * Legt die Wuerfel vom Wuerfelbereich in die Auslage.
+     * Setzt das Attribut {draussen} auf true, damit diese Wuerfel nicht mehr gewuerfelt werden
+     * und entfernt den Action Listener
+     *
+     * </pre>
+     * @param pufferBtn JButton - Der Button, der bewegt wird
+     * @param btnIndex int - an welche Stelle der Button gelegt wird
+     * @param wuerfelListener - ActionListener - Damit die Wuerfel nicht mehr angeklickt werden koennen
+     * @see JButton
+     * @see ActionListener
+     *
      */
 
     public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener){
