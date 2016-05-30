@@ -84,12 +84,12 @@ public class Spieler implements Comparable<Spieler> {
     }
 
     /**
-     * Setzt Spieler.fertig auf true
+     * Setzt Spieler.fertig auf den angegebenen Wert
      *
      *
      */
-    public void setFertig() {
-        this.fertig = true;
+    public void setFertig(boolean fertig) {
+        this.fertig = fertig;
     }
     /**
      * Liefert den Spielernamen

@@ -6,6 +6,7 @@ import spiel.Runde;
 import spiel.Spieler;
 import spiel.Wuerfel;
 
+import javax.smartcardio.CardChannel;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -29,6 +30,9 @@ import java.sql.SQLException;
 public class SpielerPanel extends JPanel {
 
     private Runde runde; //TestAttribut
+
+
+    private Spielfeld spielfeld;
     //ToDo: Datenhaltung und Wiederherstellung über die Datenbank
     private Spieler spieler;
     private boolean aufgedeckt = false;
@@ -47,7 +51,7 @@ public class SpielerPanel extends JPanel {
     private JPanel name;
     private JPanel profilbild;
 
-    public SpielerPanel(Spieler spieler /*, Runde runde*/){
+    public SpielerPanel(Spieler spieler , Runde runde, Spielfeld spielfeld){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new LineBorder(Color.BLACK, 2));
         setBackground(Color.BLACK);
@@ -55,6 +59,7 @@ public class SpielerPanel extends JPanel {
 
         this.runde = runde;
         this.spieler = spieler;
+        this.spielfeld = spielfeld;
 
 
         this.auslage = new JPanel(new GridLayout(1,3));
@@ -196,7 +201,7 @@ public class SpielerPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println(spieler.getLetztesBild());
-                spieler.setFertig();
+                spieler.setFertig(true);
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
                 if(aufgedeckt == true){
@@ -219,13 +224,9 @@ public class SpielerPanel extends JPanel {
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
-                if (runde.pruefeFertig()) {
-                    ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
 
-                    updatePanel();
+                spielfeld.pruefeFertig();
 
-                    //ToDo: Aufdecken aller Becher muss durch die GUI erfolgen
-                }
 
 
             }
@@ -289,6 +290,10 @@ public class SpielerPanel extends JPanel {
 
     }
 
+    public Spieler getSpieler() {
+        return spieler;
+    }
+
     /**
      * Aktualisiert das SpielerPanel
      * Loescht die Wuerfel in der Auslage und im Wuerfelbereich, sowie die Strafpunkte
@@ -329,6 +334,17 @@ public class SpielerPanel extends JPanel {
 
             ((CardLayout)wuerfel.getLayout()).show(wuerfel, "becher");
 
+    }
+
+    /**
+     * Wechselt die Ansicht des Wuerfelfeldes
+     * @param view String {wuerfel | becher}
+     */
+    public void changeView(String view){
+        if(view.equals("wuerfel")||wuerfel.equals("becher"))
+            ((CardLayout) wuerfel.getLayout()).show(wuerfel,view);
+        else
+            return;
     }
 
     /**

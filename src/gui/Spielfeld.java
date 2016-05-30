@@ -117,19 +117,28 @@ public class Spielfeld extends JPanel {
     List<Spieler> spielerList = gui.getAlleSpieler();
 
         for(Spieler s : spielerList){
-            SpielerPanel x = new SpielerPanel(s);
+            SpielerPanel x = new SpielerPanel(s,haelfte.getRunde(),this);
             teilnehmer.add(x);
             jPUnten.add(x);
         }
 
         updateView();
+        updateTeilnehmerListe();
     }
 
     public void updateTeilnehmerListe(){
         try {
-            Spieler temp = Datenbank.getInstance().selectSpieler(teilnehmer.get(0).getName());
-            int spielerID = Datenbank.getInstance().selectSpielID(temp.getName());
-            Datenbank.getInstance().selectSpielerImSpiel(spielerID);
+
+            List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(1);
+
+            for (String s : kennungListe){
+                SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s),haelfte.getRunde(),this);
+                teilnehmer.add(tmpPanel);
+                jPUnten.add(tmpPanel);
+            }
+
+            updateView();
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -137,6 +146,15 @@ public class Spielfeld extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        List<Spieler> spielerListeTmp = new ArrayList<>();
+
+        for(SpielerPanel s : teilnehmer){
+            spielerListeTmp.add(s.getSpieler());
+
+        }
+
+        haelfte.getRunde().setTeilnehmer(spielerListeTmp);
     }
 
     private void updateView(){
@@ -144,6 +162,24 @@ public class Spielfeld extends JPanel {
         add(jPOben, BorderLayout.NORTH);
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
+    }
+
+    /**
+     * 
+     */
+    public void pruefeFertig(){
+        int counter = 0;
+        for(SpielerPanel s: teilnehmer){
+            if(s.getSpieler().getFertig())
+                counter++;
+        }
+
+        if(counter == teilnehmer.size()){
+            for(SpielerPanel s : teilnehmer)
+                s.changeView("wuerfel");
+
+            haelfte.getRunde().auswertenBilder();
+        }
     }
 
     public GUI getGui() {
