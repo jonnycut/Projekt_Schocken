@@ -19,7 +19,7 @@ public class GUI extends JFrame {
 
     private int zustand = 1;
     private List<SpielerPanel> spieler = new ArrayList<>();
-    private Spielfeld spielfeld; //= new Spielfeld(this);
+    private Spielfeld spielfeld = new Spielfeld(this);
     private Infobereich infobereich = new Infobereich(spielfeld);
     private Anmeldung anmeldung = new Anmeldung(this);
     private Registrierung registrierung = new Registrierung(this);
@@ -66,7 +66,7 @@ public class GUI extends JFrame {
         jp.add(anmeldungP, "Anmeldung");
         jp.add(registrierungP, "Registrierung");
         jp.add(administrationP, "Administration");
-        //jp.add(spielfeldP, "Spielfeld");
+        jp.add(spielfeldP, "Spielfeld");
 
         add(jp);
 
@@ -99,6 +99,7 @@ public class GUI extends JFrame {
             case 6:
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
+                spielfeld.setAnzeige(infobereich,13);
                 break;
 
         }

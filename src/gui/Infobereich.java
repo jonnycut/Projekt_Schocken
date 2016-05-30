@@ -14,10 +14,12 @@ public class Infobereich extends JPanel {
     public Infobereich(Spielfeld spielfeld){
         super();
         setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(760, 150));
         setBackground(Color.BLACK);
         this.spielfeld = spielfeld;
 
-        info = new JLabel();
+        info = new JLabel("Willkommen beim SCHOKEN");
+        info.setFont(new Font("Arial", Font.BOLD, 30));
         info.setForeground(Color.RED);
         info.setBackground(Color.BLACK);
 
@@ -29,6 +31,6 @@ public class Infobereich extends JPanel {
 
         info.setText(infos);
         this.add(info);
-        spielfeld.setAnzeige(this);
+        //spielfeld.setAnzeige(this);
     }
 }
