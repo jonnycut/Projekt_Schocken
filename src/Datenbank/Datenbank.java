@@ -391,7 +391,7 @@ public class Datenbank {
      * @return
      * @throws SQLException
      */
-    public ArrayList<String> getSpielerImSpiel(int spielID) throws SQLException {
+    public ArrayList<String> selectSpielerImSpiel(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         ResultSet resultSet = stmt.executeQuery("SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id = '" + spielID + "'");
         ArrayList<String> spielerImSpiel = new ArrayList<String>();

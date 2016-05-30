@@ -43,7 +43,7 @@ CREATE TABLE t_Hälfte(
 );
 
 CREATE TABLE t_Runde(
-  RundenNr INT,
+  RundenNr SERIAL,
   fk_t_Spiel_Spiel_ID INT,
   fk_t_Hälfte_Art INT,
   Beginner VARCHAR(30),
