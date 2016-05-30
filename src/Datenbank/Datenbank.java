@@ -409,7 +409,7 @@ public class Datenbank {
     }
 
 
-    /**Fügt die HashMap statistik der Spiler als Objekt der DB hinzu
+    /**Fügt der Relation t_spieler die statistik des Spielers als Object hinzu
      *
      * @param kennung
      * @param statistik
@@ -436,6 +436,39 @@ public class Datenbank {
 
         }
 
+    }
+
+    /**
+     * Liefert die Statistik der Spieler aus der DB
+     * @param kennung
+     * @return
+     * @throws SQLException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public Map getStatistik(String kennung) throws SQLException, IOException, ClassNotFoundException {
+        Statement stmt = verbindung.createStatement();
+        Map<String, Integer> statistik = null;
+        ResultSet r = stmt.executeQuery(
+                "SELECT statistik" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + kennung + "'"
+        );
+        if (r.next()){
+            InputStream fis = r.getBinaryStream(1);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            statistik = (Map) ois.readObject();
+            ois.close();
+            fis.close();
+        }
+//        Set set = statistik.entrySet();
+//        Iterator iterator = set.iterator();
+//        while(iterator.hasNext()) {
+//            Map.Entry mentry = (Map.Entry) iterator.next();
+//            System.out.print("key: " + mentry.getKey() + " & Value: ");
+//            System.out.println(mentry.getValue());
+//        }
+        return statistik;
     }
     //------------------------------------------------------------------------------------------------------------------
 
