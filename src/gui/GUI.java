@@ -117,30 +117,37 @@ public class GUI extends JFrame {
 
 
     public void setServer(Server server) {
+
         this.server = server;
     }
 
     public Server getServer() {
+
         return server;
     }
 
     public Client getClient() {
+
         return client;
     }
 
     public void setClient(Client client) {
+
         this.client = client;
     }
 
     public Spielfeld getSpielfeld() {
+
         return spielfeld;
     }
 
     public void setSpielfeld(Spielfeld spielfeld) {
+
         this.spielfeld = spielfeld;
     }
 
     public void updateSpielerListe(Spieler spieler) {
+
         this.spieler.add(spieler);
     }
 
@@ -164,11 +171,13 @@ public class GUI extends JFrame {
     }
 
     public void setZustand(int zustand) {
+
         this.zustand = zustand;
     }
 
 
     public Infobereich getInfobereich() {
+
         return infobereich;
     }
 }

@@ -42,12 +42,12 @@ public class Spielfeld extends JPanel {
         teilnehmer = new ArrayList<>();
 
         jPOben = new JPanel(new FlowLayout());
-        jPOben.setPreferredSize(new Dimension(1024, 155));
+        jPOben.setPreferredSize(new Dimension(1020, 150));
         jPOben.setBackground(Color.BLACK);
 
         jPStock = new JPanel();
         jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
-        jPStock.setPreferredSize(new Dimension(250, 145));
+        jPStock.setPreferredSize(new Dimension(200, 150));
         jPStock.setBackground(Color.DARK_GRAY);
         JPanel jPText = new JPanel(new FlowLayout());
         jPText.setBackground(Color.DARK_GRAY);
@@ -55,6 +55,7 @@ public class Spielfeld extends JPanel {
         jLText.setForeground(Color.WHITE);
         jPText.add(jLText);
         jPStock.add(jPText);
+
 
         jLStock = new JLabel("13");
         jLStock.setFont(new Font("Arial", Font.BOLD, 50));
@@ -64,6 +65,7 @@ public class Spielfeld extends JPanel {
         jPOben.add(jPStock);
 
         jPMitte = new JPanel(new FlowLayout());
+        jPMitte.setPreferredSize(new Dimension(1024,50));
         jPMitte.setBackground(Color.BLACK);
         jPMitte.setBorder(new LineBorder(Color.DARK_GRAY, 2));
         JButton jBStart = new JButton("Starte Spiel");
@@ -83,7 +85,7 @@ public class Spielfeld extends JPanel {
 
 
         jPUnten = new JPanel(new FlowLayout());
-        jPUnten.setPreferredSize(new Dimension(1024, 613));
+        jPUnten.setPreferredSize(new Dimension(1024, 535));
         jPUnten.setBackground(Color.DARK_GRAY);
 
 
@@ -97,8 +99,7 @@ public class Spielfeld extends JPanel {
 
     public void updateStock() {
 
-        JLabel jLtemp = new JLabel("Test"+ haelfte.getStock().getStrafpunkte());
-        jLStock = jLtemp;
+        jLStock.setText("F" + haelfte.getStock().getStrafpunkte());
         jPStock.add(jLStock);
         jPOben.add(jPStock);
 
@@ -122,6 +123,7 @@ public class Spielfeld extends JPanel {
             SpielerPanel x = new SpielerPanel(s);
             teilnehmer.add(x);
             jPUnten.add(x);
+            System.out.println("SpielerPanel: "+ s.getName());
         }
 
         updateView();

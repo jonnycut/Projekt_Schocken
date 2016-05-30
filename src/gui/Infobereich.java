@@ -18,7 +18,7 @@ public class Infobereich extends JPanel {
     public Infobereich(GUI gui){
         super();
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(760, 150));
+        setPreferredSize(new Dimension(800, 100));
         setBackground(Color.BLACK);
         this.gui = gui;
 
@@ -32,7 +32,7 @@ public class Infobereich extends JPanel {
         jPInfo.add(info, BorderLayout.NORTH);
         JPanel temp = new JPanel();
         temp.setBackground(Color.BLACK);
-        temp.setPreferredSize(new Dimension(760, 50));
+        temp.setPreferredSize(new Dimension(800, 100));
         jPInfo.add(temp,BorderLayout.CENTER);
 
         add(jPInfo);

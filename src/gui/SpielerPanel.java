@@ -51,7 +51,7 @@ public class SpielerPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new LineBorder(Color.BLACK, 2));
         setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(0, 610));
+        setPreferredSize(new Dimension(180, 535));
 
         this.runde = runde;
         this.spieler = spieler;
@@ -211,7 +211,7 @@ public class SpielerPanel extends JPanel {
 
                 try {
                     Datenbank.getInstance().insertStatistik(spieler.getName(), spieler.getStatistik());
-                    Datenbank.getInstance().getStatistik(spieler.getName());
+                   // Datenbank.getInstance().getStatistik(spieler.getName());
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (IOException e1) {
