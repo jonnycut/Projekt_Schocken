@@ -105,6 +105,7 @@ public class GUI extends JFrame {
                 break;
             case 6:
                 infobereich.setInfos("Herzlich Willkommen beim SCHOCKEN");
+                //spielfeld.updateTeilnehmerListe();
                 spielfeld.setSpielerPanel();
                 spielfeld.updateInfo(infobereich);
                 spielfeld.updateStock();

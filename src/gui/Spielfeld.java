@@ -2,15 +2,13 @@ package gui;
 
 import Datenbank.Datenbank;
 import spiel.Haelfte;
-import spiel.Runde;
 import spiel.Spieler;
-import spiel.Stock;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
@@ -47,7 +45,7 @@ public class Spielfeld extends JPanel {
 
         jPStock = new JPanel();
         jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
-        jPStock.setPreferredSize(new Dimension(200, 150));
+        jPStock.setPreferredSize(new Dimension(180, 140));
         jPStock.setBackground(Color.DARK_GRAY);
         JPanel jPText = new JPanel(new FlowLayout());
         jPText.setBackground(Color.DARK_GRAY);
@@ -99,7 +97,7 @@ public class Spielfeld extends JPanel {
 
     public void updateStock() {
 
-        jLStock.setText("F" + haelfte.getStock().getStrafpunkte());
+        jLStock.setText("" + haelfte.getStock().getStrafpunkte());
         jPStock.add(jLStock);
         jPOben.add(jPStock);
 
@@ -128,7 +126,17 @@ public class Spielfeld extends JPanel {
     }
 
     public void updateTeilnehmerListe(){
-
+        try {
+            Spieler temp = Datenbank.getInstance().selectSpieler(teilnehmer.get(0).getName());
+            int spielerID = Datenbank.getInstance().selectSpielID(temp.getName());
+            Datenbank.getInstance().selectSpielerImSpiel(spielerID);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateView(){
