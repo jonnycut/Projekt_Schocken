@@ -474,7 +474,71 @@ public class Datenbank {
         }*/
         return statistik;
     }
-    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * fügt der aktuellen Hälfte im Spiel eine neue Runde hinzu und fügt dieser automatisch den Beginner zu
+     * @param spielID
+     * @throws SQLException
+     */
+    public void insertRunde(int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int aktuelleRunde= selectAktuelleRunde(spielID);
+        int neueRunde=aktuelleRunde+1;
+        String ersterBeginner= selectersterBeginner(spielID);
+        String nächsterbeginner= insertnaechsterBeginner(spielID);
+        int haelfte=selectAktuelleHaelfte(spielID);
+
+        if(aktuelleRunde==0) {
+            //1.Runde erstellen
+            try {
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','"+ ersterBeginner +"')");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else{
+            //weitere Runden erstellen
+            try {
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','"+ nächsterbeginner +"')");
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Diese Methode sucht ein noch offenes Spiel es kann immer nur ein offenes Spiel geben
+     *
+     * @return Liefert die Spiel_ID des offenen Spiels
+     * @throws SQLException
+     */
+    public int selectOffenesSpiel() throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int offenesSpiel = 0;
+        ResultSet r = stmt.executeQuery("SELECT Spiel_ID FROM t_Spiel WHERE Status =1"
+        );
+        if (r.next()) {
+            offenesSpiel = r.getInt(1);
+        }
+
+        return offenesSpiel;
+    }
+
+    public String selectSpielleiterKennung(int spielID) throws SQLException {
+        String spielleiter=null;
+        Statement stmt =verbindung.createStatement();
+
+        ResultSet r = stmt.executeQuery("SELECT fk_t_Spielleiter_Kennung FROM t_spiel WHERE spiel_id='" + spielID + "'");
+        if(r.next()){
+            spielleiter=r.getString(1);
+        }
+        return spielleiter;
+    }
+
+
+    //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
     public Icon selectProfilBild(String text) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
@@ -574,6 +638,59 @@ public class Datenbank {
 //-------------------------------------------Private Methoden-----------------------------------------------------------
 
     /**
+     * Liefert die aktuelle Runde im jeweiligen Spiel
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
+    private int selectAktuelleRunde(int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int rundennr=0;
+        ResultSet r=stmt.executeQuery("SELECT max(rundennr) FROM t_runde WHERE fk_t_spiel_spiel_id= '"+spielID +"'");
+
+        if(r.next()){
+            rundennr= r.getInt(1);
+        }
+        return rundennr;
+    }
+
+    /**
+     * Liefert den Verlierer der letzten Runde und somiut den Beginner der Folgerunde
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
+    private String insertnaechsterBeginner(int spielID) throws SQLException {
+        Statement stmt =verbindung.createStatement();
+        int aktuelleRunde= selectAktuelleRunde(spielID);
+        String kennungBeginner=null;
+
+        ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_runde WHERE fk_t_spiel_spiel_id='"+spielID+"'AND rundennr="+aktuelleRunde);
+
+        if(r.next()){
+            kennungBeginner=r.getString(1);
+        }
+        return kennungBeginner;
+    }
+
+    /**
+     * liefert anhand des auswürfeln den Beginner der ersten Runde
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
+    private String selectersterBeginner(int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        String kennungBeginner = null;
+        ResultSet r= stmt.executeQuery("SELECT kennung FROM (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id ='" + spielID + "' ) AS \"Spieler im Spiel\" INNER JOIN t_spieler ON fk_t_spieler_kennung=kennung ORDER by startwurf DESC limit 1");
+        if(r.next()){
+
+            kennungBeginner= r.getString(1);
+        }
+        return kennungBeginner;
+    }
+
+    /**
      * Liest das Script zur Erstellung der Relationen an
      *
      * @throws SQLException
@@ -671,37 +788,7 @@ public class Datenbank {
 
     }
 
-    /**
-     * Diese Methode sucht ein noch offenes Spiel es kann immer nur ein offenes Spiel geben
-     *
-     * @return Liefert die Spiel_ID des offenen Spiels
-     * @throws SQLException
-     */
-    public int selectOffenesSpiel() throws SQLException {
-        Statement stmt = verbindung.createStatement();
-        int offenesSpiel = 0;
-        ResultSet r = stmt.executeQuery("SELECT Spiel_ID FROM t_Spiel WHERE Status =1"
-        );
-        if (r.next()) {
-            offenesSpiel = r.getInt(1);
-        }
 
-        return offenesSpiel;
-    }
-
-
-
-
-    public String selectSpielleiterKennung(int spielID) throws SQLException {
-    String spielleiter=null;
-    Statement stmt =verbindung.createStatement();
-
-        ResultSet r = stmt.executeQuery("SELECT fk_t_Spielleiter_Kennung FROM t_spiel WHERE spiel_id='"+spielID+"'");
-        if(r.next()){
-            spielleiter=r.getString(1);
-        }
-        return spielleiter;
-    }
 }
 //    //---------------------------------------------------------------------------------------------------------------------
 //
