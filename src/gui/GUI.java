@@ -3,6 +3,7 @@ package gui;
 import Grafik.Grafik;
 import netzwerk.Client;
 import netzwerk.Server;
+import spiel.Spieler;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -18,12 +19,12 @@ import java.util.List;
 public class GUI extends JFrame {
 
     private int zustand = 1;
-    private List<SpielerPanel> spieler = new ArrayList<>();
-    private Spielfeld spielfeld = new Spielfeld(this);
-    private Infobereich infobereich = new Infobereich(spielfeld);
-    private Anmeldung anmeldung = new Anmeldung(this);
-    private Registrierung registrierung = new Registrierung(this);
-    private Administration administration = new Administration(this);
+    private List<Spieler> spieler = new ArrayList<>();
+    private Spielfeld spielfeld;
+    private Infobereich infobereich;
+    private Anmeldung anmeldung;
+    private Registrierung registrierung;
+    private Administration administration;
     //private Statistik statistik = new Statistik();
     private JPanel jp = new JPanel(new CardLayout());
     private Client client;
@@ -34,8 +35,14 @@ public class GUI extends JFrame {
 
         super("Schocken, das Würfelspiel für zwischendurch!");
 
+        spielfeld = new Spielfeld(this);
+        infobereich = new Infobereich(this);
+        anmeldung = new Anmeldung(this);
+        registrierung = new Registrierung(this);
+        administration = new Administration(this);
+
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1024, 768);
         setLocationRelativeTo(null);
 
         JPanel start = new JPanel(new BorderLayout());
@@ -69,8 +76,8 @@ public class GUI extends JFrame {
         jp.add(spielfeldP, "Spielfeld");
 
         add(jp);
-
-        pack();
+        setSize(1024, 768);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -97,9 +104,12 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
                 break;
             case 6:
+                infobereich.setInfos("Herzlich Willkommen beim SCHOCKEN");
+                spielfeld.setSpielerPanel();
+                spielfeld.updateInfo(infobereich);
+                spielfeld.updateStock();
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
-                spielfeld.setAnzeige(infobereich,13);
                 break;
 
         }
@@ -130,6 +140,10 @@ public class GUI extends JFrame {
         this.spielfeld = spielfeld;
     }
 
+    public void updateSpielerListe(Spieler spieler) {
+        this.spieler.add(spieler);
+    }
+
 
     public SpielerPanel getSpieler() {
 
@@ -139,7 +153,7 @@ public class GUI extends JFrame {
     }
 
 
-    public List<SpielerPanel> getAlleSpieler() {
+    public List<Spieler> getAlleSpieler() {
 
         return this.spieler;
     }
@@ -151,5 +165,10 @@ public class GUI extends JFrame {
 
     public void setZustand(int zustand) {
         this.zustand = zustand;
+    }
+
+
+    public Infobereich getInfobereich() {
+        return infobereich;
     }
 }

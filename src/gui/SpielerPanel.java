@@ -45,7 +45,7 @@ public class SpielerPanel extends JPanel {
     private JPanel name;
     private JPanel profilbild;
 
-    public SpielerPanel(Spieler spieler, Runde runde){
+    public SpielerPanel(Spieler spieler /*, Runde runde*/){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new LineBorder(Color.BLACK, 2));
         setBackground(Color.BLACK);

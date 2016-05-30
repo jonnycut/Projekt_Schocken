@@ -1,66 +1,145 @@
 package gui;
 
+import Datenbank.Datenbank;
+import spiel.Haelfte;
+import spiel.Runde;
+import spiel.Spieler;
+import spiel.Stock;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Flurry on 25.05.2016.
  */
 public class Spielfeld extends JPanel {
 
-    private JPanel anzeige;
-    private JPanel stock;
-    private JPanel spieler;
+    private GUI gui;
+    private Haelfte haelfte;
+    private List<SpielerPanel> teilnehmer;
+
+    private JPanel jPOben;
+    private JPanel jPMitte;
+    private JPanel jPUnten;
+
+    private JPanel jPStock;
+    private JLabel jLStock;
+
 
     public Spielfeld(GUI gui){
         super();
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
-        anzeige = new JPanel(new FlowLayout());
-        anzeige.setPreferredSize(new Dimension(1024, 155));
-        anzeige.setBackground(Color.BLACK);
 
-        stock = new JPanel();
-        stock.setLayout(new BoxLayout(stock, BoxLayout.Y_AXIS));
-        stock.setPreferredSize(new Dimension(250, 145));
-        stock.setBackground(Color.DARK_GRAY);
+        this.gui = gui;
+        haelfte = new Haelfte();
+        teilnehmer = new ArrayList<>();
 
-        spieler = new JPanel(new FlowLayout());
-        spieler.setPreferredSize(new Dimension(1024,613));
-        spieler.setBackground(Color.DARK_GRAY);
+        jPOben = new JPanel(new FlowLayout());
+        jPOben.setPreferredSize(new Dimension(1024, 155));
+        jPOben.setBackground(Color.BLACK);
 
-        add(anzeige, BorderLayout.NORTH);
-        add(spieler, BorderLayout.SOUTH);
-    }
-
-
-
-    public void setAnzeige(JPanel infobereich, int zahl) {
-
-        JPanel jPStock = new JPanel(new FlowLayout());
+        jPStock = new JPanel();
+        jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
+        jPStock.setPreferredSize(new Dimension(250, 145));
         jPStock.setBackground(Color.DARK_GRAY);
-        JLabel jLStock = new JLabel("Strafpunkte auf dem Stock");
+        JPanel jPText = new JPanel(new FlowLayout());
+        jPText.setBackground(Color.DARK_GRAY);
+        JLabel jLText = new JLabel("Strafpunkte auf dem Stock");
+        jLText.setForeground(Color.WHITE);
+        jPText.add(jLText);
+        jPStock.add(jPText);
+
+        jLStock = new JLabel("13");
+        jLStock.setFont(new Font("Arial", Font.BOLD, 50));
         jLStock.setForeground(Color.WHITE);
         jPStock.add(jLStock);
 
-        JPanel jPAnzahl = new JPanel(new FlowLayout());
-        jPAnzahl.setBackground(Color.DARK_GRAY);
-        JLabel jLAnzahl = new JLabel(""+zahl);
-        jLAnzahl.setFont(new Font("Arial", Font.BOLD, 50));
-        jLAnzahl.setForeground(Color.WHITE);
-        jPAnzahl.add(jLAnzahl);
-        this.stock.remove(jPStock);
-        this.stock.remove(jPAnzahl);
-        this.stock.add(jPStock);
-        this.stock.add(jPAnzahl);
+        jPOben.add(jPStock);
 
-        this.anzeige.add(infobereich);
-        this.anzeige.add(stock);
+        jPMitte = new JPanel(new FlowLayout());
+        jPMitte.setBackground(Color.BLACK);
+        jPMitte.setBorder(new LineBorder(Color.DARK_GRAY, 2));
+        JButton jBStart = new JButton("Starte Spiel");
+        jBStart.setEnabled(true);
 
-        this.add(anzeige, BorderLayout.NORTH);
+        ActionListener startButton = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                jPMitte.setVisible(false);
+            }
+        };
+
+        jBStart.addActionListener(startButton);
+
+        jPMitte.add(jBStart);
+
+
+
+        jPUnten = new JPanel(new FlowLayout());
+        jPUnten.setPreferredSize(new Dimension(1024, 613));
+        jPUnten.setBackground(Color.DARK_GRAY);
+
+
+
+        add(jPOben, BorderLayout.NORTH);
+        add(jPMitte, BorderLayout.CENTER);
+        add(jPUnten, BorderLayout.SOUTH);
     }
 
-    public void setSpielerpanel(JPanel Spielerpanel){
+
+
+    public void updateStock() {
+
+        JLabel jLtemp = new JLabel("Test"+ haelfte.getStock().getStrafpunkte());
+        jLStock = jLtemp;
+        jPStock.add(jLStock);
+        jPOben.add(jPStock);
+
+        updateView();
+    }
+
+    public void updateInfo(JPanel infobereich) {
+
+        jPOben.add(infobereich);
+        jPOben.add(jPStock);
+
+        updateView();
+    }
+
+    public void setSpielerPanel(){
+
+    List<Spieler> spielerList = gui.getAlleSpieler();
+
+        System.out.println(spielerList + "von Flurry");
+        for(Spieler s : spielerList){
+            SpielerPanel x = new SpielerPanel(s);
+            teilnehmer.add(x);
+            jPUnten.add(x);
+        }
+
+        updateView();
+    }
+
+    public void updateTeilnehmerListe(){
 
     }
+
+    private void updateView(){
+
+        add(jPOben, BorderLayout.NORTH);
+        add(jPMitte, BorderLayout.CENTER);
+        add(jPUnten, BorderLayout.SOUTH);
+    }
+
+    public GUI getGui() {
+        return gui;
+    }
+
 }

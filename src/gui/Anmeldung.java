@@ -22,7 +22,7 @@ public class Anmeldung extends JPanel {
 
     GUI gui;
 
-    public Anmeldung(GUI gui) {
+    public Anmeldung(GUI gui){
         super();
         this.gui = gui;
 
@@ -87,9 +87,18 @@ public class Anmeldung extends JPanel {
         ActionListener startButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ToDo: Schaltet weiter und gibt das Spiel frei
+
                 starteSpiel();
                 gui.setZustand(6);
                 gui.updateView(e);
+
+                try {
+                    Datenbank.getInstance().insertTeilnehmer(jTName.getText());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
 
             }
         };
@@ -147,6 +156,7 @@ public class Anmeldung extends JPanel {
                 try {
                     if (Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
+                        gui.updateSpielerListe(Datenbank.getInstance().selectSpieler(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
                     } else {
@@ -286,15 +296,20 @@ public class Anmeldung extends JPanel {
 
     public void starteSpiel() {
 
-        try {
-            if(Datenbank.getInstance().selectOffenesSpiel() !=1){
-                gui.setSpielfeld(new Spielfeld(gui));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        gui.setSpielfeld(new Spielfeld(gui));
+
+//        try {
+//            if(Datenbank.getInstance().selectOffenesSpiel() !=1){
+//                gui.setSpielfeld(new Spielfeld(gui));
+//            }
+//            else{
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void pruefeSpiel() {

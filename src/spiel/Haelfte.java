@@ -53,5 +53,9 @@ public class Haelfte {
         this.stock = new Stock();
     }
 
+    public Stock getStock() {
+        return stock;
+    }
+
 
 }
