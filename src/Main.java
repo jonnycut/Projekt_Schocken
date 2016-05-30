@@ -56,8 +56,7 @@ public class Main {
         outline.add(grundPanel);
         outline.setVisible(true);
         outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        outline.setPreferredSize(new Dimension(1024, 768));
-        outline.pack();
+        outline.setSize(new Dimension(1024, 768));
     }
 
 }
