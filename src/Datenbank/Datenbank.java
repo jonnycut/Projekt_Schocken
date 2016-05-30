@@ -140,6 +140,7 @@ public class Datenbank {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
+
     /**
      * Methode zum Anmelden
      *
@@ -266,7 +267,7 @@ public class Datenbank {
      * @param art     1 -> 1. Hälfte,2 -> 2.Hälfte,3 ->Finale
      * @throws SQLException
      */
-    public void erstelleHaelfte(int spielID, int art) throws SQLException {
+    public void insertHaelfte(int spielID, int art) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
         try {
@@ -288,7 +289,7 @@ public class Datenbank {
      * @param haelftenArt - aktuelle Hälfte
      * @throws SQLException
      */
-    //ToDo Ich würde gern die Methode so erweitern das als Übergabeparameter nur noch die Kennung des Spielers übergebenwird. Damit würde ich die Aktualliesierung der Strafpunkte vom Spieler auch hier durchführen
+    //ToDo Ich würde gern die Methode so erweitern das als Übergabeparameter nur noch die Kennung des Spielers übergeben wird. Damit würde ich die Aktualliesierung der Strafpunkte vom Spieler auch hier durchführen
     public void updateStock(int strafpunkte, int spielID, int haelftenArt) throws SQLException {
         Statement stmt = verbindung.createStatement();
         try {
@@ -301,11 +302,12 @@ public class Datenbank {
 
     /**
      * prüft in welchem Spiel sich ein Spieler befindet
+     *
      * @param kennung
      * @return spielID
      * @throws SQLException
      */
-    public int getSpielID(String kennung) throws SQLException {
+    public int selectSpielID(String kennung) throws SQLException {
         Statement stmnt = verbindung.createStatement();
 
         ResultSet r = stmnt.executeQuery("SELECT fkspiel_spiel_id from _t_ist_client WHERE fk_t_spieler_kennung = '" + kennung + "'");
@@ -318,11 +320,12 @@ public class Datenbank {
 
     /**
      * über die SpielID kann abgefragt werden in welcher Hälfte sich das Spiel aktuell befindet
+     *
      * @param spiel_ID
      * @return 1 für erste Hälfte , 2 für zweite Hälfte ,3 für Finale
      * @throws SQLException
      */
-    public int getAktuelleHaelfte(int spiel_ID) throws SQLException {
+    public int selectAktuelleHaelfte(int spiel_ID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int aktuelleHaelfte = 0;
 
@@ -337,6 +340,7 @@ public class Datenbank {
 
     /**
      * einen Spieler auf aktiv setzen erst dann ist der Spieler dran
+     *
      * @param kennung
      * @throws SQLException
      */
@@ -385,7 +389,8 @@ public class Datenbank {
         }
     }
 
-    /**Liefert eine Liste von allen Spielern die sich in dem selben Spiel befinden
+    /**
+     * Liefert eine Liste von allen Spielern die sich in dem selben Spiel befinden
      *
      * @param spielID
      * @return
@@ -400,7 +405,7 @@ public class Datenbank {
 
         while (resultSet.next()) {
             int i = 1;
-            while(i <= numberOfColumns) {
+            while (i <= numberOfColumns) {
                 spielerImSpiel.add(resultSet.getString(i++));
             }
             System.out.println(resultSet.getString(1));
@@ -408,8 +413,8 @@ public class Datenbank {
         return spielerImSpiel;
     }
 
-
-    /**Fügt der Relation t_spieler die statistik des Spielers als Object hinzu
+    /**
+     * Fügt der Relation t_spieler die statistik des Spielers als Object hinzu
      *
      * @param kennung
      * @param statistik
@@ -440,6 +445,7 @@ public class Datenbank {
 
     /**
      * Liefert die Statistik der Spieler aus der DB
+     *
      * @param kennung
      * @return
      * @throws SQLException
@@ -454,7 +460,7 @@ public class Datenbank {
                         " FROM t_spieler" +
                         " WHERE kennung='" + kennung + "'"
         );
-        if (r.next()){
+        if (r.next()) {
             InputStream fis = r.getBinaryStream(1);
             ObjectInputStream ois = new ObjectInputStream(fis);
             statistik = (Map) ois.readObject();
@@ -475,8 +481,8 @@ public class Datenbank {
     public Icon selectProfilBild(String text) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery("SELECT profilbild" +
-                                        " FROM t_spieler" +
-                                        " WHERE kennung='" + text + "'"
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
         );
         if (r.next()) {
             Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
@@ -676,9 +682,19 @@ public class Datenbank {
     }
 
 
+
+
+    public String selectSpielleiterKennung(int spielID) throws SQLException {
+    String spielleiter=null;
+    Statement stmt =verbindung.createStatement();
+
+        ResultSet r = stmt.executeQuery("SELECT fk_t_Spielleiter_Kennung FROM t_spiel WHERE spiel_id='"+spielID+"'");
+        if(r.next()){
+            spielleiter=r.getString(1);
+        }
+        return spielleiter;
+    }
 }
-
-
 //    //---------------------------------------------------------------------------------------------------------------------
 //
 //    /**
