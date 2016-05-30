@@ -11,6 +11,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 
 /**
@@ -81,15 +83,15 @@ public class SpielerPanel extends JPanel {
         wuerfelAnsicht.setBorder(new LineBorder(Color.BLACK,1));
 
         //WuerfelButtons mit dem entsprechenden Bild und Text versehen
-        this.w1 = new JButton(spieler.getBecher().getWuerfel()[0].getGrafik());
+        this.w1 = new JButton(spieler.getBecher().getWuerfelArray()[0].getGrafik());
         w1.setBackground(Color.LIGHT_GRAY);
         w1.setBorder(new LineBorder(Color.BLACK, 1));
         w1.setName("0");
-        this.w2 = new JButton(spieler.getBecher().getWuerfel()[1].getGrafik());
+        this.w2 = new JButton(spieler.getBecher().getWuerfelArray()[1].getGrafik());
         w2.setBackground(Color.LIGHT_GRAY);
         w2.setBorder(new LineBorder(Color.BLACK, 1));
         w2.setName("1");
-        this.w3 = new JButton(spieler.getBecher().getWuerfel()[2].getGrafik());
+        this.w3 = new JButton(spieler.getBecher().getWuerfelArray()[2].getGrafik());
         w3.setBackground(Color.LIGHT_GRAY);
         w3.setBorder(new LineBorder(Color.BLACK, 1));
         w3.setName("2");
@@ -103,34 +105,9 @@ public class SpielerPanel extends JPanel {
                 JButton pufferBtn = (JButton) e.getSource();
                 int btnIndex = Integer.parseInt(pufferBtn.getName());
 
-                auslage.remove(btnIndex);
-                auslage.add(pufferBtn, btnIndex);
+                //Wegen Mehrfachnutzung in Methode ausgelagert
+                wuerfelRaus(pufferBtn,btnIndex,this);
 
-                wuerfelAnsicht.remove(pufferBtn);
-                pufferBtn.removeActionListener(this);
-
-                JButton pufferBtn2 = new JButton();
-                pufferBtn2.setBackground(Color.BLACK);
-                pufferBtn2.setBorder(new LineBorder(Color.BLACK,1));
-                wuerfelAnsicht.add(pufferBtn2, btnIndex);
-                wuerfelAnsicht.revalidate();
-
-                //Rausgelegten wuerfel auf draussen= true, damit dieser nicht mehr gewuerfelt wird
-
-                if(pufferBtn.equals(w1)){
-                    spieler.getBecher().getWuerfel()[0].setDraussen(true);
-
-                }else if(e.getSource().equals(w2)){
-                    spieler.getBecher().getWuerfel()[1].setDraussen(true);
-                }else{
-                    spieler.getBecher().getWuerfel()[2].setDraussen(true);
-                }
-                spieler.getBecher().sortiere();
-                auslageCount++;
-                System.out.println(auslageCount);
-
-                if(auslageCount==3)
-                    wuerfeln.setEnabled(false);
 
             }
 
@@ -177,6 +154,8 @@ public class SpielerPanel extends JPanel {
                 if (spieler.getBecher().getWurf() < 2) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
+                    System.out.println(spieler.getLetztesBild());
+                    System.out.println(spieler.getBecher().getWuerfel()[0]+"-"+spieler.getBecher().getWuerfel()[1]+"-"+spieler.getBecher().getWuerfel()[2]);
                     aufgedeckt = true;
                 } else {
 
@@ -197,9 +176,9 @@ public class SpielerPanel extends JPanel {
                     aufgedeckt = false;
 
                     spieler.wuerfeln();
-                    w1.setIcon(spieler.getBecher().getWuerfel()[0].getGrafik());
-                    w2.setIcon(spieler.getBecher().getWuerfel()[1].getGrafik());
-                    w3.setIcon(spieler.getBecher().getWuerfel()[2].getGrafik());
+                    w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
+                    w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
+                    w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
                     if (spieler.getBecher().getWurf() == 3)
                         wuerfeln.setEnabled(false);
                 } else {
@@ -216,12 +195,33 @@ public class SpielerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println("Term Signal from " + spieler);
+                System.out.println(spieler.getLetztesBild());
                 spieler.setFertig();
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
+                if(aufgedeckt == true){
+                   for(int i=0; i<3;i++){
+
+                    if(!wuerfelAnsicht.getComponent(i).getName().equals("leer")){
+                        wuerfelRaus((JButton) wuerfelAnsicht.getComponent(i), i, wuerfelListener);
+                    }
+
+                   }
+                }
+
+                try {
+                    Datenbank.getInstance().insertStatistik(spieler.getName(), spieler.getStatistik());
+                    Datenbank.getInstance().getStatistik(spieler.getName());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
                 if (runde.pruefeFertig()) {
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
+
                     updatePanel();
 
                     //ToDo: Aufdecken aller Becher muss durch die GUI erfolgen
@@ -300,7 +300,7 @@ public class SpielerPanel extends JPanel {
         strafpunkte.removeAll();
         strafpunkte.add(new JLabel("" + this.spieler.getStrafpunkte()));
         this.revalidate();
-        Wuerfel[] wuerfelArray = spieler.getBecher().getWuerfel();
+        Wuerfel[] wuerfelArray = spieler.getBecher().getWuerfelArray();
         JButton[] btnArray = {w1,w2,w3};
 
 
@@ -328,6 +328,47 @@ public class SpielerPanel extends JPanel {
         else
 
             ((CardLayout)wuerfel.getLayout()).show(wuerfel, "becher");
+
+    }
+
+    /**
+     *
+     * @param pufferBtn
+     * @param btnIndex
+     * @param wuerfelListener
+     */
+
+    public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener){
+
+        auslage.remove(btnIndex);
+        auslage.add(pufferBtn, btnIndex);
+
+        wuerfelAnsicht.remove(pufferBtn);
+        pufferBtn.removeActionListener(wuerfelListener);
+
+        JButton pufferBtn2 = new JButton();
+        pufferBtn2.setName("leer");
+        pufferBtn2.setBackground(Color.BLACK);
+        pufferBtn2.setBorder(new LineBorder(Color.BLACK,1));
+        wuerfelAnsicht.add(pufferBtn2, btnIndex);
+        wuerfelAnsicht.revalidate();
+
+        //Rausgelegten wuerfel auf draussen= true, damit dieser nicht mehr gewuerfelt wird
+
+        if(pufferBtn.equals(w1)){
+            spieler.getBecher().getWuerfelArray()[0].setDraussen(true);
+
+        }else if(pufferBtn.equals(w2)){
+            spieler.getBecher().getWuerfelArray()[1].setDraussen(true);
+        }else{
+            spieler.getBecher().getWuerfelArray()[2].setDraussen(true);
+        }
+        spieler.getBecher().sortiere();
+        auslageCount++;
+
+
+        if(auslageCount==3)
+            wuerfeln.setEnabled(false);
 
     }
 

@@ -16,10 +16,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 
 public class Datenbank {
@@ -467,13 +465,13 @@ public class Datenbank {
             ois.close();
             fis.close();
         }
-//        Set set = statistik.entrySet();
-//        Iterator iterator = set.iterator();
-//        while(iterator.hasNext()) {
-//            Map.Entry mentry = (Map.Entry) iterator.next();
-//            System.out.print("key: " + mentry.getKey() + " & Value: ");
-//            System.out.println(mentry.getValue());
-//        }
+       /* Set set = statistik.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            System.out.print("key: " + mentry.getKey() + " & Value: ");
+            System.out.println(mentry.getValue());
+        }*/
         return statistik;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -543,7 +541,7 @@ public class Datenbank {
 
     }
 
-    public Spieler selectSpieler(String kennung) throws SQLException, IOException {
+    public Spieler selectSpieler(String kennung) throws SQLException, IOException, ClassNotFoundException {
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery(
                 "SELECT *" +
@@ -554,6 +552,16 @@ public class Datenbank {
             Spieler spieler = new Spieler(r.getString(1), new ImageIcon(ImageIO.read(r.getBinaryStream(4))));
             if (r.getString(7) != null)
                 spieler.setStrafpunkte(Integer.parseInt(r.getString(7)));
+
+            if(r.getBytes(8)!= null){
+                InputStream fis = r.getBinaryStream(8);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                HashMap<String,Integer> statistik = (HashMap<String, Integer>) ois.readObject();
+                ois.close();
+                fis.close();
+                spieler.setStatistik( statistik);
+            }
+
 
             return spieler;
         }

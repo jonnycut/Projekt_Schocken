@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Becher implements Comparable<Becher> {
     private List<Wuerfel> wuerfel = new ArrayList<>();
+    private Wuerfel[] wuerfelArray = new Wuerfel[3];
     private String bild;
     private int wurf;
 
@@ -28,9 +29,11 @@ public class Becher implements Comparable<Becher> {
 
         for (int i = 0; i < 3; i++) {
             wuerfel.add(new Wuerfel());
+            wuerfelArray[i]=wuerfel.get(i);
         }
 
         wuerfeln();
+
         this.wurf = 0;
     }
 
@@ -41,6 +44,10 @@ public class Becher implements Comparable<Becher> {
      */
     public String getBild() {
         return bild;
+    }
+
+    public Wuerfel[] getWuerfelArray(){
+        return this.wuerfelArray;
     }
 
     /**
@@ -79,15 +86,16 @@ public class Becher implements Comparable<Becher> {
      */
     public void wuerfeln() {
 
-        //wuerfel[] vielleicht besser als ArrayList? --> Collections.sort...?
+
 
         this.wurf++;
 
-        for (Wuerfel w : this.wuerfel) {
+        for (Wuerfel w : this.wuerfelArray) {
             w.wuerfeln();
         }
 
         sortiere();
+
     }
 
     /**<pre>
@@ -102,11 +110,12 @@ public class Becher implements Comparable<Becher> {
      * @param w3 int {1-6} Wert des dritten Wuerfels, 0 fuer nicht veraendern.
      */
     public void setWurf(int w1, int w2, int w3) {
-        wuerfel.get(0).setWert(w1);
-        wuerfel.get(1).setWert(w2);
-        wuerfel.get(2).setWert(w3);
+        wuerfelArray[0].setWert(w1);
+        wuerfelArray[1].setWert(w2);
+        wuerfelArray[2].setWert(w3);
 
         sortiere();
+
 
 
     }
@@ -121,9 +130,9 @@ public class Becher implements Comparable<Becher> {
     public void sortiere() {
         Collections.sort(wuerfel);
 
-
         if (wuerfel.get(0).getWert() == 1 && wuerfel.get(1).getWert() == 1 && wuerfel.get(2).getWert() == 1) {
             bild = "Schock aus";
+
         } else if (wuerfel.get(1).getWert() == 1 && wuerfel.get(2).getWert() == 1) {
             bild = "Schock";
         } else if (wuerfel.get(0).getWert() == wuerfel.get(1).getWert() && wuerfel.get(1).getWert() == wuerfel.get(2).getWert()) {
@@ -133,6 +142,7 @@ public class Becher implements Comparable<Becher> {
         } else {
             bild = "Zahl";
         }
+
 
     }
 
@@ -241,16 +251,24 @@ public class Becher implements Comparable<Becher> {
                 return -1;
             case "Zahl-Straße":
                 return -1;
-            case "Straße-Schock":
-                return -1;
-            case "General-Schock":
-                return -1;
+
             case "Straße-Schock aus":
                 return -1;
-            case "Schock-Schock aus":
+            case "Straße-Schock":
                 return -1;
             case "Straße-General":
                 return -1;
+
+            case "General-Schock":
+                return -1;
+
+            case "Schock-General":
+                return 1;
+
+
+            case "Schock-Schock aus":
+                return -1;
+
             default:
                 return 1;
 

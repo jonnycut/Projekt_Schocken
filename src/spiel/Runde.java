@@ -71,7 +71,7 @@ public class Runde {
         Spieler verlierer = null;
 
 
-        Collections.sort(teilnehmer);
+        Collections.sort(teilnehmer,Spieler.WURF_ORDER);
 
         verlierer = teilnehmer.get(0);
         gewinner = teilnehmer.get(teilnehmer.size() - 1);

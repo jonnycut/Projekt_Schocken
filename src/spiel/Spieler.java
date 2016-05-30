@@ -1,6 +1,10 @@
 package spiel;
 
+import Datenbank.Datenbank;
+import sun.security.provider.ConfigFile;
+
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.HashMap;
 
@@ -22,10 +26,14 @@ public class Spieler implements Comparable<Spieler> {
 
     private int strafpunkte;
     private int haelfte;
+    public int startwurf;
     private Icon profilBild;
     private String letztesBild;
     private String name;
     private boolean fertig = false;
+
+
+
     private HashMap<String, Integer> statistik = new HashMap<>();
 
     /**
@@ -43,6 +51,13 @@ public class Spieler implements Comparable<Spieler> {
         this.haelfte = 0;
         this.letztesBild = becher.getBild();
         this.name = name;
+        statistik.put("Schock aus",0);
+        statistik.put("Schock",0);
+        statistik.put("Straße",0);
+        statistik.put("General",0);
+        statistik.put("Zahl",0);
+
+        statistik.put(letztesBild,1);
 
         String[] wuerfe = {"Schock aus", "Schock", "General", "Straße", "Zahl"};
         for (String s : wuerfe) {
@@ -59,20 +74,28 @@ public class Spieler implements Comparable<Spieler> {
         return letztesBild;
     }
 
+
+    /**
+     * Liefert Spieler.fertig
+     * @return boolean
+     */
+    public boolean getFertig() {
+        return this.fertig;
+    }
+
+    /**
+     * Setzt Spieler.fertig auf true
+     *
+     *
+     */
+    public void setFertig() {
+        this.fertig = true;
+    }
     /**
      * Liefert den Spielernamen
      *
      * @return String
      */
-
-    public boolean getFertig() {
-        return this.fertig;
-    }
-
-    public void setFertig() {
-        this.fertig = true;
-    }
-
     public String getName() {
         return name;
     }
@@ -108,23 +131,87 @@ public class Spieler implements Comparable<Spieler> {
         return strafpunkte;
     }
 
+    /**<pre>
+     * Liefert die Aktuelle Statistik des Spielers als HashMap
+     *     Key {Schock aus, Schock, General, Straße, Zahl}
+     *     Value {Integer}
+     * </pre>
+     *
+     * @return Object HashMap{String, Integer}
+     * @see HashMap
+     */
+
     public HashMap<String, Integer> getStatistik() {
         return this.statistik;
     }
 
-    public void pushStatistik(String key, Integer value) {
-        statistik.put(key, value);
+    /**
+     * Setzt die Statistik des Spielers
+     * @param statistik Object Hashmap{String, Integer}
+     * @see HashMap
+     */
+    public void setStatistik(HashMap<String, Integer> statistik) {
+        this.statistik = statistik;
+    }
+
+    /**<pre>
+     * Erhoeht die Anzahl des uebergebenen Keys in der Statistik um 1.
+     * Wird ein falscher key übergeben, wird abgebrochen.
+     * </pre>
+     * @param key {Schock aus, Schock, General, Straße, Zahl}
+     */
+    public void pushStatistik(String key) {
+        if(statistik.containsKey(key)){
+            statistik.put(key, statistik.get(key)+1);
+        }else
+            return;
     }
 
     /**
+     * <pre>
      * Nutzt die wuerfeln() Methode des Bechers
      * Ändert das Attribut letztesBild auf den aktuellen Wert
+     * Erhoeht die Anzahl des gewuerfelten Bildes in der Statistik
+     * </pre>
+     * @see Becher
      */
     public void wuerfeln() {
         this.becher.wuerfeln();
         this.letztesBild = this.becher.getBild();
-        statistik.put(letztesBild, statistik.get(letztesBild) + 1);
+        pushStatistik(letztesBild);
 
+
+    }
+
+    /**
+     * <pre>
+     * Würfelmethode für das initiale Auswürfeln des Beginners.
+     * Schreint das Attribut Startwurf in die Datenbank</pre>
+     *
+     */
+    public void beginnerWuerfeln() {
+
+        this.becher.wuerfeln();
+        this.becher.resetWurf();
+        Wuerfel[] temp = becher.getWuerfel();
+        this.startwurf = (int) (temp[0].getWert() * Math.pow(10, 2)) + temp[1].getWert() * 10 + temp[2].getWert();
+
+        try {
+            Datenbank.getInstance().insertStartwurf(name,startwurf);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int getStartwurf(){
+        return this.startwurf;
+    }
+
+    public void setStartwurf(int startwurf){
+        this.startwurf=startwurf;
     }
 
     /**
@@ -165,20 +252,7 @@ public class Spieler implements Comparable<Spieler> {
         this.strafpunkte += anzahl;
     }
 
-    /**
-     * <pre>
-     * Würfelmethode für das initiale Auswürfeln des Beginners.
-     * Liefert zum späteren, einfacheren Vergleich die Summe des Wurfs zurück</pre>
-     *
-     * @return Int Summe der 3 Würfel
-     */
-    public int beginnerWuerfeln() {
 
-        this.becher.wuerfeln();
-        Wuerfel[] temp = becher.getWuerfel();
-        return temp[0].getWert() + temp[1].getWert() + temp[2].getWert();
-
-    }
 
     /**
      * <pre>
@@ -213,6 +287,15 @@ public class Spieler implements Comparable<Spieler> {
         }
     };
 
+    public static final Comparator<Spieler>
+
+            WURF_ORDER = new Comparator<Spieler>() {
+        @Override
+        public int compare(Spieler o1, Spieler o2) {
+            return o1.getBecher().compareTo(o2.getBecher());
+        }
+    };
+
     /**
      * <pre>
      * Vergleicht zwei Spieler anhand ihrer Namen.
@@ -226,4 +309,16 @@ public class Spieler implements Comparable<Spieler> {
             return s1.getName().compareTo(s2.getName());
         }
     };
+
+    /**
+     * Vergleicht zwei Spieler anhand ihrer Startwuerfe.
+     */
+    public static final Comparator<Spieler>
+            START_ORDER = new Comparator<Spieler>(){
+                @Override
+                public int compare(Spieler s1, Spieler s2){
+                    return s2.getStartwurf() - s1.getStartwurf();
+                }
+            };
+
 }
