@@ -340,7 +340,7 @@ public class Datenbank {
      * @param kennung
      * @throws SQLException
      */
-    public void setAktiverSpieler(String kennung) throws SQLException {
+    public void insertAktiverSpieler(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
         try {
@@ -358,7 +358,7 @@ public class Datenbank {
      * @return
      * @throws SQLException
      */
-    public String getAktiverSpieler(int spielID) throws SQLException {
+    public String selectAktiverSpieler(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         String aktiverSpieler = null;
         ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= " +
@@ -446,7 +446,7 @@ public class Datenbank {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public Map getStatistik(String kennung) throws SQLException, IOException, ClassNotFoundException {
+    public Map selectStatistik(String kennung) throws SQLException, IOException, ClassNotFoundException {
         Statement stmt = verbindung.createStatement();
         Map<String, Integer> statistik = null;
         ResultSet r = stmt.executeQuery(
