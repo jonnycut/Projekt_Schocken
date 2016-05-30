@@ -211,7 +211,7 @@ public class SpielerPanel extends JPanel {
 
                 try {
                     Datenbank.getInstance().insertStatistik(spieler.getName(), spieler.getStatistik());
-                   // Datenbank.getInstance().getStatistik(spieler.getName());
+                    Datenbank.getInstance().selectStatistik(spieler.getName());
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (IOException e1) {

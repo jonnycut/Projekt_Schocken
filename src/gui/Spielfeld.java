@@ -118,12 +118,10 @@ public class Spielfeld extends JPanel {
 
     List<Spieler> spielerList = gui.getAlleSpieler();
 
-        System.out.println(spielerList + "von Flurry");
         for(Spieler s : spielerList){
             SpielerPanel x = new SpielerPanel(s);
             teilnehmer.add(x);
             jPUnten.add(x);
-            System.out.println("SpielerPanel: "+ s.getName());
         }
 
         updateView();
