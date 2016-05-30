@@ -57,10 +57,13 @@ public class SpielerPanel extends JPanel {
 
 
         this.auslage = new JPanel(new GridLayout(1,3));
+        auslage.setBackground(Color.BLACK);
+
         //Platzhalter in Auslage einfuegen
         for (int i = 0; i <3 ; i++) {
             JButton auslage1 = new JButton();
-            auslage1.setBackground(Color.WHITE);
+            auslage1.setBackground(Color.DARK_GRAY);
+            auslage1.setPreferredSize(new Dimension(100,100));
             auslage1.setBorder(new LineBorder(Color.BLACK, 1));
             auslage.add(auslage1);
         }
@@ -75,18 +78,20 @@ public class SpielerPanel extends JPanel {
 
         //Wuerfelansicht bauen
         this.wuerfelAnsicht = new JPanel(new GridLayout(1,3));
+        wuerfelAnsicht.setBackground(Color.BLACK);
+        wuerfelAnsicht.setBorder(new LineBorder(Color.BLACK,1));
 
         //WuerfelButtons mit dem entsprechenden Bild und Text versehen
         this.w1 = new JButton(spieler.getBecher().getWuerfel()[0].getGrafik());
-        w1.setBackground(Color.WHITE);
+        w1.setBackground(Color.LIGHT_GRAY);
         w1.setBorder(new LineBorder(Color.BLACK, 1));
         w1.setName("0");
         this.w2 = new JButton(spieler.getBecher().getWuerfel()[1].getGrafik());
-        w2.setBackground(Color.WHITE);
+        w2.setBackground(Color.LIGHT_GRAY);
         w2.setBorder(new LineBorder(Color.BLACK, 1));
         w2.setName("1");
         this.w3 = new JButton(spieler.getBecher().getWuerfel()[2].getGrafik());
-        w3.setBackground(Color.WHITE);
+        w3.setBackground(Color.LIGHT_GRAY);
         w3.setBorder(new LineBorder(Color.BLACK, 1));
         w3.setName("2");
 
@@ -106,8 +111,8 @@ public class SpielerPanel extends JPanel {
                 pufferBtn.removeActionListener(this);
 
                 JButton pufferBtn2 = new JButton();
-                pufferBtn2.setBackground(Color.DARK_GRAY);
-                pufferBtn2.setBorder(new LineBorder(Color.DARK_GRAY,1));
+                pufferBtn2.setBackground(Color.BLACK);
+                pufferBtn2.setBorder(new LineBorder(Color.BLACK,1));
                 wuerfelAnsicht.add(pufferBtn2, btnIndex);
                 wuerfelAnsicht.revalidate();
 
@@ -153,7 +158,6 @@ public class SpielerPanel extends JPanel {
         this.strafpunkte = new JPanel();
         strafpunkte.setLayout(new FlowLayout());
         strafpunkte.setBackground(Color.DARK_GRAY);
-        //strafpunkte.setBorder(new LineBorder(Color.BLACK, 1));
 
         JLabel jLStrafpunkteTitel = new JLabel("Strafpunkte:  ");
         jLStrafpunkteTitel.setForeground(Color.RED);
@@ -231,43 +235,49 @@ public class SpielerPanel extends JPanel {
         buttons.add(wuerfeln);
         buttons.add(fertig);
 
-        this.name = new JPanel();
+        this.name = new JPanel(new FlowLayout());
         name.setBackground(Color.DARK_GRAY);
-        name.setLayout(new BoxLayout(name, BoxLayout.Y_AXIS));
 
-        JPanel jPBox = new JPanel(new FlowLayout());
-        jPBox.setBackground(Color.DARK_GRAY);
         JLabel jLSpielerName = new JLabel(this.spieler.getName());
         jLSpielerName.setForeground(Color.WHITE);
 
-        jPBox.add(jLSpielerName);
-
-        name.add(jPBox);
+        name.add(jLSpielerName);
 
 
-        this.profilbild = new JPanel(new GridLayout(1,3));
+        this.profilbild = new JPanel();
+        profilbild.setLayout(new BoxLayout(profilbild, BoxLayout.Y_AXIS));
         profilbild.setBackground(Color.DARK_GRAY);
+
+        JPanel jPProfilbild = new JPanel(new FlowLayout());
         JLabel jLProfilbild = new JLabel(spieler.getProfilBild());
-        //jLProfilbild.setBorder(new LineBorder(Color.BLACK, 1));
-        profilbild.add(jPBox);
-        profilbild.add(jLProfilbild);
+        jPProfilbild.setBackground(Color.DARK_GRAY);
+        jPProfilbild.add(jLProfilbild);
+
+        profilbild.add(name);
+        profilbild.add(jPProfilbild);
         profilbild.add(new JLabel());
 
         JPanel jPTemp = new JPanel();
-        jPTemp.setPreferredSize(new Dimension(0,10));
+        jPTemp.setPreferredSize(new Dimension(0, 20));
         jPTemp.setBackground(Color.DARK_GRAY);
 
         JPanel jPTemp1 = new JPanel();
-        jPTemp1.setPreferredSize(new Dimension(0, 10));
+        jPTemp1.setPreferredSize(new Dimension(0, 20));
         jPTemp1.setBackground(Color.DARK_GRAY);
 
+        JPanel jPBox = new JPanel();
+        jPBox.setLayout(new BoxLayout(jPBox, BoxLayout.Y_AXIS));
+        jPBox.setBackground(Color.DARK_GRAY);
+        jPBox.setBorder(new LineBorder(Color.BLACK, 2));
+
+        jPBox.add(strafpunkte);
+        jPBox.add(jPTemp);
+        jPBox.add(profilbild);
+        jPBox.add(jPTemp1);
 
         add(auslage);
         add(wuerfel);
-        add(strafpunkte);
-        add(jPTemp);
-        add(profilbild);
-        add(jPTemp1);
+        add(jPBox);
         add(buttons);
 
 
