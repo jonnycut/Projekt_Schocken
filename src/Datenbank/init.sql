@@ -6,6 +6,7 @@ CREATE TABLE t_Spieler(
   Aktiv BOOLEAN DEFAULT FALSE ,
   Abbrüche INT DEFAULT 0,
   Strafpunkte INT DEFAULT 0,
+  Statistik BYTEA,
   Startwurf INT,
   CONSTRAINT PK_t_spieler PRIMARY KEY (Kennung)
 );

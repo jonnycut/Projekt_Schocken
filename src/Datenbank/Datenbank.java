@@ -12,10 +12,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -145,13 +148,21 @@ public class Datenbank {
      * @return liefert falls ein Eintrag dieser Kombination match ein true ansonsten false
      * @throws SQLException
      */
-    public boolean selectNutzerkennung(String kennung, String passwort) throws SQLException {
-
+    public boolean selectNutzerkennung(String kennung, String passwort) throws SQLException, UnknownHostException {
         Statement stmt = verbindung.createStatement();
+        String host = String.valueOf(InetAddress.getLocalHost());
+        String ip = host.substring(host.lastIndexOf("/") + 1);
+
+        try {
+            stmt.executeUpdate("Update t_spieler SET ip = '" + ip + "' WHERE kennung = '" + kennung + "'");
+            System.out.println("update IP");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         ResultSet r = stmt.executeQuery(
                 String.format("SELECT * FROM t_Spieler WHERE Kennung ='%s' AND Passwort ='%s'", kennung, passwort));
-
+        System.out.println("access");
         return r.next();
 
     }
@@ -398,24 +409,35 @@ public class Datenbank {
     }
 
 
-    //------------------------------------------------------------------------------------------------------------------
-    public String[] spieler(int spielID) throws SQLException {
+    /**Fügt die HashMap statistik der Spiler als Objekt der DB hinzu
+     *
+     * @param kennung
+     * @param statistik
+     * @throws SQLException
+     * @throws IOException
+     */
+    public void insertStatistik(String kennung, Map statistik) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
-        int anzahl=0;
-        int i = 0;
 
-        ResultSet rs = stmt.executeQuery("SELECT count(fk_t_spieler_kennung) FROM t_ist_client Where fk_t_spiel_spiel_id='" + spielID + "'");
-        if (rs.next()) {
-            anzahl = rs.getInt(1);
-        }
-        ResultSet r = stmt.executeQuery("SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id='" + spielID + "'");
-        String[] spieler = new String[anzahl];
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("statistik.ser"));
+        oos.writeObject(statistik);
+        oos.close();
+        System.out.println("Serialisierung der Statistik");
+
+        InputStream is = new FileInputStream("statistik.ser");
+        ResultSet r = stmt.executeQuery("SELECT kennung FROM t_spieler WHERE kennung='" + kennung + "'");
+
         if (r.next()) {
-            spieler[i] = r.getString(1);
-            i++;
+            PreparedStatement ps = verbindung.prepareStatement("UPDATE t_spieler" +
+                    " SET statistik= ?" +
+                    " WHERE kennung= '" + kennung + "'");
+            ps.setBinaryStream(1, is);
+            ps.executeUpdate();
+
         }
-        return spieler;
+
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     public Icon selectProfilBild(String text) throws SQLException, IOException {
         Statement stmt = verbindung.createStatement();
@@ -441,7 +463,6 @@ public class Datenbank {
      * @throws IOException  Because Fuck u more
      */
     public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
-
 
         BufferedImage image = new BufferedImage(
                 icon.getIconWidth(),
