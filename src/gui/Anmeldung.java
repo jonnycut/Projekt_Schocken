@@ -162,7 +162,7 @@ public class Anmeldung extends JPanel {
                 }
 
                 try {
-                    // JA derSpieler ist in der Datenbank
+                    // JA der Spieler ist in der Datenbank
                     if (Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         gui.updateSpielerListe(Datenbank.getInstance().selectSpieler(jTName.getText()));
@@ -338,11 +338,6 @@ public class Anmeldung extends JPanel {
                 }
             }.start();
         }
-
-    }
-
-
-    public void erstelleNetzwerk() {
 
     }
 
