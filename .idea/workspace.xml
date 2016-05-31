@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" afterPath="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Anmeldung.java" afterPath="$PROJECT_DIR$/src/gui/Anmeldung.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -27,18 +27,14 @@
       <file leaf-file-name="Datenbank.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="206" column="54" selection-start-line="206" selection-start-column="54" selection-end-line="206" selection-end-column="54" />
+            <state vertical-scroll-proportion="-6.413793">
+              <caret line="299" column="18" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="18" />
               <folding>
                 <element signature="docComment;method#selectNutzerkennung#0;class#Datenbank#0" expanded="false" />
                 <element signature="docComment;method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
                 <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
                 <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
                 <element signature="method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
                 <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
                 <element signature="method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
                 <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
@@ -62,9 +58,6 @@
                 <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
                 <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
                 <element signature="method#insertRunde#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
                 <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
                 <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
                 <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
@@ -128,8 +121,11 @@
         <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="117" column="0" selection-start-line="117" selection-start-column="2" selection-end-line="125" selection-end-column="7" />
-              <folding />
+              <caret line="119" column="5" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+              <folding>
+                <element signature="e#3129#3130#0" expanded="true" />
+                <element signature="e#3169#3170#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,16 +134,16 @@
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="19" selection-start-line="32" selection-start-column="16" selection-end-line="34" selection-end-column="40" />
+              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Netzwerk.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Netzwerk.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69982845">
+            <state vertical-scroll-proportion="0.0">
               <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -156,12 +152,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Anmeldung.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Anmeldung.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="336" column="0" selection-start-line="336" selection-start-column="2" selection-end-line="343" selection-end-column="7" />
-              <folding />
+            <state vertical-scroll-proportion="1.0497427">
+              <caret line="348" column="4" selection-start-line="348" selection-start-column="4" selection-end-line="348" selection-end-column="4" />
+              <folding>
+                <element signature="e#12480#12481#0" expanded="true" />
+                <element signature="e#12559#12560#0" expanded="true" />
+                <element signature="e#12718#12719#0" expanded="true" />
+                <element signature="e#12797#12798#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -170,7 +171,17 @@
         <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="init.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Datenbank/init.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -211,11 +222,11 @@
         <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
         <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Programm.java" />
-        <option value="$PROJECT_DIR$/src/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Datenbank/Datenbank.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/gui/GUI.java" />
+        <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
       </list>
     </option>
   </component>
@@ -663,7 +674,7 @@
       <workItem from="1464637366428" duration="1756000" />
       <workItem from="1464672912617" duration="5343000" />
       <workItem from="1464682552530" duration="14000" />
-      <workItem from="1464682908559" duration="4321000" />
+      <workItem from="1464682908559" duration="8810000" />
     </task>
     <task id="LOCAL-00001" summary="Flurry: DB Erstellen umgeschrieben und Spielfeld angepasst">
       <created>1464678524417</created>
@@ -695,11 +706,23 @@
       <option name="project" value="LOCAL" />
       <updated>1464687278205</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art">
+      <created>1464687373052</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1464687373052</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art">
+      <created>1464691428998</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1464691428998</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12294000" />
+    <option name="totallyTimeSpent" value="16783000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -758,10 +781,6 @@
             <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
@@ -785,9 +804,6 @@
             <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertRunde#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
@@ -850,7 +866,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="104" column="44" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
-          <folding />
+          <folding>
+            <element signature="e#3129#3130#0" expanded="true" />
+            <element signature="e#3169#3170#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -896,10 +915,6 @@
             <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
@@ -923,9 +938,6 @@
             <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertRunde#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
@@ -988,7 +1000,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="104" column="44" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
-          <folding />
+          <folding>
+            <element signature="e#3129#3130#0" expanded="true" />
+            <element signature="e#3169#3170#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1034,10 +1049,6 @@
             <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
@@ -1061,9 +1072,6 @@
             <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertRunde#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
@@ -1156,10 +1164,6 @@
             <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
@@ -1183,9 +1187,6 @@
             <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertRunde#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
@@ -1267,13 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Datenbank/init.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9862543">
-          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1298,14 +1292,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1314,44 +1300,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="2" selection-end-line="125" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="336" column="0" selection-start-line="336" selection-start-column="2" selection-end-line="343" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="19" selection-start-line="32" selection-start-column="16" selection-end-line="34" selection-end-column="40" />
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="5" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+          <folding>
+            <element signature="e#3129#3130#0" expanded="true" />
+            <element signature="e#3169#3170#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="206" column="54" selection-start-line="206" selection-start-column="54" selection-end-line="206" selection-end-column="54" />
+        <state vertical-scroll-proportion="-6.413793">
+          <caret line="299" column="18" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="18" />
           <folding>
             <element signature="docComment;method#selectNutzerkennung#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
             <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
@@ -1375,9 +1352,6 @@
             <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertRunde#0;class#Datenbank#0" expanded="false" />
-            <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-            <element signature="method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
             <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
             <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
             <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
@@ -1438,10 +1412,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69982845">
+        <state vertical-scroll-proportion="0.0">
           <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Datenbank/init.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0497427">
+          <caret line="348" column="4" selection-start-line="348" selection-start-column="4" selection-end-line="348" selection-end-column="4" />
+          <folding>
+            <element signature="e#12480#12481#0" expanded="true" />
+            <element signature="e#12559#12560#0" expanded="true" />
+            <element signature="e#12718#12719#0" expanded="true" />
+            <element signature="e#12797#12798#0" expanded="true" />
           </folding>
         </state>
       </provider>

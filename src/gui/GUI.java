@@ -28,6 +28,7 @@ public class GUI extends JFrame {
     private Administration administration;
     //private Statistik statistik = new Statistik();
     private Spielfeld spielfeld;
+
     private Netzwerk netzwerk;
 
 
@@ -114,16 +115,9 @@ public class GUI extends JFrame {
         }
     }
 
-
-//    public void setServer(Server server) {
-//
-//        this.server = server;
-//    }
-//
-//    public Server getServer() {
-//
-//        return server;
-//    }
+    public void setNetzwerk(Netzwerk netzwerk) {
+        this.netzwerk = netzwerk;
+    }
 
     public Spielfeld getSpielfeld() {
 
