@@ -3,6 +3,7 @@ package gui;
 import Datenbank.Datenbank;
 import spiel.Haelfte;
 import spiel.Spieler;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by Flurry on 25.05.2016.
  */
-public class Spielfeld extends JPanel  {
+public class Spielfeld extends JPanel {
 
     private GUI gui;
     private Infobereich infobereich;
@@ -33,7 +34,7 @@ public class Spielfeld extends JPanel  {
     private JLabel jLStock;
 
 
-    public Spielfeld(GUI gui){
+    public Spielfeld(GUI gui) {
         super();
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
@@ -57,7 +58,7 @@ public class Spielfeld extends JPanel  {
                 setSpielerPanel();
 
                 try {
-                    Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(),2);
+                    Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
@@ -69,10 +70,15 @@ public class Spielfeld extends JPanel  {
         jBStart.addActionListener(startButton);
 
         try {
-            InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
-            String ip = ia[1].getHostAddress();
-            if(Datenbank.getInstance().selectServerIP().equals(ip)){
+            if (Datenbank.getInstance().selectServerIP() == null) {
                 jPOben.add(jBStart);
+            } else {
+                InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+
+                String ip = ia[1].getHostAddress();
+                if (Datenbank.getInstance().selectServerIP().equals(ip)) {
+                    jPOben.add(jBStart);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +127,7 @@ public class Spielfeld extends JPanel  {
         add(jPUnten, BorderLayout.SOUTH);
     }
 
-    private void updateView(){
+    private void updateView() {
 
         add(jPOben, BorderLayout.NORTH);
         add(jPMitte, BorderLayout.CENTER);
@@ -148,12 +154,12 @@ public class Spielfeld extends JPanel  {
         updateView();
     }
 
-    public void setSpielerPanel(){
+    public void setSpielerPanel() {
 
-    List<Spieler> spielerList = gui.getAlleSpieler();
+        List<Spieler> spielerList = gui.getAlleSpieler();
 
-        for(Spieler s : spielerList){
-            SpielerPanel x = new SpielerPanel(s,haelfte.getRunde(),this);
+        for (Spieler s : spielerList) {
+            SpielerPanel x = new SpielerPanel(s, haelfte.getRunde(), this);
             teilnehmer.add(x);
             jPUnten.add(x);
         }
@@ -162,14 +168,14 @@ public class Spielfeld extends JPanel  {
         updateTeilnehmerListe();
     }
 
-    public void updateTeilnehmerListe(){
+    public void updateTeilnehmerListe() {
         try {
 
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
 
 
-            for (String s : kennungListe){
-                SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s),haelfte.getRunde(),this);
+            for (String s : kennungListe) {
+                SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), haelfte.getRunde(), this);
                 teilnehmer.add(tmpPanel);
                 jPUnten.add(tmpPanel);
             }
@@ -186,7 +192,7 @@ public class Spielfeld extends JPanel  {
 
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
-        for(SpielerPanel s : teilnehmer){
+        for (SpielerPanel s : teilnehmer) {
             spielerListeTmp.add(s.getSpieler());
 
         }
@@ -202,19 +208,17 @@ public class Spielfeld extends JPanel  {
      * und Runde.Auswerten() wertet die Bilder aus und verteilt die Chips.
      * </pre>
      *
-     *
      * @see spiel.Runde
-     *
      */
-    public void pruefeFertig(){
+    public void pruefeFertig() {
         int counter = 0;
-        for(SpielerPanel s: teilnehmer){
-            if(s.getSpieler().getFertig())
+        for (SpielerPanel s : teilnehmer) {
+            if (s.getSpieler().getFertig())
                 counter++;
         }
 
-        if(counter == teilnehmer.size()){
-            for(SpielerPanel s : teilnehmer)
+        if (counter == teilnehmer.size()) {
+            for (SpielerPanel s : teilnehmer)
                 s.changeView("wuerfel");
 
             haelfte.getRunde().auswertenBilder();
