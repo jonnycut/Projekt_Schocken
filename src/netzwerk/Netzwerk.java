@@ -8,19 +8,28 @@ import java.net.UnknownHostException;
 
 /**
  * Created by dfleuren on 31.05.2016.
+ * Diese Klasse stellt die Netzwerkkommunikation sicher.
+ * Erzeugt entwerder ein Client oder einen Server mit Client.
  */
 public class Netzwerk {
     private GUI gui;
 
-
+    /**
+     * Erzeugt einen Client oder einen Server mit Client für die Netzwerkkommunikation.
+     * @param ipServer String[] beinhaltet diese Array IP-Addresse:
+     *                 Wird nur ein Client erzeugt.
+     *                 Beinhaltet das Array keine IP-Addresse wird ein Server und ein Client erzeugt.
+     * @param gui GUI GUI ist die aktuelle GUI.
+     */
     public Netzwerk(String[] ipServer, GUI gui) {
         this.gui = gui;
 
+        // JA die IP vom Server steht im Array. Nur Client erzeugen.
         if (!ipServer[0].equals("")) {
             new Client(ipServer[0],this.gui);
-
-
-        } else {
+        }
+        // NEIN es steht keine IP vom Server im Array. Server und Client erzeugen.
+        else {
             new Server();
             try {
                 Thread.sleep(1000);
@@ -29,15 +38,15 @@ public class Netzwerk {
             }
             try {
                 System.out.println("Verbinde zum Server: "+ipServer);
+
+                // Auslesen der Lokalen IP-Addresse vom Netzwerkadapter, um dem Client die Server IP zu übergeben.
                 InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
                 String ip = ia[1].getHostAddress();
                 new Client(ip,this.gui);
-
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }
