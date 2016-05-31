@@ -33,8 +33,10 @@ public class Client {
                     try {
                         String zeile;
                         while ((zeile = reader.readLine()) != null){
-                            if(zeile == "#")
+                            if(zeile.contains("#")){
                                 gui.getSpielfeld().netzwerkUpdate();
+                            }
+
                             else
                                 System.out.println(zeile);
                         }
