@@ -106,6 +106,7 @@ public class GUI extends JFrame {
                 break;
             case 6:
                 spielfeld.updateTeilnehmerListe();
+                sendeUpdateSignal();
                 //spielfeld.setSpielerPanel(); --> Grund fuer die doppelte Anzeige des Clients
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
@@ -163,6 +164,10 @@ public class GUI extends JFrame {
 
     public void setIch(String ich) {
         this.ich = ich;
+    }
+
+    public void sendeUpdateSignal(){
+        netzwerk.getClient().sendeUpdate();
     }
 
 }

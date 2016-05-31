@@ -10,6 +10,7 @@ import java.net.Socket;
  */
 public class Client {
     private GUI gui;
+    private String zeile;
 
 
     public Client(String ip,GUI gui) {
@@ -49,7 +50,7 @@ public class Client {
 
             System.out.println("Verbindung zum Server eingerichtet!");
 
-            String zeile;
+            //String zeile;
             while ((zeile = br.readLine()) != null){
                 writer.write(zeile);
                 writer.newLine();
@@ -60,5 +61,9 @@ public class Client {
                 (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendeUpdate(){
+        zeile="#";
     }
 }

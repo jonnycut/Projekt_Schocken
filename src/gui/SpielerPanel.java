@@ -227,7 +227,7 @@ public class SpielerPanel extends JPanel {
 
                 spielfeld.pruefeFertig();
 
-                spielfeld.sendUpdateSignal();
+
 
             }
         });
