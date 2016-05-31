@@ -52,6 +52,7 @@ public class Spielfeld extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
+                setSpielerPanel();
             }
         };
 

@@ -42,9 +42,6 @@ public class GUI extends JFrame {
         registrierung = new Registrierung(this);
         administration = new Administration(this);
 
-       // netzwerk = new Netzwerk();
-
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

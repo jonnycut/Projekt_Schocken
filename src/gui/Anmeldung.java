@@ -27,9 +27,10 @@ public class Anmeldung extends JPanel {
 
     /**
      * Der Konstruktor erzeugt ein neues JPanel, als Anmeldebereich, um sich am Spiel an zu melden oder sich zu registrieren.
+     *
      * @param gui GUI ist die aktuelle GUI.
      */
-    public Anmeldung(GUI gui){
+    public Anmeldung(GUI gui) {
         super();
         this.gui = gui;
 
@@ -256,12 +257,11 @@ public class Anmeldung extends JPanel {
 
                 if (result == JOptionPane.OK_OPTION) {
                     String pwdEingabe = password.getText();
-                    if(pwdEingabe.equals(richtigesPWD)){
+                    if (pwdEingabe.equals(richtigesPWD)) {
                         gui.setZustand(5);
                         gui.updateView(e);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Passwort falsch", "fehler",JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Passwort falsch", "fehler", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -321,46 +321,34 @@ public class Anmeldung extends JPanel {
         gui.setSpielfeld(new Spielfeld(gui));
     }
 
-    public void pruefeSpiel() throws SQLException, ClassNotFoundException{
+    public void pruefeSpiel() throws SQLException, ClassNotFoundException {
 
         Datenbank.getInstance().insertTeilnehmer(jTName.getText());
         int spielID = Datenbank.getInstance().selectOffenesSpiel();
         String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
-        if(spielleiter.equals(jTName.getText())){
-            String[] serverIP = {};
+        String[] serverIP = {};
+        if (spielleiter.equals(jTName.getText())) {
+            new Thread() {
+                public void run() {
+                    gui.setNetzwerk(new Netzwerk(serverIP));
+                }
+            }.start();
+        } else {
+            serverIP[0] = Datenbank.getInstance().selectServerIP();
 
             new Thread() {
-                public  void run() {
+                public void run() {
                     gui.setNetzwerk(new Netzwerk(serverIP));
                 }
             }.start();
         }
-        else{
-            String[] serverIP = {spielleiter};
-
-            new Thread() {
-                public  void run() {
-                    gui.setNetzwerk(new Netzwerk(serverIP));
-                }
-            }.start();
-        }
-
-        }
-
-
-    public void erstelleNetzwerk(){
 
     }
 
 
-//    public void erstelleServer() {
-//        if (gui.getServer() == null) {
-//            gui.setServer(new Server());
-//            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
-//        }else{
-//            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
-//        }
-//    }
+    public void erstelleNetzwerk() {
+
+    }
 
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
 
