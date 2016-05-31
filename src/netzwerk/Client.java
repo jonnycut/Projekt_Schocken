@@ -55,7 +55,7 @@ public class Client {
                                 System.out.println(zeile);
                         }
                     } catch (IOException e) {
-                        System.out.println("Verbindung zum Server verloren!");;
+                        System.out.println("Verbindung zum Server verloren!");
                         System.exit(0);
                     }
                 }
@@ -81,6 +81,8 @@ public class Client {
 
 
     public void sendeUpdate(){
+
+        //ToDo: #[STATUSAENDERUNG] uebernehmen und verarbeiten -> Update InfoBereich
         try {
             writer2.write("#");
             writer2.newLine();
