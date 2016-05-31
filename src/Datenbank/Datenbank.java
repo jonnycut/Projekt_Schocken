@@ -333,6 +333,7 @@ public class Datenbank {
                     "ON t_ist_client.fk_t_spiel_spiel_id=" + spielID + "))");
 
             stmt.executeUpdate("INSERT INTO t_hälfte (fk_t_spiel_spiel_id,art) VALUES (" + spielID + "," + art + ")");
+            insertersteRunde(spielID, art);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -550,7 +551,7 @@ public class Datenbank {
         String nächsterbeginner = insertnaechsterBeginner(spielID);
         int haelfte = selectAktuelleHaelfte(spielID);
 
-        if (aktuelleRunde == 0 && selectAktuelleHaelfte(spielID) == 0) {
+        if (aktuelleRunde == 0) {
             //1.Runde erstellen
             try {
                 stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
@@ -567,7 +568,18 @@ public class Datenbank {
             }
         }
     }
+    public void insertersteRunde(int spielID,int haelfte ) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int neueRunde = selectAktuelleRunde(spielID) + 1;
+        String ersterBeginner = selectersterBeginner(spielID);
 
+         //1.Runde erstellen
+            try {
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
     /**
      * Diese Methode sucht ein noch offenes Spiel es kann immer nur ein offenes Spiel geben
      *
