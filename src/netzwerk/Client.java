@@ -13,6 +13,7 @@ public class Client {
 
     private GUI gui; // Die aktuelle GUI
     private String zeile; // Die Nachricht/Steuersignal für den Chat
+    private BufferedWriter writer2;
 
 
     /**
@@ -21,6 +22,8 @@ public class Client {
      */
     public Client(String ip,GUI gui) {
         this.gui=gui;
+
+
 
         // Baut die Verbindung zum Server auf.
         this.gui.setClient(this);
@@ -60,6 +63,8 @@ public class Client {
 
             System.out.println("Verbindung zum Server eingerichtet!");
 
+            this.writer2 = writer;
+
             // Erzeugt eine neue Nachricht und sendet diese zum Server.
             //String zeile;
             while ((zeile = br.readLine()) != null){
@@ -76,7 +81,14 @@ public class Client {
 
 
     public void sendeUpdate(){
-        zeile="#";
-        System.out.println("Sende UpdateSignal");
+        try {
+            writer2.write("#");
+            writer2.newLine();
+            writer2.flush();
+            System.out.println("UpdateSignal gesendet");
+        } catch (IOException e) {
+            System.out.println("UpdateSignal nicht moeglich");
+            e.printStackTrace();
+        }
     }
 }
