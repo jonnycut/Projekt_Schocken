@@ -14,9 +14,15 @@ import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
+ * Diese Klasse ist für den Administrator um Passwörter zu ändern.
  */
 public class Administration extends JPanel{
 
+
+    /**
+     * Der Konstruktor erzeugt ein neues JPanel, als Administrationsbereich, um Passwörter bei Spielern zu ändern.
+     * @param gui GUI ist die aktuelle GUI.
+     */
     public Administration(GUI gui) {
         super();
 
@@ -91,6 +97,7 @@ public class Administration extends JPanel{
         JPanel untenLinks = new JPanel(new BorderLayout());
         untenLinks.setBackground(Color.DARK_GRAY);
 
+        // liest das neue Passwort aus und führt die Methode passwortReset() aus.
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -104,6 +111,7 @@ public class Administration extends JPanel{
 
         JButton jBZurueck = new JButton("ZURÜCK");
 
+        // schaltet die Ansicht zurück auf den Anmeldebildschirm
         ActionListener zurueck = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(1);
@@ -175,7 +183,11 @@ public class Administration extends JPanel{
 
     //------------------------------------------METHODEN---------------------------------------------------------------
 
-
+    /**
+     * Setzt das Passwort eines Spielers zurück.
+     * @param name String ist der Name vom Spieler, bei dem das Passwort geändert wird.
+     * @param passwort String ist das neue Passwort.
+     */
     public void passwortReset(String name, String passwort){
         try {
             if(Datenbank.getInstance().selectNutzerKennungReg(name)) {
@@ -194,8 +206,13 @@ public class Administration extends JPanel{
     }
 
 
-    //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
+    //----------------------------------------INNEREKLASSEN-----------------------------------------------------------
 
+
+    /**
+     * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
+     * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     */
     public class JTextFieldLimit extends PlainDocument {
         private int limit;
 
@@ -205,7 +222,8 @@ public class Administration extends JPanel{
         }
 
         public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-            if (str == null) return;
+            if (str == null)
+                return;
 
             if ((getLength() + str.length()) <= limit) {
                 super.insertString(offset, str, attr);

@@ -23,7 +23,7 @@ import java.util.*;
 public class Datenbank {
     private static Datenbank datenbank;
     private static Connection verbindung;
-    private static String ip = "localhost";
+    private static String ip = "";//"localhost";
 
     public Datenbank() {
 
@@ -64,6 +64,7 @@ public class Datenbank {
 
             if (eingabe == JOptionPane.OK_OPTION) {
                 ip = jTipAdd.getText();
+                System.out.println(ip);
                 try {
                     getInstance();
                 } catch (ClassNotFoundException e) {
@@ -71,7 +72,10 @@ public class Datenbank {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }
 
+            if(eingabe == JOptionPane.CANCEL_OPTION){
+                System.exit(0);
             }
         }
 
