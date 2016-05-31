@@ -328,14 +328,25 @@ public class Anmeldung extends JPanel {
         String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
         if(spielleiter.equals(jTName.getText())){
             String[] serverIP = {};
-            gui.setNetzwerk(new Netzwerk(serverIP));
+
+            new Thread() {
+                public  void run() {
+                    gui.setNetzwerk(new Netzwerk(serverIP));
+                }
+            }.start();
         }
         else{
             String[] serverIP = {spielleiter};
-            gui.setNetzwerk(new Netzwerk(serverIP));
+
+            new Thread() {
+                public  void run() {
+                    gui.setNetzwerk(new Netzwerk(serverIP));
+                }
+            }.start();
+        }
 
         }
-    }
+
 
     public void erstelleNetzwerk(){
 
