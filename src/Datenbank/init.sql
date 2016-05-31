@@ -53,9 +53,7 @@ CREATE TABLE t_Runde(
   Gewinner VARCHAR(30),
 
   CONSTRAINT PK_t_Runde PRIMARY KEY (RundenNr,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art),
-  --CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY (fk_t_Spiel_Spiel_ID)REFERENCES t_Spiel(Spiel_ID) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY (fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art)REFERENCES t_hälfte(fk_t_spiel_spiel_ID,Art) ON UPDATE CASCADE ON DELETE CASCADE
-  --CONSTRAINT FK_t_Hälfte_Art FOREIGN KEY (fk_t_Hälfte_Art)REFERENCES t_Hälfte(Art) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE t_Durchgang(
@@ -63,9 +61,7 @@ CREATE TABLE t_Durchgang(
   fk_t_Spiel_Spiel_ID INT,
   fk_t_Hälfte_Art INT,
   fk_t_Runde_RundenNr INT,
-  Würfel_1 INT,
-  Würfel_2 INT,
-  Würfel_3 INT,
+  Würfel BYTEA,
   Zähler INT DEFAULT 1,
 
   CONSTRAINT PK_t_Durchgang PRIMARY KEY (fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr)

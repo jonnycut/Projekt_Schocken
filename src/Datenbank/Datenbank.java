@@ -584,6 +584,12 @@ public class Datenbank {
         return offenesSpiel;
     }
 
+    /**
+     * Liefert die Spielleiterkennung eines Spiels
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
     public String selectSpielleiterKennung(int spielID) throws SQLException {
         String spielleiter=null;
         Statement stmt =verbindung.createStatement();
@@ -595,12 +601,33 @@ public class Datenbank {
         return spielleiter;
     }
 
+    /**
+     * Methode zum aktualisieren des Spielstatus
+     * @param spielID--> des Spiels welches akzualisiert werden soll
+     * @param status-->  2 für es wird gespielt; 3 für Spiel beendet
+     * @throws SQLException
+     */
     public void updateSpielstatus(int spielID,int status) throws SQLException {
         Statement stmt =verbindung.createStatement();
 
         stmt.executeUpdate("UPDATE t_spiel SET status="+ status +" WHERE spiel_id="+spielID);
     }
 
+    /**
+     * prüft ob sich bereits 2 Spieler im Spiel befinden
+     * @return
+     * @throws SQLException
+     */
+    public boolean selectStarteSpiel() throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        boolean check =false;
+        ResultSet r = stmt.executeQuery("SELECT count(*) from t_ist_client WHERE fk_t_spiel_spiel_id="+selectOffenesSpiel());
+
+        if(r.next()){
+            if(r.getInt(1)<1){check= true;}
+        }
+        return check;
+    }
 
     //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
@@ -688,6 +715,7 @@ public class Datenbank {
         }
 
     }
+
 
 
     /**
@@ -869,9 +897,6 @@ public class Datenbank {
         }
         return true;
     }
-
-
-
 
     /**
      * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.
