@@ -55,7 +55,7 @@ public class SpielerPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new LineBorder(Color.BLACK, 2));
         setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(180, 535));
+        setPreferredSize(new Dimension(180, 530));
 
         this.runde = runde;
         this.spieler = spieler;
