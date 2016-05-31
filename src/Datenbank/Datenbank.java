@@ -279,6 +279,20 @@ public class Datenbank {
 
                 try {
                     stmt.executeUpdate(String.format("INSERT INTO t_ist_client  VALUES ('%s','%d')", teilnehmer, spielID));
+                   // StringBufferInputStream s=new StringBufferInputStream("#");
+                    byte[] bytes = new byte[0];
+                    try {
+                        bytes = new String("#").getBytes("UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    ByteArrayInputStream aIS = new ByteArrayInputStream(bytes);
+                    System.out.println(aIS);
+                    System.setIn(aIS);
+
+
+
+
 
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -639,7 +653,7 @@ public class Datenbank {
         return check;
     }
 
-
+//    public void updateStrafpunkte
 
     //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
