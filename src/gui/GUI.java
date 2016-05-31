@@ -55,8 +55,6 @@ public class GUI extends JFrame {
 
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-
                 updateView(e);
             }
         };
@@ -160,6 +158,7 @@ public class GUI extends JFrame {
     }
 
     public String getIch() {
+
         return ich;
     }
 

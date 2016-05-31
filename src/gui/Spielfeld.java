@@ -58,6 +58,10 @@ public class Spielfeld extends JPanel {
 
                 jPOben.setVisible(false);
                 updateTeilnehmerListe();
+                gui.sendeUpdateSignal();
+                infobereich.setInfos("Spiel wurde gestartet");
+                updateInfo(infobereich);
+
 
                 try {
                     Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);

@@ -80,7 +80,8 @@ public class Infobereich extends JPanel {
         int spielID = 0;
         try {
             spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
-            JLabel spielleiter = new JLabel("Spielleiter ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
+            System.out.println(spielID);
+            JLabel spielleiter = new JLabel("Spielleiter:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
             spielleiter.setForeground(Color.RED);
             spielleiter.setBackground(Color.BLACK);
             jPInfo.add(spielleiter,BorderLayout.SOUTH);

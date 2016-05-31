@@ -167,7 +167,8 @@ public class Anmeldung extends JPanel {
                         gui.updateSpielerListe(Datenbank.getInstance().selectSpieler(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
-                        gui.setIch(jTName.getName());
+                        gui.setIch(jTName.getText());
+                        System.out.println("Flurry:  " + gui.getIch());
                         pruefeSpiel();
                     } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -310,6 +311,7 @@ public class Anmeldung extends JPanel {
 
 
     public void starteSpiel() {
+
         gui.setSpielfeld(new Spielfeld(gui));
     }
 
