@@ -5,6 +5,7 @@ import javax.swing.*;
 
 /**
  * Created by dfleuren on 23.05.2016.
+ * Diese Klasse hält alle Grafiken für das gesamte Spiel vor.
  */
 public class Grafik {
 
@@ -43,7 +44,7 @@ public class Grafik {
     public static final Icon AVATAR_YODA = new ImageIcon(Grafik.class.getResource("Avatar_YODA.png"));
 
 
-    //------------------------------------------------W�RFEL----------------------------------------------------------
+    //------------------------------------------------WÜRFEL----------------------------------------------------------
 
     public static final Icon WUERFEL_1 = new ImageIcon(Grafik.class.getResource("Wuerfel_1.png"));
 
