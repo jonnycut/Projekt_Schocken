@@ -4,7 +4,7 @@ package Datenbank;
  * Created by ehampel on 23.05.2016.
  */
 
-import com.sun.xml.internal.bind.v2.TODO;
+
 import spiel.Spieler;
 
 import javax.imageio.ImageIO;
@@ -17,7 +17,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.*;
 import java.util.*;
-import java.util.List;
+
 
 
 public class Datenbank {
