@@ -24,11 +24,11 @@ public class Netzwerk {
     public Netzwerk(String[] ipServer, GUI gui) {
         this.gui = gui;
 
-        // JA die IP vom Server steht im Array. Nur Client erzeugen.
+        // JA: Die IP vom Server steht im Array. Nur Client erzeugen.
         if (!ipServer[0].equals("")) {
             new Client(ipServer[0],this.gui);
         }
-        // NEIN es steht keine IP vom Server im Array. Server und Client erzeugen.
+        // NEIN: Es steht keine IP vom Server im Array. Server und Client erzeugen.
         else {
             new Server();
             try {
