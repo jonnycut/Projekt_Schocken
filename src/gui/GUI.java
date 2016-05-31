@@ -20,12 +20,11 @@ public class GUI extends JFrame {
 
     private int zustand = 1;
     private List<Spieler> spieler = new ArrayList<>();
-    private Spielfeld spielfeld;
-    private Infobereich infobereich;
     private Anmeldung anmeldung;
     private Registrierung registrierung;
     private Administration administration;
     //private Statistik statistik = new Statistik();
+    private Spielfeld spielfeld;
     private JPanel jp = new JPanel(new CardLayout());
     private Client client;
     private Server server;
@@ -36,7 +35,6 @@ public class GUI extends JFrame {
         super("Schocken, das Würfelspiel für zwischendurch!");
 
         spielfeld = new Spielfeld(this);
-        infobereich = new Infobereich(this);
         anmeldung = new Anmeldung(this);
         registrierung = new Registrierung(this);
         administration = new Administration(this);
@@ -104,11 +102,7 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
                 break;
             case 6:
-                infobereich.setInfos("Herzlich Willkommen beim SCHOCKEN");
-                //spielfeld.updateTeilnehmerListe();
                 spielfeld.setSpielerPanel();
-                spielfeld.updateInfo(infobereich);
-                spielfeld.updateStock();
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
@@ -176,9 +170,4 @@ public class GUI extends JFrame {
         this.zustand = zustand;
     }
 
-
-    public Infobereich getInfobereich() {
-
-        return infobereich;
-    }
 }

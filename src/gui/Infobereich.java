@@ -10,17 +10,17 @@ import java.awt.*;
  */
 public class Infobereich extends JPanel {
 
-    private GUI gui;
     private Spielfeld spielfeld;
     private JPanel jPInfo;
     private JLabel info;
 
-    public Infobereich(GUI gui){
+    public Infobereich(Spielfeld spielfeld){
         super();
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 100));
+        setPreferredSize(new Dimension(810, 150));
         setBackground(Color.BLACK);
-        this.gui = gui;
+
+        this.spielfeld = spielfeld;
 
         jPInfo = new JPanel(new BorderLayout());
         jPInfo.setBackground(Color.BLACK);
@@ -30,9 +30,10 @@ public class Infobereich extends JPanel {
         info.setBackground(Color.BLACK);
 
         jPInfo.add(info, BorderLayout.NORTH);
+
         JPanel temp = new JPanel();
         temp.setBackground(Color.BLACK);
-        temp.setPreferredSize(new Dimension(800, 100));
+        temp.setPreferredSize(new Dimension(810, 50));
         jPInfo.add(temp,BorderLayout.CENTER);
 
         add(jPInfo);
@@ -42,7 +43,10 @@ public class Infobereich extends JPanel {
     public void setInfos(String infos){
 
         info.setText(infos);
-        jPInfo.add(info,BorderLayout.NORTH);
+        JPanel jPCenter = new JPanel(new FlowLayout());
+        jPCenter.setBackground(Color.BLACK);
+        jPCenter.add(info);
+        jPInfo.add(jPCenter,BorderLayout.NORTH);
 
         istSpielleiter();
 
@@ -50,7 +54,7 @@ public class Infobereich extends JPanel {
     }
 
     public void istSpielleiter(){
-        String name = gui.getAlleSpieler().get(0).getName();
+       // String name = spielfeld.getTeilnehmer().get(0).getName();
         if(/*Er ist Spielleiter*/ true){
             JLabel spielleiter = new JLabel("Sie sind Spielleiter");
             spielleiter.setForeground(Color.RED);

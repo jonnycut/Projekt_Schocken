@@ -19,6 +19,7 @@ import java.util.List;
 public class Spielfeld extends JPanel {
 
     private GUI gui;
+    private Infobereich infobereich;
     private Haelfte haelfte;
     private List<SpielerPanel> teilnehmer;
 
@@ -36,12 +37,32 @@ public class Spielfeld extends JPanel {
         setBackground(Color.BLACK);
 
         this.gui = gui;
+        infobereich = new Infobereich(this);
         haelfte = new Haelfte();
         teilnehmer = new ArrayList<>();
 
         jPOben = new JPanel(new FlowLayout());
-        jPOben.setPreferredSize(new Dimension(1020, 150));
+        //jPOben.setPreferredSize(new Dimension(1024, 50));
         jPOben.setBackground(Color.BLACK);
+        jPOben.setBorder(new LineBorder(Color.DARK_GRAY, 2));
+        JButton jBStart = new JButton("Starte Spiel");
+        jBStart.setEnabled(true);
+
+        ActionListener startButton = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                jPOben.setVisible(false);
+            }
+        };
+
+        jBStart.addActionListener(startButton);
+
+        jPOben.add(jBStart);
+
+        jPMitte = new JPanel(new FlowLayout());
+        jPMitte.setPreferredSize(new Dimension(1020, 150));
+        jPMitte.setBackground(Color.DARK_GRAY);
+
 
         jPStock = new JPanel();
         jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
@@ -54,60 +75,51 @@ public class Spielfeld extends JPanel {
         jPText.add(jLText);
         jPStock.add(jPText);
 
-
         jLStock = new JLabel("13");
         jLStock.setFont(new Font("Arial", Font.BOLD, 50));
         jLStock.setForeground(Color.WHITE);
         jPStock.add(jLStock);
 
-        jPOben.add(jPStock);
-
-        jPMitte = new JPanel(new FlowLayout());
-        jPMitte.setPreferredSize(new Dimension(1024,50));
-        jPMitte.setBackground(Color.BLACK);
-        jPMitte.setBorder(new LineBorder(Color.DARK_GRAY, 2));
-        JButton jBStart = new JButton("Starte Spiel");
-        jBStart.setEnabled(true);
-
-        ActionListener startButton = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                jPMitte.setVisible(false);
-            }
-        };
-
-        jBStart.addActionListener(startButton);
-
-        jPMitte.add(jBStart);
-
+        jPMitte.add(jPStock);
 
 
         jPUnten = new JPanel(new FlowLayout());
         jPUnten.setPreferredSize(new Dimension(1024, 535));
         jPUnten.setBackground(Color.DARK_GRAY);
+        jPUnten.setBorder(BorderFactory.createMatteBorder(8, 0, 0, 0, Color.BLACK));
 
-
+        infobereich.setInfos("Herzlich Willkommen beim SCHOCKEN");
+        updateInfo(infobereich);
+        updateStock();
 
         add(jPOben, BorderLayout.NORTH);
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
     }
 
+    private void updateView(){
 
+        add(jPOben, BorderLayout.NORTH);
+        add(jPMitte, BorderLayout.CENTER);
+        add(jPUnten, BorderLayout.SOUTH);
+    }
 
     public void updateStock() {
 
         jLStock.setText("" + haelfte.getStock().getStrafpunkte());
-        jPStock.add(jLStock);
-        jPOben.add(jPStock);
+        JPanel jPCenter = new JPanel(new FlowLayout());
+        jPCenter.setBackground(Color.DARK_GRAY);
+        jPCenter.add(jLStock);
+        jPStock.add(jPCenter);
+        jPMitte.add(jPStock);
 
         updateView();
     }
 
     public void updateInfo(JPanel infobereich) {
 
-        jPOben.add(infobereich);
-        jPOben.add(jPStock);
+        jPMitte.add(infobereich);
+        jPMitte.add(jPStock);
 
         updateView();
     }
@@ -157,12 +169,6 @@ public class Spielfeld extends JPanel {
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
     }
 
-    private void updateView(){
-
-        add(jPOben, BorderLayout.NORTH);
-        add(jPMitte, BorderLayout.CENTER);
-        add(jPUnten, BorderLayout.SOUTH);
-    }
 
     /**
      * <pre>
@@ -190,8 +196,8 @@ public class Spielfeld extends JPanel {
         }
     }
 
-    public GUI getGui() {
-        return gui;
+    public List<SpielerPanel> getTeilnehmer() {
+        return teilnehmer;
     }
 
 }

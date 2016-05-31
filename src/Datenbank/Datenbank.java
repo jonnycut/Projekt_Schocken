@@ -31,21 +31,69 @@ public class Datenbank {
 
     public static void dbErstellen() {
         Datenbank db = null;
-        try {
-            db = Datenbank.getInstance();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Datenbanktreiber nicht gefunden");
-        } catch (SQLException e) {
-            if (e.getMessage().startsWith("Datenbank existiert nicht"))
+
+        String[] optionen = { "Anlegen", "Verbinden", "Abbrechen" };
+
+        int n = JOptionPane.showOptionDialog( null,
+                "Möchten Sie eine Datenbank anlegen oder sich mit einer verbinden?",
+                "Datenbank",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, optionen,optionen[0] );
+
+        if ( n == JOptionPane.YES_OPTION )
+            try {
+                db = Datenbank.getInstance();
+            } catch (ClassNotFoundException e) {
+                System.out.println("Datenbanktreiber nicht gefunden");
+            } catch (SQLException e) {
+                if (e.getMessage().startsWith("Datenbank existiert nicht"))
+                    try {
+                        db = Datenbank.getInstance("db_schocken2");
+                    } catch (SQLException e1) {
+                        System.out.println(e1.getMessage());
+                        e1.printStackTrace();
+                    }
+            }
+
+        if ( n == JOptionPane.NO_OPTION ) {
+            JLabel jLText = new JLabel("IP Adresse des DB Servers");
+            JTextField jTipAdd = new JTextField();
+            Object[] ipAdd = {jLText,jTipAdd};
+            int eingabe = JOptionPane.showConfirmDialog(null, ipAdd, "Bitte IP Adresse eingeben", JOptionPane.OK_CANCEL_OPTION);
+
+            if (eingabe == JOptionPane.OK_OPTION) {
+                ip = jTipAdd.getText();
                 try {
-                    db = Datenbank.getInstance("db_schocken2");
-                } catch (SQLException e1) {
-                    System.out.println(e1.getMessage());
-                    e1.printStackTrace();
+                    getInstance();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
 
+            }
         }
     }
+
+
+//    public static void dbErstellen() {
+//        Datenbank db = null;
+//        try {
+//            db = Datenbank.getInstance();
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Datenbanktreiber nicht gefunden");
+//        } catch (SQLException e) {
+//            if (e.getMessage().startsWith("Datenbank existiert nicht"))
+//                try {
+//                    db = Datenbank.getInstance("db_schocken2");
+//                } catch (SQLException e1) {
+//                    System.out.println(e1.getMessage());
+//                    e1.printStackTrace();
+//                }
+//
+//        }
+//    }
 
     public static Datenbank getInstance() throws ClassNotFoundException, SQLException {
         //wenn die datenbank das erstemal geladen wird

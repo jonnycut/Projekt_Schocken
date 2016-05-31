@@ -23,9 +23,10 @@ public class Main {
 
 
     public static void main(String[] args) {
-     new GUI();
+
 
      Datenbank.dbErstellen();
+        new GUI();
 //
 //
 //        try {
