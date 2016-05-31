@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Anmeldung.java" afterPath="$PROJECT_DIR$/src/gui/Anmeldung.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Datenbank/Datenbank.java" afterPath="$PROJECT_DIR$/src/Datenbank/Datenbank.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/GUI.java" afterPath="$PROJECT_DIR$/src/gui/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" afterPath="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -28,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Datenbank.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Datenbank.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23327616">
+            <state vertical-scroll-proportion="0.0">
               <caret line="206" column="54" selection-start-line="206" selection-start-column="54" selection-end-line="206" selection-end-column="54" />
               <folding>
                 <element signature="docComment;method#selectNutzerkennung#0;class#Datenbank#0" expanded="false" />
@@ -148,11 +144,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Netzwerk.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Netzwerk.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.69982845">
+              <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -216,10 +212,10 @@
         <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Programm.java" />
         <option value="$PROJECT_DIR$/src/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
         <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Datenbank/Datenbank.java" />
+        <option value="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
       </list>
     </option>
   </component>
@@ -667,7 +663,7 @@
       <workItem from="1464637366428" duration="1756000" />
       <workItem from="1464672912617" duration="5343000" />
       <workItem from="1464682552530" duration="14000" />
-      <workItem from="1464682908559" duration="4223000" />
+      <workItem from="1464682908559" duration="4321000" />
     </task>
     <task id="LOCAL-00001" summary="Flurry: DB Erstellen umgeschrieben und Spielfeld angepasst">
       <created>1464678524417</created>
@@ -693,11 +689,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464684254042</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art">
+      <created>1464687278205</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1464687278205</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12196000" />
+    <option name="totallyTimeSpent" value="12294000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1312,16 +1314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1348,7 +1340,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23327616">
+        <state vertical-scroll-proportion="0.0">
           <caret line="206" column="54" selection-start-line="206" selection-start-column="54" selection-end-line="206" selection-end-column="54" />
           <folding>
             <element signature="docComment;method#selectNutzerkennung#0;class#Datenbank#0" expanded="false" />
@@ -1440,6 +1432,16 @@
             <marker date="1464687263550" expanded="true" signature="29596:29681" placeholder="SELECT SUM(s..t_spiel..." />
             <marker date="1464687263550" expanded="true" signature="30669:30749" placeholder="INSERT INTO ..." />
             <marker date="1464687263550" expanded="true" signature="30855:31043" placeholder="UPDATE t_spi..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69982845">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

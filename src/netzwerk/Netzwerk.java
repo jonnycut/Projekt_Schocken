@@ -1,6 +1,7 @@
 package netzwerk;
 
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -20,7 +21,9 @@ public class Netzwerk {
                 e.printStackTrace();
             }
             try {
-                new Client("" + Inet4Address.getLocalHost());
+                InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+                String ip = ia[1].getHostAddress();
+                new Client(ip);
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();
