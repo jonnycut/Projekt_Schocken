@@ -1,5 +1,7 @@
 package netzwerk;
 
+import gui.GUI;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -7,8 +9,11 @@ import java.net.Socket;
  * Created by dfleuren on 23.05.2016.
  */
 public class Client {
+    private GUI gui;
 
-    public Client(String ip) {
+
+    public Client(String ip,GUI gui) {
+        this.gui=gui;
         try (Socket socket = new Socket(ip, 5060);
              BufferedReader reader = new BufferedReader(
                      new InputStreamReader(
@@ -28,7 +33,10 @@ public class Client {
                     try {
                         String zeile;
                         while ((zeile = reader.readLine()) != null){
-                            System.out.println(zeile);
+                            if(zeile == "#")
+                                gui.getSpielfeld().netzwerkUpdate();
+                            else
+                                System.out.println(zeile);
                         }
                     } catch (IOException e) {
                         System.out.println("Verbindung zum Server verloren!");;

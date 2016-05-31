@@ -56,7 +56,7 @@ public class Spielfeld extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
-                setSpielerPanel();
+                updateTeilnehmerListe();
 
                 try {
                     Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
@@ -228,6 +228,13 @@ public class Spielfeld extends JPanel {
 
     public List<SpielerPanel> getTeilnehmer() {
         return teilnehmer;
+    }
+
+    public void netzwerkUpdate(){
+        updateTeilnehmerListe();
+        updateStock();
+        updateView();
+        System.out.println("recieved updateSignal...");
     }
 
     public GUI getGui() {

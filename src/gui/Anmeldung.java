@@ -321,17 +321,20 @@ public class Anmeldung extends JPanel {
         String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
         String[] serverIP = {""};
         if (spielleiter.equals(jTName.getText())) {
+
             new Thread() {
                 public void run() {
-                    gui.setNetzwerk(new Netzwerk(serverIP));
+                    gui.setNetzwerk(new Netzwerk(serverIP,gui));
                 }
+
             }.start();
         } else {
+
             serverIP[0] = Datenbank.getInstance().selectServerIP();
 
             new Thread() {
                 public void run() {
-                    gui.setNetzwerk(new Netzwerk(serverIP));
+                    gui.setNetzwerk(new Netzwerk(serverIP,gui));
                 }
             }.start();
         }
