@@ -366,7 +366,7 @@ public class Datenbank {
     public int selectSpielID(String kennung) throws SQLException {
         Statement stmnt = verbindung.createStatement();
 
-        ResultSet r = stmnt.executeQuery("SELECT fkspiel_spiel_id from _t_ist_client WHERE fk_t_spieler_kennung = '" + kennung + "'");
+        ResultSet r = stmnt.executeQuery("SELECT fk_t_spiel_spiel_id from t_ist_client WHERE fk_t_spieler_kennung = '" + kennung + "'");
         int spielID = 0;
         if (r.next()) {
             spielID = r.getInt(1);
