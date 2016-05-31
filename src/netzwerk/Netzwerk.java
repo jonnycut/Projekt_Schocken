@@ -37,7 +37,7 @@ public class Netzwerk {
                 e.printStackTrace();
             }
             try {
-                System.out.println("Verbinde zum Server: "+ipServer);
+                System.out.println("Verbinde zum Server:  "+ipServer);
 
                 // Auslesen der Lokalen IP-Addresse vom Netzwerkadapter, um dem Client die Server IP zu übergeben.
                 InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
