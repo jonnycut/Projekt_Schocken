@@ -154,6 +154,7 @@ public class Spielfeld extends JPanel {
 
     public void updateInfo(JPanel infobereich) {
 
+        jPMitte.removeAll();
         jPMitte.add(infobereich);
         jPMitte.add(jPStock);
 
