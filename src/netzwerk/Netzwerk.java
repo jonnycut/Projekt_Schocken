@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 public class Netzwerk {
 
     public Netzwerk(String[] ipServer) {
-        if (ipServer.length == 1) {
+        if (!ipServer[0].equals("")) {
             new Client(ipServer[0]);
 
         } else {

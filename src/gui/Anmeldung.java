@@ -326,7 +326,7 @@ public class Anmeldung extends JPanel {
         Datenbank.getInstance().insertTeilnehmer(jTName.getText());
         int spielID = Datenbank.getInstance().selectOffenesSpiel();
         String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
-        String[] serverIP = {};
+        String[] serverIP = {""};
         if (spielleiter.equals(jTName.getText())) {
             new Thread() {
                 public void run() {
