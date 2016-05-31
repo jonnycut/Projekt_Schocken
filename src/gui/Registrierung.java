@@ -16,9 +16,14 @@ import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
+ * Diese Klasse ist für die Registrierung eines neuen Spielers.
  */
 public class Registrierung extends JPanel {
 
+    /**
+     * Der Konstruktor erzeugt ein neues JPanel, als Registratiosbereich, um einen neuen Spieler anzulegen.
+     * @param gui GUI ist die aktuelle GUI.
+     */
     public Registrierung(GUI gui) {
         super();
         Icon[] avatare = {Grafik.AVATAR_R2D2, Grafik.AVATAR_BB8, Grafik.AVATAR_BOBA, Grafik.AVATAR_C3PO, Grafik.AVATAR_TROOPER, Grafik.AVATAR_VADER, Grafik.AVATAR_WUKI, Grafik.AVATAR_YODA, Grafik.AVATAR_BATMAN, Grafik.AVATAR_C_AMERICA, Grafik.AVATAR_DEADPOOL, Grafik.AVATAR_FLASH, Grafik.AVATAR_IRONMAN, Grafik.AVATAR_SPIDERMAN, Grafik.AVATAR_SUPERMAN, Grafik.AVATAR_THOR};
@@ -120,6 +125,16 @@ public class Registrierung extends JPanel {
 
         JButton jBWeiter = new JButton("WEITER");
 
+        /* Überprüft ob die JTextfields befüllt sind.
+         * Ist nur enabled wenn ein Profibild gewählt wurde.
+         * Wenn NEIN: kommt eine Fehlermeldung.
+         * Wenn JA: Wird überprüft ob der Spieler in der Datenbank existiert.
+         *          Wenn NEIN: Kommt eine Fehlermeldung.
+         *          Wenn JA: Wird geprüft ob die Passwort JTetxtfields übereienstimmen.
+         *                   Wenn NEIN: Kommt eine Fehlermeldung.
+         *                   Wenn JA: Wird das gewählte Profilbild, der Name und das Passwort in der Datenbank gespeichert.
+         *                            Schaltet die Ansicht zurück auf den Anmeldebildschirm.
+         */
         ActionListener weiter = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (jTName.getText().equals("")) {
@@ -147,7 +162,7 @@ public class Registrierung extends JPanel {
                                 Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
                                 Datenbank.getInstance().insertProfilbild(jTName.getText(), jBProfil.getIcon());
                             } catch (SQLException e1) {
-                                System.out.println("123 " + e1.getMessage());
+                                e1.printStackTrace();
                                 JOptionPane.showMessageDialog(null, "Der Benutzer wurde nicht angelegt, weil die Datenbank nicht erreichbar ist", "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (ClassNotFoundException e1) {
                                 JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -158,7 +173,7 @@ public class Registrierung extends JPanel {
                         } else {
                             if (jTName.getText().equals("")) {
                             } else {
-                                JOptionPane.showMessageDialog(null, "Passwort stimmt nicht Ã¼berein", "Fehler", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein", "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     else{
@@ -180,6 +195,7 @@ public class Registrierung extends JPanel {
 
         JButton jBZurueck = new JButton("ZURÜCK");
 
+        // Schaltet die Ansicht zurück auf den Anmeldebildschirm.
         ActionListener zurueck = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(1);
@@ -209,21 +225,23 @@ public class Registrierung extends JPanel {
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
         JPanel rechts = new JPanel(new GridLayout(4, 4));
 
+        /* Überträgt das gewählte Profilbild in den Auswahlbereich des linken Panels.
+         * Enabled den WeiterButton.
+         */
         ActionListener profilbild = new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 JButton tempB = (JButton) e.getSource();
                 jBProfil.setIcon(tempB.getIcon());
                 jBPProfil.add(jBProfil);
                 jLMitte.setIcon(Grafik.BLOCK);
                 mitte.add(jLMitte);
-                //ToDo: Überarbeiten!!!
                 if (jBProfil.getIcon() != null) {
                     jBWeiter.setEnabled(true);
                 }
             }
         };
 
+        // Erzeugt und befüllt alle Buttons des rechten Panels mit Icons.
         for (int i = 0; i <= 15; i++) {
             JButton jb = new JButton();
             jb.setIcon(avatare[i]);
@@ -269,20 +287,21 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
+
         add(jp, BorderLayout.CENTER);
     }
 
-    /*ToDo: Krebs fragen ob es ok ist das Ã¼ber die Button zu machen, oder mit den Methoden. Wenn ja, aus dem UML streichen*/
-//    public void spielerAnlegen(String name, String passwort) {
-//
-//    }
-//
-//    public boolean pruefeSpielerKennung(String name) {
-//
-//        return true;
-//    }
+    //------------------------------------------METHODEN---------------------------------------------------------------
 
-    // aus dem Internet
+
+
+    //----------------------------------------INNEREKLASSEN-----------------------------------------------------------
+
+
+    /**
+     * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
+     * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     */
     public class JTextFieldLimit extends PlainDocument {
         private int limit;
 
@@ -299,5 +318,4 @@ public class Registrierung extends JPanel {
             }
         }
     }
-
 }

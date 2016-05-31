@@ -18,7 +18,6 @@ import java.sql.SQLException;
  */
 public class Administration extends JPanel{
 
-
     /**
      * Der Konstruktor erzeugt ein neues JPanel, als Administrationsbereich, um Passwörter bei Spielern zu ändern.
      * @param gui GUI ist die aktuelle GUI.
@@ -97,7 +96,7 @@ public class Administration extends JPanel{
         JPanel untenLinks = new JPanel(new BorderLayout());
         untenLinks.setBackground(Color.DARK_GRAY);
 
-        // liest das neue Passwort aus und führt die Methode passwortReset() aus.
+        // Liest das neue Passwort aus und führt die Methode passwortReset() aus.
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -111,7 +110,7 @@ public class Administration extends JPanel{
 
         JButton jBZurueck = new JButton("ZURÜCK");
 
-        // schaltet die Ansicht zurück auf den Anmeldebildschirm
+        // Schaltet die Ansicht zurück auf den Anmeldebildschirm
         ActionListener zurueck = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(1);

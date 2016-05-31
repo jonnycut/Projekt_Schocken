@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
+ * Diese Klasse ist für das Spielfeld um dem Spieler Informationen mitzuteilen.
  */
 public class Infobereich extends JPanel {
 
@@ -17,12 +18,16 @@ public class Infobereich extends JPanel {
 
     public Infobereich(Spielfeld spielfeld){
         super();
+        this.spielfeld = spielfeld;
+
+
+        //-------------------------------------SUPER-PANEL-------------------------------------------------------------
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(810, 150));
         setBackground(Color.BLACK);
 
-        this.spielfeld = spielfeld;
 
+        //-------------------------------------MITTE-PANEL-------------------------------------------------------------
         jPInfo = new JPanel(new BorderLayout());
         jPInfo.setBackground(Color.BLACK);
         info = new JLabel();
@@ -37,10 +42,20 @@ public class Infobereich extends JPanel {
         temp.setPreferredSize(new Dimension(810, 50));
         jPInfo.add(temp,BorderLayout.CENTER);
 
+
+        //-------------------------------------SUPER-PANEL-------------------------------------------------------------
         add(jPInfo);
     }
 
 
+    //------------------------------------------METHODEN---------------------------------------------------------------
+
+
+    /**
+     * Erzeugt eine JLabel und allen Spielern Informationen zu kommen zu lassen.
+     * @param infos String beinhaltet den Informationstext der angezeigt werden soll.
+     * Es wird zum Schluss wieder in den Infobereich eingefügt.
+     */
     public void setInfos(String infos) {
 
         info.setText(infos);
@@ -54,6 +69,13 @@ public class Infobereich extends JPanel {
         add(jPInfo);
     }
 
+
+    /**
+     * Erzeugt ein JLabel, welches anzeigt wer der Spielleiter ist.
+     * Es wird die SpielID aus der Datenbank abgerufen und mit dieser ID
+     * wird in der Datenbank geprüft wer der Spielleiter des Spiels ist.
+     * Dann wird es in das JPanel jPInfo eingefügt.
+     */
     public void istSpielleiter() {
         int spielID = 0;
         try {
@@ -67,7 +89,5 @@ public class Infobereich extends JPanel {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
 }
