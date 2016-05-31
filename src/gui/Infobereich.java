@@ -4,6 +4,7 @@ import Datenbank.Datenbank;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
@@ -40,7 +41,7 @@ public class Infobereich extends JPanel {
     }
 
 
-    public void setInfos(String infos){
+    public void setInfos(String infos) throws SQLException, ClassNotFoundException {
 
         info.setText(infos);
         JPanel jPCenter = new JPanel(new FlowLayout());
@@ -53,13 +54,12 @@ public class Infobereich extends JPanel {
         add(jPInfo);
     }
 
-    public void istSpielleiter(){
-       // String name = spielfeld.getTeilnehmer().get(0).getName();
-        if(/*Er ist Spielleiter*/ true){
-            JLabel spielleiter = new JLabel("Sie sind Spielleiter");
+    public void istSpielleiter() throws SQLException, ClassNotFoundException {
+            int spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
+            JLabel spielleiter = new JLabel("Spielleiter ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
             spielleiter.setForeground(Color.RED);
             spielleiter.setBackground(Color.BLACK);
             jPInfo.add(spielleiter,BorderLayout.SOUTH);
-        }
+
     }
 }

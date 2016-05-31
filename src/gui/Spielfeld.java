@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class Spielfeld extends JPanel {
 
+
     private GUI gui;
     private Infobereich infobereich;
     private Haelfte haelfte;
@@ -157,7 +158,6 @@ public class Spielfeld extends JPanel {
     public void setSpielerPanel() {
 
         List<Spieler> spielerList = gui.getAlleSpieler();
-        jPUnten = new JPanel();
 
         for (Spieler s : spielerList) {
             SpielerPanel x = new SpielerPanel(s, haelfte.getRunde(), this);
@@ -230,4 +230,7 @@ public class Spielfeld extends JPanel {
         return teilnehmer;
     }
 
+    public GUI getGui() {
+        return gui;
+    }
 }

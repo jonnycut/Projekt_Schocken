@@ -21,6 +21,7 @@ public class GUI extends JFrame {
 
     private int zustand = 1;
     private JPanel jp = new JPanel(new CardLayout());
+    private String ich = "";
 
     private List<Spieler> spieler = new ArrayList<>();
     private Anmeldung anmeldung;
@@ -154,6 +155,14 @@ public class GUI extends JFrame {
     public void setZustand(int zustand) {
 
         this.zustand = zustand;
+    }
+
+    public String getIch() {
+        return ich;
+    }
+
+    public void setIch(String ich) {
+        this.ich = ich;
     }
 
 }
