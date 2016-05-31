@@ -537,6 +537,12 @@ public class Datenbank {
         return spielleiter;
     }
 
+    public void updateSpielstatus(int spielID,int status) throws SQLException {
+        Statement stmt =verbindung.createStatement();
+
+        stmt.executeUpdate("UPDATE t_spiel SET status="+ status +" WHERE spiel_id="+spielID);
+    }
+
 
     //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
@@ -771,6 +777,9 @@ public class Datenbank {
         }
         return true;
     }
+
+
+
 
     /**
      * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.
