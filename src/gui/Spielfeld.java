@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
 /**
  * Created by Flurry on 25.05.2016.
  */
-public class Spielfeld extends JPanel {
+public class Spielfeld extends JPanel  {
 
     private GUI gui;
     private Infobereich infobereich;
@@ -53,12 +55,33 @@ public class Spielfeld extends JPanel {
 
                 jPOben.setVisible(false);
                 setSpielerPanel();
+
+                try {
+                    Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(),2);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
             }
         };
 
         jBStart.addActionListener(startButton);
 
-        jPOben.add(jBStart);
+        try {
+            InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+            String ip = ia[1].getHostAddress();
+            if(Datenbank.getInstance().selectServerIP().equals(ip)){
+                jPOben.add(jBStart);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
 
         jPMitte = new JPanel(new FlowLayout());
         jPMitte.setPreferredSize(new Dimension(1020, 150));
