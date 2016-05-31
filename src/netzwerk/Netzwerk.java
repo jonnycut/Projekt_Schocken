@@ -11,13 +11,14 @@ import java.net.UnknownHostException;
  */
 public class Netzwerk {
     private GUI gui;
-    private Client client;
+
 
     public Netzwerk(String[] ipServer, GUI gui) {
         this.gui = gui;
 
         if (!ipServer[0].equals("")) {
-            this.client= new Client(ipServer[0],this.gui);
+            new Client(ipServer[0],this.gui);
+
 
         } else {
             new Server();
@@ -30,7 +31,8 @@ public class Netzwerk {
                 System.out.println("Verbinde zum Server: "+ipServer);
                 InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
                 String ip = ia[1].getHostAddress();
-                this.client= new Client(ip,this.gui);
+                new Client(ip,this.gui);
+
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();
@@ -38,7 +40,4 @@ public class Netzwerk {
         }
     }
 
-    public Client getClient(){
-        return this.client;
-    }
 }

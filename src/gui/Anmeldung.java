@@ -338,7 +338,10 @@ public class Anmeldung extends JPanel {
                     gui.setNetzwerk(new Netzwerk(serverIP,gui));
                 }
             }.start();
+
+
         }
+
     }
 
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------

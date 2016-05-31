@@ -1,6 +1,7 @@
 package netzwerk;
 
 import gui.GUI;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -22,6 +23,7 @@ public class Client {
         this.gui=gui;
 
         // Baut die Verbindung zum Server auf.
+        this.gui.setClient(this);
         try (Socket socket = new Socket(ip, 5060);
              BufferedReader reader = new BufferedReader(
                      new InputStreamReader(
@@ -74,6 +76,7 @@ public class Client {
 
 
     public void sendeUpdate(){
-        zeile = "#";
+        zeile="#";
+        System.out.println("Sende UpdateSignal");
     }
 }

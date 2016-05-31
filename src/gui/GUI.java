@@ -31,6 +31,7 @@ public class GUI extends JFrame {
     private Spielfeld spielfeld;
 
     private Netzwerk netzwerk;
+    private Client client;
 
 
 
@@ -167,7 +168,14 @@ public class GUI extends JFrame {
     }
 
     public void sendeUpdateSignal(){
-        netzwerk.getClient().sendeUpdate();
+        if(this.client==null)
+            System.out.println("client nicht gefunden");
+        else
+            this.client.sendeUpdate();
+
+    }
+    public void setClient(Client client){
+        this.client = client;
     }
 
 }
