@@ -2,6 +2,7 @@ import Datenbank.Datenbank;
 import gui.GUI;
 import Grafik.Grafik;
 import gui.SpielerPanel;
+import netzwerk.Client;
 import spiel.Runde;
 import spiel.Spieler;
 import spiel.Stock;
@@ -9,9 +10,11 @@ import spiel.Stock;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.net.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -25,8 +28,47 @@ public class Main {
     public static void main(String[] args) {
 
 
-     Datenbank.dbErstellen();
-        new GUI();
+            try
+            {
+                InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+                String tmp = ia[1].getHostAddress();
+                System.out.println(tmp);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+
+
+//            StringBuffer addresses = new StringBuffer();
+//
+//            try
+//            {
+//                InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+//                String tmp;
+//                for (int i=0; i<ia.length; i++)
+//                {
+//                    if (i > 0)
+//                    {
+//                        addresses.append(" / ");
+//                    }
+//                    tmp = ia[i].toString();
+//                    addresses.append(tmp.substring(tmp.indexOf("/")+1));
+//                }
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//
+//        System.out.println(addresses);
+
+
+
+
+//        Datenbank.dbErstellen();
+//        new GUI();
 //
 //
 //        try {

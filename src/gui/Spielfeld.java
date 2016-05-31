@@ -141,7 +141,8 @@ public class Spielfeld extends JPanel {
     public void updateTeilnehmerListe(){
         try {
 
-            List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(1);
+            List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
+
 
             for (String s : kennungListe){
                 SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s),haelfte.getRunde(),this);

@@ -64,6 +64,7 @@ public class Datenbank {
 
             if (eingabe == JOptionPane.OK_OPTION) {
                 ip = jTipAdd.getText();
+                System.out.println(ip);
                 try {
                     getInstance();
                 } catch (ClassNotFoundException e) {
@@ -71,7 +72,10 @@ public class Datenbank {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }
 
+            if(eingabe == JOptionPane.CANCEL_OPTION){
+                System.exit(0);
             }
         }
 
@@ -201,8 +205,9 @@ public class Datenbank {
      */
     public boolean selectNutzerkennung(String kennung, String passwort) throws SQLException, UnknownHostException {
         Statement stmt = verbindung.createStatement();
-        String host = String.valueOf(InetAddress.getLocalHost());
-        String ip = host.substring(host.lastIndexOf("/") + 1);
+        InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+        String ip = ia[1].getHostAddress();
+
 
         try {
             stmt.executeUpdate("Update t_spieler SET ip = '" + ip + "' WHERE kennung = '" + kennung + "'");

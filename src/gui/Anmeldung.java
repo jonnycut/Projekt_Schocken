@@ -17,11 +17,16 @@ import java.sql.SQLException;
 
 /**
  * Created by dfleuren on 23.05.2016.
+ * Diese Klasse ist der Anmeldebildschirm vom Spiel.
  */
 public class Anmeldung extends JPanel {
 
     GUI gui;
 
+    /**
+     * Der Konstruktor erzeugt ein neues JPanel, als Anmeldebereich, um sich am Spiel an zu melden oder sich zu registrieren.
+     * @param gui GUI ist die aktuelle GUI.
+     */
     public Anmeldung(GUI gui){
         super();
         this.gui = gui;
@@ -76,14 +81,17 @@ public class Anmeldung extends JPanel {
         jTPasswort.setDocument(new JTextFieldLimit(30));
         jPTPasswort.add(jTPasswort);
 
-
         JButton jBStart = new JButton("START");
+
         // Nur drückbar wenn die DB Abfrage erfolgreich war
         jBStart.setEnabled(false);
         JPanel jBPStart = new JPanel(new FlowLayout());
         jBPStart.setBackground(Color.DARK_GRAY);
         jBPStart.add(jBStart);
 
+        /* Führt die Methode starteSpiel() aus und schaltet die Ansicht auf das Spielfeld um.
+         * Fügt den Spieler in der Datenbank als Teilnehmer hinzu.
+         */
         ActionListener startButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ToDo: Schaltet weiter und gibt das Spiel frei
@@ -141,6 +149,11 @@ public class Anmeldung extends JPanel {
 
         untenLinks.add(jBPStart);
 
+        /* Prüft in der Datenbank ob der Name und das Passwort übereinstimmen.
+         * Wenn NEIN: Kommt eine Fehlermeldeung.
+         * Wenn JA: Wird das passende Profilbild aus der Datenbank geholt und angezeigt.
+         *          Der StartButton wird freigegeben.
+         */
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (jTName.getText().equals("")) {
@@ -208,6 +221,7 @@ public class Anmeldung extends JPanel {
         register.setBackground(Color.DARK_GRAY);
         JButton jBReg = new JButton("Registrieren");
 
+        // schaltet die Ansicht auf den Registrierungsbildschirm weiter.
         ActionListener reg = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(3);
@@ -222,6 +236,10 @@ public class Anmeldung extends JPanel {
         reset.setBackground(Color.DARK_GRAY);
         JButton pwReset = new JButton("Passwort reseten");
 
+        /* Es öffnet sich ein Abfragefenster für das Passwort.
+         * Ist das Passwort FALSCH: Kommt eine Fehlermeldung.
+         * Ist das Passwort RICHTIG: Schaltet die Ansicht auf den Administrationssbildschirm weiter.
+         */
         ActionListener pwReseten = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -316,17 +334,22 @@ public class Anmeldung extends JPanel {
 
     }
 
-    public void erstelleServer() {
-        if (gui.getServer() == null) {
-            gui.setServer(new Server());
-            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
-        }else{
-            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
-        }
-    }
+//    public void erstelleServer() {
+//        if (gui.getServer() == null) {
+//            gui.setServer(new Server());
+//            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
+//        }else{
+//            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
+//        }
+//    }
 
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
 
+
+    /**
+     * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
+     * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     */
     public class JTextFieldLimit extends PlainDocument {
         private int limit;
 
@@ -336,7 +359,8 @@ public class Anmeldung extends JPanel {
         }
 
         public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-            if (str == null) return;
+            if (str == null)
+                return;
 
             if ((getLength() + str.length()) <= limit) {
                 super.insertString(offset, str, attr);

@@ -2,6 +2,7 @@ package gui;
 
 import Grafik.Grafik;
 import netzwerk.Client;
+import netzwerk.Netzwerk;
 import netzwerk.Server;
 import spiel.Spieler;
 
@@ -19,15 +20,16 @@ import java.util.List;
 public class GUI extends JFrame {
 
     private int zustand = 1;
+    private JPanel jp = new JPanel(new CardLayout());
+
     private List<Spieler> spieler = new ArrayList<>();
     private Anmeldung anmeldung;
     private Registrierung registrierung;
     private Administration administration;
     //private Statistik statistik = new Statistik();
     private Spielfeld spielfeld;
-    private JPanel jp = new JPanel(new CardLayout());
-    private Client client;
-    private Server server;
+    private Netzwerk netzwerk;
+
 
 
     public GUI() {
@@ -38,6 +40,8 @@ public class GUI extends JFrame {
         anmeldung = new Anmeldung(this);
         registrierung = new Registrierung(this);
         administration = new Administration(this);
+
+       // netzwerk = new Netzwerk();
 
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -111,25 +115,15 @@ public class GUI extends JFrame {
     }
 
 
-    public void setServer(Server server) {
-
-        this.server = server;
-    }
-
-    public Server getServer() {
-
-        return server;
-    }
-
-    public Client getClient() {
-
-        return client;
-    }
-
-    public void setClient(Client client) {
-
-        this.client = client;
-    }
+//    public void setServer(Server server) {
+//
+//        this.server = server;
+//    }
+//
+//    public Server getServer() {
+//
+//        return server;
+//    }
 
     public Spielfeld getSpielfeld() {
 
