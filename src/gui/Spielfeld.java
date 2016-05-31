@@ -200,6 +200,15 @@ public class Spielfeld extends JPanel {
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
     }
+    public void netzwerkUpdate(){
+        jPUnten.removeAll();
+        updateTeilnehmerListe();
+        updateStock();
+        updateView();
+        revalidate();
+        System.out.println("recieved updateSignal...");
+    }
+
 
 
     /**
@@ -230,12 +239,6 @@ public class Spielfeld extends JPanel {
         return teilnehmer;
     }
 
-    public void netzwerkUpdate(){
-        updateTeilnehmerListe();
-        updateStock();
-        updateView();
-        System.out.println("recieved updateSignal...");
-    }
 
     public GUI getGui() {
         return gui;

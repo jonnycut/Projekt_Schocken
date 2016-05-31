@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/netzwerk/Client.java" afterPath="$PROJECT_DIR$/src/netzwerk/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Spielfeld.java" afterPath="$PROJECT_DIR$/src/gui/Spielfeld.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -156,12 +156,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="157" column="33" selection-start-line="157" selection-start-column="15" selection-end-line="157" selection-end-column="33" />
-              <folding />
+            <state vertical-scroll-proportion="0.9415808">
+              <caret line="207" column="21" selection-start-line="207" selection-start-column="21" selection-end-line="207" selection-end-column="21" />
+              <folding>
+                <element signature="e#6878#6879#0" expanded="true" />
+                <element signature="e#6911#6912#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -216,10 +219,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6786941">
+            <state vertical-scroll-proportion="0.0">
               <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="68" />
               <folding />
             </state>
@@ -251,13 +254,13 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
         <option value="$PROJECT_DIR$/src/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
         <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
         <option value="/&lt;Generic&gt; Fragment (Datenbank.java:22211).sql" />
         <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
         <option value="$PROJECT_DIR$/src/Datenbank/init.sql" />
         <option value="$PROJECT_DIR$/src/Datenbank/Datenbank.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Client.java" />
+        <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
       </list>
     </option>
   </component>
@@ -482,7 +485,7 @@
       <workItem from="1464693580565" duration="3515000" />
       <workItem from="1464697131188" duration="2812000" />
       <workItem from="1464700224850" duration="9900000" />
-      <workItem from="1464713114815" duration="240000" />
+      <workItem from="1464713114815" duration="603000" />
     </task>
     <task id="LOCAL-00001" summary="Flurry: DB Erstellen umgeschrieben und Spielfeld angepasst">
       <created>1464678524417</created>
@@ -580,11 +583,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464713130224</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Netzwerk gefummel">
+      <created>1464713376544</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1464713376544</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34204000" />
+    <option name="totallyTimeSpent" value="34567000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -632,7 +641,8 @@
     <MESSAGE value="Flurry: DB Erstellen umgeschrieben und Spielfeld angepasst" />
     <MESSAGE value="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art" />
     <MESSAGE value="Neue DB Methode SelectStarteSpiel liefert dir true wenn du 2 spieler im Spiel Hast" />
-    <option name="LAST_COMMIT_MESSAGE" value="Neue DB Methode SelectStarteSpiel liefert dir true wenn du 2 spieler im Spiel Hast" />
+    <MESSAGE value="Netzwerk gefummel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Netzwerk gefummel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1122,7 +1132,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#6878#6879#0" expanded="true" />
+            <element signature="e#6911#6912#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1269,7 +1282,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#6878#6879#0" expanded="true" />
+            <element signature="e#6911#6912#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1416,7 +1432,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="e#6878#6879#0" expanded="true" />
+            <element signature="e#6911#6912#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1572,14 +1591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1600,14 +1611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="157" column="33" selection-start-line="157" selection-start-column="15" selection-end-line="157" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1738,9 +1741,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6786941">
+        <state vertical-scroll-proportion="0.0">
           <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="68" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9415808">
+          <caret line="207" column="21" selection-start-line="207" selection-start-column="21" selection-end-line="207" selection-end-column="21" />
+          <folding>
+            <element signature="e#6878#6879#0" expanded="true" />
+            <element signature="e#6911#6912#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
