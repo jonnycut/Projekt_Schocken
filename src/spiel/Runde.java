@@ -32,7 +32,8 @@ public class Runde {
 
     public void setTeilnehmer(List<Spieler> teilnehmer) {
         this.teilnehmer = teilnehmer;
-        this.beginner = teilnehmer.get(teilnehmer.size()-1);
+        if(teilnehmer.size()>0)
+            this.beginner = teilnehmer.get(teilnehmer.size()-1);
     }
 
     /**

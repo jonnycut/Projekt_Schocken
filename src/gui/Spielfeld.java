@@ -3,13 +3,14 @@ package gui;
 import Datenbank.Datenbank;
 import spiel.Haelfte;
 import spiel.Spieler;
+import sun.misc.IOUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -56,7 +57,7 @@ public class Spielfeld extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
-                setSpielerPanel();
+                updateTeilnehmerListe();
 
                 try {
                     Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
@@ -200,6 +201,15 @@ public class Spielfeld extends JPanel {
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
     }
+    public void netzwerkUpdate(){
+        jPUnten.removeAll();
+        updateTeilnehmerListe();
+        updateStock();
+        updateView();
+        revalidate();
+        System.out.println("recieved updateSignal...");
+    }
+
 
 
     /**
@@ -229,6 +239,15 @@ public class Spielfeld extends JPanel {
     public List<SpielerPanel> getTeilnehmer() {
         return teilnehmer;
     }
+
+    public void sendUpdate() throws UnsupportedEncodingException {
+
+        byte[] bytes = new String("#").getBytes("UTF-8");
+        ByteArrayInputStream aIS = new ByteArrayInputStream(bytes);
+        System.setIn(aIS);
+
+    }
+
 
     public GUI getGui() {
         return gui;
