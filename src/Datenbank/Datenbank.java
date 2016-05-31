@@ -23,7 +23,7 @@ import java.util.*;
 public class Datenbank {
     private static Datenbank datenbank;
     private static Connection verbindung;
-    private static String ip = "localhost";
+    private static String ip ="localhost";
 
     public Datenbank() {
 
