@@ -36,7 +36,7 @@ public class Datenbank {
 
         int n = JOptionPane.showOptionDialog( null,
                 "Möchten Sie eine Datenbank anlegen oder sich mit einer verbinden?",
-                "Datenbank",
+                "Willkomen bei den Spiel Schocken",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null, optionen,optionen[0] );
@@ -73,6 +73,10 @@ public class Datenbank {
                 }
 
             }
+        }
+
+        if(n == JOptionPane.CLOSED_OPTION){
+            System.exit(0);
         }
     }
 
