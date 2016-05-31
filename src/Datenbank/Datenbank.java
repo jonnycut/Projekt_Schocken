@@ -205,8 +205,9 @@ public class Datenbank {
      */
     public boolean selectNutzerkennung(String kennung, String passwort) throws SQLException, UnknownHostException {
         Statement stmt = verbindung.createStatement();
-        String host = String.valueOf(InetAddress.getLocalHost());
-        String ip = host.substring(host.lastIndexOf("/") + 1);
+        InetAddress ia[] = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+        String ip = ia[1].getHostAddress();
+
 
         try {
             stmt.executeUpdate("Update t_spieler SET ip = '" + ip + "' WHERE kennung = '" + kennung + "'");

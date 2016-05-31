@@ -334,14 +334,14 @@ public class Anmeldung extends JPanel {
 
     }
 
-    public void erstelleServer() {
-        if (gui.getServer() == null) {
-            gui.setServer(new Server());
-            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
-        }else{
-            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
-        }
-    }
+//    public void erstelleServer() {
+//        if (gui.getServer() == null) {
+//            gui.setServer(new Server());
+//            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
+//        }else{
+//            gui.setClient(new Client(""/*ToDo: Client IP Adress*/));
+//        }
+//    }
 
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
 

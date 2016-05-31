@@ -41,7 +41,7 @@ public class GUI extends JFrame {
         registrierung = new Registrierung(this);
         administration = new Administration(this);
 
-        netzwerk = new Netzwerk();
+       // netzwerk = new Netzwerk();
 
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -115,15 +115,15 @@ public class GUI extends JFrame {
     }
 
 
-    public void setServer(Server server) {
-
-        this.server = server;
-    }
-
-    public Server getServer() {
-
-        return server;
-    }
+//    public void setServer(Server server) {
+//
+//        this.server = server;
+//    }
+//
+//    public Server getServer() {
+//
+//        return server;
+//    }
 
     public Spielfeld getSpielfeld() {
 

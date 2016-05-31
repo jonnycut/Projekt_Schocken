@@ -1,13 +1,16 @@
 package netzwerk;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
+
 /**
  * Created by dfleuren on 31.05.2016.
  */
 public class Netzwerk {
 
-    public Netzwerk(String[] args) {
-        if (args.length == 1) {
-            new Client(args[0]);
+    public Netzwerk(String[] ipServer) {
+        if (ipServer.length == 1) {
+            new Client(ipServer[0]);
 
         } else {
             new Server();
@@ -16,7 +19,12 @@ public class Netzwerk {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            new Client("127.0.0.1");
+            try {
+                new Client("" + Inet4Address.getLocalHost());
+
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
