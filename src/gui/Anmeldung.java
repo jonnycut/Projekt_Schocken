@@ -3,6 +3,7 @@ package gui;
 import Datenbank.Datenbank;
 import Grafik.Grafik;
 import netzwerk.Client;
+import netzwerk.Netzwerk;
 import netzwerk.Server;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ import java.sql.SQLException;
 public class Anmeldung extends JPanel {
 
     GUI gui;
+    JTextField jTName;
 
     /**
      * Der Konstruktor erzeugt ein neues JPanel, als Anmeldebereich, um sich am Spiel an zu melden oder sich zu registrieren.
@@ -65,7 +67,7 @@ public class Anmeldung extends JPanel {
 
         JPanel jPTName = new JPanel(new FlowLayout());
         jPTName.setBackground(Color.DARK_GRAY);
-        JTextField jTName = new JTextField(20);
+        jTName = new JTextField(20);
         jTName.setDocument(new JTextFieldLimit(30));
         jPTName.add(jTName);
 
@@ -167,11 +169,13 @@ public class Anmeldung extends JPanel {
                 }
 
                 try {
+                    // JA derSpieler ist in der Datenbank
                     if (Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         gui.updateSpielerListe(Datenbank.getInstance().selectSpieler(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
+                        pruefeSpiel();
                     } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
@@ -315,24 +319,28 @@ public class Anmeldung extends JPanel {
     public void starteSpiel() {
 
         gui.setSpielfeld(new Spielfeld(gui));
-
-//        try {
-//            if(Datenbank.getInstance().selectOffenesSpiel() !=1){
-//                gui.setSpielfeld(new Spielfeld(gui));
-//            }
-//            else{
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
     }
 
-    public void pruefeSpiel() {
+    public void pruefeSpiel() throws SQLException, ClassNotFoundException{
+
+        Datenbank.getInstance().insertTeilnehmer(jTName.getText());
+        int spielID = Datenbank.getInstance().selectOffenesSpiel();
+        String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
+        if(spielleiter.equals(jTName.getText())){
+            String[] serverIP = {};
+            gui.setNetzwerk(new Netzwerk(serverIP));
+        }
+        else{
+            String[] serverIP = {spielleiter};
+            gui.setNetzwerk(new Netzwerk(serverIP));
+
+        }
+    }
+
+    public void erstelleNetzwerk(){
 
     }
+
 
 //    public void erstelleServer() {
 //        if (gui.getServer() == null) {
