@@ -102,15 +102,6 @@ public class Anmeldung extends JPanel {
                 starteSpiel();
                 gui.setZustand(6);
                 gui.updateView(e);
-
-                try {
-                    Datenbank.getInstance().insertTeilnehmer(jTName.getText());
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-
             }
         };
         jBStart.addActionListener(startButton);

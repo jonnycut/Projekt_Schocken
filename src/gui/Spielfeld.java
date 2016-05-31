@@ -157,6 +157,7 @@ public class Spielfeld extends JPanel {
     public void setSpielerPanel() {
 
         List<Spieler> spielerList = gui.getAlleSpieler();
+        jPUnten = new JPanel();
 
         for (Spieler s : spielerList) {
             SpielerPanel x = new SpielerPanel(s, haelfte.getRunde(), this);
