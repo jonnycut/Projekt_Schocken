@@ -301,7 +301,6 @@ public class Anmeldung extends JPanel {
 
         jp.add(unten, BorderLayout.SOUTH);
 
-
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
 
         add(jp, BorderLayout.CENTER);
