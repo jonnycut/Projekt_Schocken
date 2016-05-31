@@ -107,7 +107,8 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
                 break;
             case 6:
-                spielfeld.setSpielerPanel();
+                spielfeld.updateTeilnehmerListe();
+                //spielfeld.setSpielerPanel(); --> Grund fuer die doppelte Anzeige des Clients
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;

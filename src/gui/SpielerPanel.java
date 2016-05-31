@@ -339,11 +339,13 @@ public class SpielerPanel extends JPanel {
     /**
      * Wechselt die Ansicht des Wuerfelfeldes
      * @param view String {wuerfel | becher}
+     * @throws IllegalArgumentException
      */
-    public void changeView(String view){
+    public void changeView(String view) throws IllegalArgumentException{
         if(view.equals("wuerfel")||wuerfel.equals("becher"))
             ((CardLayout) wuerfel.getLayout()).show(wuerfel,view);
         else
+            throw new IllegalArgumentException("Argument darf nur {wuerfel || becher} sein");
             return;
     }
 

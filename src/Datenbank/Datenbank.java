@@ -6,6 +6,7 @@ package Datenbank;
 
 
 import spiel.Spieler;
+import spiel.Wuerfel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -727,6 +728,40 @@ public class Datenbank {
         }
         return null;
     }
+
+    /**
+     * Fuerht ein Update der Attribute des Spielers mit der uebergebenen Kennung aus.
+     * Nutzt die insertStatistik(Map) Methode
+     * @param kennung String - Kennung des zu aktualisierenden Spielers
+     * @param strafpunkte Int - Wert der zu setzenden Strafpunkte
+     * @param statistik Map[String, Integer] - Die zu setzende Statistik
+     * @throws SQLException
+     * @throws IOException
+     */
+    public void updateSpieler(String kennung, int strafpunkte, Map<String, Integer> statistik) throws SQLException, IOException {
+
+        PreparedStatement ps = verbindung.prepareStatement(
+                "UPDATE t_spieler" +
+                        "SET strafpunkte= ?" +
+                        "WHERE kennung= '" + kennung + "'");
+        ps.setInt(1,strafpunkte);
+        ps.setString(2, kennung);
+        ps.executeUpdate();
+
+        insertStatistik(kennung,statistik);
+
+
+    }
+
+   /* public void updateSpielerWuerfel(Wuerfel[] wuerfel){
+
+        PreparedStatement ps = verbindung.createStatement(
+                "UPDATE t_spieler"+
+                        "SET w1= ?"+
+                        "SET w2= ?"+
+                        "SET w3"=
+        );
+    }*/
 
     public void updatePasswort(String name, String passwort) {
         //ToDo Machen
