@@ -57,7 +57,7 @@ public class Spielfeld extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
-                updateTeilnehmerListe();
+                //updateTeilnehmerListe();
                 gui.sendeUpdateSignal();
                 infobereich.setInfos("Spiel wurde gestartet");
                 updateInfo(infobereich);
@@ -154,6 +154,7 @@ public class Spielfeld extends JPanel {
 
     public void updateInfo(JPanel infobereich) {
 
+        jPMitte.removeAll();
         jPMitte.add(infobereich);
         jPMitte.add(jPStock);
 
