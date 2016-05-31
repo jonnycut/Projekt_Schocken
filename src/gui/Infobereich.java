@@ -1,7 +1,6 @@
 package gui;
 
 import Datenbank.Datenbank;
-
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;

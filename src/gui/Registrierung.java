@@ -2,7 +2,6 @@ package gui;
 
 import Datenbank.Datenbank;
 import Grafik.Grafik;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.text.AttributeSet;
