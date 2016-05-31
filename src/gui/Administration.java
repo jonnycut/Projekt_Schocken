@@ -27,11 +27,13 @@ public class Administration extends JPanel{
 
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
+
         JPanel jp = new JPanel(new BorderLayout());
         jp.setBackground(Color.BLACK);
 
 
         //-------------------------------------OBEN-PANEL--------------------------------------------------------------
+
         JPanel oben = new JPanel();
         oben.setBackground(Color.BLACK);
         JLabel jLoben = new JLabel("Administration");
@@ -42,6 +44,7 @@ public class Administration extends JPanel{
 
 
         //-------------------------------------LINKS-PANEL-------------------------------------------------------------
+
         JPanel links = new JPanel(new BorderLayout());
         links.setBackground(Color.DARK_GRAY);
 
@@ -130,6 +133,7 @@ public class Administration extends JPanel{
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
+
         JPanel mitte = new JPanel();
         mitte.setBackground(Color.DARK_GRAY);
         JLabel jLMitte = new JLabel(Grafik.LOGO1);
@@ -139,6 +143,7 @@ public class Administration extends JPanel{
 
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
+
         JPanel rechts = new JPanel();
         rechts.setPreferredSize(new Dimension(240, 0));
         rechts.setBackground(Color.BLACK);

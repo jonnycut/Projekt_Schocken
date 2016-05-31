@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Administration.java" afterPath="$PROJECT_DIR$/src/gui/Administration.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Anmeldung.java" afterPath="$PROJECT_DIR$/src/gui/Anmeldung.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Infobereich.java" afterPath="$PROJECT_DIR$/src/gui/Infobereich.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Registrierung.java" afterPath="$PROJECT_DIR$/src/gui/Registrierung.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -36,121 +39,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Datenbank.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
+      <file leaf-file-name="Anmeldung.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="642" column="0" selection-start-line="642" selection-start-column="0" selection-end-line="642" selection-end-column="0" />
+              <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
               <folding>
-                <element signature="method#Datenbank#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#dbErstellen#0;class#Datenbank#0" expanded="false" />
-                <element signature="e#2647#2687#0" expanded="false" />
-                <element signature="method#getInstance#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#getInstance#1;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectNutzerkennung#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectNutzerKennungReg#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertNutzerKennung#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertTeilnehmer#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectServerIP#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertHaelfte#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#updateStock#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#updateStock#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectSpielID#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectSpielID#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectAktuelleHaelfte#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectAktuelleHaelfte#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertAktiverSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertAktiverSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectAktiverSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectAktiverSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertStartwurf#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertStartwurf#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectSpielerImSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectSpielerImSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertStatistik#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertStatistik#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectStatistik#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectStatistik#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertRunde#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectOffenesSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectSpielleiterKennung#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#updateSpielstatus#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#updateSpielstatus#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectStarteSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectStarteSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectProfilBild#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertProfilbild#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#updateSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#updateSpieler#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#updatePasswort#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectAktuelleRunde#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectAktuelleRunde#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertnaechsterBeginner#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertnaechsterBeginner#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#selectersterBeginner#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#selectersterBeginner#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#einlesenScript#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#einlesenScript#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#prüfeSpielleiterStatus#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#prüfeSpielleiterStatus#0;class#Datenbank#0" expanded="false" />
-                <element signature="docComment;method#insertSpiel#0;class#Datenbank#0" expanded="false" />
-                <element signature="method#insertSpiel#0;class#Datenbank#0" expanded="false" />
+                <element signature="e#11807#11808#0" expanded="true" />
+                <element signature="e#11859#11860#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
+      <file leaf-file-name="Registrierung.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/Registrierung.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
+            <state vertical-scroll-proportion="-0.9604131">
+              <caret line="264" column="7" selection-start-line="264" selection-start-column="7" selection-end-line="264" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
+      <file leaf-file-name="SpielerPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="251" column="32" selection-start-line="251" selection-start-column="32" selection-end-line="251" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Infobereich.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Anmeldung.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61962134">
-              <caret line="302" column="8" selection-start-line="302" selection-start-column="8" selection-end-line="302" selection-end-column="8" />
+              <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -180,7 +96,6 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
         <option value="$PROJECT_DIR$/src/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
         <option value="/&lt;Generic&gt; Fragment (Datenbank.java:22211).sql" />
         <option value="$PROJECT_DIR$/src/Datenbank/init.sql" />
         <option value="$PROJECT_DIR$/src/netzwerk/Client.java" />
@@ -188,6 +103,9 @@
         <option value="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
         <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
         <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
+        <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
+        <option value="$PROJECT_DIR$/src/gui/Administration.java" />
+        <option value="$PROJECT_DIR$/src/gui/Registrierung.java" />
       </list>
     </option>
   </component>
@@ -598,28 +516,44 @@
       <option name="project" value="LOCAL" />
       <updated>1464715974696</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Test">
+      <created>1464716590338</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1464716590338</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37208000" />
+    <option name="totallyTimeSpent" value="37873000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32929516" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819384" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32929516" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13656388" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23234917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.118336886" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -632,7 +566,6 @@
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="69" y="702" width="1730" height="850" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31959912" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -651,7 +584,8 @@
     <MESSAGE value="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art" />
     <MESSAGE value="Neue DB Methode SelectStarteSpiel liefert dir true wenn du 2 spieler im Spiel Hast" />
     <MESSAGE value="Netzwerkgefummel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Netzwerkgefummel" />
+    <MESSAGE value="Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -664,14 +598,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="348" column="0" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -790,7 +716,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#11807#11808#0" expanded="true" />
+            <element signature="e#11859#11860#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -912,7 +841,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#11807#11808#0" expanded="true" />
+            <element signature="e#11859#11860#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1325,22 +1257,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Administration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23327616">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Netzwerk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1353,14 +1269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1440,14 +1348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/netzwerk/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1472,10 +1372,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8433735">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Administration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0240964">
+          <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61962134">
-          <caret line="302" column="8" selection-start-line="302" selection-start-column="8" selection-end-line="302" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+          <folding>
+            <element signature="e#11807#11808#0" expanded="true" />
+            <element signature="e#11859#11860#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Registrierung.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.9604131">
+          <caret line="264" column="7" selection-start-line="264" selection-start-column="7" selection-end-line="264" selection-end-column="7" />
           <folding />
         </state>
       </provider>

@@ -22,12 +22,11 @@ import java.sql.SQLException;
  */
 public class Anmeldung extends JPanel {
 
-    GUI gui;
-    JTextField jTName;
+    GUI gui; // Die aktuelle GUI
+    JTextField jTName; // Das JTextfield um den Spielername zu speichern.
 
     /**
      * Der Konstruktor erzeugt ein neues JPanel, als Anmeldebereich, um sich am Spiel an zu melden oder sich zu registrieren.
-     *
      * @param gui GUI ist die aktuelle GUI.
      */
     public Anmeldung(GUI gui) {
@@ -35,11 +34,13 @@ public class Anmeldung extends JPanel {
         this.gui = gui;
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
+
         JPanel jp = new JPanel(new BorderLayout());
         jp.setBackground(Color.BLACK);
 
 
         //-------------------------------------OBEN-PANEL--------------------------------------------------------------
+
         JPanel oben = new JPanel();
         oben.setBackground(Color.BLACK);
         JLabel jLoben = new JLabel("Herzlich Willkommen");
@@ -50,6 +51,7 @@ public class Anmeldung extends JPanel {
 
 
         //-------------------------------------LINKS-PANEL-------------------------------------------------------------
+
         JPanel links = new JPanel(new BorderLayout());
         links.setBackground(Color.DARK_GRAY);
 
@@ -190,6 +192,7 @@ public class Anmeldung extends JPanel {
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
+
         JPanel mitte = new JPanel();
         mitte.setBackground(Color.DARK_GRAY);
         JLabel jLMitte = new JLabel(Grafik.LOGO1);
@@ -199,10 +202,10 @@ public class Anmeldung extends JPanel {
 
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
+
         JPanel rechts = new JPanel(new BorderLayout());
         rechts.setPreferredSize(new Dimension(240, 0));
         rechts.setBackground(Color.DARK_GRAY);
-
 
         JPanel obenRechts = new JPanel();
         obenRechts.setBackground(Color.DARK_GRAY);
@@ -234,7 +237,7 @@ public class Anmeldung extends JPanel {
         reset.setBackground(Color.DARK_GRAY);
         JButton pwReset = new JButton("Passwort reseten");
 
-        /* Es öffnet sich ein Abfragefenster für das Passwort.
+        /* Es öffnet sich ein Abfragefenster für das Passwort("root") vom DBAdmin.
          * Ist das Passwort FALSCH: Kommt eine Fehlermeldung.
          * Ist das Passwort RICHTIG: Schaltet die Ansicht auf den Administrationssbildschirm weiter.
          */
@@ -266,7 +269,6 @@ public class Anmeldung extends JPanel {
         obenRechts.add(register);
         untenRechts.add(reset);
 
-
         rechts.add(obenRechts, BorderLayout.CENTER);
         rechts.add(untenRechts, BorderLayout.SOUTH);
 
@@ -274,6 +276,7 @@ public class Anmeldung extends JPanel {
 
 
         //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
+
         JPanel unten = new JPanel(new GridLayout(1, 3));
         unten.setBackground(Color.BLACK);
 
@@ -308,43 +311,39 @@ public class Anmeldung extends JPanel {
 
     //------------------------------------------METHODEN---------------------------------------------------------------
 
-    public void starteSpiel() {
 
+    public void starteSpiel() {
         gui.setSpielfeld(new Spielfeld(gui));
     }
 
     public void pruefeSpiel() throws SQLException, ClassNotFoundException {
-
         Datenbank.getInstance().insertTeilnehmer(jTName.getText());
         int spielID = Datenbank.getInstance().selectOffenesSpiel();
         String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
         String[] serverIP = {""};
-        if (spielleiter.equals(jTName.getText())) {
 
+        if (spielleiter.equals(jTName.getText())) {
             new Thread() {
                 public void run() {
                     gui.setNetzwerk(new Netzwerk(serverIP,gui));
                 }
-
             }.start();
+
         } else {
-
             serverIP[0] = Datenbank.getInstance().selectServerIP();
-
             new Thread() {
                 public void run() {
                     gui.setNetzwerk(new Netzwerk(serverIP,gui));
                 }
             }.start();
         }
-
     }
 
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
 
 
     /**
-     * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
+     * Diese Klasse ist für die Beschänkung der JTextfields verandwortlich.
      * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
      */
     public class JTextFieldLimit extends PlainDocument {

@@ -30,11 +30,13 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
+
         JPanel jp = new JPanel(new BorderLayout());
         jp.setBackground(Color.BLACK);
 
 
         //-------------------------------------OBEN-PANEL--------------------------------------------------------------
+
         JPanel oben = new JPanel();
         oben.setBackground(Color.BLACK);
         JLabel jLoben = new JLabel("REGISTRIERUNG");
@@ -223,6 +225,7 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------RECHTS-PANEL------------------------------------------------------------
+
         JPanel rechts = new JPanel(new GridLayout(4, 4));
 
         /* Überträgt das gewählte Profilbild in den Auswahlbereich des linken Panels.
@@ -258,6 +261,7 @@ public class Registrierung extends JPanel {
 
 
         //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
+
         JPanel unten = new JPanel(new GridLayout(1, 3));
         unten.setBackground(Color.BLACK);
 

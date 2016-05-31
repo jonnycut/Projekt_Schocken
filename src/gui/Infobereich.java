@@ -22,12 +22,14 @@ public class Infobereich extends JPanel {
 
 
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
+
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(810, 150));
         setBackground(Color.BLACK);
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
+
         jPInfo = new JPanel(new BorderLayout());
         jPInfo.setBackground(Color.BLACK);
         info = new JLabel();
@@ -44,12 +46,12 @@ public class Infobereich extends JPanel {
 
 
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
+
         add(jPInfo);
     }
 
 
     //------------------------------------------METHODEN---------------------------------------------------------------
-
 
     /**
      * Erzeugt eine JLabel und allen Spielern Informationen zu kommen zu lassen.
@@ -57,7 +59,6 @@ public class Infobereich extends JPanel {
      * Es wird zum Schluss wieder in den Infobereich eingefügt.
      */
     public void setInfos(String infos) {
-
         info.setText(infos);
         JPanel jPCenter = new JPanel(new FlowLayout());
         jPCenter.setBackground(Color.BLACK);
