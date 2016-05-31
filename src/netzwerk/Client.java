@@ -1,20 +1,27 @@
 package netzwerk;
 
 import gui.GUI;
-
 import java.io.*;
 import java.net.Socket;
 
 /**
  * Created by dfleuren on 23.05.2016.
+ * Diese Klasse ist der Client für die Netzwerkkommunikation.
  */
 public class Client {
-    private GUI gui;
-    private String zeile;
+
+    private GUI gui; // Die aktuelle GUI
+    private String zeile; // Die Nachricht für den Chat
 
 
+    /**
+     * Der Konstruktor erzeugt einen Client, der sich mit dem Server verbindet.
+     * @param gui GUI ist die aktuelle GUI.
+     */
     public Client(String ip,GUI gui) {
         this.gui=gui;
+
+        // Baut die Verbindung zum Server auf.
         try (Socket socket = new Socket(ip, 5060);
              BufferedReader reader = new BufferedReader(
                      new InputStreamReader(
@@ -29,6 +36,7 @@ public class Client {
                              System.in));
         ) {
 
+            // Erzeugt einen neuen Thread und liest die einkommenden Nachrichten und Steuersignale aus.
             new Thread(){
                 public  void run(){
                     try {
@@ -50,6 +58,7 @@ public class Client {
 
             System.out.println("Verbindung zum Server eingerichtet!");
 
+            // Erzeugt eine neue Nachricht und sendet diese zum Server.
             //String zeile;
             while ((zeile = br.readLine()) != null){
                 writer.write(zeile);
@@ -63,7 +72,8 @@ public class Client {
         }
     }
 
+
     public void sendeUpdate(){
-        zeile="#";
+        zeile = "#";
     }
 }

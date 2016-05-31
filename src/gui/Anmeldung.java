@@ -323,8 +323,10 @@ public class Anmeldung extends JPanel {
         String[] serverIP = {""};
 
         if (spielleiter.equals(jTName.getText())) {
+
             new Thread() {
                 public void run() {
+
                     gui.setNetzwerk(new Netzwerk(serverIP,gui));
                 }
             }.start();
