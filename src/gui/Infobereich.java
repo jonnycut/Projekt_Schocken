@@ -41,7 +41,7 @@ public class Infobereich extends JPanel {
     }
 
 
-    public void setInfos(String infos) throws SQLException, ClassNotFoundException {
+    public void setInfos(String infos) {
 
         info.setText(infos);
         JPanel jPCenter = new JPanel(new FlowLayout());
@@ -54,12 +54,20 @@ public class Infobereich extends JPanel {
         add(jPInfo);
     }
 
-    public void istSpielleiter() throws SQLException, ClassNotFoundException {
-            int spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
+    public void istSpielleiter() {
+        int spielID = 0;
+        try {
+            spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
             JLabel spielleiter = new JLabel("Spielleiter ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
             spielleiter.setForeground(Color.RED);
             spielleiter.setBackground(Color.BLACK);
             jPInfo.add(spielleiter,BorderLayout.SOUTH);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
