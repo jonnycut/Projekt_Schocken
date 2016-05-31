@@ -600,7 +600,7 @@ public class Datenbank {
         ResultSet r = stmt.executeQuery("SELECT fk_t_Spielleiter_Kennung FROM t_spiel WHERE spiel_id='" + spielID + "'");
         if (r.next()) {
             spielleiter = r.getString(1);
-            System.out.println("Das Spiel mit der ID" + spielID + "hat die Kennung : " + spielleiter);
+            System.out.println("Das Spiel mit der ID " + spielID + " hat die Spielleiterkennung : " + spielleiter);
         }
         return spielleiter;
     }
