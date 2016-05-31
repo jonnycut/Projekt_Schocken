@@ -11,7 +11,7 @@ import java.net.Socket;
 public class Client {
 
     private GUI gui; // Die aktuelle GUI
-    private String zeile; // Die Nachricht für den Chat
+    private String zeile; // Die Nachricht/Steuersignal für den Chat
 
 
     /**
