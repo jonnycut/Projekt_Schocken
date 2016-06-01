@@ -68,6 +68,7 @@ public class Spielfeld extends JPanel {
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
+
                 gui.sendeUpdateSignal(" Das Spiel wurde gestartet und es wir der Beginner ausgewürfelt");
 
 

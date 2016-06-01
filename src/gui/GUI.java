@@ -157,7 +157,7 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
                 break;
             case 6:
-                spielfeld.updateTeilnehmerListe();
+                //spielfeld.updateTeilnehmerListe();
                 sendeUpdateSignal(besitzerName + "  ist dem Spiel begetreten");
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
