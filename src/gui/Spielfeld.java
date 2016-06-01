@@ -167,18 +167,19 @@ public class Spielfeld extends JPanel {
         add(jPOben, BorderLayout.NORTH);
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
-        repaint();
+        revalidate();
     }
 
     public void updateStock() {
 
+        jPStock.remove(jLStock);
         jLStock.setText("" + haelfte.getStock().getStrafpunkte());
         JPanel jPCenter = new JPanel(new FlowLayout());
         jPCenter.setBackground(Color.DARK_GRAY);
         jPCenter.add(jLStock);
         jPStock.add(jPCenter);
         jPMitte.add(jPStock);
-
+        jPMitte.revalidate();
         updateView();
     }
 
@@ -186,7 +187,7 @@ public class Spielfeld extends JPanel {
 
         jPMitte.remove(this.infobereich);
         jPMitte.add(infobereich);
-        jPMitte.add(jPStock);
+        jPMitte.add(this.jPStock);
         jPMitte.revalidate();
         updateStock();
         updateView();
@@ -195,10 +196,9 @@ public class Spielfeld extends JPanel {
 
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
-
         jPUnten.removeAll();
-        try {
 
+        try {
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
 
             for (String s : kennungListe) {
@@ -208,16 +208,16 @@ public class Spielfeld extends JPanel {
                     tmpPanel.getBecher().setEnabled(true);
                     tmpPanel.setBecher(tmpPanel.getBecher());
                 }
+
                 teilnehmer.add(tmpPanel);
                 jPUnten.add(tmpPanel);
+                jPUnten.revalidate();
             }
 
             if(teilnehmer.size() >=2 ){
                 if(jPOben.getComponents().length!=0)
                     jPOben.getComponent(0).setEnabled(true);
             }
-
-
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -225,7 +225,6 @@ public class Spielfeld extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
