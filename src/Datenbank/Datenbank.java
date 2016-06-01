@@ -13,16 +13,14 @@ import spiel.Wuerfel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 
 public class Datenbank {
@@ -676,7 +674,7 @@ public class Datenbank {
     public void updateAktiv(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
         boolean flag ;
-        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung + "'");
+        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung+"'");
         if (r.next()) {
             flag=(!r.getBoolean(1));
             stmt.executeUpdate("Update t_spieler SET aktiv = " + flag + " Where kennung = '" + kennung + "'");
@@ -737,20 +735,26 @@ public class Datenbank {
 
     public void schalteWeiter(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        String aktiverSpieler = selectAktiverSpieler(spielID);
+        java.util.List<String> spieler=new ArrayList<>();
+        java.util.List<Boolean> spielerAktiv=new ArrayList<>();
 
 
-        ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung From t_spieler where kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client where fk_t_spiel_spiel_id =" + spielID + " order by aktiv DESC, startwurf DESC");
+
+        ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung,startwurf FROM t_spieler WHERE kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client WHERE fk_t_spiel_spiel_id =7)  ORDER BY startwurf DESC");
         while (rs.next()) {
-            if (rs.getBoolean(1) == true) {
-                updateAktiv(rs.getString(2));
-                if (rs.next()) {
-                    updateAktiv(rs.getString(2));
-                }
-            }
-
+            spieler.add(rs.getString("kennung"));
+            spielerAktiv.add(rs.getBoolean("aktiv"));
         }
-
+        System.out.println(spieler.toString());
+        while(!spielerAktiv.get(0)){
+            Boolean tempBool=spielerAktiv.remove(0);
+            String temp=spieler.remove(0);
+            spieler.add(spieler.size(),temp);
+            spielerAktiv.add(spielerAktiv.size(),tempBool);
+        }
+        System.out.println(spieler.toString());
+        updateAktiv(spieler.get(0));
+        updateAktiv(spieler.get(1));
     }
 
     public void insertOrUpdateDurchgang(String kennung, int spielID, int haelfte, int rundennr) throws SQLException, IOException, ClassNotFoundException {
@@ -1102,8 +1106,8 @@ public class Datenbank {
      * @throws SQLException
      */
     private static void einlesenScript() throws SQLException {
-        try (BufferedReader br = new BufferedReader(new FileReader(
-                Datenbank.class.getResource("init.sql").getFile()))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                Datenbank.class.getResourceAsStream("init.sql")))) {
             String sqlInstruction = "";
             String zeile;
             while ((zeile = br.readLine()) != null) {
