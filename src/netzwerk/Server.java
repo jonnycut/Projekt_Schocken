@@ -49,6 +49,7 @@ public class Server {
     }
 
     private void loescheUser(User user) {
+
         users.remove(user);
     }
 

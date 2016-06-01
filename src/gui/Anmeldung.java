@@ -310,37 +310,49 @@ public class Anmeldung extends JPanel {
     //------------------------------------------METHODEN---------------------------------------------------------------
 
 
+    /**
+     * Erzeugt ein JPanel, welches als Spielfeld dient.
+     */
     public void starteSpiel() {
 
         gui.setSpielfeld(new Spielfeld(gui));
     }
 
-    public void pruefeSpiel() throws SQLException, ClassNotFoundException {
-        Datenbank.getInstance().insertTeilnehmer(jTName.getText());
-        int spielID = Datenbank.getInstance().selectOffenesSpiel();
-        String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
-        String[] serverIP = {""};
 
-        if (spielleiter.equals(jTName.getText())) {
+    /**
+     * Prüft über die Datenbank ob es ein Spiel bereits existiert oder ob eine neues erstellt werden soll.
+     * Mit der SpielID wird der Spielleiter ermittelt und es wir eine neues Netzwerk erstellt mit Client oder Server mit Client.
+     */
+    public void pruefeSpiel() {
 
-            new Thread() {
-                public void run() {
+        try {
+            Datenbank.getInstance().insertTeilnehmer(jTName.getText());
+            int spielID = Datenbank.getInstance().selectOffenesSpiel();
+            String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
+            String[] serverIP = {""};
+            if (spielleiter.equals(jTName.getText())) {
 
-                    gui.setNetzwerk(new Netzwerk(serverIP,gui));
-                }
-            }.start();
+                new Thread() {
+                    public void run() {
 
-        } else {
-            serverIP[0] = Datenbank.getInstance().selectServerIP();
-            new Thread() {
-                public void run() {
-                    gui.setNetzwerk(new Netzwerk(serverIP,gui));
-                }
-            }.start();
+                        gui.setNetzwerk(new Netzwerk(serverIP,gui));
+                    }
+                }.start();
 
+            } else {
+                serverIP[0] = Datenbank.getInstance().selectServerIP();
+                new Thread() {
+                    public void run() {
 
+                        gui.setNetzwerk(new Netzwerk(serverIP,gui));
+                    }
+                }.start();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-
     }
 
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
