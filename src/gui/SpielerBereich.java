@@ -16,7 +16,6 @@ public class SpielerBereich extends JPanel {
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(1020, 530));
         setBackground(Color.DARK_GRAY);
-        setBorder(BorderFactory.createMatteBorder(8, 0, 0, 0, Color.BLACK));
 
         for(SpielerPanel s : teilnehmer){
             add(s);

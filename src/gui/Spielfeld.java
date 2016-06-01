@@ -33,8 +33,6 @@ public class Spielfeld extends JPanel {
     private JPanel jPMitte; // BoderLayout.CENTER beinhaltet den Infobereich
     private JPanel jPUnten; // BorderLayout.SOUUTH beinhaltet die SpielerPanel
 
-    private SpielerBereich sb;
-
     private JPanel jPStock; //
     private JLabel jLStock;
 
@@ -61,17 +59,7 @@ public class Spielfeld extends JPanel {
 
                 jPOben.setVisible(false);
                 infobereich.setPreferredSize(new Dimension(810, 200));
-                try {
-                    System.out.println("Spielfeld: Setze aktiv");
-                    Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
-                    System.out.println("Spielfeld: Habe aktiv gesetzt");
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-
-                gui.sendeUpdateSignal(" Das Spiel wurde gestartet und es wir der Beginner ausgewürfelt");
+                gui.sendeUpdateSignal(" Das Spiel wurde gestartet");
 
 
                 try {
@@ -164,26 +152,20 @@ public class Spielfeld extends JPanel {
 
     private void updateView() {
 
-        remove(jPOben);
-        remove(jPMitte);
-        remove(jPUnten);
         add(jPOben, BorderLayout.NORTH);
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
-        revalidate();
-        gui.updateView();
     }
 
     public void updateStock() {
 
-        jPStock.remove(jLStock);
         jLStock.setText("" + haelfte.getStock().getStrafpunkte());
         JPanel jPCenter = new JPanel(new FlowLayout());
         jPCenter.setBackground(Color.DARK_GRAY);
         jPCenter.add(jLStock);
         jPStock.add(jPCenter);
         jPMitte.add(jPStock);
-        jPMitte.revalidate();
+
         updateView();
     }
 
@@ -191,7 +173,7 @@ public class Spielfeld extends JPanel {
 
         jPMitte.remove(this.infobereich);
         jPMitte.add(infobereich);
-        jPMitte.add(this.jPStock);
+        jPMitte.add(jPStock);
         jPMitte.revalidate();
         updateStock();
         updateView();
@@ -200,9 +182,9 @@ public class Spielfeld extends JPanel {
 
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
-        //jPUnten.remove(sb);
 
         try {
+
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
 
             for (String s : kennungListe) {
@@ -212,16 +194,16 @@ public class Spielfeld extends JPanel {
                     tmpPanel.getBecher().setEnabled(true);
                     tmpPanel.setBecher(tmpPanel.getBecher());
                 }
-
                 teilnehmer.add(tmpPanel);
-//                jPUnten.add(tmpPanel);
-//                jPUnten.revalidate();
+                jPUnten.add(tmpPanel);
             }
 
             if(teilnehmer.size() >=2 ){
                 if(jPOben.getComponents().length!=0)
                     jPOben.getComponent(0).setEnabled(true);
             }
+            updateView();
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -237,24 +219,19 @@ public class Spielfeld extends JPanel {
         }
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
-
-        sb = new SpielerBereich(teilnehmer);
-        jPUnten.add(sb);
-        gui.setZustand(666);
-        updateView();
-
     }
 
 
+
+
     public void netzwerkUpdate(String info){
-
+        jPUnten.removeAll();
         updateTeilnehmerListe();
-
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
         updateView();
-
+        revalidate();
         System.out.println("recieved updateSignal...");
     }
 
