@@ -352,14 +352,14 @@ public class SpielerPanel extends JPanel {
                     }
                 }
 
-                try {
-                    //ToDo: Würfel und fertig des Spielers mitschicken! KNA
-                    Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
-                }
+//                try {
+//                    //ToDo: Würfel und fertig des Spielers mitschicken! KNA
+//                    Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
+//                } catch (SQLException e1) {
+//                    e1.printStackTrace();
+//                } catch (ClassNotFoundException e1) {
+//                    e1.printStackTrace();
+//                }
 
                 spielfeld.netzwerkUpdate(spieler.getName() + " hat "+ spieler.getStartwurf() + " gewürfelt!");
                 spielfeld.pruefeFertig();
