@@ -557,7 +557,7 @@ public class Datenbank {
         int neueRunde = aktuelleRunde + 1;
         String nächsterbeginner = selectnaechsterBeginner(spielID);
         int haelfte = selectAktuelleHaelfte(spielID);
-        //insertRundenVerlierer(spielID,);
+       // insertRundenergebnis(spielID, );
 
         //weitere Runden erstellen
         try {
@@ -683,12 +683,12 @@ public class Datenbank {
         return check;
     }
 
-    public void insertRundenVerlierer(int spielID, String verlierer) throws SQLException {
+    public void insertRundenergebnis(int spielID, String verlierer,String gewinner) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int rundennr = selectAktuelleRunde(spielID);
         int art = selectAktuelleHaelfte(spielID);
 
-        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
+        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' gewinner = '"+gewinner +"' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
     }
 //    public void updateStrafpunkte
 
@@ -856,8 +856,10 @@ public class Datenbank {
         );
     }*/
 
-    public void updatePasswort(String name, String passwort) {
-        //ToDo Machen
+    public void updatePasswort(String name, String passwort) throws SQLException {
+        Statement stmt =verbindung.createStatement();
+
+        stmt.executeUpdate("UPDATE t_spieler SET passwort = '"+passwort+"' WHERE kennung = '"+name+"'");
     }
 //-------------------------------------------Private Methoden-----------------------------------------------------------
 
