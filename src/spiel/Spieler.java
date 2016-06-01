@@ -213,6 +213,8 @@ public class Spieler implements Comparable<Spieler> {
             e.printStackTrace();
         }
 
+
+
     }
 
     public int getStartwurf(){
@@ -231,22 +233,6 @@ public class Spieler implements Comparable<Spieler> {
     public void popStrafpunkte(int anzahl) {
 
         this.strafpunkte -= anzahl;
-
-    }
-
-    /**
-     * <pre>
-     *     Setzt die Wuerfel des Bechers auf die uebergebenen int Werte.
-     *     Wird ein Wert mit 0 uebergeben, wird dieser Wuerfel nicht veraendert.
-     *
-     * </pre>
-     *
-     * @param w1 int {1-6} Wert des ersten Wuerfels, 0 fuer nicht veraendern.
-     * @param w2 int {1-6} Wert des zweiten Wuerfels, 0 fuer nicht veraendern.
-     * @param w3 int {1-6} Wert des dritten Wuerfels, 0 fuer nicht veraendern.
-     */
-    public void setWuerfel(int w1, int w2, int w3) {
-        becher.setWurf(w1, w2, w3);
 
     }
 
@@ -304,6 +290,21 @@ public class Spieler implements Comparable<Spieler> {
             return o1.getBecher().compareTo(o2.getBecher());
         }
     };
+
+    /**
+     * <pre>
+     *  Setzt dem Becher des Spielers ein neues WuerfelArray als Wurf.
+     * Nutzt Becher.setWurf(Wuerfel[]), diese sortiert und setzt Becher.Bild.
+     * Danach wird Spieler.letztesBild = Becher.getBild();
+     * </pre>
+     *
+     * @param wuerfelArray - Ein Array aus 3 Object Wuerfel
+     * @see Becher#setWurf(Wuerfel[])
+     */
+    public void setWurt(Wuerfel[] wuerfelArray){
+        this.becher.setWurf(wuerfelArray);
+        this.letztesBild = becher.getBild();
+    }
 
     /**
      * <pre>
