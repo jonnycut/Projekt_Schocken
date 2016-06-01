@@ -341,7 +341,7 @@ public class SpielerPanel extends JPanel {
         if(spieler.getAktiv() == true){
             setBorder(new LineBorder(Color.RED, 3));
             buttonEnable();
-            this.spielfeld.netzwerkUpdate(spieler.getName() + " ist dran...");
+            spielfeld.getInfobereich().setInfos(spieler.getName() + " ist dran...");
         }
         else{
             setBorder(new LineBorder(Color.BLACK, 2));
