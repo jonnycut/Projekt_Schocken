@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Datenbank/diagram.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_BATMAN.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_BB8.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Grafik/Avatar_BOBA.png" charset="UTF-8" />
