@@ -13,9 +13,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
+/**<pre>
  * Created by U.F.O. on 23.05.2016.
  * Diese Klasse ist der Anmeldebildschirm vom Spiel.
+ * </pre>
  *
  * @author DFleuren
  */
@@ -31,9 +32,11 @@ public class Anmeldung extends JPanel {
      */
     JTextField jTName;
 
-    /**
+    /**<pre>
      * Der Konstruktor erzeugt ein neues JPanel, als Anmeldebereich, um sich am Spiel an zu melden oder sich zu registrieren.
+     * Dort besteht auch die Möglichkeit die Datenbank zu Löschen oder ein Spielerpasswort neu zu vergeben.
      * @param gui GUI ist die aktuelle GUI.
+     * </pre>
      */
     public Anmeldung(GUI gui) {
         super();
@@ -105,11 +108,9 @@ public class Anmeldung extends JPanel {
          */
         ActionListener startButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ToDo: Schaltet weiter und gibt das Spiel frei
-
-                starteSpiel();
+                gui.setSpielfeld(new Spielfeld(gui));
                 gui.setZustand(6);
-                gui.updateView(e);
+                gui.updateView();
 
             }
         };
@@ -176,8 +177,8 @@ public class Anmeldung extends JPanel {
                         gui.updateSpielerListe(Datenbank.getInstance().selectSpieler(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
-                        gui.setIch(jTName.getText());
-                        System.out.println("Flurry:  " + gui.getIch());
+                        gui.setBesitzerName(jTName.getText());
+                        System.out.println("Flurry:  " + gui.getBesitzerName());
                         pruefeSpiel();
                     } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -272,7 +273,7 @@ public class Anmeldung extends JPanel {
         ActionListener reg = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(3);
-                gui.updateView(e);
+                gui.updateView();
             }
         };
 
@@ -302,7 +303,7 @@ public class Anmeldung extends JPanel {
                     String pwdEingabe = password.getText();
                     if (pwdEingabe.equals(richtigesPWD)) {
                         gui.setZustand(5);
-                        gui.updateView(e);
+                        gui.updateView();
                     } else {
                         JOptionPane.showMessageDialog(null, "Passwort falsch", "fehler", JOptionPane.ERROR_MESSAGE);
                     }
@@ -357,22 +358,8 @@ public class Anmeldung extends JPanel {
         add(jp, BorderLayout.CENTER);
     }
 
+
     //------------------------------------------METHODEN---------------------------------------------------------------
-
-
-    /**
-     * <pre>
-     *  Setzt das Attribut spielfeld der GUI mit einem neuen Spielfeld (Extents JPanel),
-     *  dem Spielfeld wird die GUI mitgegeben.
-     * </pre>
-     * @see Spielfeld
-     *
-     */
-    public void starteSpiel() {
-
-        gui.setSpielfeld(new Spielfeld(gui));
-    }
-
 
     /**<pre>
      * Prüft über die Datenbank, ob bereits ein Spiel  existiert, oder ob eine neues erstellt werden soll.
@@ -415,11 +402,12 @@ public class Anmeldung extends JPanel {
     //----------------------------------------MINNEREKLASSEN-----------------------------------------------------------
 
 
-    /**
+    /** <pre>
      * Diese Klasse ist für die Beschänkung der JTextfields verandwortlich.
      * So dass nur eine Maxanzahl von Zeichen eingetragen werden darf / kann.
      *
      * Diese Klasse basiert auf einer Vorlage von http://www.java2s.com/Tutorial/Java/0260__Swing-Event/LimitJTextFieldinputtoamaximumlength.htm
+     * </pre>
      */
     private class JTextFieldLimit extends PlainDocument {
         private int limit;

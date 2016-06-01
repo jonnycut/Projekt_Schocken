@@ -94,7 +94,7 @@ public class Infobereich extends JPanel {
 //    public void istSpielleiter() {
 //        int spielID = 0;
 //        try {
-//            spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
+//            spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName());
 //            System.out.println(spielID);
 //            JLabel spielleiter = new JLabel("Spielleiter:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
 //            spielleiter.setForeground(Color.RED);

@@ -11,9 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-/**
+/**<pre>
  * Created by U.F.O on 23.05.2016.
  * Diese Klasse ist für den Administrator um Passwörter zu ändern.
+ * </pre>
  *
  * @author DFleuren
  */
@@ -102,7 +103,6 @@ public class Administration extends JPanel{
         untenLinks.setBackground(Color.DARK_GRAY);
 
         // Liest das neue Passwort aus und führt die Methode passwortReset() aus.
-
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -120,7 +120,7 @@ public class Administration extends JPanel{
         ActionListener zurueck = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(1);
-                gui.updateView(e);
+                gui.updateView();
             }
         };
 
@@ -191,7 +191,7 @@ public class Administration extends JPanel{
     //------------------------------------------METHODEN---------------------------------------------------------------
 
     /**
-     * Setzt das Passwort eines Spielers zurück.
+     * Setzt ein neues Passwort eines Spielers.
      * @param name String ist die Kennung des Spielers, dessen Passwort geändert wird (caseSensitive!).
      * @param passwort String ist das neue Passwort.
      */

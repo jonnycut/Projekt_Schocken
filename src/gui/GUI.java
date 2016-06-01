@@ -3,7 +3,6 @@ package gui;
 import Grafik.Grafik;
 import netzwerk.Client;
 import netzwerk.Netzwerk;
-import netzwerk.Server;
 import spiel.Spieler;
 
 import javax.swing.*;
@@ -21,13 +20,13 @@ import java.util.List;
  */
 public class GUI extends JFrame {
 
-    //ToDo "ich" in sprechende Variable ändern
-    //ToDo fehlende Attribute Kommentieren
+    //ToDo fehlende Attribute und Konstruktor Kommentieren
 
     /**
      * Zustand der GUI um die verschiedenen Ansichen zu schalten
      */
     private int zustand = 1;
+
     /**
      * Das GrundPanel
      */
@@ -36,32 +35,40 @@ public class GUI extends JFrame {
     /**
      * Der Besitzer der GUI
      */
-    private String ich = "";
+    private String besitzerName = "";
+
     /**
      * Die Liste der Spieler
      */
     private List<Spieler> spieler = new ArrayList<>();
+
     /**
      * Der Anmeldebildschirm
      */
     private Anmeldung anmeldung;
+
     /**
      * Der Registrierungsbildschirm
      */
     private Registrierung registrierung;
+
     /**
      * Der Administrationsbildschirm
      */
     private Administration administration;
+
     //private Statistik statistik = new Statistik();
+
     /**
      * Der Spielbildschirm
      */
     private Spielfeld spielfeld;
+
     /**
      * Das Netzwerk der GUI
      */
     private Netzwerk netzwerk;
+
     /**
      * Der NetzwerkClient der GUI
      */
@@ -88,7 +95,8 @@ public class GUI extends JFrame {
 
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                updateView(e);
+
+                updateView();
             }
         };
 
@@ -114,6 +122,8 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
+    //------------------------------------------METHODEN---------------------------------------------------------------
+
     /**
      * <pre>
      * Aktualisiert die Ansicht der GUI
@@ -125,12 +135,12 @@ public class GUI extends JFrame {
      * ist gesendet
      * </pre>
      *
-     * @param e
+     * @param
      * @see Client#sendeUpdate(String)
      * @see Spielfeld#updateTeilnehmerListe()
      */
-    //ToDO: Wieso wird e übergeben?
-    public void updateView(ActionEvent e) {
+
+    public void updateView() {
 
         switch (zustand) {
 
@@ -146,19 +156,20 @@ public class GUI extends JFrame {
                 zustand = 4;
                 break;
             case 4:
-                //ToDo: Dinge die bei Registrierung laufen
+                //ToDo: Statistik vom Spieler
                 break;
             case 5:
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
                 break;
             case 6:
                 spielfeld.updateTeilnehmerListe();
-                sendeUpdateSignal(ich + "  ist dem Spiel begetreten");
-                //spielfeld.setSpielerPanel(); --> Grund fuer die doppelte Anzeige des Clients
+                sendeUpdateSignal(besitzerName + "  ist dem Spiel begetreten");
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
-
+            case 7:
+                //ToDo: Statistik vom Gewinner und Verlierer oder vom Spiel
+                break;
         }
     }
 
@@ -175,12 +186,12 @@ public class GUI extends JFrame {
 
     /**
      * Getter für das Netzwerk der GUI
-     *
+     * Für eine spätere Änderung.
      * @return Netzwerk Object
      * @see Netzwerk
      */
-    //ToDo: Kann das nicht raus, da wir auf Grund des Threads eh nie an das Netzwerk kommen!
     public Netzwerk getNetzwerk() {
+
         return netzwerk;
     }
 
@@ -217,37 +228,23 @@ public class GUI extends JFrame {
         this.spieler.add(spieler);
     }
 
-    //ToDo: What the Fuck??
-    public SpielerPanel getSpieler() {
-
-        SpielerPanel spieler = null;
-
-        return spieler;
-    }
-
     /**
      * Liefert die SpielerListe der GUI
      *
      * @return List{Spieler}
      */
-    //ToDo: Richtige Schreibweise der Liste <> wird ignoriert....
     public List<Spieler> getAlleSpieler() {
 
         return this.spieler;
     }
 
-    //ToDo: Wofür?
-    public void startPosition() {
-
-    }
-
     /**
      * Setzt den Zustand der GUI
      *
-     * @param zustand int {1-6]}
+     * @param zustand int {1-7]}
      */
     public void setZustand(int zustand) {
-        //ToDo: Falschen Zustand abfangen?
+
         this.zustand = zustand;
     }
 
@@ -256,19 +253,19 @@ public class GUI extends JFrame {
      *
      * @return String - Kennung des Besitzers
      */
-    public String getIch() {
+    public String getBesitzerName() {
 
-        return ich;
+        return besitzerName;
     }
 
     /**
      * Setzt den Besitzer der GUI
      *
-     * @param ich String - Kennung des Besitzers
+     * @param besitzerName String - Kennung des Besitzers
      */
-    public void setIch(String ich) {
+    public void setBesitzerName(String besitzerName) {
 
-        this.ich = ich;
+        this.besitzerName = besitzerName;
     }
 
     /**
@@ -287,7 +284,6 @@ public class GUI extends JFrame {
             System.out.println("client nicht gefunden");
         else
             this.client.sendeUpdate(info);
-
     }
 
     /**
@@ -300,5 +296,4 @@ public class GUI extends JFrame {
 
         this.client = client;
     }
-
 }

@@ -161,7 +161,7 @@ public class Registrierung extends JPanel {
                         if (passwort.equals(passwortW) && !jTName.getText().equals("")) {
                             try {
                                 gui.setZustand(1);
-                                gui.updateView(e);
+                                gui.updateView();
                                 Datenbank.getInstance().insertNutzerKennung(jTName.getText(), passwort);
                                 Datenbank.getInstance().insertProfilbild(jTName.getText(), jBProfil.getIcon());
                             } catch (SQLException e1) {
@@ -202,7 +202,7 @@ public class Registrierung extends JPanel {
         ActionListener zurueck = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setZustand(1);
-                gui.updateView(e);
+                gui.updateView();
             }
         };
 

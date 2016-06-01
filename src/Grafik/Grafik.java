@@ -8,7 +8,6 @@ import javax.swing.*;
  * Diese Klasse hält alle Grafiken für das gesamte Spiel vor.
  * </pre>
  *
- *
  * @author DFleuren
  */
 public class Grafik {

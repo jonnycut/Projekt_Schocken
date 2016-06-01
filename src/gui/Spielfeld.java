@@ -3,7 +3,6 @@ package gui;
 import Datenbank.Datenbank;
 import spiel.Haelfte;
 import spiel.Spieler;
-import sun.misc.IOUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -138,7 +137,7 @@ public class Spielfeld extends JPanel {
     public void istSpielleiter() {
         int spielID = 0;
         try {
-            spielID = Datenbank.getInstance().selectSpielID(gui.getIch());
+            spielID = Datenbank.getInstance().selectSpielID(gui.getBesitzerName());
             System.out.println(spielID);
             JLabel spielleiter = new JLabel("Spielleiter ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
             spielleiter.setForeground(Color.RED);
@@ -189,7 +188,7 @@ public class Spielfeld extends JPanel {
             for (String s : kennungListe) {
                 SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), haelfte.getRunde(), this);
 
-                if(s.equals(gui.getIch())){
+                if(s.equals(gui.getBesitzerName())){
                     tmpPanel.getBecher().setEnabled(true);
                     tmpPanel.setBecher(tmpPanel.getBecher());
                 }
