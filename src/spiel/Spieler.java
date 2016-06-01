@@ -212,9 +212,6 @@ public class Spieler implements Comparable<Spieler> {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     public int getStartwurf(){

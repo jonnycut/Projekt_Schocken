@@ -59,7 +59,14 @@ public class Spielfeld extends JPanel {
 
                 jPOben.setVisible(false);
                 infobereich.setPreferredSize(new Dimension(810, 200));
-                gui.sendeUpdateSignal(" Das Spiel wurde gestartet");
+                try {
+                    Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                gui.sendeUpdateSignal(" Das Spiel wurde gestartet und es wir der Beginner ausgewürfelt");
 
 
                 try {

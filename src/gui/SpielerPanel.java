@@ -269,7 +269,22 @@ public class SpielerPanel extends JPanel {
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "becher");
                     aufgedeckt = false;
 
-                    spieler.wuerfeln();
+                    try {
+                        if(Datenbank.getInstance().selectAktuelleHaelfte(Datenbank.getInstance().selectSpielID(spieler.getName())) == 0){
+                            spieler.beginnerWuerfeln();
+                            ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
+                            wuerfeln.setEnabled(false);
+                        }
+                        else {
+                            spieler.wuerfeln();
+                        }
+
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+
                     w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
@@ -304,22 +319,19 @@ public class SpielerPanel extends JPanel {
                         if (!wuerfelAnsicht.getComponent(i).getName().equals("leer")) {
                             wuerfelRaus((JButton) wuerfelAnsicht.getComponent(i), i, wuerfelListener);
                         }
-
                     }
                 }
 
                 try {
                     //ToDo: Würfel und fertig des Spielers mitschicken! KNA
-                    Datenbank.getInstance().insertStatistik(spieler.getName(), spieler.getStatistik());
-                    Datenbank.getInstance().selectStatistik(spieler.getName());
+                    Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
                 } catch (SQLException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
 
+                spielfeld.netzwerkUpdate(spieler.getName() + " hat "+ spieler.getStartwurf() + " gewürfelt!");
                 spielfeld.pruefeFertig();
                 spieler.setAktiv(false);
 
