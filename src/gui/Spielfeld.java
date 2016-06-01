@@ -66,7 +66,7 @@ public class Spielfeld extends JPanel {
                     //Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
                     Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
                     gui.sendeUpdateSignal(" Das Spiel wurde gestartet." + gui.getBesitzerName() + " beginnt das Auswürfeln...");
-                    netzwerkUpdate("lokales Update");
+                    //netzwerkUpdate("lokales Update");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
