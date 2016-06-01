@@ -157,7 +157,7 @@ public class Registrierung extends JPanel {
                 }
 
                 try {
-                    if (Datenbank.getInstance().selectNutzerKennungReg(jTName.getText()))
+                    if (!Datenbank.getInstance().selectNutzerKennungReg(jTName.getText()))
                         if (passwort.equals(passwortW) && !jTName.getText().equals("")) {
                             try {
                                 gui.setZustand(1);
