@@ -361,7 +361,7 @@ public class SpielerPanel extends JPanel {
 //                    e1.printStackTrace();
 //                }
 
-                spielfeld.netzwerkUpdate(spieler.getName() + " hat "+ spieler.getStartwurf() + " gewürfelt!");
+
                 spielfeld.pruefeFertig();
                 spieler.setAktiv(false);
 
