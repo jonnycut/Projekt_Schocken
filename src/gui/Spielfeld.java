@@ -60,7 +60,7 @@ public class Spielfeld extends JPanel {
 
                 jPOben.setVisible(false);
                 infobereich.setPreferredSize(new Dimension(810, 200));
-                gui.sendeUpdateSignal();
+                gui.sendeUpdateSignal(" Das Spiel wurde gestartet");
 
 
                 try {

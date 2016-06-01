@@ -106,7 +106,7 @@ public class GUI extends JFrame {
                 break;
             case 6:
                 spielfeld.updateTeilnehmerListe();
-                sendeUpdateSignal();
+                sendeUpdateSignal(ich + "  ist dem Spiel begetreten");
                 //spielfeld.setSpielerPanel(); --> Grund fuer die doppelte Anzeige des Clients
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
@@ -173,11 +173,11 @@ public class GUI extends JFrame {
         this.ich = ich;
     }
 
-    public void sendeUpdateSignal(){
+    public void sendeUpdateSignal(String info){
         if(this.client==null)
             System.out.println("client nicht gefunden");
         else
-            this.client.sendeUpdate();
+            this.client.sendeUpdate(info);
 
     }
     public void setClient(Client client){
