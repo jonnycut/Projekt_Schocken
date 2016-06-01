@@ -226,7 +226,7 @@ public class Spielfeld extends JPanel {
             e.printStackTrace();
         }
 
-
+        jPUnten.repaint();
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
         for (SpielerPanel s : teilnehmer) {
@@ -247,7 +247,7 @@ public class Spielfeld extends JPanel {
         updateInfo(infobereich);
         updateStock();
         updateView();
-        validate();
+        repaint();
         System.out.println("recieved updateSignal...");
     }
 
