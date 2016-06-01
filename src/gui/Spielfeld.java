@@ -181,10 +181,6 @@ public class Spielfeld extends JPanel {
 
 
     public void updateTeilnehmerListe() {
-        jPOben.setVisible(false);
-        jPOben.removeAll();
-        jPOben.invalidate();
-
         teilnehmer = new ArrayList<>();
 
         try {
@@ -216,8 +212,6 @@ public class Spielfeld extends JPanel {
             e.printStackTrace();
         }
 
-        jPOben.repaint();
-        jPOben.setVisible(true);
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
         for (SpielerPanel s : teilnehmer) {
@@ -231,14 +225,13 @@ public class Spielfeld extends JPanel {
 
 
     public void netzwerkUpdate(String info){
-        setVisible(false);
-        invalidate();
+        jPUnten.removeAll();
         updateTeilnehmerListe();
-        repaint();
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
-        repaint();
+        updateView();
+        revalidate();
         System.out.println("recieved updateSignal...");
     }
 

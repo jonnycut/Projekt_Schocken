@@ -157,18 +157,13 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
                 break;
             case 6:
-                //spielfeld.updateTeilnehmerListe();
+                spielfeld.updateTeilnehmerListe();
                 sendeUpdateSignal(besitzerName + "  ist dem Spiel begetreten");
                 jp.add(spielfeld, "Spielfeld");
                 ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
             case 7:
                 //ToDo: Statistik vom Gewinner und Verlierer oder vom Spiel
-                break;
-            case 666:
-                jp.remove(spielfeld);
-                jp.add(spielfeld, "Spielfeld");
-                ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
         }
     }
@@ -216,7 +211,7 @@ public class GUI extends JFrame {
 
         this.spielfeld = spielfeld;
     }
-
+    
     /**
      * Setzt den Zustand der GUI
      *
