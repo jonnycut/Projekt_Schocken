@@ -175,6 +175,7 @@ public class Spielfeld extends JPanel {
         jPMitte.add(infobereich);
         jPMitte.add(jPStock);
         jPMitte.revalidate();
+        updateStock();
         updateView();
     }
 
@@ -230,6 +231,7 @@ public class Spielfeld extends JPanel {
         updateInfo(infobereich);
         updateStock();
         updateView();
+        revalidate();
         System.out.println("recieved updateSignal...");
     }
 
