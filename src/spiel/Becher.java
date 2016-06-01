@@ -99,20 +99,20 @@ public class Becher implements Comparable<Becher> {
     }
 
     /**<pre>
-     * Setzt die drei Wuerfel auf die uebergebenen int Werte
-     * und ruft sortiere() auf umd die Wuerfelliste zu sortieren
+     * Setzt das wuerfelArray auf das übergebene Array,
+     * ruft sortiere() auf umd die Wuerfelliste zu sortieren
      * und das aktuelle Bild zu bestimmen.
      *
-     * Bei falschen Werten (wert <0 || wert > 6) wird der Wuerfel nicht veraendert.
+     * Wird in Spieler.setWurf(Wuerfel[]) genutzt.
+     *
+     *
      * </pre>
-     * @param w1 int {1-6} Wert des ersten Wuerfels, 0 fuer nicht veraendern.
-     * @param w2 int {1-6} Wert des zweiten Wuerfels, 0 fuer nicht veraendern.
-     * @param w3 int {1-6} Wert des dritten Wuerfels, 0 fuer nicht veraendern.
+     * @param wuerfelArray Wuerfel[] Das übergebene Array, das als Würfel eingefügt wird.
+     * @see Spieler#setWurt(Wuerfel[])
+
      */
-    public void setWurf(int w1, int w2, int w3) {
-        wuerfelArray[0].setWert(w1);
-        wuerfelArray[1].setWert(w2);
-        wuerfelArray[2].setWert(w3);
+    public void setWurf(Wuerfel[] wuerfelArray) {
+        this.wuerfelArray=wuerfelArray;
 
         sortiere();
 

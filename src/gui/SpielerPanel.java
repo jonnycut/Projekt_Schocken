@@ -124,6 +124,7 @@ public class SpielerPanel extends JPanel {
                 //Wegen Mehrfachnutzung in Methode ausgelagert
                 wuerfelRaus(pufferBtn,btnIndex,this);
 
+                //Datenbank.getInstance().upd
 
             }
 
@@ -140,6 +141,15 @@ public class SpielerPanel extends JPanel {
         wuerfelAnsicht.add(w1, 0);
         wuerfelAnsicht.add(w2, 1);
         wuerfelAnsicht.add(w3, 2);
+
+        //bereits rausgelegte Wuerfel in der Auslage anzeigen.
+
+        if(spieler.getBecher().getWuerfelArray()[0].getDraussen())
+            wuerfelRaus(w1,0,wuerfelListener);
+        if(spieler.getBecher().getWuerfelArray()[1].getDraussen())
+            wuerfelRaus(w2,1,wuerfelListener);
+        if(spieler.getBecher().getWuerfelArray()[2].getDraussen())
+            wuerfelRaus(w3,2,wuerfelListener);
 
 
 
