@@ -169,6 +169,8 @@ public class Spielfeld extends JPanel {
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
         revalidate();
+        gui.setZustand(2);
+        gui.updateView();
     }
 
     public void updateStock() {

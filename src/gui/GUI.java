@@ -143,8 +143,9 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Anmeldung");
                 break;
             case 2:
-                //ToDo: Dinge die in der Anmeldung stattfinden
-                System.out.println("Test Anmeldung");
+                jp.remove(spielfeld);
+                jp.add(spielfeld, "Spielfeld");
+                ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
             case 3:
                 ((CardLayout) jp.getLayout()).show(jp, "Registrierung");
