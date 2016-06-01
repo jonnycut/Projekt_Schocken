@@ -57,23 +57,61 @@ public class SpielerPanel extends JPanel {
      */
     private JPanel wuerfel;
     /**
-     *
+     *  JButton für den Würfelbecher
      */
     private JButton becher;
+    /**
+     * JPanel, welches die Würfel im Becher enthält
+     */
     private JPanel wuerfelAnsicht;
+    /**
+     * JButton für Würfel 1
+     */
     private JButton w1;
+    /**
+     * JButton für Würfel 2
+     */
     private JButton w2;
+    /**
+     * JButton für Würfel 3
+     */
     private JButton w3;
+    /**
+     * JPanel, welches die Strafpunkte des Spielers enthält
+     */
     private JPanel strafpunkte;
-
+    /**
+     * JButton, der das Würfeln auslöst
+     */
     private JButton wuerfeln;
+    /**
+     * JButton, für fertig
+     */
     private JButton fertig;
 
+    /**<pre>
+     * Constructor für das SpielerPanel. Setzt die Runde, den Spieler und das Spielfeld,
+     * Prüft ob der Spieler des Panels gerade Aktiv ist und erstellt bei true einen roten Rahmen.
+     * Sendet über Spielfeld.netzwerkUpdate(String) eine Nachricht, dass er gerade aktiv ist.
+     *
+     * Fügt die nötigen ActionListener hinzu (Würfeln, Würfel, Becher und fertig).
+     * Fügt die Würfel des Spielers in das entsprechende JPanel ein (wenn Wuerfel.draussen = true -> Auslage, sonst wuerfelAnsicht)
+     *
+     * </pre>
+     *
+     * @param spieler Spieler Object - Spieler des Panels
+     * @param runde  Runde Object - Die Runde des Panels ToDo:Kann eigentlich raus!
+     * @param spielfeld Spielfeld Object - Das Spielfeld des Panels
+     */
 
     public SpielerPanel(Spieler spieler , Runde runde, Spielfeld spielfeld){
         this.runde = runde;
         this.spieler = spieler;
         this.spielfeld = spielfeld;
+
+        /*
+        Bei Aktivem Spieler einen Rahmen ziehen und ein netzwerkUpdate senden
+         */
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -162,7 +200,7 @@ public class SpielerPanel extends JPanel {
         wuerfelAnsicht.add(w2, 1);
         wuerfelAnsicht.add(w3, 2);
 
-        //bereits rausgelegte Wuerfel in der Auslage anzeigen.
+        //bereits rausgelegte Wuerfel aus dem Becher nehmen und in der Auslage anzeigen.
 
         if(spieler.getBecher().getWuerfelArray()[0].getDraussen())
             wuerfelRaus(w1,0,wuerfelListener);
@@ -196,11 +234,16 @@ public class SpielerPanel extends JPanel {
         this.fertig = new JButton("FERTIG");
         fertig.setEnabled(false);
 
+        /*
+        Hebt den Becher des Spielers an und zeigt die darunterliegenden Würfel.
+        Setzt "Aufgedeckt" auf true
+        Wenn der Spieler bereits die maximale Wurfanzahl erreicht hat, erscheint ein Fehlermeldung
+         */
         becher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (spieler.getBecher().getWurf() < 2) {
-                    //ToDo: MaxWuerfe anhand des Beginners begrenzen
+                    //ToDo: MaxWuerfe anhand des Beginners begrenzen: KNA
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     System.out.println(spieler.getLetztesBild());
                     System.out.println(spieler.getBecher().getWuerfel()[0] + "-" + spieler.getBecher().getWuerfel()[1] + "-" + spieler.getBecher().getWuerfel()[2]);
@@ -213,12 +256,18 @@ public class SpielerPanel extends JPanel {
             }
         });
 
+        /*
+         Zeigt den Becher an und ruft die Spieler.wuerfeln() methode auf.
+         Danach werden die richtigen Grafiken der Buttons gesetzt
+         Wenn dies der letzte Wurf war, wird der Würfelbutton disabled
+
+         */
         wuerfeln.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 if (spieler.getBecher().getWurf() < 3) {
-                    //ToDo: MaxWuerfe anhand des Beginners begrenzen
+                    //ToDo: MaxWuerfe anhand des Beginners begrenzen KNA
 
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "becher");
                     aufgedeckt = false;
@@ -239,6 +288,11 @@ public class SpielerPanel extends JPanel {
             }
         });
 
+        /*
+        Setzt den Spieler auf fertig, disabled alle Buttons und legt, insofern der Becher offen ist,
+        alle Würfel heraus.
+        Danach wird ein Update des Spielers an die Datenbank geschickt.
+         */
         fertig.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -258,6 +312,7 @@ public class SpielerPanel extends JPanel {
                 }
 
                 try {
+                    //ToDo: Würfel und fertig des Spielers mitschicken! KNA
                     Datenbank.getInstance().insertStatistik(spieler.getName(), spieler.getStatistik());
                     Datenbank.getInstance().selectStatistik(spieler.getName());
                 } catch (SQLException e1) {
@@ -323,16 +378,12 @@ public class SpielerPanel extends JPanel {
         add(jPBox);
         add(buttons);
 
-
-
-
-
-
-
-
-
     }
 
+    /**
+     * Liefert den Spieler des Panels
+     * @return spieler Spieler Object - der Spieler des Panels
+     */
     public Spieler getSpieler() {
         return spieler;
     }
@@ -342,7 +393,7 @@ public class SpielerPanel extends JPanel {
      * Loescht die Wuerfel in der Auslage und im Wuerfelbereich, sowie die Strafpunkte
      * und schreibt diese neu.
      */
-
+        //ToDo: Da alle Panels immer neu erstellt werden, brauchen wir das eigentlich nicht....KNA
 
     public void updatePanel(){
 
@@ -398,19 +449,21 @@ public class SpielerPanel extends JPanel {
      * <pre>
      * Legt die Wuerfel vom Wuerfelbereich in die Auslage.
      * Setzt das Attribut {draussen} auf true, damit diese Wuerfel nicht mehr gewuerfelt werden
-     * und entfernt den Action Listener
+     * und entfernt den Action Listener.
+     * auslageCount wird erhöt um den Spieler automatisch auf fertig zu setzen, wenn alle Würfel draussen sind.
+     *
+     * Sendet dann ein Update des Spielers an die Datenbank und ein UpdateSignal mit dem String
+     * (Spieler hat Würfel rausgelegt)über das Netzwerk,
      *
      * </pre>
      * @param pufferBtn JButton - Der Button, der bewegt wird
      * @param btnIndex int - an welche Stelle der Button gelegt wird
      * @param wuerfelListener - ActionListener - Damit die Wuerfel nicht mehr angeklickt werden koennen
-     * @see JButton# MTHODE(Comparable)
-     * @see ActionListener
-     *
+     *@see Spielfeld#netzwerkUpdate(String)
      */
 
     public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener){
-
+        String ausgelegterWert="";
         auslage.remove(btnIndex);
         auslage.add(pufferBtn, btnIndex);
 
@@ -428,11 +481,14 @@ public class SpielerPanel extends JPanel {
 
         if(pufferBtn.equals(w1)){
             spieler.getBecher().getWuerfelArray()[0].setDraussen(true);
+            ausgelegterWert =""+spieler.getBecher().getWuerfelArray()[0].getWert();
 
         }else if(pufferBtn.equals(w2)){
             spieler.getBecher().getWuerfelArray()[1].setDraussen(true);
+            ausgelegterWert =""+spieler.getBecher().getWuerfelArray()[1].getWert();
         }else{
             spieler.getBecher().getWuerfelArray()[2].setDraussen(true);
+            ausgelegterWert =""+spieler.getBecher().getWuerfelArray()[2].getWert();
         }
         spieler.getBecher().sortiere();
         auslageCount++;
@@ -440,15 +496,39 @@ public class SpielerPanel extends JPanel {
 
         if(auslageCount==3)
             wuerfeln.setEnabled(false);
+        //ToDo: Gesamtes Updaten, inkl der Würfel schicken. KNA
+        try {
+            Datenbank.getInstance().updateSpieler(spieler.getName(), spieler.getStrafpunkte(),spieler.getStatistik());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        spielfeld.netzwerkUpdate(""+spieler.getName() + " hat eine" + ausgelegterWert +" ausgelegt.");
 
     }
 
+    /**<pre>
+     * Enabled alle Buttons des Panels,
+     * wird genutzt, wenn der Spieler aktiv ist
+     * </pre>
+     *
+     */
     public void buttonEnable(){
         becher.setEnabled(true);
         wuerfeln.setEnabled(true);
         fertig.setEnabled(true);
     }
 
+    /**
+     * Liefert den Becher des Panels
+     * @return becher JButton Object - Der Becher Button des Panels
+     */
+
+    //ToDO: Ich glaube, die Nutzen wir nirgendwo... was soll ich denn mit dem Button??? KNA
     public JButton getBecher() {
         return becher;
     }
