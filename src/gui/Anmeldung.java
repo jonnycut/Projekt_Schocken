@@ -217,6 +217,45 @@ public class Anmeldung extends JPanel {
         obenRechts.add(jLObenRechts);
         obenRechts.setLayout(new BoxLayout(obenRechts, BoxLayout.Y_AXIS));
 
+        JPanel mitteRechts = new JPanel();
+        mitteRechts.setBackground(Color.DARK_GRAY);
+        JPanel loesche = new JPanel(new FlowLayout());
+        loesche.setBackground(Color.DARK_GRAY);
+        JButton jBdbLoeschen = new JButton("Datenbank löschen");
+
+        ActionListener loescheDB = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                String richtigesPWD = "root";
+
+                JLabel jPassword = new JLabel("Passwort");
+                JTextField password = new JPasswordField(10);
+                password.setDocument(new JTextFieldLimit(10));
+                Object[] ob = {jPassword, password};
+                int result = JOptionPane.showConfirmDialog(null, ob, "Bitte Passwort eingeben", JOptionPane.OK_CANCEL_OPTION);
+
+                if (result == JOptionPane.OK_OPTION) {
+                    String pwdEingabe = password.getText();
+                    if (pwdEingabe.equals(richtigesPWD)) {
+                        if(Datenbank.dropDB("db_schocken2")){
+                            JOptionPane.showMessageDialog(null, "Die Datenbank db_schocken2 wurde gelöscht.", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Die Datenbank wurde NICHT gelöscht.", "Fehler", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Passwort falsch", "fehler", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        };
+
+        jBdbLoeschen.addActionListener(loescheDB);
+        loesche.add(jBdbLoeschen);
+        mitteRechts.add(loesche);
+
+
+
         JPanel untenRechts = new JPanel();
         untenRechts.setBackground(Color.DARK_GRAY);
         untenRechts.setLayout(new BoxLayout(untenRechts, BoxLayout.Y_AXIS));
@@ -273,6 +312,7 @@ public class Anmeldung extends JPanel {
         obenRechts.add(register);
         untenRechts.add(reset);
 
+        rechts.add(mitteRechts, BorderLayout.NORTH);
         rechts.add(obenRechts, BorderLayout.CENTER);
         rechts.add(untenRechts, BorderLayout.SOUTH);
 

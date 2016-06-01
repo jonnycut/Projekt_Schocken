@@ -197,6 +197,27 @@ public class Datenbank {
         return datenbank;
     }
 
+    public static boolean dropDB(String dbName){
+        String host = ip;
+        int port = 5432;
+
+        String url = "jdbc:postgresql://" + host + ":" + port + "/";
+        Properties props = new Properties();
+        props.setProperty("user", "postgres");
+        props.setProperty("password", "root");
+        try {
+            verbindung.close();
+            verbindung = DriverManager.getConnection(url, props);
+            verbindung.createStatement().executeUpdate(
+                    "DROP DATABASE " + dbName);
+            verbindung.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "" + e, "Fehler", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return  true;
+    }
+
 //----------------------------------------------------------------------------------------------------------------------
 
     /**
