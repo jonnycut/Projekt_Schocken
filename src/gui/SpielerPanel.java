@@ -528,7 +528,10 @@ public class SpielerPanel extends JPanel {
      * @return becher JButton Object - Der Becher Button des Panels
      */
 
-    //ToDO: Ich glaube, die Nutzen wir nirgendwo... was soll ich denn mit dem Button??? KNA
+    /**
+     * Liefert den JButton Becher des Panels
+     * @return becher JButton Object
+     */
     public JButton getBecher() {
         return becher;
     }
