@@ -31,6 +31,7 @@ public class Spieler implements Comparable<Spieler> {
     private String letztesBild;
     private String name;
     private boolean fertig = false;
+    private boolean aktiv = false;
 
 
 
@@ -81,6 +82,14 @@ public class Spieler implements Comparable<Spieler> {
      */
     public boolean getFertig() {
         return this.fertig;
+    }
+
+    public void setAktiv(boolean aktiv){
+        this.aktiv = aktiv;
+    }
+
+    public boolean getAktiv(){
+        return this.aktiv;
     }
 
     /**
