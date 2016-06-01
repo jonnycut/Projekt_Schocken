@@ -28,11 +28,11 @@ public class Spielfeld extends JPanel {
     private Haelfte haelfte;
     private List<SpielerPanel> teilnehmer;
 
-    private JPanel jPOben;
-    private JPanel jPMitte;
-    private JPanel jPUnten;
+    private JPanel jPOben; // BorderLayout.NORTH beinhaltet den Spielstart Button
+    private JPanel jPMitte; // BoderLayout.CENTER beinhaltet den Infobereich
+    private JPanel jPUnten; // BorderLayout.SOUUTH beinhaltet die SpielerPanel
 
-    private JPanel jPStock;
+    private JPanel jPStock; //
     private JLabel jLStock;
 
 
@@ -57,10 +57,8 @@ public class Spielfeld extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
+                infobereich.setPreferredSize(new Dimension(810, 200));
                 gui.sendeUpdateSignal();
-                infobereich.removeAll();
-                infobereich.setInfos("Spiel wurde gestartet");
-                updateInfo(infobereich);
 
 
                 try {
@@ -116,6 +114,7 @@ public class Spielfeld extends JPanel {
         jLStock.setForeground(Color.WHITE);
         jPStock.add(jLStock);
 
+        jPMitte.add(infobereich);
         jPMitte.add(jPStock);
 
 
@@ -152,12 +151,12 @@ public class Spielfeld extends JPanel {
         updateView();
     }
 
-    public void updateInfo(JPanel infobereich) {
+    public void updateInfo(Infobereich infobereich) {
 
-        jPMitte.removeAll();
+        jPMitte.remove(this.infobereich);
         jPMitte.add(infobereich);
         jPMitte.add(jPStock);
-
+        jPMitte.revalidate();
         updateView();
     }
 
@@ -206,9 +205,11 @@ public class Spielfeld extends JPanel {
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
     }
-    public void netzwerkUpdate(){
+    public void netzwerkUpdate(/*String info*/){
         jPUnten.removeAll();
         updateTeilnehmerListe();
+        infobereich.setInfos("Spiel wurde gestartet");
+        updateInfo(infobereich);
         updateStock();
         updateView();
         revalidate();

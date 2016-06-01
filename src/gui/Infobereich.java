@@ -31,7 +31,7 @@ public class Infobereich extends JPanel {
 
         jPInfo = new JPanel(new BorderLayout());
         jPInfo.setBackground(Color.BLACK);
-        info = new JLabel();
+        info = new JLabel("TEST");
         info.setFont(new Font("Arial", Font.BOLD, 20));
         info.setForeground(Color.RED);
         info.setBackground(Color.BLACK);
@@ -58,15 +58,19 @@ public class Infobereich extends JPanel {
      * Es wird zum Schluss wieder in den Infobereich eingefügt.
      */
     public void setInfos(String infos) {
+
         info.setText(infos);
-        JPanel jPCenter = new JPanel(new FlowLayout());
-        jPCenter.setBackground(Color.BLACK);
-        jPCenter.add(info);
-        jPInfo.add(jPCenter,BorderLayout.NORTH);
+//        JPanel jPCenter = new JPanel(new FlowLayout());
+//        jPCenter.setBackground(Color.BLACK);
+//        jPCenter.add(info);
+//        jPInfo.add(jPCenter, BorderLayout.NORTH);
+        jPInfo.add(info, BorderLayout.NORTH);
 
         istSpielleiter();
 
         add(jPInfo);
+
+        System.out.println("Flurry:  " + infos);
     }
 
 

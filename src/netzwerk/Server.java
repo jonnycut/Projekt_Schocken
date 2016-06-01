@@ -43,7 +43,7 @@ public class Server {
     private void neueNachricht(User user, String nachricht) {
 //        System.out.println(nachricht);
         for (User u : users) {
-            if (u != user)
+           // if (u != user)
                 u.sendeNachricht(nachricht);
         }
     }
