@@ -4,8 +4,10 @@ import javax.swing.*;
 
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
  * Diese Klasse hält alle Grafiken für das gesamte Spiel vor.
+ *
+ * @author DFleuren
  */
 public class Grafik {
 
