@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/SpielerPanel.java" afterPath="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Spielfeld.java" afterPath="$PROJECT_DIR$/src/gui/Spielfeld.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -173,8 +172,8 @@
       <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39554796">
-              <caret line="193" column="59" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.2791096">
+              <caret line="189" column="125" selection-start-line="189" selection-start-column="125" selection-end-line="189" selection-end-column="125" />
               <folding />
             </state>
           </provider>
@@ -751,7 +750,7 @@
       <workItem from="1464774802570" duration="895000" />
       <workItem from="1464776083845" duration="9000" />
       <workItem from="1464776273504" duration="10000" />
-      <workItem from="1464777233108" duration="1787000" />
+      <workItem from="1464777233108" duration="1869000" />
     </task>
     <task id="LOCAL-00001" summary="Flurry: DB Erstellen umgeschrieben und Spielfeld angepasst">
       <created>1464678524417</created>
@@ -993,11 +992,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464778134753</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Flurry: Aktiver Spieler Rahmen">
+      <created>1464779903736</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1464779903736</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62323000" />
+    <option name="totallyTimeSpent" value="62405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1802,8 +1807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39554796">
-          <caret line="193" column="59" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.2791096">
+          <caret line="189" column="125" selection-start-line="189" selection-start-column="125" selection-end-line="189" selection-end-column="125" />
           <folding />
         </state>
       </provider>

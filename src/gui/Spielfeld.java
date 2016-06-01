@@ -188,7 +188,6 @@ public class Spielfeld extends JPanel {
 
             for (String s : kennungListe) {
                 SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), haelfte.getRunde(), this);
-                // hier die bUTTOns ändern!!!
                 if(s.equals(gui.getIch())){
                     tmpPanel.getBecher().setEnabled(true);
                     tmpPanel.setBecher(tmpPanel.getBecher());
