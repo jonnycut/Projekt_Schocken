@@ -68,11 +68,9 @@ public class Infobereich extends JPanel {
 //        jPInfo.add(jPCenter, BorderLayout.NORTH);
         jPInfo.add(info, BorderLayout.NORTH);
 
-        istSpielleiter();
+        //istSpielleiter();
 
         add(jPInfo);
-
-        System.out.println("Flurry:  " + infos);
     }
 
 
@@ -82,19 +80,19 @@ public class Infobereich extends JPanel {
      * wird in der Datenbank geprüft wer der Spielleiter des Spiels ist.
      * Dann wird es in das JPanel jPInfo eingefügt.
      */
-    public void istSpielleiter() {
-        int spielID = 0;
-        try {
-            spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
-            System.out.println(spielID);
-            JLabel spielleiter = new JLabel("Spielleiter:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
-            spielleiter.setForeground(Color.RED);
-            spielleiter.setBackground(Color.BLACK);
-            jPInfo.add(spielleiter,BorderLayout.SOUTH);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void istSpielleiter() {
+//        int spielID = 0;
+//        try {
+//            spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getIch());
+//            System.out.println(spielID);
+//            JLabel spielleiter = new JLabel("Spielleiter:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
+//            spielleiter.setForeground(Color.RED);
+//            spielleiter.setBackground(Color.BLACK);
+//            jPInfo.add(spielleiter,BorderLayout.SOUTH);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

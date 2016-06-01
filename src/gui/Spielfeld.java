@@ -100,8 +100,8 @@ public class Spielfeld extends JPanel {
         jPMitte.setBackground(Color.DARK_GRAY);
 
 
-        jPStock = new JPanel();
-        jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
+        jPStock = new JPanel(new BorderLayout());
+        //jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
         jPStock.setPreferredSize(new Dimension(180, 140));
         jPStock.setBackground(Color.DARK_GRAY);
         JPanel jPText = new JPanel(new FlowLayout());
@@ -109,12 +109,13 @@ public class Spielfeld extends JPanel {
         JLabel jLText = new JLabel("Strafpunkte auf dem Stock");
         jLText.setForeground(Color.WHITE);
         jPText.add(jLText);
-        jPStock.add(jPText);
+        jPStock.add(jPText, BorderLayout.NORTH);
 
         jLStock = new JLabel("13");
         jLStock.setFont(new Font("Arial", Font.BOLD, 50));
         jLStock.setForeground(Color.WHITE);
-        jPStock.add(jLStock);
+        jPStock.add(jLStock, BorderLayout.CENTER);
+        istSpielleiter();
 
         jPMitte.add(infobereich);
         jPMitte.add(jPStock);
@@ -133,6 +134,23 @@ public class Spielfeld extends JPanel {
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
     }
+
+    public void istSpielleiter() {
+        int spielID = 0;
+        try {
+            spielID = Datenbank.getInstance().selectSpielID(gui.getIch());
+            System.out.println(spielID);
+            JLabel spielleiter = new JLabel("Spielleiter des Spiels ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
+            spielleiter.setForeground(Color.RED);
+            spielleiter.setBackground(Color.BLACK);
+            jPStock.add(spielleiter,BorderLayout.SOUTH);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void updateView() {
 
