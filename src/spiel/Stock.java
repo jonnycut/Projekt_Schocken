@@ -1,5 +1,7 @@
 package spiel;
 
+import Datenbank.Datenbank;
+
 /**
  * Created by KNapret on 23.05.2016.
  */

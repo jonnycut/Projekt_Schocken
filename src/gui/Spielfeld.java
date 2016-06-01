@@ -52,9 +52,9 @@ public class Spielfeld extends JPanel {
         jPOben.setBackground(Color.BLACK);
         jPOben.setBorder(new LineBorder(Color.DARK_GRAY, 2));
         JButton jBStart = new JButton("Starte Spiel");
-        jBStart.setEnabled(true);
+        jBStart.setEnabled(false);
 
-        ActionListener startButton = new ActionListener() {
+        ActionListener starteSpielButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
@@ -72,7 +72,7 @@ public class Spielfeld extends JPanel {
             }
         };
 
-        jBStart.addActionListener(startButton);
+        jBStart.addActionListener(starteSpielButton);
 
         try {
             if (Datenbank.getInstance().selectServerIP() == null) {
@@ -100,7 +100,6 @@ public class Spielfeld extends JPanel {
 
 
         jPStock = new JPanel(new BorderLayout());
-        //jPStock.setLayout(new BoxLayout(jPStock, BoxLayout.Y_AXIS));
         jPStock.setPreferredSize(new Dimension(180, 140));
         jPStock.setBackground(Color.DARK_GRAY);
         JPanel jPText = new JPanel(new FlowLayout());
@@ -110,7 +109,7 @@ public class Spielfeld extends JPanel {
         jPText.add(jLText);
         jPStock.add(jPText, BorderLayout.NORTH);
 
-        jLStock = new JLabel("13");
+        jLStock = new JLabel();
         jLStock.setFont(new Font("Arial", Font.BOLD, 50));
         jLStock.setForeground(Color.WHITE);
         jPStock.add(jLStock, BorderLayout.CENTER);
@@ -186,7 +185,7 @@ public class Spielfeld extends JPanel {
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
 
             for (String s : kennungListe) {
-                SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), haelfte.getRunde(), this);
+                SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), this);
 
                 if(s.equals(gui.getBesitzerName())){
                     tmpPanel.getBecher().setEnabled(true);
@@ -196,6 +195,9 @@ public class Spielfeld extends JPanel {
                 jPUnten.add(tmpPanel);
             }
 
+            if(teilnehmer.size() >=2 ){
+                jPOben.getComponent(0).setEnabled(true);
+            }
             updateView();
 
         } catch (ClassNotFoundException e) {
@@ -210,9 +212,6 @@ public class Spielfeld extends JPanel {
 
         for (SpielerPanel s : teilnehmer) {
             spielerListeTmp.add(s.getSpieler());
-
-
-
         }
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
@@ -223,13 +222,11 @@ public class Spielfeld extends JPanel {
 
     public void netzwerkUpdate(String info){
         jPUnten.removeAll();
-        remove(jPUnten);
         updateTeilnehmerListe();
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
         updateView();
-        revalidate();
         System.out.println("recieved updateSignal...");
     }
 

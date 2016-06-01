@@ -5,7 +5,6 @@ import Grafik.Grafik;
 import spiel.Runde;
 import spiel.Spieler;
 import spiel.Wuerfel;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -29,8 +28,6 @@ import java.sql.SQLException;
  * @author KNapret / DFleuren
  */
 public class SpielerPanel extends JPanel {
-    //ToDo: Brauchen wir das noch? muss ich noch gucken. KNA
-    private Runde runde; //TestAttribut
 
     /**
      * Das Spielfeld des Panles
@@ -104,8 +101,7 @@ public class SpielerPanel extends JPanel {
      * @param spielfeld Spielfeld Object - Das Spielfeld des Panels
      */
 
-    public SpielerPanel(Spieler spieler , Runde runde, Spielfeld spielfeld){
-        this.runde = runde;
+    public SpielerPanel(Spieler spieler, Spielfeld spielfeld){
         this.spieler = spieler;
         this.spielfeld = spielfeld;
 
