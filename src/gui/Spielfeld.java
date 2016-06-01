@@ -198,7 +198,8 @@ public class Spielfeld extends JPanel {
             }
 
             if(teilnehmer.size() >=2 ){
-                jPOben.getComponent(0).setEnabled(true);
+                if(jPOben.getComponents().length!=0)
+                    jPOben.getComponent(0).setEnabled(true);
             }
             updateView();
 
