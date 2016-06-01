@@ -140,7 +140,7 @@ public class Spielfeld extends JPanel {
         try {
             spielID = Datenbank.getInstance().selectSpielID(gui.getIch());
             System.out.println(spielID);
-            JLabel spielleiter = new JLabel("Spielleiter des Spiels ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
+            JLabel spielleiter = new JLabel("Spielleiter ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
             spielleiter.setForeground(Color.RED);
             spielleiter.setBackground(Color.BLACK);
             jPStock.add(spielleiter,BorderLayout.SOUTH);
