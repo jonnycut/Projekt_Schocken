@@ -454,8 +454,7 @@ public class Datenbank {
     public String selectAktiverSpieler(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         String aktiverSpieler = null;
-        ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= " +
-                "'" + spielID + "') AS " + "Spieler im Spiel" + " INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
+        ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= '" + spielID + "') AS \"Spieler im Spiel\" INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
         if (r.next())
             aktiverSpieler = r.getString(1);
         System.out.println("Spieler " + aktiverSpieler + " ist nun würfelberechtigt");
