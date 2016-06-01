@@ -239,7 +239,7 @@ public class Datenbank {
         ResultSet r = stmt.executeQuery(
                 "SELECT * FROM " + "t_Spieler" + " WHERE " + "Kennung = " + "'" + kennung + "'");
 
-        return !r.next();
+        return r.next();
     }
 
     /**

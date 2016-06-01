@@ -250,7 +250,8 @@ public class Anmeldung extends JPanel {
                 String richtigesPWD = "root";
 
                 JLabel jPassword = new JLabel("Passwort");
-                JTextField password = new JPasswordField();
+                JTextField password = new JPasswordField(10);
+                password.setDocument(new JTextFieldLimit(10));
                 Object[] ob = {jPassword, password};
                 int result = JOptionPane.showConfirmDialog(null, ob, "Bitte Passwort eingeben", JOptionPane.OK_CANCEL_OPTION);
 

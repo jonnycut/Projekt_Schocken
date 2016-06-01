@@ -70,6 +70,7 @@ public class SpielerPanel extends JPanel {
         //Platzhalter in Auslage einfuegen
         for (int i = 0; i <3 ; i++) {
             JButton auslage1 = new JButton();
+            auslage1.setEnabled(false);
             auslage1.setBackground(Color.DARK_GRAY);
             auslage1.setPreferredSize(new Dimension(100,100));
             auslage1.setBorder(new LineBorder(Color.BLACK, 1));

@@ -162,28 +162,15 @@ public class Spielfeld extends JPanel {
         updateView();
     }
 
-    public void setSpielerPanel() {
-
-        List<Spieler> spielerList = gui.getAlleSpieler();
-
-        for (Spieler s : spielerList) {
-            SpielerPanel x = new SpielerPanel(s, haelfte.getRunde(), this);
-            teilnehmer.add(x);
-            jPUnten.add(x);
-        }
-
-        updateView();
-        updateTeilnehmerListe();
-    }
 
     public void updateTeilnehmerListe() {
         try {
 
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
 
-
             for (String s : kennungListe) {
                 SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), haelfte.getRunde(), this);
+                // hier die bUTTOns ändern!!!
                 teilnehmer.add(tmpPanel);
                 jPUnten.add(tmpPanel);
             }
@@ -203,10 +190,15 @@ public class Spielfeld extends JPanel {
         for (SpielerPanel s : teilnehmer) {
             spielerListeTmp.add(s.getSpieler());
 
+
         }
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
     }
+
+
+
+
     public void netzwerkUpdate(/*String info*/){
         jPUnten.removeAll();
         updateTeilnehmerListe();
