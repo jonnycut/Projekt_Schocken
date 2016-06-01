@@ -191,7 +191,12 @@ public class Spielfeld extends JPanel {
 
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
-        jPUnten.removeAll();
+
+        jPUnten = new JPanel(new FlowLayout());
+        jPUnten.setPreferredSize(new Dimension(1024, 535));
+        jPUnten.setBackground(Color.DARK_GRAY);
+        jPUnten.setBorder(BorderFactory.createMatteBorder(8, 0, 0, 0, Color.BLACK));
+
         try {
 
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
@@ -211,7 +216,7 @@ public class Spielfeld extends JPanel {
                 if(jPOben.getComponents().length!=0)
                     jPOben.getComponent(0).setEnabled(true);
             }
-            //updateView();
+
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -221,7 +226,7 @@ public class Spielfeld extends JPanel {
             e.printStackTrace();
         }
 
-        jPUnten.validate();
+
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
         for (SpielerPanel s : teilnehmer) {
@@ -235,7 +240,7 @@ public class Spielfeld extends JPanel {
 
 
     public void netzwerkUpdate(String info){
-        removeAll();
+        remove(jPUnten);
         updateTeilnehmerListe();
 
         infobereich.setInfos(info);
