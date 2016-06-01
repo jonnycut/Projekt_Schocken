@@ -236,10 +236,11 @@ public class Spielfeld extends JPanel {
     public void netzwerkUpdate(String info){
         jPUnten.removeAll();
         updateTeilnehmerListe();
+        jPUnten.revalidate();
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
-        updateView();
+        //updateView();
         revalidate();
         System.out.println("recieved updateSignal...");
     }
