@@ -5,9 +5,7 @@ package Datenbank;
  */
 
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import spiel.Spieler;
-import spiel.Wuerfel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +16,10 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 
 public class Datenbank {
@@ -274,12 +275,11 @@ public class Datenbank {
             ResultSet r = stmt.executeQuery("SELECT count(*) from t_ist_client WHERE fk_t_spiel_spiel_id= " + spielID);
 
             if (r.next())
-                System.out.println(r.getInt(1));
+                System.out.println("Sie sind Spieler Nummer: " + (r.getInt(1) + 1));
             if (r.getInt(1) < 7) {
 
                 try {
                     stmt.executeUpdate(String.format("INSERT INTO t_ist_client  VALUES ('%s','%d')", teilnehmer, spielID));
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -325,15 +325,22 @@ public class Datenbank {
      */
     public void insertHaelfte(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        int art = selectAktuelleHaelfte(spielID) + 1;
-
+        int abgeschlosseneHaelfte = selectAktuelleHaelfte(spielID);
+        int neueHaelfte = selectAktuelleHaelfte(spielID) + 1;
+        if (neueHaelfte > 1) {
+            ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_runde WHERE fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + abgeschlosseneHaelfte);
+            if (r.next()) {
+                inserthaelftenVerlierer(r.getString(1), spielID, abgeschlosseneHaelfte);
+            }
+        }
         try {
             stmt.executeUpdate("Update t_spieler SET Strafpunkte = 0 Where Kennung IN(Select fk_t_spieler_kennung from " +
                     "((t_Spiel INNER JOIN t_hälfte ON t_hälfte.fk_t_spiel_spiel_id=" + spielID + ")INNER JOIN t_ist_client " +
                     "ON t_ist_client.fk_t_spiel_spiel_id=" + spielID + "))");
 
-            stmt.executeUpdate("INSERT INTO t_hälfte (fk_t_spiel_spiel_id,art) VALUES (" + spielID + "," + art + ")");
-            insertersteRunde(spielID, art);
+            stmt.executeUpdate("INSERT INTO t_hälfte (fk_t_spiel_spiel_id,art) VALUES (" + spielID + "," + neueHaelfte + ")");
+            insertersteRunde(spielID, neueHaelfte);
+            stmt.executeUpdate("Update t_runde SET rundennr=1 WHERE fk_t_spiel_spiel_id=" + spielID + " AND fk_t_hälfte_art=" + neueHaelfte);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -347,7 +354,6 @@ public class Datenbank {
      * @param haelftenArt - aktuelle Hälfte
      * @throws SQLException
      */
-    //ToDo Ich würde gern die Methode so erweitern das als Übergabeparameter nur noch die Kennung des Spielers übergeben wird. Damit würde ich die Aktualliesierung der Strafpunkte vom Spieler auch hier durchführen
     public void updateStock(int strafpunkte, int spielID, int haelftenArt) throws SQLException {
         Statement stmt = verbindung.createStatement();
         try {
@@ -428,7 +434,7 @@ public class Datenbank {
                 "'" + spielID + "') AS " + "Spieler im Spiel" + " INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
         if (r.next())
             aktiverSpieler = r.getString(1);
-        System.out.println("Spieler "+aktiverSpieler+" ist nun würfelberechtigt");
+        System.out.println("Spieler " + aktiverSpieler + " ist nun würfelberechtigt");
         return aktiverSpieler;
     }
 
@@ -468,7 +474,7 @@ public class Datenbank {
             while (i <= numberOfColumns) {
                 spielerImSpiel.add(resultSet.getString(i++));
             }
-            System.out.println("Spieler "+resultSet.getString(1)+" zum Spiel"+spielID+" hinzugefügt");
+            System.out.println("Spieler " + resultSet.getString(1) + " zum Spiel" + spielID + " hinzugefügt");
         }
         return spielerImSpiel;
     }
@@ -540,46 +546,54 @@ public class Datenbank {
     /**
      * fügt der aktuellen Hälfte im Spiel eine neue Runde hinzu und fügt dieser automatisch den Beginner zu
      *
-     * @param spielID
+     * @param spielID zu welchem Spiel soll die Runde hinzugefügt werden
      * @throws SQLException
      */
     public void insertRunde(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int aktuelleRunde = selectAktuelleRunde(spielID);
         int neueRunde = aktuelleRunde + 1;
-        String ersterBeginner = selectersterBeginner(spielID);
-        String nächsterbeginner = insertnaechsterBeginner(spielID);
+        String nächsterbeginner = selectnaechsterBeginner(spielID);
         int haelfte = selectAktuelleHaelfte(spielID);
+        //insertRundenVerlierer(spielID,);
 
-        if (aktuelleRunde == 0) {
-            //1.Runde erstellen
+        //weitere Runden erstellen
+        try {
+            stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + nächsterbeginner + "')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * erstellt die erste Runde in einer neuen Hälfte
+     *
+     * @param spielID
+     * @param haelfte
+     * @throws SQLException
+     */
+    public void insertersteRunde(int spielID, int haelfte) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int neueRunde = selectAktuelleRunde(spielID) + 1;
+        String ersterBeginner = selectersterBeginner(spielID);
+        String haelftenverlierer = selectHaelftenVerlierer(spielID, haelfte - 1);
+
+        //1.Runde erstellen
+        if (haelfte == 1) {
             try {
                 stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         } else {
-            //weitere Runden erstellen
             try {
-                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + nächsterbeginner + "')");
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + haelftenverlierer + "')");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-    public void insertersteRunde(int spielID,int haelfte ) throws SQLException {
-        Statement stmt = verbindung.createStatement();
-        int neueRunde = selectAktuelleRunde(spielID) + 1;
-        String ersterBeginner = selectersterBeginner(spielID);
 
-         //1.Runde erstellen
-            try {
-                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-    }
     /**
      * Diese Methode sucht ein noch offenes Spiel es kann immer nur ein offenes Spiel geben
      *
@@ -618,6 +632,12 @@ public class Datenbank {
         return spielleiter;
     }
 
+    public void updateAktivZuFalse(String kennung) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        stmt.executeUpdate("Update t_spieler SET aktiv = false Where kennung = "+kennung);
+
+    }
+
     /**
      * Methode zum aktualisieren des Spielstatus
      *
@@ -629,6 +649,16 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
 
         stmt.executeUpdate("UPDATE t_spiel SET status=" + status + " WHERE spiel_id=" + spielID);
+        if (status == 2) {
+            insertAktiverSpieler(selectersterBeginner(spielID));
+            System.out.println("Das Spiel " + spielID + " wird nun gespielt");
+        }
+        if (status == 3) {
+            updateAktivZuFalse(selectAktiverSpieler(spielID));
+
+            System.out.println("Das Spiel " + spielID + " ist nun geschlossen");
+        }
+
     }
 
     /**
@@ -650,6 +680,15 @@ public class Datenbank {
         }
         return check;
     }
+
+    public void insertRundenVerlierer(int spielID, String verlierer) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int rundennr = selectAktuelleRunde(spielID);
+        int art = selectAktuelleHaelfte(spielID);
+
+        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
+    }
+//    public void updateStrafpunkte
 
 //    public void updateStrafpunkte
 
@@ -820,31 +859,51 @@ public class Datenbank {
 //-------------------------------------------Private Methoden-----------------------------------------------------------
 
     /**
+     * @param spielID --> in welchem SPiel befindet sich die Hälfte
+     * @param haelfte --> welche Hälfte
+     * @return Kennung des Verlierers der vorherigen Hälfte
+     * @throws SQLException
+     */
+    private String selectHaelftenVerlierer(int spielID, int haelfte) throws SQLException {
+        String verlierer = null;
+        Statement stmt = verbindung.createStatement();
+
+        ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_hälfte WHERE fk_t_spiel_spiel_id =" + spielID + " AND art=" + haelfte);
+
+        if (r.next()) {
+            verlierer = r.getString(1);
+        }
+        return verlierer;
+    }
+
+    /**
      * Liefert die aktuelle Runde im jeweiligen Spiel
      *
      * @param spielID
-     * @return
+     * @return derzeitige Rundennummer
      * @throws SQLException
      */
     private int selectAktuelleRunde(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int rundennr = 0;
-        ResultSet r = stmt.executeQuery("SELECT max(rundennr) FROM t_runde WHERE fk_t_spiel_spiel_id= '" + spielID + "'");
+        int haelfte = selectAktuelleHaelfte(spielID);
+        ResultSet r = stmt.executeQuery("SELECT max(rundennr) FROM t_runde WHERE fk_t_spiel_spiel_id= " + spielID + " AND fk_t_hälfte_art=" + haelfte);
 
         if (r.next()) {
             rundennr = r.getInt(1);
+
         }
         return rundennr;
     }
 
     /**
-     * Liefert den Verlierer der letzten Runde und somiut den Beginner der Folgerunde
+     * Liefert den Verlierer der letzten Runde
      *
      * @param spielID
-     * @return
+     * @return den Beginner der Folgerunde
      * @throws SQLException
      */
-    private String insertnaechsterBeginner(int spielID) throws SQLException {
+    private String selectnaechsterBeginner(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int aktuelleRunde = selectAktuelleRunde(spielID);
         String kennungBeginner = null;
@@ -861,7 +920,7 @@ public class Datenbank {
      * liefert anhand des auswürfeln den Beginner der ersten Runde
      *
      * @param spielID
-     * @return
+     * @return Kennung des spielers mit der höchsten Augenzahl nach dem auswürfeln
      * @throws SQLException
      */
     private String selectersterBeginner(int spielID) throws SQLException {
@@ -902,13 +961,11 @@ public class Datenbank {
      * prüft ob der Spieler bereits berechtigt ist ein Spiel zu eröffnen
      *
      * @param kennung -> Spielleiter
-     * @return
+     * @return true wenn der Spieler berechtigt ist ein neues Spiel anzulgen
      * @throws SQLException
      */
     private boolean prüfeSpielleiterStatus(String kennung) throws SQLException {
-
         Statement stmt = verbindung.createStatement();
-
         ResultSet r = stmt.executeQuery("SELECT * From t_spiel where fk_t_spielleiter_kennung= " + "'" + kennung + "'");
 
         if (r.next()) {
@@ -925,11 +982,10 @@ public class Datenbank {
     }
 
     /**
-     * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.
-     * Die Spiel_ID wird durch den Datentyp SERIAL automatisch hochgezählt.
-     * Die Kennung des Spielers wird in die Relation t_spielleiter geschrieben
-     * Der Status des Spiels ird initial auf 1 gesetzt und die Zeit des Anlegens
-     * wird mittels TIMESTAMP DEFAULT Current Timestamp auf die aktuelle Zeit gesetzt.
+     * Diese Methode legt ein neues Spiel in der Relation t_Spiel an.Die Spiel_ID wird durch den Datentyp SERIAL
+     * automatisch hochgezählt.Die Kennung des Spielers wird in die Relation t_spielleiter geschrieben.
+     * Der Status des Spiels wird initial auf 1 gesetzt und die Zeit des Anlegens wird mittels TIMESTAMP DEFAULT Current
+     * Timestamp auf die aktuelle Zeit gesetzt.
      *
      * @param spielleiter
      * @throws SQLException
@@ -970,6 +1026,20 @@ public class Datenbank {
         } else {
             System.out.println("is nicht");
         }
+    }
+
+    /**
+     * Methode zum Einfügrn des Spielerd der die Hälfte veroren hat
+     *
+     * @param verlierer -->Kennung des Spielers der die letzte Runde der vorherigen Hälfte verloren hat
+     * @param spielID   -->Zugehörigkeit der Hälfte
+     * @param art-->1   für erste Hälfte ;2 für zweite Hälfte ;3 für Finale
+     * @throws SQLException
+     */
+    private void inserthaelftenVerlierer(String verlierer, int spielID, int art) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+
+        stmt.executeUpdate("UPDATE t_hälfte SET verlierer = '" + verlierer + "' WHERE fk_t_spiel_spiel_id = " + spielID + " AND art=" + art);
 
     }
 
