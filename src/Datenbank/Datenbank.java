@@ -677,10 +677,10 @@ public class Datenbank {
     public void updateAktiv(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
         boolean flag ;
-        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = " + kennung);
+        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung + "'");
         if (r.next()) {
             flag=(!r.getBoolean(1));
-            stmt.executeUpdate("Update t_spieler SET aktiv = " + flag + " Where kennung = " + kennung);
+            stmt.executeUpdate("Update t_spieler SET aktiv = " + flag + " Where kennung = '" + kennung + "'");
         }
     }
 
