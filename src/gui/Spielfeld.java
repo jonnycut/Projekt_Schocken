@@ -199,10 +199,10 @@ public class Spielfeld extends JPanel {
 
 
 
-    public void netzwerkUpdate(/*String info*/){
+    public void netzwerkUpdate(String info){
         jPUnten.removeAll();
         updateTeilnehmerListe();
-        infobereich.setInfos("Spiel wurde gestartet");
+        infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
         updateView();

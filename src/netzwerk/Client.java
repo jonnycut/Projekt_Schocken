@@ -48,7 +48,7 @@ public class Client {
                         String zeile;
                         while ((zeile = reader.readLine()) != null){
                             if(zeile.contains("#")){
-                                gui.getSpielfeld().netzwerkUpdate();
+                                gui.getSpielfeld().netzwerkUpdate(zeile.substring(1));
                             }
 
                             else
@@ -79,12 +79,14 @@ public class Client {
         }
     }
 
+    /**
+     * Sendet das UpdateSignal '#Info' ueber das Netzwerk an den Server
+     * @param info String - StatusInfo, die im Infobereich angezeigt wird
+     */
+    public void sendeUpdate(String info){
 
-    public void sendeUpdate(){
-
-        //ToDo: #[STATUSAENDERUNG] uebernehmen und verarbeiten -> Update InfoBereich
         try {
-            writer.write("#");
+            writer.write("#"+info);
             writer.newLine();
             writer.flush();
             System.out.println("UpdateSignal gesendet");
