@@ -340,7 +340,8 @@ public class SpielerPanel extends JPanel {
 
         if(spieler.getAktiv() == true){
             setBorder(new LineBorder(Color.RED, 3));
-            buttonEnable();
+            if(spieler.getName().equals(spielfeld.getGui().getBesitzerName()))
+                buttonEnable();
             spielfeld.getInfobereich().setInfos(spieler.getName() + " ist dran...");
         }
         else{
