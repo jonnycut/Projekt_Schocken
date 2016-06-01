@@ -161,9 +161,13 @@ public class Spielfeld extends JPanel {
 
     private void updateView() {
 
+        remove(jPOben);
+        remove(jPMitte);
+        remove(jPUnten);
         add(jPOben, BorderLayout.NORTH);
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
+        repaint();
     }
 
     public void updateStock() {
@@ -192,11 +196,7 @@ public class Spielfeld extends JPanel {
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
 
-        jPUnten = new JPanel(new FlowLayout());
-        jPUnten.setPreferredSize(new Dimension(1024, 535));
-        jPUnten.setBackground(Color.DARK_GRAY);
-        jPUnten.setBorder(BorderFactory.createMatteBorder(8, 0, 0, 0, Color.BLACK));
-
+        jPUnten.removeAll();
         try {
 
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
@@ -226,7 +226,7 @@ public class Spielfeld extends JPanel {
             e.printStackTrace();
         }
 
-        jPUnten.repaint();
+
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
         for (SpielerPanel s : teilnehmer) {
@@ -234,20 +234,20 @@ public class Spielfeld extends JPanel {
         }
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
+
+        updateView();
     }
 
 
-
-
     public void netzwerkUpdate(String info){
-        remove(jPUnten);
+
         updateTeilnehmerListe();
 
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
         updateView();
-        repaint();
+
         System.out.println("recieved updateSignal...");
     }
 
