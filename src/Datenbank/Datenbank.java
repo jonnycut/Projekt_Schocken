@@ -814,6 +814,9 @@ public class Datenbank {
                 fis.close();
                 spieler.setStatistik(statistik);
             }
+            if(r.getBoolean(5))
+                spieler.setAktiv(r.getBoolean(5));
+
 
 
             return spieler;
