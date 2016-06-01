@@ -38,11 +38,6 @@ public class GUI extends JFrame {
     private String besitzerName = "";
 
     /**
-     * Die Liste der Spieler
-     */
-    private List<Spieler> spieler = new ArrayList<>();
-
-    /**
      * Der Anmeldebildschirm
      */
     private Anmeldung anmeldung;
@@ -215,27 +210,6 @@ public class GUI extends JFrame {
     public void setSpielfeld(Spielfeld spielfeld) {
 
         this.spielfeld = spielfeld;
-    }
-
-    /**
-     * Fügt den übergebenen Spieler der Teilnehmerliste hinzu
-     *
-     * @param spieler Object
-     * @see Spieler
-     */
-    public void updateSpielerListe(Spieler spieler) {
-
-        this.spieler.add(spieler);
-    }
-
-    /**
-     * Liefert die SpielerListe der GUI
-     *
-     * @return List{Spieler}
-     */
-    public List<Spieler> getAlleSpieler() {
-
-        return this.spieler;
     }
 
     /**

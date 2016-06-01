@@ -180,6 +180,8 @@ public class Spielfeld extends JPanel {
 
 
     public void updateTeilnehmerListe() {
+        teilnehmer = new ArrayList<>();
+
         try {
 
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());

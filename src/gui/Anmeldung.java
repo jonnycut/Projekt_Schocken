@@ -111,7 +111,6 @@ public class Anmeldung extends JPanel {
                 gui.setSpielfeld(new Spielfeld(gui));
                 gui.setZustand(6);
                 gui.updateView();
-
             }
         };
         jBStart.addActionListener(startButton);
@@ -174,7 +173,6 @@ public class Anmeldung extends JPanel {
                     // JA der Spieler ist in der Datenbank
                     if (Datenbank.getInstance().selectNutzerkennung(jTName.getText(), passwort)) {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
-                        gui.updateSpielerListe(Datenbank.getInstance().selectSpieler(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
                         gui.setBesitzerName(jTName.getText());
