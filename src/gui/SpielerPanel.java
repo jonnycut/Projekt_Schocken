@@ -97,7 +97,6 @@ public class SpielerPanel extends JPanel {
      * </pre>
      *
      * @param spieler Spieler Object - Spieler des Panels
-     * @param runde  Runde Object - Die Runde des Panels ToDo:Kann eigentlich raus!
      * @param spielfeld Spielfeld Object - Das Spielfeld des Panels
      */
 

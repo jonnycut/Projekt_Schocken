@@ -59,11 +59,13 @@ public class Spielfeld extends JPanel {
 
                 jPOben.setVisible(false);
                 infobereich.setPreferredSize(new Dimension(810, 200));
-                gui.sendeUpdateSignal(" Das Spiel wurde gestartet");
+
 
 
                 try {
                     Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
+                    Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
+                    gui.sendeUpdateSignal(" Das Spiel wurde gestartet."+gui.getBesitzerName()+" beginnt das Auswürfeln...");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
