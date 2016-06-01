@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/GUI.java" afterPath="$PROJECT_DIR$/src/gui/GUI.java" />
+    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="SpielerPanel 315-329&#10;Aktiv weiterschalten eingefügt *huihuihui*">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/SpielerPanel.java" afterPath="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -37,6 +36,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Datenbank.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -152,8 +161,8 @@
       <file leaf-file-name="SpielerPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45503598">
-              <caret line="344" column="84" selection-start-line="344" selection-start-column="84" selection-end-line="344" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.36330935">
+              <caret line="330" column="111" selection-start-line="330" selection-start-column="111" selection-end-line="330" selection-end-column="111" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,9 +193,10 @@
       <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="41" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
+            <state vertical-scroll-proportion="-6.37931">
+              <caret line="56" column="30" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="30" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#8438#8439#0" expanded="true" />
                 <element signature="e#8471#8472#0" expanded="true" />
                 <element signature="e#8568#8569#0" expanded="true" />
@@ -761,13 +771,7 @@
       <workItem from="1464797033428" duration="4953000" />
       <workItem from="1464802088246" duration="4892000" />
       <workItem from="1464807196735" duration="1489000" />
-      <workItem from="1464808731141" duration="6946000" />
-    </task>
-    <task id="LOCAL-00015" summary="Neue DB Methode SelectStarteSpiel liefert dir true wenn du 2 spieler im Spiel Hast">
-      <created>1464707376193</created>
-      <option name="number" value="00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1464707376193</updated>
+      <workItem from="1464808731141" duration="8704000" />
     </task>
     <task id="LOCAL-00016" summary="Neue DB Methode SelectStarteSpiel liefert dir true wenn du 2 spieler im Spiel Hast">
       <created>1464713130224</created>
@@ -1057,11 +1061,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464816286717</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="spielerpanel 343-344 buttoinScheisse">
+      <created>1464816641037</created>
+      <option name="number" value="00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1464816641037</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91116000" />
+    <option name="totallyTimeSpent" value="92874000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1153,7 +1163,9 @@
     <MESSAGE value="Spielfeld Z66-68 geändert.&#10;Spielleiter setzt sich aktiv und schreibt dies in die DB&#10;&#10;Spielerpanel auch irgendwas" />
     <MESSAGE value="Spielfeld Z190-191 geändert.&#10;" />
     <MESSAGE value="läuft fast" />
-    <option name="LAST_COMMIT_MESSAGE" value="läuft fast" />
+    <MESSAGE value="spielerpanel 343-344 buttoinScheisse" />
+    <MESSAGE value="SpielerPanel 315-329&#10;Aktiv weiterschalten eingefügt *huihuihui*" />
+    <option name="LAST_COMMIT_MESSAGE" value="SpielerPanel 315-329&#10;Aktiv weiterschalten eingefügt *huihuihui*" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1908,14 +1920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/ExterneJARS/postgresql-9.4.1208.jar!/org/postgresql/jdbc/PgConnection.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.037037">
@@ -2093,19 +2097,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="41" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
-          <folding>
-            <element signature="e#8438#8439#0" expanded="true" />
-            <element signature="e#8471#8472#0" expanded="true" />
-            <element signature="e#8568#8569#0" expanded="true" />
-            <element signature="e#8607#8608#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2114,10 +2105,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/netzwerk/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.37931">
+          <caret line="56" column="30" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8438#8439#0" expanded="true" />
+            <element signature="e#8471#8472#0" expanded="true" />
+            <element signature="e#8568#8569#0" expanded="true" />
+            <element signature="e#8607#8608#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45503598">
-          <caret line="344" column="84" selection-start-line="344" selection-start-column="84" selection-end-line="344" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.36330935">
+          <caret line="330" column="111" selection-start-line="330" selection-start-column="111" selection-end-line="330" selection-end-column="111" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

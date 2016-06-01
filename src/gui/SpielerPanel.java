@@ -312,6 +312,37 @@ public class SpielerPanel extends JPanel {
                 spieler.setFertig(true);
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
+    //ToDo:hier abfangen, dass das nur beim Auswürfeln passiert
+                int myPos = spielfeld.getTeilnehmer().indexOf(spieler);
+                String nextPlayer = "";
+
+                if(myPos+1 < spielfeld.getTeilnehmer().size()){
+
+                    nextPlayer= spielfeld.getTeilnehmer().get(myPos+1).getSpieler().getName();
+                    try {
+                        Datenbank.getInstance().updateAktiv(nextPlayer);
+                        Datenbank.getInstance().updateAktiv(spieler.getName());
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    spielfeld.getGui().sendeUpdateSignal(spieler.getName()+"wurf: "+spieler.getStartwurf()+"-"+nextPlayer +" ist nun dran...");
+                }else{
+                    try {
+                        Datenbank.getInstance().updateAktiv(spieler.getName());
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei");
+                }
+
+
+ //ToDo: Ende nur Auswürfeln
+
                 if (aufgedeckt == true) {
                     for (int i = 0; i < 3; i++) {
 
