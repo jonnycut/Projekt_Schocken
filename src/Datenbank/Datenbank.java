@@ -502,6 +502,23 @@ public class Datenbank {
         return spielerImSpiel;
     }
 
+    public ArrayList<String> selectStartAufstellung(int spielID)throws SQLException{
+        Statement stmt = verbindung.createStatement();
+        ResultSet resultSet = stmt.executeQuery("SELECT kennung From t_spieler where kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client where fk_t_spiel_spiel_id = "+spielID+")order by startwurf DESC");
+
+        ArrayList<String> startaufstellung = new ArrayList<String>();
+        ResultSetMetaData metadata = resultSet.getMetaData();
+        int numberOfColumns = metadata.getColumnCount();
+
+        while (resultSet.next()) {
+            int i = 1;
+            while (i <= numberOfColumns) {
+                startaufstellung.add(resultSet.getString(i++));
+            }
+            System.out.println("Der Spieler " + resultSet.getString(1) + "spielt an Platz" + i);
+        }
+        return startaufstellung;
+    }
     /**
      * Fügt der Relation t_spieler die statistik des Spielers als Object hinzu
      *
@@ -655,11 +672,15 @@ public class Datenbank {
         return spielleiter;
     }
 
-    public void updateAktivZuFalse(String kennung) throws SQLException {
+    public void updateAktiv(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        stmt.executeUpdate("Update t_spieler SET aktiv = false Where kennung = "+kennung);
-
+        boolean flag;
+        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = "+kennung);
+        if (r.next()) {
+            stmt.executeUpdate("Update t_spieler SET aktiv = " + !r.getBoolean(1) + " Where kennung = " + kennung);
+        }
     }
+
 
     /**
      * Methode zum aktualisieren des Spielstatus
@@ -677,7 +698,7 @@ public class Datenbank {
             System.out.println("Das Spiel " + spielID + " wird nun gespielt");
         }
         if (status == 3) {
-            updateAktivZuFalse(selectAktiverSpieler(spielID));
+            updateAktiv(selectAktiverSpieler(spielID));
 
             System.out.println("Das Spiel " + spielID + " ist nun geschlossen");
         }
@@ -711,9 +732,23 @@ public class Datenbank {
 
         stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' gewinner = '"+gewinner +"' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
     }
-//    public void updateStrafpunkte
+    public void schalteWeiter(int spielID) throws SQLException {
+        Statement stmt =verbindung.createStatement();
+        String aktiverSpieler=selectAktiverSpieler(spielID);
 
-//    public void updateStrafpunkte
+
+        ResultSet rs =stmt.executeQuery("SELECT aktiv,kennung From t_spieler where kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client where fk_t_spiel_spiel_id =" + spielID + " order by aktiv DESC, startwurf DESC");
+        while(rs.next()){
+            if(rs.getBoolean(1)==true){
+                updateAktiv(rs.getString(2));
+                if(rs.next()){
+                    updateAktiv(rs.getString(2));
+                }
+            }
+
+        }
+
+    }
 
     //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
@@ -916,6 +951,8 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
         int rundennr = 0;
         int haelfte = selectAktuelleHaelfte(spielID);
+
+
         ResultSet r = stmt.executeQuery("SELECT max(rundennr) FROM t_runde WHERE fk_t_spiel_spiel_id= " + spielID + " AND fk_t_hälfte_art=" + haelfte);
 
         if (r.next()) {

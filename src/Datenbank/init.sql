@@ -61,10 +61,14 @@ CREATE TABLE t_Durchgang(
   fk_t_Spiel_Spiel_ID INT,
   fk_t_Hälfte_Art INT,
   fk_t_Runde_RundenNr INT,
-  Würfel BYTEA,
-  Zähler INT DEFAULT 1,
+  Wuerfel1 BYTEA,
+  Wuerfel2 BYTEA,
+  Wuerfel3 BYTEA,
+  zaehler INT DEFAULT 1,
 
-  CONSTRAINT PK_t_Durchgang PRIMARY KEY (fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr)
+  CONSTRAINT PK_t_Durchgang PRIMARY KEY (zähler,fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr),
+  CONSTRAINT FK_t_Runde FOREIGN KEY (fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr) REFERENCES t_runde(fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,RundenNr)
+ -- CONSTRAINT FK t_Spieler_Kennung FOREIGN KEY (fk_t_Spieler_Kennung)REFERENCES t_spieler(kennung)
 ) ;
 
 
