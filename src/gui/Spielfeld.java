@@ -33,6 +33,8 @@ public class Spielfeld extends JPanel {
     private JPanel jPMitte; // BoderLayout.CENTER beinhaltet den Infobereich
     private JPanel jPUnten; // BorderLayout.SOUUTH beinhaltet die SpielerPanel
 
+    private SpielerBereich sb;
+
     private JPanel jPStock; //
     private JLabel jLStock;
 
@@ -169,7 +171,6 @@ public class Spielfeld extends JPanel {
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
         revalidate();
-        //gui.setZustand(666);
         gui.updateView();
     }
 
@@ -199,7 +200,7 @@ public class Spielfeld extends JPanel {
 
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
-        jPUnten.removeAll();
+        //jPUnten.remove(sb);
 
         try {
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
@@ -213,8 +214,8 @@ public class Spielfeld extends JPanel {
                 }
 
                 teilnehmer.add(tmpPanel);
-                jPUnten.add(tmpPanel);
-                jPUnten.revalidate();
+//                jPUnten.add(tmpPanel);
+//                jPUnten.revalidate();
             }
 
             if(teilnehmer.size() >=2 ){
@@ -237,6 +238,8 @@ public class Spielfeld extends JPanel {
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
 
+        sb = new SpielerBereich(teilnehmer);
+        jPUnten.add(sb);
         gui.setZustand(666);
         updateView();
 
