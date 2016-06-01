@@ -60,10 +60,10 @@ public class Spielfeld extends JPanel {
                 jPOben.setVisible(false);
                 infobereich.setPreferredSize(new Dimension(810, 200));
 
-
+                //gui.sendeUpdateSignal(" Das Spiel wurde gestartet."+gui.getBesitzerName()+" beginnt das Auswürfeln...");
 
                 try {
-                    Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
+                    //Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
                     Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
                     gui.sendeUpdateSignal(" Das Spiel wurde gestartet."+gui.getBesitzerName()+" beginnt das Auswürfeln...");
                 } catch (SQLException e1) {
@@ -187,7 +187,8 @@ public class Spielfeld extends JPanel {
 
         try {
 
-            List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
+            int id = Datenbank.getInstance().selectSpielID(gui.getBesitzerName());
+            List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(id);
 
             for (String s : kennungListe) {
                 SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), this);
