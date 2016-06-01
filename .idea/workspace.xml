@@ -201,8 +201,8 @@
       <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5641026">
-              <caret line="242" column="10" selection-start-line="242" selection-start-column="10" selection-end-line="242" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.50598294">
+              <caret line="243" column="8" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -633,7 +633,7 @@
       <workItem from="1464793013113" duration="1059000" />
       <workItem from="1464794189906" duration="2233000" />
       <workItem from="1464796864302" duration="116000" />
-      <workItem from="1464797033428" duration="3050000" />
+      <workItem from="1464797033428" duration="3442000" />
     </task>
     <task id="LOCAL-00001" summary="Flurry: DB Erstellen umgeschrieben und Spielfeld angepasst">
       <created>1464678524417</created>
@@ -923,11 +923,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464799777724</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="gefuckel">
+      <created>1464800093541</created>
+      <option name="number" value="00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1464800093541</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75886000" />
+    <option name="totallyTimeSpent" value="76278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1931,8 +1937,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5641026">
-          <caret line="242" column="10" selection-start-line="242" selection-start-column="10" selection-end-line="242" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.50598294">
+          <caret line="243" column="8" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
           <folding />
         </state>
       </provider>

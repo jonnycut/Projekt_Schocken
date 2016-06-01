@@ -191,7 +191,7 @@ public class Spielfeld extends JPanel {
 
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
-
+        jPUnten.removeAll();
         try {
 
             List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(Datenbank.getInstance().selectOffenesSpiel());
@@ -221,6 +221,7 @@ public class Spielfeld extends JPanel {
             e.printStackTrace();
         }
 
+        jPUnten.validate();
         List<Spieler> spielerListeTmp = new ArrayList<>();
 
         for (SpielerPanel s : teilnehmer) {
@@ -234,14 +235,14 @@ public class Spielfeld extends JPanel {
 
 
     public void netzwerkUpdate(String info){
-        jPUnten.removeAll();
+        removeAll();
         updateTeilnehmerListe();
-        jPUnten.revalidate();
+
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
-        //updateView();
-        revalidate();
+        updateView();
+        validate();
         System.out.println("recieved updateSignal...");
     }
 
