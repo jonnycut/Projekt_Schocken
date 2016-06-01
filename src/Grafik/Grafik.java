@@ -3,9 +3,11 @@ package Grafik;
 import javax.swing.*;
 
 
-/**
+/**<pre>
  * Created by U.F.O. on 23.05.2016.
  * Diese Klasse hält alle Grafiken für das gesamte Spiel vor.
+ * </pre>
+ *
  *
  * @author DFleuren
  */

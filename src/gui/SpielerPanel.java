@@ -6,7 +6,6 @@ import spiel.Runde;
 import spiel.Spieler;
 import spiel.Wuerfel;
 
-import javax.smartcardio.CardChannel;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -57,17 +56,19 @@ public class SpielerPanel extends JPanel {
      * JPanel, welches die Würfel im Becher enthält
      */
     private JPanel wuerfel;
+    /**
+     *
+     */
     private JButton becher;
     private JPanel wuerfelAnsicht;
     private JButton w1;
     private JButton w2;
     private JButton w3;
     private JPanel strafpunkte;
-    private JPanel buttons;
+
     private JButton wuerfeln;
     private JButton fertig;
-    private JPanel name;
-    private JPanel profilbild;
+
 
     public SpielerPanel(Spieler spieler , Runde runde, Spielfeld spielfeld){
         this.runde = runde;
@@ -188,7 +189,7 @@ public class SpielerPanel extends JPanel {
         jLStrafpunkte.setForeground(Color.WHITE);
         strafpunkte.add(jLStrafpunkte);
 
-        this.buttons = new JPanel();
+        JPanel buttons = new JPanel();
         buttons.setBackground(Color.BLACK);
         this.wuerfeln = new JButton("WÜRFELN");
         wuerfeln.setEnabled(false);
@@ -202,7 +203,7 @@ public class SpielerPanel extends JPanel {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     System.out.println(spieler.getLetztesBild());
-                    System.out.println(spieler.getBecher().getWuerfel()[0]+"-"+spieler.getBecher().getWuerfel()[1]+"-"+spieler.getBecher().getWuerfel()[2]);
+                    System.out.println(spieler.getBecher().getWuerfel()[0] + "-" + spieler.getBecher().getWuerfel()[1] + "-" + spieler.getBecher().getWuerfel()[2]);
                     aufgedeckt = true;
                 } else {
 
@@ -246,14 +247,14 @@ public class SpielerPanel extends JPanel {
                 spieler.setFertig(true);
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
-                if(aufgedeckt == true){
-                   for(int i=0; i<3;i++){
+                if (aufgedeckt == true) {
+                    for (int i = 0; i < 3; i++) {
 
-                    if(!wuerfelAnsicht.getComponent(i).getName().equals("leer")){
-                        wuerfelRaus((JButton) wuerfelAnsicht.getComponent(i), i, wuerfelListener);
+                        if (!wuerfelAnsicht.getComponent(i).getName().equals("leer")) {
+                            wuerfelRaus((JButton) wuerfelAnsicht.getComponent(i), i, wuerfelListener);
+                        }
+
                     }
-
-                   }
                 }
 
                 try {
@@ -271,16 +272,13 @@ public class SpielerPanel extends JPanel {
                 spieler.setAktiv(false);
 
 
-
-
-
             }
         });
 
         buttons.add(wuerfeln);
         buttons.add(fertig);
 
-        this.name = new JPanel(new FlowLayout());
+        JPanel name = new JPanel(new FlowLayout());
         name.setBackground(Color.DARK_GRAY);
 
         JLabel jLSpielerName = new JLabel(this.spieler.getName());
@@ -289,7 +287,7 @@ public class SpielerPanel extends JPanel {
         name.add(jLSpielerName);
 
 
-        this.profilbild = new JPanel();
+        JPanel profilbild = new JPanel();
         profilbild.setLayout(new BoxLayout(profilbild, BoxLayout.Y_AXIS));
         profilbild.setBackground(Color.DARK_GRAY);
 
