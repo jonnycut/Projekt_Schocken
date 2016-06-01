@@ -55,7 +55,13 @@ public class SpielerPanel extends JPanel {
 
     public SpielerPanel(Spieler spieler , Runde runde, Spielfeld spielfeld){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new LineBorder(Color.BLACK, 2));
+
+        if(spieler.getAktiv() == true){
+            setBorder(new LineBorder(Color.RED, 3));
+        }
+        else{
+            setBorder(new LineBorder(Color.BLACK, 2));
+        }
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(180, 530));
 
@@ -238,6 +244,7 @@ public class SpielerPanel extends JPanel {
 
 
 
+
             }
         });
 
@@ -308,6 +315,7 @@ public class SpielerPanel extends JPanel {
      * Loescht die Wuerfel in der Auslage und im Wuerfelbereich, sowie die Strafpunkte
      * und schreibt diese neu.
      */
+
 
     public void updatePanel(){
 
