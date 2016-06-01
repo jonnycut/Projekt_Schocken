@@ -58,6 +58,7 @@ public class SpielerPanel extends JPanel {
 
         if(spieler.getAktiv() == true){
             setBorder(new LineBorder(Color.RED, 3));
+            buttonEnable();
         }
         else{
             setBorder(new LineBorder(Color.BLACK, 2));
@@ -101,17 +102,14 @@ public class SpielerPanel extends JPanel {
         this.w1 = new JButton(spieler.getBecher().getWuerfelArray()[0].getGrafik());
         w1.setBackground(Color.LIGHT_GRAY);
         w1.setBorder(new LineBorder(Color.BLACK, 1));
-        w1.setEnabled(false);
         w1.setName("0");
         this.w2 = new JButton(spieler.getBecher().getWuerfelArray()[1].getGrafik());
         w2.setBackground(Color.LIGHT_GRAY);
         w2.setBorder(new LineBorder(Color.BLACK, 1));
-        w1.setEnabled(false);
         w2.setName("1");
         this.w3 = new JButton(spieler.getBecher().getWuerfelArray()[2].getGrafik());
         w3.setBackground(Color.LIGHT_GRAY);
         w3.setBorder(new LineBorder(Color.BLACK, 1));
-        w1.setEnabled(false);
         w3.setName("2");
 
         //WuerfelListener um einen Wuerfel vom Becher in die Auslage zu legen
@@ -418,11 +416,16 @@ public class SpielerPanel extends JPanel {
 
     public void buttonEnable(){
         becher.setEnabled(true);
-        w1.setEnabled(true);
-        w2.setEnabled(true);
-        w3.setEnabled(true);
         wuerfeln.setEnabled(true);
         fertig.setEnabled(true);
+    }
+
+    public JButton getBecher() {
+        return becher;
+    }
+
+    public void setBecher(JButton becher) {
+        this.becher = becher;
     }
 
 
