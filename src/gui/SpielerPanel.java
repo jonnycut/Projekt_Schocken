@@ -115,14 +115,7 @@ public class SpielerPanel extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        if(spieler.getAktiv() == true){
-            setBorder(new LineBorder(Color.RED, 3));
-            buttonEnable();
-            this.spielfeld.netzwerkUpdate(spieler.getName() + " ist dran...");
-        }
-        else{
-            setBorder(new LineBorder(Color.BLACK, 2));
-        }
+
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(180, 530));
 
@@ -160,15 +153,23 @@ public class SpielerPanel extends JPanel {
         this.w1 = new JButton(spieler.getBecher().getWuerfelArray()[0].getGrafik());
         w1.setBackground(Color.LIGHT_GRAY);
         w1.setBorder(new LineBorder(Color.BLACK, 1));
+        w1.setEnabled(false);
         w1.setName("0");
+
+
         this.w2 = new JButton(spieler.getBecher().getWuerfelArray()[1].getGrafik());
         w2.setBackground(Color.LIGHT_GRAY);
         w2.setBorder(new LineBorder(Color.BLACK, 1));
+        w2.setEnabled(false);
         w2.setName("1");
+
+
         this.w3 = new JButton(spieler.getBecher().getWuerfelArray()[2].getGrafik());
         w3.setBackground(Color.LIGHT_GRAY);
         w3.setBorder(new LineBorder(Color.BLACK, 1));
+        w3.setEnabled(false);
         w3.setName("2");
+
 
         //WuerfelListener um einen Wuerfel vom Becher in die Auslage zu legen
         //-> Entsprechender Wuerfel wird mit leerem Button ersetzt (Design)
@@ -329,6 +330,15 @@ public class SpielerPanel extends JPanel {
 
             }
         });
+
+        if(spieler.getAktiv() == true){
+            setBorder(new LineBorder(Color.RED, 3));
+            buttonEnable();
+            this.spielfeld.netzwerkUpdate(spieler.getName() + " ist dran...");
+        }
+        else{
+            setBorder(new LineBorder(Color.BLACK, 2));
+        }
 
         buttons.add(wuerfeln);
         buttons.add(fertig);
@@ -507,7 +517,7 @@ public class SpielerPanel extends JPanel {
             e.printStackTrace();
         }
 
-        spielfeld.netzwerkUpdate(""+spieler.getName() + " hat eine" + ausgelegterWert +" ausgelegt.");
+        spielfeld.netzwerkUpdate(""+spieler.getName() + " hat eine " + ausgelegterWert +" ausgelegt.");
 
     }
 
@@ -521,6 +531,9 @@ public class SpielerPanel extends JPanel {
         becher.setEnabled(true);
         wuerfeln.setEnabled(true);
         fertig.setEnabled(true);
+        w1.setEnabled(true);
+        w2.setEnabled(true);
+        w3.setEnabled(true);
     }
 
     /**

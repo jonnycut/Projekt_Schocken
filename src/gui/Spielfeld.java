@@ -223,6 +223,7 @@ public class Spielfeld extends JPanel {
 
     public void netzwerkUpdate(String info){
         jPUnten.removeAll();
+        remove(jPUnten);
         updateTeilnehmerListe();
         infobereich.setInfos(info);
         updateInfo(infobereich);
