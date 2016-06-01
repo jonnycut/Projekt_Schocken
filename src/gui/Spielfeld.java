@@ -169,7 +169,7 @@ public class Spielfeld extends JPanel {
         add(jPMitte, BorderLayout.CENTER);
         add(jPUnten, BorderLayout.SOUTH);
         revalidate();
-        gui.setZustand(2);
+        //gui.setZustand(666);
         gui.updateView();
     }
 
@@ -237,7 +237,9 @@ public class Spielfeld extends JPanel {
 
         haelfte.getRunde().setTeilnehmer(spielerListeTmp);
 
+        gui.setZustand(666);
         updateView();
+
     }
 
 

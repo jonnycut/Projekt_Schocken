@@ -143,9 +143,8 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Anmeldung");
                 break;
             case 2:
-                jp.remove(spielfeld);
-                jp.add(spielfeld, "Spielfeld");
-                ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
+                //ToDo: Dinge die in der Anmeldung stattfinden
+                System.out.println("Test Anmeldung");
                 break;
             case 3:
                 ((CardLayout) jp.getLayout()).show(jp, "Registrierung");
@@ -165,6 +164,11 @@ public class GUI extends JFrame {
                 break;
             case 7:
                 //ToDo: Statistik vom Gewinner und Verlierer oder vom Spiel
+                break;
+            case 666:
+                jp.remove(spielfeld);
+                jp.add(spielfeld, "Spielfeld");
+                ((CardLayout) jp.getLayout()).show(jp, "Spielfeld");
                 break;
         }
     }
