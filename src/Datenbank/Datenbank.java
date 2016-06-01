@@ -1,7 +1,9 @@
 package Datenbank;
 
 /**
- * Created by ehampel on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
+ *
+ * @author EHampel
  */
 
 
