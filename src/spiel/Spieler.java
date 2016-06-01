@@ -58,6 +58,8 @@ public class Spieler implements Comparable<Spieler> {
         statistik.put("General",0);
         statistik.put("Zahl",0);
 
+
+
         statistik.put(letztesBild,1);
 
         String[] wuerfe = {"Schock aus", "Schock", "General", "Straße", "Zahl"};

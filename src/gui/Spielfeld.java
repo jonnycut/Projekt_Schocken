@@ -60,7 +60,9 @@ public class Spielfeld extends JPanel {
                 jPOben.setVisible(false);
                 infobereich.setPreferredSize(new Dimension(810, 200));
                 try {
+                    System.out.println("Spielfeld: Setze aktiv");
                     Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
+                    System.out.println("Spielfeld: Habe aktiv gesetzt");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
@@ -209,7 +211,7 @@ public class Spielfeld extends JPanel {
                 if(jPOben.getComponents().length!=0)
                     jPOben.getComponent(0).setEnabled(true);
             }
-            updateView();
+            //updateView();
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
