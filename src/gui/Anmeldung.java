@@ -25,7 +25,11 @@ public class Anmeldung extends JPanel {
      *  Die aktuelle GUI
      */
     GUI gui;
-    JTextField jTName; // Das JTextfield um den Spielername zu speichern.
+
+    /**
+     * Das JTextfield um den Spielername zu speichern.
+     */
+    JTextField jTName;
 
     /**
      * Der Konstruktor erzeugt ein neues JPanel, als Anmeldebereich, um sich am Spiel an zu melden oder sich zu registrieren.
@@ -357,7 +361,12 @@ public class Anmeldung extends JPanel {
 
 
     /**
-     * Erzeugt ein JPanel, welches als Spielfeld dient.
+     * <pre>
+     *  Setzt das Attribut spielfeld der GUI mit einem neuen Spielfeld (Extents JPanel),
+     *  dem Spielfeld wird die GUI mitgegeben.
+     * </pre>
+     * @see Spielfeld
+     *
      */
     public void starteSpiel() {
 
@@ -365,9 +374,11 @@ public class Anmeldung extends JPanel {
     }
 
 
-    /**
-     * Prüft über die Datenbank ob es ein Spiel bereits existiert oder ob eine neues erstellt werden soll.
-     * Mit der SpielID wird der Spielleiter ermittelt und es wir eine neues Netzwerk erstellt mit Client oder Server mit Client.
+    /**<pre>
+     * Prüft über die Datenbank, ob bereits ein Spiel  existiert, oder ob eine neues erstellt werden soll.
+     * Mit der SpielID wird der Spielleiter ermittelt und es wird eine neues Netzwerk erstellt mit Client oder Server mit Client.
+     * </pre>
+     *
      */
     public void pruefeSpiel() {
 
@@ -406,7 +417,7 @@ public class Anmeldung extends JPanel {
 
     /**
      * Diese Klasse ist für die Beschänkung der JTextfields verandwortlich.
-     * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     * So dass nur eine Maxanzahl von Zeichen eingetragen werden darf / kann.
      *
      * Diese Klasse basiert auf einer Vorlage von http://www.java2s.com/Tutorial/Java/0260__Swing-Event/LimitJTextFieldinputtoamaximumlength.htm
      */

@@ -305,7 +305,7 @@ public class Registrierung extends JPanel {
 
     /**
      * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
-     * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     * So dass nur eine Maxanzahl von Zeichen eingetragen werden darf / kann.
      *
      * Diese Klasse basiert auf einer Vorlage von http://www.java2s.com/Tutorial/Java/0260__Swing-Event/LimitJTextFieldinputtoamaximumlength.htm
      */

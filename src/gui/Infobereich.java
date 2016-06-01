@@ -12,11 +12,21 @@ import java.sql.SQLException;
  * @author DFleuren
  */
 public class Infobereich extends JPanel {
-
+    /**
+     * Das Spielfeld, zu dem der Infobereich gehört
+     */
     private Spielfeld spielfeld;
+    //ToDo: Bin mir nicht sicher, was was ist! KNA
     private JPanel jPInfo;
     private JLabel info;
 
+    /**<pre>
+     * Constructor des Infobereiches.
+     * Erwartet ein Spielfeld, damit er weis, zu wem er gehört
+     * </pre>
+     * @param spielfeld
+     * @see Spielfeld
+     */
     public Infobereich(Spielfeld spielfeld){
         super();
         this.spielfeld = spielfeld;
@@ -55,12 +65,12 @@ public class Infobereich extends JPanel {
     //------------------------------------------METHODEN---------------------------------------------------------------
 
     /**
-     * Erzeugt eine JLabel und allen Spielern Informationen zu kommen zu lassen.
-     * @param infos String beinhaltet den Informationstext der angezeigt werden soll.
+     * Erzeugt ein JLabel um allen Spielern Informationen zukommen zu lassen.
+     * @param infos String beinhaltet den Informationstext der angezeigt werden soll.<br></br>
      * Es wird zum Schluss wieder in den Infobereich eingefügt.
      */
     public void setInfos(String infos) {
-
+        //ToDo: brauchen wir das auskommentierte noch? wenn nicht, wurd nämlich nichts neu erzeugt und die Beschreibung muss angepasst werden. KNA
         info.setText(infos);
 //        JPanel jPCenter = new JPanel(new FlowLayout());
 //        jPCenter.setBackground(Color.BLACK);
@@ -80,6 +90,7 @@ public class Infobereich extends JPanel {
      * wird in der Datenbank geprüft wer der Spielleiter des Spiels ist.
      * Dann wird es in das JPanel jPInfo eingefügt.
      */
+    //ToDo: Brauchen wir das noch? KNA
 //    public void istSpielleiter() {
 //        int spielID = 0;
 //        try {

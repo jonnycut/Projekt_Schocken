@@ -30,16 +30,32 @@ import java.sql.SQLException;
  * @author KNapret / DFleuren
  */
 public class SpielerPanel extends JPanel {
-
+    //ToDo: Brauchen wir das noch? muss ich noch gucken. KNA
     private Runde runde; //TestAttribut
 
-
+    /**
+     * Das Spielfeld des Panles
+     */
     private Spielfeld spielfeld;
-    //ToDo: Datenhaltung und Wiederherstellung über die Datenbank
+    /**
+     * Das SpielerObject des SpielerPanels
+     */
     private Spieler spieler;
+    /**
+     * Boolean, ob der Becher offen oder geschlossen ist.
+     */
     private boolean aufgedeckt = false;
+    /**
+     * Das JPanel der Auslage, welches die rausgelegten Würfel enthält
+     */
     private JPanel auslage;
-    private int auslageCount=0; //testzwecke, muss abgeändert werden
+    /**
+     * Zähler für die herausgelegten würfel, Wenn =3 ist der Spieler automatisch fertig
+     */
+    private int auslageCount=0;
+    /**
+     * JPanel, welches die Würfel im Becher enthält
+     */
     private JPanel wuerfel;
     private JButton becher;
     private JPanel wuerfelAnsicht;
@@ -54,11 +70,16 @@ public class SpielerPanel extends JPanel {
     private JPanel profilbild;
 
     public SpielerPanel(Spieler spieler , Runde runde, Spielfeld spielfeld){
+        this.runde = runde;
+        this.spieler = spieler;
+        this.spielfeld = spielfeld;
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         if(spieler.getAktiv() == true){
             setBorder(new LineBorder(Color.RED, 3));
             buttonEnable();
+            this.spielfeld.netzwerkUpdate(spieler.getName() + " ist dran...");
         }
         else{
             setBorder(new LineBorder(Color.BLACK, 2));
@@ -66,9 +87,7 @@ public class SpielerPanel extends JPanel {
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(180, 530));
 
-        this.runde = runde;
-        this.spieler = spieler;
-        this.spielfeld = spielfeld;
+
 
 
         this.auslage = new JPanel(new GridLayout(1,3));
@@ -249,6 +268,8 @@ public class SpielerPanel extends JPanel {
                 }
 
                 spielfeld.pruefeFertig();
+                spieler.setAktiv(false);
+
 
 
 

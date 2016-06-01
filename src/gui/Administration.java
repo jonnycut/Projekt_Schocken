@@ -22,6 +22,7 @@ public class Administration extends JPanel{
     /**
      * Der Konstruktor erzeugt ein neues JPanel, als Administrationsbereich, um Passwörter bei Spielern zu ändern.
      * @param gui GUI ist die aktuelle GUI.
+     *
      */
     public Administration(GUI gui) {
         super();
@@ -101,6 +102,7 @@ public class Administration extends JPanel{
         untenLinks.setBackground(Color.DARK_GRAY);
 
         // Liest das neue Passwort aus und führt die Methode passwortReset() aus.
+
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -190,7 +192,7 @@ public class Administration extends JPanel{
 
     /**
      * Setzt das Passwort eines Spielers zurück.
-     * @param name String ist der Name vom Spieler, bei dem das Passwort geändert wird.
+     * @param name String ist die Kennung des Spielers, dessen Passwort geändert wird (caseSensitive!).
      * @param passwort String ist das neue Passwort.
      */
     public void passwortReset(String name, String passwort){
@@ -216,7 +218,7 @@ public class Administration extends JPanel{
 
     /**
      * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
-     * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     * So dass nur eine Maxanzahl von Zeichen eingetragen werden darf/ kann.
      *
      * Diese Klasse basiert auf einer Vorlage von http://www.java2s.com/Tutorial/Java/0260__Swing-Event/LimitJTextFieldinputtoamaximumlength.htm
      */
