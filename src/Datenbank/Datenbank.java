@@ -739,6 +739,7 @@ public class Datenbank {
      */
     public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
 
+        // Im Internet gefunden... StackOverflow...
         BufferedImage image = new BufferedImage(
                 icon.getIconWidth(),
                 icon.getIconHeight(),

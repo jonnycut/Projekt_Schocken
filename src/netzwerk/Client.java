@@ -62,7 +62,7 @@ public class Client {
             System.out.println("Verbindung zum Server eingerichtet!");
 
             this.writer = writer;
-
+            //Hier noch einen neuen Thread drum.
             // Erzeugt eine neue Nachricht und sendet diese zum Server.
             //String zeile;
             while ((zeile = br.readLine()) != null){

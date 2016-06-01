@@ -14,12 +14,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by  on 23.05.2016.
  * Diese Klasse ist der Anmeldebildschirm vom Spiel.
+ * @author dfleuren
  */
 public class Anmeldung extends JPanel {
 
-    GUI gui; // Die aktuelle GUI
+    /**
+     *  Die aktuelle GUI
+     */
+    GUI gui;
     JTextField jTName; // Das JTextfield um den Spielername zu speichern.
 
     /**
@@ -361,6 +365,8 @@ public class Anmeldung extends JPanel {
     /**
      * Diese Klasse ist für die Beschänkung der JTextfields verandwortlich.
      * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     *
+     * Diese Klasse basiert auf einer Vorlage...
      */
     private class JTextFieldLimit extends PlainDocument {
         private int limit;

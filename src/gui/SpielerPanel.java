@@ -360,7 +360,7 @@ public class SpielerPanel extends JPanel {
      * @param pufferBtn JButton - Der Button, der bewegt wird
      * @param btnIndex int - an welche Stelle der Button gelegt wird
      * @param wuerfelListener - ActionListener - Damit die Wuerfel nicht mehr angeklickt werden koennen
-     * @see JButton
+     * @see JButton#add(Comparable)
      * @see ActionListener
      *
      */
