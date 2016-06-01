@@ -18,7 +18,9 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
+ *
+ * @author  KNapret(Uwe) / DFleuren(Flurry) / EHampel(Opa)
  */
 public class Main {
     //testAttribute
