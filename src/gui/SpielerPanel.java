@@ -304,7 +304,7 @@ public class SpielerPanel extends JPanel {
         alle Würfel heraus.
         Danach wird ein Update des Spielers an die Datenbank geschickt.
          */
-        fertig.addActionListener(new ActionListener() {
+        ActionListener fertigListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -313,7 +313,16 @@ public class SpielerPanel extends JPanel {
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
     //ToDo:hier abfangen, dass das nur beim Auswürfeln passiert
-                int myPos = spielfeld.getTeilnehmer().indexOf(spieler);
+                int myPos=0;
+
+                //Fehler war: myPos wurde mit spielfeld.getTeilnehmer().indexOf(spieler) gesucht.
+                //da die Liste Panels enthält und keine Spieler wurde immer -1 zurückgegeben
+
+                for(SpielerPanel sp : spielfeld.getTeilnehmer()){
+                    if(sp.getSpieler().getName().equals(spieler.getName())){
+                        myPos = spielfeld.getTeilnehmer().indexOf(sp);
+                    }
+                }
                 String nextPlayer = "";
 
                 if(myPos+1 < spielfeld.getTeilnehmer().size()){
@@ -367,7 +376,10 @@ public class SpielerPanel extends JPanel {
 
 
             }
-        });
+        };
+
+        fertig.addActionListener(fertigListener);
+
 
         if(spieler.getAktiv() == true){
             setBorder(new LineBorder(Color.RED, 3));
