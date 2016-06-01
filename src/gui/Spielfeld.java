@@ -18,7 +18,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by Flurry on 25.05.2016.
+ * Created by U.F.O on 25.05.2016.
+ *
+ * @author DFleuren
  */
 public class Spielfeld extends JPanel {
 

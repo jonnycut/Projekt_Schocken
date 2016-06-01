@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
+ *
+ * @author DFleuren
  */
 public class Server {
 

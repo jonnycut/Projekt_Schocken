@@ -14,9 +14,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by  on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
  * Diese Klasse ist der Anmeldebildschirm vom Spiel.
- * @author dfleuren
+ *
+ * @author DFleuren
  */
 public class Anmeldung extends JPanel {
 
@@ -366,7 +367,7 @@ public class Anmeldung extends JPanel {
      * Diese Klasse ist für die Beschänkung der JTextfields verandwortlich.
      * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
      *
-     * Diese Klasse basiert auf einer Vorlage...
+     * Diese Klasse basiert auf einer Vorlage von http://www.java2s.com/Tutorial/Java/0260__Swing-Event/LimitJTextFieldinputtoamaximumlength.htm
      */
     private class JTextFieldLimit extends PlainDocument {
         private int limit;

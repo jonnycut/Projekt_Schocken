@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 
 /**
- * Created by KNapret on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
  *
  * <pre>
  * Spielerpanel
@@ -26,6 +26,8 @@ import java.sql.SQLException;
  * Enthaelt die noetigen Listener fuer den Spielverlauf
  * (wuerfeln, aufdecken, fertig)
  * </pre>
+ *
+ * @author KNapret / DFleuren
  */
 public class SpielerPanel extends JPanel {
 

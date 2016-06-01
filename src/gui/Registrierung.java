@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O on 23.05.2016.
  * Diese Klasse ist für die Registrierung eines neuen Spielers.
+ *
+ * @author DFleuren
  */
 public class Registrierung extends JPanel {
 
@@ -304,6 +306,8 @@ public class Registrierung extends JPanel {
     /**
      * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
      * So dass nur eine Maxanzahl von Zeichen eingetragen werden dürfen / können.
+     *
+     * Diese Klasse basiert auf einer Vorlage von http://www.java2s.com/Tutorial/Java/0260__Swing-Event/LimitJTextFieldinputtoamaximumlength.htm
      */
     private class JTextFieldLimit extends PlainDocument {
         private int limit;

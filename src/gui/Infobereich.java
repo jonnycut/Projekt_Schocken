@@ -6,8 +6,10 @@ import java.awt.*;
 import java.sql.SQLException;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O on 23.05.2016.
  * Diese Klasse ist für das Spielfeld um dem Spieler Informationen mitzuteilen.
+ *
+ * @author DFleuren
  */
 public class Infobereich extends JPanel {
 

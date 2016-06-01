@@ -2,14 +2,16 @@ package gui;
 
 
 
-        import Datenbank.Datenbank;
+import Datenbank.Datenbank;
         import spiel.Spieler;
 
         import javax.swing.*;
         import java.awt.*;
 
 /**
- * Created by ehampel on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
+ *
+ * @author EHampel / DFleuren
  */
 public class Statistik extends JPanel {
 

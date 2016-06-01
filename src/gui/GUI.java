@@ -15,7 +15,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O on 23.05.2016.
+ *
+ * @author DFleuren
  */
 public class GUI extends JFrame {
 

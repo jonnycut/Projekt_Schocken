@@ -6,8 +6,10 @@ import java.io.*;
 import java.net.Socket;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
  * Diese Klasse ist der Client für die Netzwerkkommunikation.
+ *
+ * @author DFleuren / KNapret
  */
 public class Client {
 

@@ -5,9 +5,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Created by dfleuren on 23.05.2016.
+ * Created by U.F.O. on 23.05.2016.
  * Diese Klasse stellt die Netzwerkkommunikation sicher.
  * Erzeugt entwerder ein Client oder einen Server mit Client.
+ *
+ * @author DFleuren
  */
 public class Netzwerk {
 
