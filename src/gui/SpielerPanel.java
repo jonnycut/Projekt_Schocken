@@ -558,7 +558,7 @@ public class SpielerPanel extends JPanel {
             wuerfeln.setEnabled(false);
         //ToDo: Gesamtes Updaten, inkl der Würfel schicken. KNA
         try {
-            Datenbank.getInstance().updateSpieler(spieler.getName(), spieler.getStrafpunkte(),spieler.getStatistik());
+            Datenbank.getInstance().updateSpieler(spieler.getName(), spieler.getStrafpunkte());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {

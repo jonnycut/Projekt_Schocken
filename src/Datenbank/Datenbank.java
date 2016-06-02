@@ -13,7 +13,6 @@ import spiel.Wuerfel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.InetAddress;
@@ -396,6 +395,39 @@ public class Datenbank {
         return ip;
     }
 
+    /**<pre>
+     * Diese Methode holt sich die Würfel eines Durchgangs aus der Datenbank,
+     * erstellt daraus neue Würfel Objekte und liefert diese in einem Array zurück
+     * </pre>
+     *
+     *
+     * @param kennung
+     * @return wuerfel Wuerfel[] - Array mit den 3 Wüfelobjekten (wuerfel{w1,w2,w3})
+     */
+    public Wuerfel[] selectDurchgang(String kennung) throws SQLException, IOException, ClassNotFoundException {
+        Statement stmt = verbindung.createStatement();
+
+        Wuerfel[] wuerfelArray = new Wuerfel[3];
+        int stelle = 0;
+
+        int spielID = selectSpielID(kennung);
+        int haelfte = selectAktuelleHaelfte(spielID);
+        int rundenNr = selectAktuelleRunde(spielID);
+
+        ResultSet rS = stmt.executeQuery("SELECT wuerfel1, wuerfel2, wuerfel3 FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
+                "', AND fk_t_runde_rundennr ="+rundenNr+
+                ", AND fk_t_haelfte_art="+haelfte+
+                ", AND fk_t_spiel_spiel_id="+spielID);
+
+        while(rS.next()){
+            ObjectInputStream oIS = new ObjectInputStream(new ByteArrayInputStream(rS.getBytes(1)));
+            wuerfelArray[stelle] = (Wuerfel) oIS.readObject();
+            System.out.println("Wuerfel "+stelle+"ist erstellt: "+wuerfelArray[stelle]);
+            stelle++;
+        }
+
+        return wuerfelArray;
+    }
     /**
      * <pre>
      * Methode zum anlegen einer Hälfte wobei der Stock initial in der DB auf 13 gesetzt wird,
@@ -733,15 +765,15 @@ public class Datenbank {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void insertDurchgang(String kennung) throws SQLException, IOException, ClassNotFoundException {
+    public void insertDurchgang(String kennung,Wuerfel[] wuerfelArray) throws SQLException, IOException, ClassNotFoundException {
         Statement stmt = verbindung.createStatement();
         int spielID = selectSpielID(kennung);
         int haelfte = selectAktuelleHaelfte(spielID);
         int rundennr = selectAktuelleRunde(spielID);
-        Spieler tmp = selectSpieler(kennung);
-        Object wuerfel1 = tmp.getBecher().getWuerfelArray()[0];
-        Object wuerfel2 = tmp.getBecher().getWuerfelArray()[1];
-        Object wuerfel3 = tmp.getBecher().getWuerfelArray()[2];
+
+        Object wuerfel1 = wuerfelArray[0];
+        Object wuerfel2 = wuerfelArray[1];
+        Object wuerfel3 = wuerfelArray[2];
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -1164,6 +1196,11 @@ public class Datenbank {
      * @see Spieler
      */
     public Spieler selectSpieler(String kennung) throws SQLException, IOException, ClassNotFoundException {
+
+        int spielID = selectSpielID(kennung);
+        int haelfte = selectAktuelleHaelfte(spielID);
+        int rundenNr = selectAktuelleRunde(spielID);
+
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery(
                 "SELECT *" +
@@ -1175,16 +1212,17 @@ public class Datenbank {
             if (r.getString(7) != null)
                 spieler.setStrafpunkte(Integer.parseInt(r.getString(7)));
 
-            if (r.getBytes(8) != null) {
-                InputStream fis = r.getBinaryStream(8);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                HashMap<String, Integer> statistik = (HashMap<String, Integer>) ois.readObject();
-                ois.close();
-                fis.close();
-                spieler.setStatistik(statistik);
-            }
             if (r.getBoolean(5))
                 spieler.setAktiv(r.getBoolean(5));
+
+            ResultSet rS = stmt.executeQuery("SELECT COUNT(*) FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
+                    "', AND fk_t_runde_rundennr ="+rundenNr+
+                    ", AND fk_t_haelfte_art="+haelfte+
+                    ", AND fk_t_spiel_spiel_id="+spielID);
+            if(rS.next())
+                if(r.getInt(1)!=0){
+                    spieler.setWurf(selectDurchgang(kennung));
+                }
 
 
             return spieler;
@@ -1194,15 +1232,13 @@ public class Datenbank {
 
     /**
      * Fuerht ein Update der Attribute des Spielers mit der uebergebenen Kennung aus.
-     * Nutzt die insertStatistik(Map) Methode
      *
      * @param kennung     String - Kennung des zu aktualisierenden Spielers
      * @param strafpunkte Int - Wert der zu setzenden Strafpunkte
-     * @param statistik   Map[String, Integer] - Die zu setzende Statistik
      * @throws SQLException
      * @throws IOException
      */
-    public void updateSpieler(String kennung, int strafpunkte, Map<String, Integer> statistik) throws SQLException, IOException {
+    public void updateSpieler(String kennung, int strafpunkte) throws SQLException, IOException {
 
         PreparedStatement ps = verbindung.prepareStatement(
                 "UPDATE t_spieler" +

@@ -33,9 +33,6 @@ public class Spieler implements Comparable<Spieler> {
     private boolean aktiv = false;
 
 
-
-    private HashMap<String, Integer> statistik = new HashMap<>();
-
     /**
      * Erstellt einen neuen Spieler mit dem angegeben Namen und Profilbild
      * Becher wird erstellt, Strafpunkte und Hälfte auf 0 gesetzt
@@ -51,20 +48,7 @@ public class Spieler implements Comparable<Spieler> {
         this.haelfte = 0;
         this.letztesBild = becher.getBild();
         this.name = name;
-        statistik.put("Schock aus",0);
-        statistik.put("Schock",0);
-        statistik.put("Straße",0);
-        statistik.put("General",0);
-        statistik.put("Zahl",0);
 
-
-
-        statistik.put(letztesBild,1);
-
-        String[] wuerfe = {"Schock aus", "Schock", "General", "Straße", "Zahl"};
-        for (String s : wuerfe) {
-            this.statistik.put(s, 0);
-        }
     }
 
     /**
@@ -141,54 +125,18 @@ public class Spieler implements Comparable<Spieler> {
         return strafpunkte;
     }
 
-    /**<pre>
-     * Liefert die Aktuelle Statistik des Spielers als HashMap
-     *     Key {Schock aus, Schock, General, Straße, Zahl}
-     *     Value {Integer}
-     * </pre>
-     *
-     * @return Object HashMap{String, Integer}
-     * @see HashMap
-     */
-
-    public HashMap<String, Integer> getStatistik() {
-        return this.statistik;
-    }
-
-    /**
-     * Setzt die Statistik des Spielers
-     * @param statistik Object Hashmap{String, Integer}
-     * @see HashMap
-     */
-    public void setStatistik(HashMap<String, Integer> statistik) {
-        this.statistik = statistik;
-    }
-
-    /**<pre>
-     * Erhoeht die Anzahl des uebergebenen Keys in der Statistik um 1.
-     * Wird ein falscher key übergeben, wird abgebrochen.
-     * </pre>
-     * @param key {Schock aus, Schock, General, Straße, Zahl}
-     */
-    public void pushStatistik(String key) {
-        if(statistik.containsKey(key)){
-            statistik.put(key, statistik.get(key)+1);
-        }else
-            return;
-    }
 
     /**
      * <pre>
      * Nutzt die wuerfeln() Methode des Bechers
      * Ändert das Attribut letztesBild auf den aktuellen Wert
-     * Erhoeht die Anzahl des gewuerfelten Bildes in der Statistik
      * </pre>
      * @see Becher
      */
     public void wuerfeln() {
         this.becher.wuerfeln();
         this.letztesBild = this.becher.getBild();
-        pushStatistik(letztesBild);
+
 
 
     }
@@ -299,7 +247,7 @@ public class Spieler implements Comparable<Spieler> {
      * @param wuerfelArray - Ein Array aus 3 Object Wuerfel
      * @see Becher#setWurf(Wuerfel[])
      */
-    public void setWurt(Wuerfel[] wuerfelArray){
+    public void setWurf(Wuerfel[] wuerfelArray){
         this.becher.setWurf(wuerfelArray);
         this.letztesBild = becher.getBild();
     }

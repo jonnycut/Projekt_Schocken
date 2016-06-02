@@ -135,7 +135,7 @@ public class Becher implements Comparable<Becher> {
      *
      * </pre>
      * @param wuerfelArray Wuerfel[] Das übergebene Array, das als Würfel eingefügt wird.
-     * @see Spieler#setWurt(Wuerfel[])
+     * @see Spieler#setWurf(Wuerfel[])
 
      */
     public void setWurf(Wuerfel[] wuerfelArray) {

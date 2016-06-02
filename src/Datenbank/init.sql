@@ -6,14 +6,12 @@ CREATE TABLE t_Spieler(
   Aktiv BOOLEAN DEFAULT FALSE ,
   Abbrüche INT DEFAULT 0,
   Strafpunkte INT DEFAULT 0,
-  Statistik BYTEA,
   Startwurf INT,
   CONSTRAINT PK_t_spieler PRIMARY KEY (Kennung)
 );
 
 CREATE TABLE t_Spielleiter(
   fk_t_Spieler_Kennung VARCHAR(30),
-  Geleitete_Spiele INT DEFAULT 1,
   CONSTRAINT PK_t_Spielerleiter_Kennung Primary KEY(fk_t_Spieler_Kennung),
   CONSTRAINT FK_t_Spielerleiter_Kennung FOREIGN KEY (fk_t_Spieler_Kennung) REFERENCES t_Spieler(Kennung)ON UPDATE CASCADE ON DELETE CASCADE
 );
