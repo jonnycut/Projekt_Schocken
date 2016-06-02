@@ -12,6 +12,7 @@ import spiel.Wuerfel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.xml.transform.Result;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -489,19 +490,23 @@ public class Datenbank {
 
     public ArrayList<Integer> selectStatistik(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        ArrayList<Integer> statistik=new ArrayList<>();
+        ArrayList<Integer> statistik = new ArrayList<>();
 
         ResultSet gewonneneRunden = stmt.executeQuery("Select Count(gewinner) from t_runde where gewinner='" + kennung + "'");
-        if (gewonneneRunden.next()){
+        if (gewonneneRunden.next()) {
             statistik.add(gewonneneRunden.getInt(1));
+        }
+        ResultSet verloreneRunden = stmt.executeQuery("Select Count(verlierer) from t_runde where verlierer='" + kennung + "'");
+        if (verloreneRunden.next()) {
+            statistik.add(verloreneRunden.getInt(1));
         }
 
         ResultSet verloreneHaelften = stmt.executeQuery("Select Count(verlierer) from t_hälfte where verlierer='" + kennung + "'");
-        if(verloreneHaelften.next()){
+        if (verloreneHaelften.next()) {
             statistik.add(verloreneHaelften.getInt(1));
         }
         ResultSet verloreneSpiele = stmt.executeQuery("Select count(verlierer) from t_spiel WHERE verlierer='" + kennung + "'");
-        if(verloreneSpiele.next()){
+        if (verloreneSpiele.next()) {
             statistik.add(verloreneSpiele.getInt(1));
         }
 
@@ -548,6 +553,13 @@ public class Datenbank {
         }
     }
 
+
+    /**
+     *
+     * @param spielID von dem Siel welches den Stockstatus liefern soll
+     * @return
+     * @throws SQLException
+     */
     public int selectStockStatus(int spielID) throws SQLException {
         int haelfte = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
@@ -676,7 +688,8 @@ public class Datenbank {
         return spielerImSpiel;
     }
 
-    /** Diese Methode liefert die Sitzreihenfolge nach dem Auswürfeln diese ändert sich das gesamte Spiel über nicht mehr
+    /**
+     * Diese Methode liefert die Sitzreihenfolge nach dem Auswürfeln diese ändert sich das gesamte Spiel über nicht mehr
      *
      * @param spielID um alle spieler des Spiels zu erfassen
      * @return
@@ -740,11 +753,26 @@ public class Datenbank {
 
         return offenesSpiel;
     }
+    /**
+     * liefert eine Liste mit allen Spielern oin der Datenbank
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<String> selectalleSpieler() throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        ArrayList<String> alleSpieler = new ArrayList<>();
+
+        ResultSet r = stmt.executeQuery("Select kennung From t_spieler");
+        while (r.next()) {
+            alleSpieler.add(r.getString(1));
+        }
+        return alleSpieler;
+    }
 
     /**
      * Liefert die Spielleiterkennung des eigenen Spiels
      *
-     * @param spielID  um den richtigen Spielleiter zu selektieren
+     * @param spielID um den richtigen Spielleiter zu selektieren
      * @return
      * @throws SQLException
      */
@@ -819,7 +847,7 @@ public class Datenbank {
         java.util.List<Boolean> spielerAktiv = new ArrayList<>();
 
 
-        ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung,startwurf FROM t_spieler WHERE kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client WHERE fk_t_spiel_spiel_id = "+ spielID +")  ORDER BY startwurf DESC");
+        ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung,startwurf FROM t_spieler WHERE kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client WHERE fk_t_spiel_spiel_id = " + spielID + ")  ORDER BY startwurf DESC");
         while (rs.next()) {
             spieler.add(rs.getString(2));
             spielerAktiv.add(rs.getBoolean(1));
@@ -848,7 +876,7 @@ public class Datenbank {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void insertDurchgang(String kennung,Wuerfel[] wuerfelArray) throws SQLException, IOException, ClassNotFoundException {
+    public void insertDurchgang(String kennung, Wuerfel[] wuerfelArray) throws SQLException, IOException, ClassNotFoundException {
         Statement stmt = verbindung.createStatement();
         int spielID = selectSpielID(kennung);
         int haelfte = selectAktuelleHaelfte(spielID);
@@ -952,7 +980,7 @@ public class Datenbank {
      */
     private void insertersteRunde(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        int haelfte=selectAktuelleHaelfte(spielID);
+        int haelfte = selectAktuelleHaelfte(spielID);
         int neueRunde = selectAktuelleRunde(spielID) + 1;
         String ersterBeginner = selectersterBeginner(spielID);
         String haelftenverlierer = selectHaelftenVerlierer(spielID, haelfte - 1);
@@ -1306,8 +1334,12 @@ public class Datenbank {
                 if (rS.getInt(1) != 0) {
                     spieler.setWurf(selectDurchgang(kennung));
                     spieler.getBecher().setAnzahlWuerfe(rS.getInt(1));
-               }
+                }
+
+
             }
+
+
 
             return spieler;
         }

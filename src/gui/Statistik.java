@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 
 
 /**
@@ -24,6 +24,7 @@ public class Statistik extends JPanel {
     private JLabel jLProfilbild;
     private JLabel jLName;
     private JLabel jLGewonneneRunden;
+    private JLabel jLVerlorenRunden;
     private JLabel jLVerloreneHaelften;
     private JLabel jLVerloreneSpiele;
     private JLabel jLSchock;
@@ -94,6 +95,22 @@ public class Statistik extends JPanel {
 
         jPGewonneneRunden.add(jLGewonneneRunden);
         mitte.add(jPGewonneneRunden);
+
+        JPanel jPVerloreneRunde = new JPanel(new FlowLayout());
+        jPVerloreneRunde.setBackground(Color.DARK_GRAY);
+        JLabel jLVerRunde = new JLabel("Verlorene Runden:  ");
+        jLVerRunde.setBackground(Color.BLACK);
+        jLVerRunde.setForeground(Color.WHITE);
+        jLVerRunde.setFont(new Font("Arial", Font.BOLD, 15));
+        jPVerloreneRunde.add(jLGew);
+
+        jLVerlorenRunden = new JLabel("TEST");
+        jLVerlorenRunden.setBackground(Color.DARK_GRAY);
+        jLVerlorenRunden.setForeground(Color.RED);
+        jLVerlorenRunden.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPVerloreneRunde.add(jLVerlorenRunden);
+        mitte.add(jPVerloreneRunde);
 
         JPanel jPVerloreneHaelften = new JPanel(new FlowLayout());
         jPVerloreneHaelften.setBackground(Color.DARK_GRAY);
@@ -280,6 +297,7 @@ public class Statistik extends JPanel {
         }
 
         jLGewonneneRunden.setText(""+statArray.remove(0));
+        jLVerlorenRunden.setText(""+statArray.remove(0));
         jLVerloreneHaelften.setText(""+statArray.remove(0));
         jLVerloreneSpiele.setText(""+statArray.remove(0));
 //        jLSchock.setText(""+statArray.remove(1));
@@ -291,7 +309,64 @@ public class Statistik extends JPanel {
 
         return this;
     }
+    /**Liefert die beiden Spieler die mit einander Verglichen werden sollen
+     *
+     * @return
+     * @throws SQLException
+     */
+    public String[] vergleicheStatistik() throws SQLException {
+        Integer wertung = 0;
+        Map<String,Integer> tmp=new HashMap<>();
 
+        try {
+            for (String s : Datenbank.getInstance().selectalleSpieler()) {
+                // alleStatistiken.add(selectStatistik(s));
+                for(Integer i:Datenbank.getInstance().selectStatistik(s)){
+                    //jede gewonnene Runde gibt 10 Punkte
+                    wertung = wertung + (i * 10);
+                    //jede verlorene Runde gibt 10 Minus Punkte
+                    wertung = wertung + (i * (-10));
+                    //jede verlorene Hälfte gibt  20 Minus Punkte
+                    wertung = wertung + (i * (-20));
+                    //jedes verlorene Spiel  gibt  30 Minus Punkte
+                    wertung = wertung + (i * (-30));
+                    //jeder Schock gibt 5 Punkte
+                    wertung = wertung + (i * (5));
+                    //jede General gibt es 3 Punkte
+                    wertung = wertung + (i * (3));
+                    //jede einfache Wurf gibt es 1 Punkte
+                    wertung = wertung + (i);
+                    //jeder SchockAus gibt 20 Punkte
+                    wertung = wertung + (i * (20));
+
+                    tmp.put(s,wertung);
+
+                    wertung=0;
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        LinkedList<Map.Entry<String,Integer>> list = new LinkedList(tmp.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+
+                return o1.getValue() - o2.getValue();
+            }
+        });
+
+        String besterSpieler = list.removeFirst().getKey();
+        String schlechtesterSpieler = list.removeLast().getKey();
+
+        String[] zuVergleichendeSpieler=new String[2];
+        zuVergleichendeSpieler[1]=besterSpieler;
+        zuVergleichendeSpieler[2]=schlechtesterSpieler;
+
+        return zuVergleichendeSpieler;
+    }
 }
 
 
