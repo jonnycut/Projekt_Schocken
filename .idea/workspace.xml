@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/spiel/Becher.java" afterPath="$PROJECT_DIR$/src/spiel/Becher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Datenbank/Datenbank.java" afterPath="$PROJECT_DIR$/src/Datenbank/Datenbank.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/spiel/Haelfte.java" afterPath="$PROJECT_DIR$/src/spiel/Haelfte.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/spiel/Runde.java" afterPath="$PROJECT_DIR$/src/spiel/Runde.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/SpielerPanel.java" afterPath="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Spielfeld.java" afterPath="$PROJECT_DIR$/src/gui/Spielfeld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -41,179 +34,7 @@
     <favorites_list name="Projekt_Schocken" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpielerPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="490" column="44" selection-start-line="490" selection-start-column="44" selection-end-line="490" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Anmeldung.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Becher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/spiel/Becher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
-              <folding>
-                <element signature="e#2101#2102#0" expanded="true" />
-                <element signature="e#2138#2139#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="198" column="0" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Haelfte.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/spiel/Haelfte.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Spieler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/spiel/Spieler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="152" column="24" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Runde.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/spiel/Runde.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="50" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Datenbank.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="799" column="16" selection-start-line="799" selection-start-column="16" selection-end-line="799" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1464905162154" expanded="true" signature="10769:10841" placeholder="Update t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="11696:11773" placeholder="SELECT * FRO..t_Spieler..." />
-                <marker date="1464905162154" expanded="true" signature="13095:13156" placeholder="SELECT count..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="13773:13818" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="14373:14466" placeholder="SELECT IP FR..t_Spieler..." />
-                <marker date="1464905162154" expanded="true" signature="15339:15574" placeholder="SELECT COUNT..t_durchgang..." />
-                <marker date="1464905162154" expanded="true" signature="15701:15983" placeholder="SELECT wuerf..t_durchgang..." />
-                <marker date="1464905162154" expanded="true" signature="17618:17712" placeholder="SELECT verli..t_runde..." />
-                <marker date="1464905162154" expanded="true" signature="17927:18219" placeholder="Update t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="17981:18218" placeholder="Select fk_t_..t_Spiel..." />
-                <marker date="1464905162154" expanded="true" signature="18256:18347" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="18422:18514" placeholder="Update t_run..." />
-                <marker date="1464905162154" expanded="true" signature="18868:18936" placeholder="Select Count..t_runde..." />
-                <marker date="1464905162154" expanded="true" signature="19099:19170" placeholder="Select Count..t_hälfte..." />
-                <marker date="1464905162154" expanded="true" signature="19333:19403" placeholder="Select count..t_spiel..." />
-                <marker date="1464905162154" expanded="true" signature="20631:20763" placeholder="Update t_häl..." />
-                <marker date="1464905162154" expanded="true" signature="21071:21150" placeholder="SELECT stock..t_hälfte..." />
-                <marker date="1464905162154" expanded="true" signature="21638:21729" placeholder="SELECT fk_t_..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="22361:22456" placeholder="Select art f..t_hälfte..." />
-                <marker date="1464905162154" expanded="true" signature="22943:23006" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="23673:23896" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
-                <marker date="1464905162154" expanded="true" signature="23695:23801" placeholder="SELECT fk_t_..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="24635:24717" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="25254:25345" placeholder="SELECT fk_t_..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="26305:26465" placeholder="SELECT kennu..t_spieler..." />
-                <marker date="1464905162154" expanded="true" signature="26352:26426" placeholder="SELECT fk_t_..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="27684:27850" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="28321:28365" placeholder="SELECT Spiel..t_Spiel..." />
-                <marker date="1464905162154" expanded="true" signature="28986:29063" placeholder="SELECT fk_t_..t_spiel..." />
-                <marker date="1464905162154" expanded="true" signature="29723:29766" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="29827:29883" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="30930:31110" placeholder="UPDATE t_run..." />
-                <marker date="1464905162154" expanded="true" signature="31869:32045" placeholder="SELECT aktiv..t_spieler..." />
-                <marker date="1464905162154" expanded="true" signature="31932:32006" placeholder="SELECT fk_t_..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="34650:34895" placeholder="SELECT count..t_durchgang..." />
-                <marker date="1464905162154" expanded="true" signature="35066:35269" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="35777:35980" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="36488:36691" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="38373:38537" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="38702:38869" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="39289:39350" placeholder="Select aktiv..t_spieler..." />
-                <marker date="1464905162154" expanded="true" signature="39449:39524" placeholder="Update t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="39977:40059" placeholder="SELECT verli..t_hälfte..." />
-                <marker date="1464905162154" expanded="true" signature="40596:40693" placeholder="SELECT max(r..t_runde..." />
-                <marker date="1464905162154" expanded="true" signature="41246:41332" placeholder="SELECT verli..t_runde..." />
-                <marker date="1464905162154" expanded="true" signature="41905:42127" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
-                <marker date="1464905162154" expanded="true" signature="41926:42016" placeholder="SELECT fk_t_..t_ist_client..." />
-                <marker date="1464905162154" expanded="true" signature="43494:43570" placeholder="SELECT * Fro..t_spiel..." />
-                <marker date="1464905162154" expanded="true" signature="43645:43730" placeholder="SELECT SUM(s..t_spiel..." />
-                <marker date="1464905162154" expanded="true" signature="44711:44791" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="44897:45085" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="46336:46440" placeholder="UPDATE t_häl..." />
-                <marker date="1464905162154" expanded="true" signature="47189:47308" placeholder="SELECT profi..t_spieler..." />
-                <marker date="1464905162154" expanded="true" signature="48763:48879" placeholder="SELECT kennu..t_spieler..." />
-                <marker date="1464905162154" expanded="true" signature="49003:49133" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="49310:49344" placeholder="INSERT INTO ..." />
-                <marker date="1464905162154" expanded="true" signature="50273:50386" placeholder="SELECT * FRO..t_spieler..." />
-                <marker date="1464905162154" expanded="true" signature="50779:51020" placeholder="SELECT COUNT..t_durchgang..." />
-                <marker date="1464905162154" expanded="true" signature="51818:51943" placeholder="UPDATE t_spi..." />
-                <marker date="1464905162154" expanded="true" signature="52506:52587" placeholder="UPDATE t_spi..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Stock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/spiel/Stock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -400,24 +221,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projekt_Schocken" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projekt_Schocken" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Datenbank" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -898,13 +701,7 @@
       <workItem from="1464861555746" duration="1994000" />
       <workItem from="1464863570187" duration="32653000" />
       <workItem from="1464897114528" duration="7615000" />
-      <workItem from="1464905124794" duration="47000" />
-    </task>
-    <task id="LOCAL-00053" summary="gefuckel">
-      <created>1464802665849</created>
-      <option name="number" value="00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1464802665849</updated>
+      <workItem from="1464905124794" duration="688000" />
     </task>
     <task id="LOCAL-00054" summary="gefuckel">
       <created>1464803198077</created>
@@ -1194,11 +991,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464894046336</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="ENDE">
+      <created>1464905209537</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1464905209537</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156407000" />
+    <option name="totallyTimeSpent" value="157048000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="72" y="3" width="1602" height="1010" extended-state="0" />
@@ -1206,28 +1009,28 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36032864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36032864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32276994" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09581498" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15953307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15953307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26508343" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11553273" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39977974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39977974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1302" y="416" width="444" height="449" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32378855" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819384" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1270,7 +1073,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rollback 17:30" />
     <MESSAGE value="rollback 17:30 ALLES JUNGE" />
     <MESSAGE value="Spielfeld Z66-68 geändert.&#10;Spielleiter setzt sich aktiv und schreibt dies in die DB&#10;&#10;Spielerpanel auch irgendwas" />
     <MESSAGE value="Spielfeld Z190-191 geändert.&#10;" />
@@ -1295,7 +1097,8 @@
     <MESSAGE value="Sind auf dem besten Weg, noch kleinigkeiten und dann is jut!" />
     <MESSAGE value="Ausgelegte würfel werden nach update falsche angzeigt" />
     <MESSAGE value="Eine Runde funktioniert!&#10;ToDo: Strafpunkte (Spieler und Stock in die DB schreiben)&#10;und neue Runde starten!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Eine Runde funktioniert!&#10;ToDo: Strafpunkte (Spieler und Stock in die DB schreiben)&#10;und neue Runde starten!" />
+    <MESSAGE value="ENDE" />
+    <option name="LAST_COMMIT_MESSAGE" value="ENDE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1365,6 +1168,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1926" column="0" selection-start-line="1926" selection-start-column="0" selection-end-line="1926" selection-end-column="0" />
+          <folding>
+            <element signature="e#68197#68198#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1386,6 +1192,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1418,66 +1225,66 @@
           <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1464905162154" expanded="true" signature="10769:10841" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="11696:11773" placeholder="SELECT * FRO..t_Spieler..." />
-            <marker date="1464905162154" expanded="true" signature="13095:13156" placeholder="SELECT count..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="13773:13818" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="14373:14466" placeholder="SELECT IP FR..t_Spieler..." />
-            <marker date="1464905162154" expanded="true" signature="15339:15574" placeholder="SELECT COUNT..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="15701:15983" placeholder="SELECT wuerf..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="17618:17712" placeholder="SELECT verli..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="17927:18219" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="17981:18218" placeholder="Select fk_t_..t_Spiel..." />
-            <marker date="1464905162154" expanded="true" signature="18256:18347" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="18422:18514" placeholder="Update t_run..." />
-            <marker date="1464905162154" expanded="true" signature="18868:18936" placeholder="Select Count..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="19099:19170" placeholder="Select Count..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="19333:19403" placeholder="Select count..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="20631:20763" placeholder="Update t_häl..." />
-            <marker date="1464905162154" expanded="true" signature="21071:21150" placeholder="SELECT stock..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="21638:21729" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="22361:22456" placeholder="Select art f..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="22943:23006" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="23673:23896" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
-            <marker date="1464905162154" expanded="true" signature="23695:23801" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="24635:24717" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="25254:25345" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="26305:26465" placeholder="SELECT kennu..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="26352:26426" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="27684:27850" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="28321:28365" placeholder="SELECT Spiel..t_Spiel..." />
-            <marker date="1464905162154" expanded="true" signature="28986:29063" placeholder="SELECT fk_t_..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="29723:29766" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="29827:29883" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="30930:31110" placeholder="UPDATE t_run..." />
-            <marker date="1464905162154" expanded="true" signature="31869:32045" placeholder="SELECT aktiv..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="31932:32006" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="34650:34895" placeholder="SELECT count..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="35066:35269" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="35777:35980" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="36488:36691" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="38373:38537" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="38702:38869" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="39289:39350" placeholder="Select aktiv..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="39449:39524" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="39977:40059" placeholder="SELECT verli..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="40596:40693" placeholder="SELECT max(r..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="41246:41332" placeholder="SELECT verli..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="41905:42127" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
-            <marker date="1464905162154" expanded="true" signature="41926:42016" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="43494:43570" placeholder="SELECT * Fro..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="43645:43730" placeholder="SELECT SUM(s..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="44711:44791" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="44897:45085" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="46336:46440" placeholder="UPDATE t_häl..." />
-            <marker date="1464905162154" expanded="true" signature="47189:47308" placeholder="SELECT profi..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="48763:48879" placeholder="SELECT kennu..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="49003:49133" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="49310:49344" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="50273:50386" placeholder="SELECT * FRO..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="50779:51020" placeholder="SELECT COUNT..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="51818:51943" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="52506:52587" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..t_Spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT count..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT IP FR..t_Spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT wuerf..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select fk_t_..t_Spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_run..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select Count..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select Count..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select count..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_häl..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT stock..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select art f..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT Spiel..t_Spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_run..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT aktiv..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT count..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select aktiv..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT max(r..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * Fro..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT SUM(s..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_häl..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT profi..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
           </folding>
         </state>
       </provider>
@@ -1506,66 +1313,66 @@
           <caret line="742" column="0" selection-start-line="742" selection-start-column="0" selection-end-line="742" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1464905162154" expanded="true" signature="10769:10841" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="11696:11773" placeholder="SELECT * FRO..t_Spieler..." />
-            <marker date="1464905162154" expanded="true" signature="13095:13156" placeholder="SELECT count..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="13773:13818" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="14373:14466" placeholder="SELECT IP FR..t_Spieler..." />
-            <marker date="1464905162154" expanded="true" signature="15339:15574" placeholder="SELECT COUNT..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="15701:15983" placeholder="SELECT wuerf..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="17618:17712" placeholder="SELECT verli..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="17927:18219" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="17981:18218" placeholder="Select fk_t_..t_Spiel..." />
-            <marker date="1464905162154" expanded="true" signature="18256:18347" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="18422:18514" placeholder="Update t_run..." />
-            <marker date="1464905162154" expanded="true" signature="18868:18936" placeholder="Select Count..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="19099:19170" placeholder="Select Count..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="19333:19403" placeholder="Select count..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="20631:20763" placeholder="Update t_häl..." />
-            <marker date="1464905162154" expanded="true" signature="21071:21150" placeholder="SELECT stock..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="21638:21729" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="22361:22456" placeholder="Select art f..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="22943:23006" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="23673:23896" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
-            <marker date="1464905162154" expanded="true" signature="23695:23801" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="24635:24717" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="25254:25345" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="26305:26465" placeholder="SELECT kennu..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="26352:26426" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="27684:27850" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="28321:28365" placeholder="SELECT Spiel..t_Spiel..." />
-            <marker date="1464905162154" expanded="true" signature="28986:29063" placeholder="SELECT fk_t_..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="29723:29766" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="29827:29883" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="30930:31110" placeholder="UPDATE t_run..." />
-            <marker date="1464905162154" expanded="true" signature="31869:32045" placeholder="SELECT aktiv..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="31932:32006" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="34650:34895" placeholder="SELECT count..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="35066:35269" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="35777:35980" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="36488:36691" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="38373:38537" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="38702:38869" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="39289:39350" placeholder="Select aktiv..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="39449:39524" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="39977:40059" placeholder="SELECT verli..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="40596:40693" placeholder="SELECT max(r..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="41246:41332" placeholder="SELECT verli..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="41905:42127" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
-            <marker date="1464905162154" expanded="true" signature="41926:42016" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="43494:43570" placeholder="SELECT * Fro..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="43645:43730" placeholder="SELECT SUM(s..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="44711:44791" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="44897:45085" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="46336:46440" placeholder="UPDATE t_häl..." />
-            <marker date="1464905162154" expanded="true" signature="47189:47308" placeholder="SELECT profi..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="48763:48879" placeholder="SELECT kennu..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="49003:49133" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="49310:49344" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="50273:50386" placeholder="SELECT * FRO..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="50779:51020" placeholder="SELECT COUNT..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="51818:51943" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="52506:52587" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..t_Spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT count..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT IP FR..t_Spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT wuerf..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select fk_t_..t_Spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_run..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select Count..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select Count..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select count..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_häl..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT stock..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select art f..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT Spiel..t_Spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_run..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT aktiv..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT count..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select aktiv..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT max(r..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * Fro..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT SUM(s..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_häl..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT profi..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
           </folding>
         </state>
       </provider>
@@ -1603,6 +1410,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3909091">
           <caret line="1282" column="16" selection-start-line="1282" selection-start-column="16" selection-end-line="1282" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1610,6 +1418,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33295456">
           <caret line="3301" column="16" selection-start-line="3301" selection-start-column="16" selection-end-line="3301" selection-end-column="16" />
+          <folding>
+            <element signature="e#114015#114016#0" expanded="false" />
+            <element signature="e#114062#114063#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1645,6 +1457,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="833" column="0" selection-start-line="833" selection-start-column="0" selection-end-line="833" selection-end-column="0" />
+          <folding>
+            <element signature="e#30716#30717#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1652,6 +1467,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2120" column="0" selection-start-line="2120" selection-start-column="0" selection-end-line="2120" selection-end-column="0" />
+          <folding>
+            <element signature="e#82684#82685#0" expanded="false" />
+            <element signature="e#113007#113008#0" expanded="false" />
+            <element signature="e#113034#113035#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1673,6 +1493,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1926" column="0" selection-start-line="1926" selection-start-column="0" selection-end-line="1926" selection-end-column="0" />
+          <folding>
+            <element signature="e#68197#68198#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1704,19 +1527,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="464" column="0" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Grafik/Logo.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Grafik/Grafik.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63931626">
-          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Statistik.java">
@@ -1733,6 +1550,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="62" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1762,6 +1580,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1827,24 +1646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="490" column="44" selection-start-line="490" selection-start-column="44" selection-end-line="490" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/spiel/Runde.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1856,70 +1657,96 @@
     <entry file="file://$PROJECT_DIR$/src/Datenbank/Datenbank.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="799" column="16" selection-start-line="799" selection-start-column="16" selection-end-line="799" selection-end-column="16" />
+          <caret line="904" column="0" selection-start-line="904" selection-start-column="0" selection-end-line="904" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1464905162154" expanded="true" signature="10769:10841" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="11696:11773" placeholder="SELECT * FRO..t_Spieler..." />
-            <marker date="1464905162154" expanded="true" signature="13095:13156" placeholder="SELECT count..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="13773:13818" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="14373:14466" placeholder="SELECT IP FR..t_Spieler..." />
-            <marker date="1464905162154" expanded="true" signature="15339:15574" placeholder="SELECT COUNT..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="15701:15983" placeholder="SELECT wuerf..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="17618:17712" placeholder="SELECT verli..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="17927:18219" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="17981:18218" placeholder="Select fk_t_..t_Spiel..." />
-            <marker date="1464905162154" expanded="true" signature="18256:18347" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="18422:18514" placeholder="Update t_run..." />
-            <marker date="1464905162154" expanded="true" signature="18868:18936" placeholder="Select Count..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="19099:19170" placeholder="Select Count..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="19333:19403" placeholder="Select count..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="20631:20763" placeholder="Update t_häl..." />
-            <marker date="1464905162154" expanded="true" signature="21071:21150" placeholder="SELECT stock..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="21638:21729" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="22361:22456" placeholder="Select art f..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="22943:23006" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="23673:23896" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
-            <marker date="1464905162154" expanded="true" signature="23695:23801" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="24635:24717" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="25254:25345" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="26305:26465" placeholder="SELECT kennu..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="26352:26426" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="27684:27850" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="28321:28365" placeholder="SELECT Spiel..t_Spiel..." />
-            <marker date="1464905162154" expanded="true" signature="28986:29063" placeholder="SELECT fk_t_..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="29723:29766" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="29827:29883" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="30930:31110" placeholder="UPDATE t_run..." />
-            <marker date="1464905162154" expanded="true" signature="31869:32045" placeholder="SELECT aktiv..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="31932:32006" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="34650:34895" placeholder="SELECT count..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="35066:35269" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="35777:35980" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="36488:36691" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="38373:38537" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="38702:38869" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="39289:39350" placeholder="Select aktiv..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="39449:39524" placeholder="Update t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="39977:40059" placeholder="SELECT verli..t_hälfte..." />
-            <marker date="1464905162154" expanded="true" signature="40596:40693" placeholder="SELECT max(r..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="41246:41332" placeholder="SELECT verli..t_runde..." />
-            <marker date="1464905162154" expanded="true" signature="41905:42127" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
-            <marker date="1464905162154" expanded="true" signature="41926:42016" placeholder="SELECT fk_t_..t_ist_client..." />
-            <marker date="1464905162154" expanded="true" signature="43494:43570" placeholder="SELECT * Fro..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="43645:43730" placeholder="SELECT SUM(s..t_spiel..." />
-            <marker date="1464905162154" expanded="true" signature="44711:44791" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="44897:45085" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="46336:46440" placeholder="UPDATE t_häl..." />
-            <marker date="1464905162154" expanded="true" signature="47189:47308" placeholder="SELECT profi..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="48763:48879" placeholder="SELECT kennu..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="49003:49133" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="49310:49344" placeholder="INSERT INTO ..." />
-            <marker date="1464905162154" expanded="true" signature="50273:50386" placeholder="SELECT * FRO..t_spieler..." />
-            <marker date="1464905162154" expanded="true" signature="50779:51020" placeholder="SELECT COUNT..t_durchgang..." />
-            <marker date="1464905162154" expanded="true" signature="51818:51943" placeholder="UPDATE t_spi..." />
-            <marker date="1464905162154" expanded="true" signature="52506:52587" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..t_Spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT count..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT IP FR..t_Spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT wuerf..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select fk_t_..t_Spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_run..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select Count..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select Count..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select count..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_häl..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT stock..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select art f..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT Kennu..fk_t_spieler_kennung..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT Spiel..t_Spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_run..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT aktiv..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT count..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Select aktiv..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="Update t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_hälfte..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT max(r..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT verli..t_runde..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..fk_t_spieler_kennung..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT fk_t_..t_ist_client..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * Fro..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT SUM(s..t_spiel..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_häl..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT profi..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT kennu..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..t_spieler..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..t_durchgang..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
+            <marker date="1464905162154" expanded="true" signature="-1:-1" placeholder="UPDATE t_spi..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="490" column="0" selection-start-line="490" selection-start-column="0" selection-end-line="490" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="266" column="0" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Grafik/Grafik.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75227684">
+          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
