@@ -149,7 +149,8 @@ public class GUI extends JFrame {
         jPRechts.setBackground(Color.BLACK);
         add(jPRechts, BorderLayout.EAST);
 
-        setSize(1030, 770);
+        setSize(1024, 768);
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }

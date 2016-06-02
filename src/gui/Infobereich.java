@@ -40,26 +40,27 @@ public class Infobereich extends JPanel {
 
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
 
-        setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(810, 150));
+        //setLayout(new FlowLayout());
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(810, 200));
         setBackground(Color.BLACK);
 
 
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
 
-        jPInfo = new JPanel(new BorderLayout());
+        jPInfo = new JPanel(new FlowLayout());
         jPInfo.setBackground(Color.BLACK);
         info = new JLabel("TEST");
         info.setFont(new Font("Arial", Font.BOLD, 20));
         info.setForeground(Color.RED);
         info.setBackground(Color.BLACK);
 
-        jPInfo.add(info, BorderLayout.NORTH);
+        jPInfo.add(info);
 
         JPanel temp = new JPanel();
         temp.setBackground(Color.BLACK);
-        temp.setPreferredSize(new Dimension(810, 50));
-        jPInfo.add(temp,BorderLayout.CENTER);
+        temp.setPreferredSize(new Dimension(810, 100));
+        jPInfo.add(temp);
 
 
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------

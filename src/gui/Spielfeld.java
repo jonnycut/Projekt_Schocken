@@ -58,7 +58,7 @@ public class Spielfeld extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 jPOben.setVisible(false);
-                infobereich.setPreferredSize(new Dimension(810, 200));
+                //infobereich.setPreferredSize(new Dimension(810, 200));
 
                 //gui.sendeUpdateSignal(" Das Spiel wurde gestartet."+gui.getBesitzerName()+" beginnt das Auswürfeln...");
 
