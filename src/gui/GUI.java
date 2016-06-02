@@ -20,8 +20,6 @@ import java.util.List;
  */
 public class GUI extends JFrame {
 
-    //ToDo fehlende Attribute und Konstruktor Kommentieren
-
     /**
      * Zustand der GUI um die verschiedenen Ansichen zu schalten
      */
@@ -52,6 +50,9 @@ public class GUI extends JFrame {
      */
     private Administration administration;
 
+    /**
+    * Der Statistikbildschirm
+    */
     //private Statistik statistik = new Statistik();
 
     /**
@@ -70,6 +71,12 @@ public class GUI extends JFrame {
     private Client client;
 
 
+    /**Die GUI erzeugt das Fenster in dem das gesamte Spiel stattfindet.
+     * Initial wird ein Button mit Logo angezeigt der ActionListener schaltet
+     * den Zustand weiter und führt die updteView() Methode aus.
+     *
+     * @see this#updateView()
+     */
     public GUI() {
 
         super("Schocken, das Würfelspiel für zwischendurch!");
@@ -88,9 +95,9 @@ public class GUI extends JFrame {
         jb.setBackground(Color.BLACK);
         jb.setBorder(new LineBorder(null));
 
+        // Schaltet um auf den Anmeldebildschirm
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 updateView();
             }
         };
@@ -99,6 +106,7 @@ public class GUI extends JFrame {
         jb.setIcon(Grafik.TISCH_LOGO);
         start.add(jb, BorderLayout.CENTER);
 
+        //-------------------------------------JPanel CARDS------------------------------------------------------------
         JPanel anmeldungP = anmeldung;
         JPanel registrierungP = registrierung;
         JPanel administrationP = administration;
@@ -110,6 +118,8 @@ public class GUI extends JFrame {
         jp.add(registrierungP, "Registrierung");
         jp.add(administrationP, "Administration");
         jp.add(spielfeldP, "Spielfeld");
+
+        //-------------------------------------SUPER-FRAME-------------------------------------------------------------
 
         add(jp);
         setSize(1024, 768);
@@ -143,15 +153,15 @@ public class GUI extends JFrame {
                 ((CardLayout) jp.getLayout()).show(jp, "Anmeldung");
                 break;
             case 2:
-                //ToDo: Dinge die in der Anmeldung stattfinden
-                System.out.println("Test Anmeldung");
+                //ToDo: Statistik vom Spieler anzeigen
+                System.out.println(" Statistik vom Spieler");
                 break;
             case 3:
                 ((CardLayout) jp.getLayout()).show(jp, "Registrierung");
                 zustand = 4;
                 break;
             case 4:
-                //ToDo: Statistik vom Spieler
+                // Platzhalter
                 break;
             case 5:
                 ((CardLayout) jp.getLayout()).show(jp, "Administration");
