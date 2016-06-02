@@ -77,7 +77,6 @@ public class Infobereich extends JPanel {
      * Es wird zum Schluss wieder in den Infobereich eingefügt.
      */
     public void setInfos(String infos) {
-        //ToDo: brauchen wir das auskommentierte noch? wenn nicht, wurd nämlich nichts neu erzeugt und die Beschreibung muss angepasst werden. KNA
         info.setText(infos);
         JPanel jPCenter = new JPanel(new FlowLayout());
         jPCenter.setBackground(Color.BLACK);

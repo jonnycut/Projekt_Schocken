@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/GUI.java" afterPath="$PROJECT_DIR$/src/gui/GUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Infobereich.java" afterPath="$PROJECT_DIR$/src/gui/Infobereich.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Spielfeld.java" afterPath="$PROJECT_DIR$/src/gui/Spielfeld.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -85,8 +83,8 @@
       <file leaf-file-name="Infobereich.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.011965812">
-              <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.50598294">
+              <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -620,13 +618,7 @@
       <workItem from="1464819228621" duration="843000" />
       <workItem from="1464820102353" duration="1791000" />
       <workItem from="1464843000468" duration="18506000" />
-      <workItem from="1464861555746" duration="1230000" />
-    </task>
-    <task id="LOCAL-00040" summary="Flurry: Aktiver Spieler Rahmen">
-      <created>1464778134753</created>
-      <option name="number" value="00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1464778134753</updated>
+      <workItem from="1464861555746" duration="1439000" />
     </task>
     <task id="LOCAL-00041" summary="Flurry: Aktiver Spieler Rahmen">
       <created>1464781669182</created>
@@ -916,11 +908,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464861779861</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="&#10;Allegmein Design &#10;">
+      <created>1464862793700</created>
+      <option name="number" value="00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1464862793700</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115328000" />
+    <option name="totallyTimeSpent" value="115537000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1373,6 +1371,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="464" column="0" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1436,8 +1435,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.011965812">
-          <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.50598294">
+          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
           <folding />
         </state>
       </provider>
