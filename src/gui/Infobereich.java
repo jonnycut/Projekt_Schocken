@@ -12,12 +12,21 @@ import java.sql.SQLException;
  * @author DFleuren
  */
 public class Infobereich extends JPanel {
+
     /**
      * Das Spielfeld, zu dem der Infobereich gehört
      */
     private Spielfeld spielfeld;
+
     //ToDo: Bin mir nicht sicher, was was ist! KNA
+    /**
+     * Das JPanel in dem das JLabel mit der Information steckt.
+     */
     private JPanel jPInfo;
+
+    /**
+     * Das JLabel mit der Information.
+     */
     private JLabel info;
 
     /**<pre>
@@ -72,38 +81,12 @@ public class Infobereich extends JPanel {
     public void setInfos(String infos) {
         //ToDo: brauchen wir das auskommentierte noch? wenn nicht, wurd nämlich nichts neu erzeugt und die Beschreibung muss angepasst werden. KNA
         info.setText(infos);
-//        JPanel jPCenter = new JPanel(new FlowLayout());
-//        jPCenter.setBackground(Color.BLACK);
-//        jPCenter.add(info);
-//        jPInfo.add(jPCenter, BorderLayout.NORTH);
+        JPanel jPCenter = new JPanel(new FlowLayout());
+        jPCenter.setBackground(Color.BLACK);
+        jPCenter.add(info);
+        jPInfo.add(jPCenter, BorderLayout.NORTH);
         jPInfo.add(info, BorderLayout.NORTH);
-
-        //istSpielleiter();
 
         add(jPInfo);
     }
-
-
-    /**
-     * Erzeugt ein JLabel, welches anzeigt wer der Spielleiter ist.
-     * Es wird die SpielID aus der Datenbank abgerufen und mit dieser ID
-     * wird in der Datenbank geprüft wer der Spielleiter des Spiels ist.
-     * Dann wird es in das JPanel jPInfo eingefügt.
-     */
-    //ToDo: Brauchen wir das noch? KNA
-//    public void istSpielleiter() {
-//        int spielID = 0;
-//        try {
-//            spielID = Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName());
-//            System.out.println(spielID);
-//            JLabel spielleiter = new JLabel("Spielleiter:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
-//            spielleiter.setForeground(Color.RED);
-//            spielleiter.setBackground(Color.BLACK);
-//            jPInfo.add(spielleiter,BorderLayout.SOUTH);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

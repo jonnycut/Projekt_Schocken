@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/SpielerPanel.java" afterPath="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
+    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="SpielerPanel Z313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt&#10;&#10;Infobereich Doku und in Z">
+      <change type="DELETED" beforePath="Z:\Script-Projekt\Schocken\Projekt_Schocken\src\gui\SpielerBereich.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Infobereich.java" afterPath="$PROJECT_DIR$/src/gui/Infobereich.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -51,21 +52,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpielerPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SpielerPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6435869">
+            <state vertical-scroll-proportion="0.0">
               <caret line="171" column="63" selection-start-line="171" selection-start-column="63" selection-end-line="171" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Infobereich.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Infobereich.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.8454546">
+              <caret line="90" column="5" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -201,7 +202,6 @@
         <option value="$PROJECT_DIR$/src/netzwerk/Programm.java" />
         <option value="/&lt;Generic&gt; Fragment (Datenbank.java:22211).sql" />
         <option value="$PROJECT_DIR$/src/gui/Registrierung.java" />
-        <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
         <option value="$PROJECT_DIR$/src/gui/Statistik.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Netzwerk.java" />
         <option value="$PROJECT_DIR$/src/netzwerk/Server.java" />
@@ -218,6 +218,7 @@
         <option value="$PROJECT_DIR$/src/gui/GUI.java" />
         <option value="/&lt;Generic&gt; Fragment (Datenbank.java:16554).sql" />
         <option value="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
+        <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
       </list>
     </option>
   </component>
@@ -719,13 +720,7 @@
       <workItem from="1464808731141" duration="8788000" />
       <workItem from="1464819228621" duration="843000" />
       <workItem from="1464820102353" duration="1791000" />
-      <workItem from="1464843000468" duration="566000" />
-    </task>
-    <task id="LOCAL-00021" summary="Flurry: Dokumentiere alle meine FUCKIN Klassen, so eine Hurensohn Scheiße hier!">
-      <created>1464717441385</created>
-      <option name="number" value="00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1464717441385</updated>
+      <workItem from="1464843000468" duration="953000" />
     </task>
     <task id="LOCAL-00022" summary="Flurry: Dokumentiere alle meine FUCKIN Klassen, so eine Hurensohn Scheiße hier!">
       <created>1464720367231</created>
@@ -1015,11 +1010,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464820386401</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="SpielerPanel 313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt">
+      <created>1464843623143</created>
+      <option name="number" value="00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1464843623143</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96158000" />
+    <option name="totallyTimeSpent" value="96545000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1027,6 +1028,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1045,7 +1047,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39977974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1302" y="416" width="444" height="449" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32488987" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1113,7 +1114,8 @@
     <MESSAGE value="läuft fast" />
     <MESSAGE value="spielerpanel 343-344 buttoinScheisse" />
     <MESSAGE value="SpielerPanel 315-329&#10;Aktiv weiterschalten eingefügt *huihuihui*" />
-    <option name="LAST_COMMIT_MESSAGE" value="SpielerPanel 315-329&#10;Aktiv weiterschalten eingefügt *huihuihui*" />
+    <MESSAGE value="SpielerPanel 313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt" />
+    <option name="LAST_COMMIT_MESSAGE" value="SpielerPanel 313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1553,14 +1555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/spiel/Spieler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1622,8 +1616,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/SpielerPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6435869">
+        <state vertical-scroll-proportion="0.0">
           <caret line="171" column="63" selection-start-line="171" selection-start-column="63" selection-end-line="171" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8454546">
+          <caret line="90" column="5" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
           <folding />
         </state>
       </provider>
