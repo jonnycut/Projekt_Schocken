@@ -704,17 +704,23 @@ public class Datenbank {
      */
     public void updateSpielstatus(int spielID, int status) throws SQLException {
         Statement stmt = verbindung.createStatement();
+        if(status==1){
+            stmt.executeUpdate("UPDATE t_spiel SET status=2 WHERE spiel_id=" + spielID);
+        }else{
+            stmt.executeUpdate("UPDATE t_spiel SET status=" + status + " WHERE spiel_id=" + spielID);
 
-        stmt.executeUpdate("UPDATE t_spiel SET status=" + status + " WHERE spiel_id=" + spielID);
-        if (status == 2) {
-            insertAktiverSpieler(selectersterBeginner(spielID));
-            System.out.println("Das Spiel " + spielID + " wird nun gespielt");
-        }
-        if (status == 3) {
-            updateAktiv(selectAktiverSpieler(spielID));
+            if (status == 2) {
+                insertAktiverSpieler(selectersterBeginner(spielID));
+                System.out.println("Das Spiel " + spielID + " wird nun gespielt");
+            }
+            if (status == 3) {
+                updateAktiv(selectAktiverSpieler(spielID));
 
-            System.out.println("Das Spiel " + spielID + " ist nun geschlossen");
+                System.out.println("Das Spiel " + spielID + " ist nun geschlossen");
+            }
         }
+
+
 
     }
 

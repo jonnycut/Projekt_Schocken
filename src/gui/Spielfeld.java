@@ -60,8 +60,9 @@ public class Spielfeld extends JPanel {
                 jPOben.setVisible(false);
 
                 try {
-                    Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
                     Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
+                    Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 1);
+
                     gui.sendeUpdateSignal(" Das Spiel wurde gestartet." + gui.getBesitzerName() + " beginnt das Auswürfeln...");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
