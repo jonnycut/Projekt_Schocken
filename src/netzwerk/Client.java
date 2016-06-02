@@ -13,17 +13,28 @@ import java.net.Socket;
  */
 public class Client {
 
-    private GUI gui; // Die aktuelle GUI
-    private String zeile; // Die Nachricht/Steuersignal für den Chat
-   private BufferedWriter writer; // writer für die Steuersignale
+    /**
+     * Die aktuelle GUI
+     */
+    private GUI gui;
+
+    /**
+     * Die Nachricht/Steuersignal für den Chat
+     */
+    private String zeile;
+    /**
+     * Der Writer für die Infos/Steuersignal oder für den Chat
+     */
+    private BufferedWriter writer; //
 
 
     /**
      * Der Konstruktor erzeugt einen Client, der sich mit dem Server verbindet.
+     *
      * @param gui GUI ist die aktuelle GUI.
      */
-    public Client(String ip,GUI gui) {
-        this.gui=gui;
+    public Client(String ip, GUI gui) {
+        this.gui = gui;
 
         // Baut die Verbindung zum Server auf.
         this.gui.setClient(this);
@@ -42,19 +53,17 @@ public class Client {
         ) {
 
             // Erzeugt einen neuen Thread und liest die einkommenden Nachrichten und Steuersignale aus.
-            new Thread(){
-                public  void run(){
+            new Thread() {
+                public void run() {
                     try {
                         String zeile;
-                        while ((zeile = reader.readLine()) != null){
-                            if(zeile.contains("#")){
+                        while ((zeile = reader.readLine()) != null) {
+                            if (zeile.contains("#")) {
                                 gui.getSpielfeld().updateSpielfeld(zeile.substring(1));
-                            }else if (zeile.contains("@")){
-                                System.out.println("updateCounter: " +zeile.substring(1));
+                            } else if (zeile.contains("@")) {
+                                System.out.println("updateCounter: " + zeile.substring(1));
                                 gui.getSpielfeld().setCounter(Integer.parseInt(zeile.substring(1)));
-                            }
-
-                            else
+                            } else
                                 System.out.println(zeile);
                         }
                     } catch (IOException e) {
@@ -67,10 +76,11 @@ public class Client {
             System.out.println("Verbindung zum Server eingerichtet!");
 
             this.writer = writer;
+
             //Hier noch einen neuen Thread drum.
             // Erzeugt eine neue Nachricht und sendet diese zum Server.
             //String zeile;
-            while ((zeile = br.readLine()) != null){
+            while ((zeile = br.readLine()) != null) {
                 writer.write(zeile);
                 writer.newLine();
                 writer.flush();
@@ -87,10 +97,10 @@ public class Client {
      * Falls das Schreiben in den Stream fehlschlägt, erscheint eine Consolenfehlermeldung.
      * @param info String - StatusInfo, die im Infobereich angezeigt wird
      */
-    public void sendeUpdate(String info){
+    public void sendeUpdate(String info) {
 
         try {
-            writer.write("#"+info);
+            writer.write("#" + info);
             writer.newLine();
             writer.flush();
             System.out.println("UpdateSignal gesendet");
@@ -106,7 +116,7 @@ public class Client {
      * Falls das Schreiben in den Stream fehlschlägt, erscheint eine Consolenfehlermeldung.
      * @param counter
      */
-    public void sendeUpdateCounter(int counter){
+    public void sendeUpdateCounter(int counter){{
         try {
             writer.write("@"+counter);
             writer.newLine();

@@ -20,20 +20,64 @@ import java.util.*;
  */
 public class Statistik extends JPanel {
 
-
+    /**
+     *  Für das aktuelle Profilbild
+     */
     private JLabel jLProfilbild;
+
+    /**
+     *  Für den aktuellen Spielernamen
+     */
     private JLabel jLName;
+
+    /**
+     *  Für die bis jetzt gewonnenen Runde
+     */
     private JLabel jLGewonneneRunden;
     private JLabel jLVerlorenRunden;
+
+    /**
+     *  Für die bis jetzt verlorenen Hälften
+     */
     private JLabel jLVerloreneHaelften;
+
+    /**
+     *  Für die bis jetzt verlorenen Spiele
+     */
     private JLabel jLVerloreneSpiele;
+
+    /**
+     *  Für die bis jetzt gewürfelten Schocks
+     */
     private JLabel jLSchock;
+
+    /**
+     *  Für die bis jetzt gewürfelten Strassen
+     */
     private JLabel jLStrasse;
+
+    /**
+     *  Für die bis jetzt gewürfelten Generale
+     */
     private JLabel jLGenaral;
+
+    /**
+     *  Für die bis jetzt gewürfelten einfachen Würfe
+     */
     private JLabel jLEinfacherWurf;
+
+    /**
+     *  Für die bis jetzt gewürfelten SchockAus
+     */
     private JLabel jLSchockAus;
 
 
+
+    /**
+     * Der Konstruktor erzeugt ein neues JPanel, als Statistikbereich, um Spieler Informationen anzuzeigen.
+     * @param gui GUI ist die aktuelle GUI.
+     *
+     */
     public Statistik(GUI gui) {
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------

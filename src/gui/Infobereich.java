@@ -57,12 +57,6 @@ public class Infobereich extends JPanel {
 
         jPInfo.add(info);
 
-//        JPanel temp = new JPanel();
-//        temp.setBackground(Color.BLACK);
-//        temp.setPreferredSize(new Dimension(810, 100));
-//        jPInfo.add(temp);
-
-
         //-------------------------------------SUPER-PANEL-------------------------------------------------------------
 
         add(jPInfo);

@@ -11,66 +11,16 @@ import java.util.List;
  * @author KNapret(Uwe) / DFleuren(Flurry) / EHampel(Opa)
  */
 public class Main {
-    //testAttribute
-    static List<Spieler> teilnehmer = new ArrayList<>();
 
-
+    /**Die Methode erzeugt die GUI und die Datenbank oder die Verbindung zu einer Datenbank
+     *
+     * @param args Mögliche Parameter
+     */
     public static void main(String[] args) {
 
         Datenbank.dbErstellen();
-
         new GUI();
 
-//
-//
-//        try {
-//            teilnehmer.add(Datenbank.getInstance().selectSpieler("Jochen"));
-//            teilnehmer.add(Datenbank.getInstance().selectSpieler("uwe"));
-//            teilnehmer.add(Datenbank.getInstance().selectSpieler("Alex"));
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-////        teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
-////        teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
-////        teilnehmer.add(new Spieler("Alex", Grafik.AVATAR_C3PO));
-//
-//
-//        for(Spieler s : teilnehmer) {
-//            s.beginnerWuerfeln();
-//            s.wuerfeln();
-//            s.getBecher().resetWurf();
-//        }
-//
-//        Collections.sort(teilnehmer,Spieler.START_ORDER);
-//
-//
-//        JFrame outline = new JFrame();
-//        JPanel grundPanel = new JPanel(new GridLayout(1, 8));
-//
-//        Runde runde = new Runde(new Stock(),null);
-//        grundPanel.add(new SpielerPanel(teilnehmer.get(0),runde));
-//        grundPanel.add(new SpielerPanel(teilnehmer.get(1),runde));
-//        grundPanel.add(new SpielerPanel(teilnehmer.get(2),runde));
-////        grundPanel.add(new SpielerPanel(teilnehmer.get(3),runde));
-////        grundPanel.add(new SpielerPanel(teilnehmer.get(4),runde));
-////        grundPanel.add(new SpielerPanel(teilnehmer.get(5),runde));
-//
-//
-//
-//        runde.setTeilnehmer(teilnehmer);
-//
-//
-//
-//        outline.add(grundPanel);
-//        outline.setVisible(true);
-//        outline.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        outline.setSize(new Dimension(1024, 768));
     }
 
 }

@@ -13,7 +13,10 @@ import java.net.UnknownHostException;
  */
 public class Netzwerk {
 
-    private GUI gui; // Die aktuelle GUI
+    /**
+     *  Die aktuelle GUI
+     */
+    private GUI gui;
 
     /**
      * Erzeugt einen Client oder einen Server mit Client für die Netzwerkkommunikation.

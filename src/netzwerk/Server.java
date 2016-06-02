@@ -13,8 +13,19 @@ import java.util.Vector;
  */
 public class Server {
 
+    /**
+     *  Die aktuelle Liste aller angemeldeten Clients am Server
+     */
     private List<User> users = new Vector<>();
 
+
+    /**
+     * <pre>
+     * Dieser Konstructor ist für die Erstellung des Servers.
+     * Läuft über den Port 5060
+     * Sendet und empfängt Chatnachricht, Steuersignale oder Infos für der Spiel.
+     * </pre>
+     */
     public Server() {
         try {
             ServerSocket serverSocket = new ServerSocket(5060);
@@ -42,6 +53,13 @@ public class Server {
 
     }
 
+    /**
+     * <pre>
+     * Ist ein Private Methode für die Nachriten und Steuersignal Verteilung im Netzwerk.
+     * </pre>
+     *
+     * @param user Liste von Usern um allen die Chatnachricht oder das Steuersignal zu schicken
+     */
     private void neueNachricht(User user, String nachricht) {
 //        System.out.println(nachricht);
         for (User u : users) {
@@ -50,11 +68,23 @@ public class Server {
         }
     }
 
+    /**
+     * <pre>
+     * Ist ein Private Methode um User die den Chat verlassen haben aus der Liste zunehmen
+     * </pre>
+     *
+     * @param user Liste von allen Usern die mit dem Server verbunden sind
+     */
     private void loescheUser(User user) {
 
         users.remove(user);
     }
 
+    /**
+     * <pre>
+     * Ist ein Private Klasse für die Nutzer
+     * </pre>
+     */
     private class User {
 
         private Socket socket;
@@ -84,7 +114,13 @@ public class Server {
                 }
             }.start();
         }
-
+        /**
+         * <pre>
+         * Diese Methode übermitelt die Chatnachrichten an alle Clients die auf dem Server sind
+         * </pre>
+         *
+         * @param nachricht String ist die Chat Nachricht
+         */
         public void sendeNachricht(String nachricht) {
             try {
                 BufferedWriter writer = new BufferedWriter(

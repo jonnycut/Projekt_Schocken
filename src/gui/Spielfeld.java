@@ -23,21 +23,70 @@ import java.util.List;
  */
 public class Spielfeld extends JPanel {
 
-
+    /**
+     *  Die aktuelle GUI
+     */
     private GUI gui;
+
+    /**
+     *  Die aktueller Infobereich
+     */
     private Infobereich infobereich;
+
+    /**
+     *  Die aktuelle Hälfte
+     */
     private Haelfte haelfte;
+
+    /**
+     *  Liste aller Teilnehmer ein eimem Spiel
+     */
     private List<SpielerPanel> teilnehmer;
+
+    /**
+     *  Counter für die bekommt die Anzahl aller Spieler im Spiel, um das Auswerten einer Runde anzustoßen.
+     */
     private int counter = 0;
 
-    private JPanel jPOben; // BorderLayout.NORTH beinhaltet den Spielstart Button
-    private JPanel jPMitte; // BoderLayout.CENTER beinhaltet den Infobereich
-    private JPanel jPUnten; // BorderLayout.SOUUTH beinhaltet die SpielerPanel
+    /**
+     *  Die aktuelles JPanel im Norden(BorderLayout.NORTH) beinhaltet den Spielstart Button
+     */
+    private JPanel jPOben;
 
-    private JPanel jPStock; //
+    /**
+     *  Die aktuelles JPanel im Norden(BoderLayout.CENTER) beinhaltet den Infobereich
+     */
+    private JPanel jPMitte;
+
+    /**
+     *  Die aktuelles JPanel im Norden(BorderLayout.SOUTH) beinhaltet die SpielerPanel
+     */
+    private JPanel jPUnten;
+
+    /**
+     *  Die aktuelles JPanel neben dem Infobereich im Center beinhaltet den Stock
+     */
+    private JPanel jPStock;
+
+    /**
+     *  Die aktuelles JLabel im jPStock beinhaltet die anzahl der Strafpunkte auf dem Stock
+     */
     private JLabel jLStock;
 
 
+    /**
+     * <pre>
+     * Constructor für das Spielerfeld.
+     * Beinhaltet den Infobereich für Informationen an die Spieler, die Anzeige für den Aktuellen Stock und alle sich im
+     * Spiel befindenen SpielerPanel.
+     *
+     * Ist das Zentrale Anzeige Element für den Spielablauf.
+
+     * </pre>
+     *
+     * @param gui GUI Die aktuelle GUI (JFrame)
+
+     */
     public Spielfeld(GUI gui) {
         super();
         setLayout(new BorderLayout());
@@ -274,57 +323,54 @@ public class Spielfeld extends JPanel {
         System.out.println("recieved updateSignal...");
     }
 
-
-
     /**
-     * <pre>
-     * Wird vom SpielerPanel aus aufgerufen und prueft alle Spieler, ob sie fertig sind.
-     * Wenn alle Spieler fertig sind, wird die Ansicht des Wuerfelfeldes aufgedeckt (wuerfel angezeigt)
-     * und Runde.Auswerten() wertet die Bilder aus und verteilt die Chips.
-     * </pre>
-     *
-     * @see spiel.Runde
+     * Liefert die aktuelle Liste mit allen teilnehmern zurück
+     * @return List ArrayList mit SpielerPanel
      */
-
-    public void pruefeFertig() {
-        int counter = 0;
-        for (SpielerPanel s : teilnehmer) {
-            if (s.getSpieler().getFertig())
-                counter++;
-        }
-
-        if (counter == teilnehmer.size()) {
-            for (SpielerPanel s : teilnehmer)
-                s.changeView("wuerfel");
-
-            haelfte.getRunde().auswertenBilder();
-        }
-    }
-
     public List<SpielerPanel> getTeilnehmer() {
         return teilnehmer;
     }
 
-
-
+    /**
+     * Liefert die aktuelle GUI (JFrame) zurück
+     * @return GUI  JFrame
+     */
     public GUI getGui() {
+
         return gui;
     }
 
+    /**
+     * Liefert den aktuelle Infobereich (JPanel) zurück
+     * @return Infobereich JPanel
+     */
     public Infobereich getInfobereich(){
+
         return this.infobereich;
     }
 
+    /**
+     * Liefert die aktuelle Hälfte zurück
+     * @return Haelfte Object
+     */
     public Haelfte getHaelfte(){
         return this.haelfte;
     }
 
+    /**
+     * Setzt den aktuelle RundenCounter für dei Auswertung
+     * @param count int
+     */
     public void setCounter(int count){
         this.counter = count;
-        System.out.println("Aktueller Counter nun: "+counter);
     }
 
+    /**
+     * Liefert den aktuelle RundenCounter zurück
+     * @return int sowiele Spieler sind noch an der Reihen bis zur Runden Auswertung
+     */
     public int getCounter(){
-       return this.counter;
+
+        return this.counter;
     }
 }
