@@ -33,7 +33,7 @@ public class Becher implements Comparable<Becher> {
     /**
      * Anzahl der durchgeführten Würfe, wird bei Becher.wuerfeln() hochgezählt
      */
-    private int wurf;
+    private int anzahlWuerfe;
 
     /**
      * <pre>
@@ -51,7 +51,7 @@ public class Becher implements Comparable<Becher> {
 
         wuerfeln();
 
-        this.wurf = 0;
+        this.anzahlWuerfe = 1;
     }
 
     /**
@@ -79,12 +79,12 @@ public class Becher implements Comparable<Becher> {
      *
      * @return Int - 0 - 3 (Da 3 Max)
      */
-    public int getWurf() {
-        return this.wurf;
+    public int getAnzahlWuerfe() {
+        return this.anzahlWuerfe;
     }
 
     public void resetWurf() {
-        this.wurf = 0;
+        this.anzahlWuerfe = 0;
     }
 
     /**
@@ -114,7 +114,7 @@ public class Becher implements Comparable<Becher> {
 
 
 
-        this.wurf++;
+        this.anzahlWuerfe++;
 
         for (Wuerfel w : this.wuerfelArray) {
             w.wuerfeln();
@@ -149,6 +149,10 @@ public class Becher implements Comparable<Becher> {
 
 
 
+    }
+
+    public void setAnzahlWuerfe(int anzahlWuerfe){
+        this.anzahlWuerfe=anzahlWuerfe;
     }
 
     /**
@@ -218,16 +222,16 @@ public class Becher implements Comparable<Becher> {
 
         switch (vergleich) {
             case "Schock aus-Schock aus":
-                if (wurf <= b2.getWurf())
+                if (anzahlWuerfe <= b2.getAnzahlWuerfe())
                     return 1;
                 else
                     return -1;
 
             case "Schock-Schock":
                 if (w1[0].getWert() == w2[0].getWert())
-                    if (wurf < b2.getWurf())
+                    if (anzahlWuerfe < b2.getAnzahlWuerfe())
                         return 1;
-                    else if (wurf > b2.getWurf())
+                    else if (anzahlWuerfe > b2.getAnzahlWuerfe())
                         return -1;
                     else
                         return w1[0].getWert() - w2[0].getWert();
@@ -237,9 +241,9 @@ public class Becher implements Comparable<Becher> {
 
             case "General-General":
                 if (w1[0].getWert() == w2[0].getWert())
-                    if (wurf < b2.getWurf())
+                    if (anzahlWuerfe < b2.getAnzahlWuerfe())
                         return 1;
-                    else if (wurf > b2.getWurf())
+                    else if (anzahlWuerfe > b2.getAnzahlWuerfe())
                         return -1;
                     else
                         return w1[0].getWert() - w2[0].getWert();
@@ -248,9 +252,9 @@ public class Becher implements Comparable<Becher> {
 
             case "Straße-Straße":
                 if (w1[0].getWert() == w2[0].getWert()) {
-                    if (wurf < b2.getWurf())
+                    if (anzahlWuerfe < b2.getAnzahlWuerfe())
                         return 1;
-                    else if (wurf > b2.getWurf())
+                    else if (anzahlWuerfe > b2.getAnzahlWuerfe())
                         return -1;
                     else
                         return w1[0].getWert() - w2[0].getWert();
@@ -264,9 +268,9 @@ public class Becher implements Comparable<Becher> {
                 int ergebnis2 = (int) (w2[0].getWert() * Math.pow(10, 2)) + w2[1].getWert() * 10 + w2[2].getWert();
 
                 if (ergebnis1 == ergebnis2) {
-                    if (wurf < b2.getWurf())
+                    if (anzahlWuerfe < b2.getAnzahlWuerfe())
                         return 1;
-                    else if (wurf > b2.getWurf())
+                    else if (anzahlWuerfe > b2.getAnzahlWuerfe())
                         return -1;
                     else
                         return 0;

@@ -184,11 +184,20 @@ public class Spielfeld extends JPanel {
 
     public void updateTeilnehmerListe() {
         teilnehmer = new ArrayList<>();
+        List<String> kennungListe;
 
         try {
 
             int id = Datenbank.getInstance().selectSpielID(gui.getBesitzerName());
-            List<String> kennungListe = Datenbank.getInstance().selectSpielerImSpiel(id);
+
+                if(Datenbank.getInstance().selectAktuelleHaelfte(id)==0)
+                    kennungListe = Datenbank.getInstance().selectSpielerImSpiel(id);
+                else{
+                    kennungListe = Datenbank.getInstance().selectStartAufstellung(id);
+                    this.haelfte.updateHaelfte(id);
+                }
+
+
 
             for (String s : kennungListe) {
                 SpielerPanel tmpPanel = new SpielerPanel(Datenbank.getInstance().selectSpieler(s), this);
@@ -251,6 +260,7 @@ public class Spielfeld extends JPanel {
     public void updateSpielfeld(String info){
         jPUnten.removeAll();
         updateTeilnehmerListe();
+
         infobereich.setInfos(info);
         updateInfo(infobereich);
         updateStock();
@@ -298,5 +308,9 @@ public class Spielfeld extends JPanel {
 
     public Infobereich getInfobereich(){
         return this.infobereich;
+    }
+
+    public Haelfte getHaelfte(){
+        return this.haelfte;
     }
 }

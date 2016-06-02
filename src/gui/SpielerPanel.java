@@ -182,8 +182,6 @@ public class SpielerPanel extends JPanel {
                 //Wegen Mehrfachnutzung in Methode ausgelagert
                 wuerfelRaus(pufferBtn,btnIndex,this);
 
-                //Datenbank.getInstance().upd
-
             }
         };
 
@@ -235,7 +233,7 @@ public class SpielerPanel extends JPanel {
          */
         becher.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (spieler.getBecher().getWurf() < 2) {
+                if (spieler.getBecher().getAnzahlWuerfe() < 2) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen: KNA
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     System.out.println(spieler.getLetztesBild());
@@ -256,7 +254,7 @@ public class SpielerPanel extends JPanel {
         wuerfeln.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (spieler.getBecher().getWurf() < 3) {
+                if (spieler.getBecher().getAnzahlWuerfe() < 3) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen KNA
 
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "becher");
@@ -270,18 +268,21 @@ public class SpielerPanel extends JPanel {
                         }
                         else {
                             spieler.wuerfeln();
+                            Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
                         }
 
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     } catch (ClassNotFoundException e1) {
                         e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
 
                     w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
-                    if (spieler.getBecher().getWurf() == 3)
+                    if (spieler.getBecher().getAnzahlWuerfe() == 3)
                         wuerfeln.setEnabled(false);
                 } else {
 
@@ -340,13 +341,14 @@ public class SpielerPanel extends JPanel {
                         }else{
                             try {
                                 Datenbank.getInstance().updateAktiv(spieler.getName());
+                                Datenbank.getInstance().insertHaelfte(spielID);
                             } catch (SQLException e1) {
                                 e1.printStackTrace();
                             } catch (ClassNotFoundException e1) {
                                 e1.printStackTrace();
                             }
 
-                            spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei");
+                            spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei und die "+spielfeld.getHaelfte().getArt()+" beginnt...");
                         }
                     }
                 } catch (SQLException e1) {

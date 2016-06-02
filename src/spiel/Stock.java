@@ -2,6 +2,9 @@ package spiel;
 
 import Datenbank.Datenbank;
 
+import java.sql.SQLException;
+import java.util.Date;
+
 /**
  * Created by KNapret on 23.05.2016.
  */
@@ -11,7 +14,7 @@ public class Stock {
 
     public Stock(){
 
-        this.strafpunkte = 13;
+        this.strafpunkte = 0;
     }
 
     public int getStrafpunkte(){
@@ -33,5 +36,16 @@ public class Stock {
         }
 
 
+    }
+
+    public void updateStock(int spielID) {
+
+        try {
+            this.strafpunkte = Datenbank.getInstance().selectStockStatus(spielID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

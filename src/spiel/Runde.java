@@ -50,7 +50,7 @@ public class Runde {
      * @return Int - {1 - 3}
      */
     public int maxWuerfe() {
-        return this.beginner.getBecher().getWurf();
+        return this.beginner.getBecher().getAnzahlWuerfe();
     }
 
     /**

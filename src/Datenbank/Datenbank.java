@@ -483,6 +483,18 @@ public class Datenbank {
         }
     }
 
+    public int selectStockStatus(int spielID) throws SQLException {
+        int haelfte = selectAktuelleHaelfte(spielID);
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery("SELECT stock FROM t_hälfte WHERE fk_t_spielid="+spielID+", AND art = "+haelfte);
+
+        if(r.next())
+            return r.getInt(1);
+        else
+            return -1;
+
+    }
+
     /**
      * prüft in welchem Spiel sich ein Spieler befindet
      *
@@ -911,7 +923,7 @@ public class Datenbank {
      * @return Kennung des Verlierers der vorherigen Hälfte
      * @throws SQLException
      */
-    private String selectHaelftenVerlierer(int spielID, int haelfte) throws SQLException {
+    public String selectHaelftenVerlierer(int spielID, int haelfte) throws SQLException {
         String verlierer = null;
         Statement stmt = verbindung.createStatement();
 
@@ -1219,10 +1231,15 @@ public class Datenbank {
                     "', AND fk_t_runde_rundennr ="+rundenNr+
                     ", AND fk_t_haelfte_art="+haelfte+
                     ", AND fk_t_spiel_spiel_id="+spielID);
-            if(rS.next())
+            if(rS.next()){
                 if(r.getInt(1)!=0){
                     spieler.setWurf(selectDurchgang(kennung));
+                    spieler.getBecher().setAnzahlWuerfe(r.getInt(1));
                 }
+
+
+            }
+
 
 
             return spieler;
