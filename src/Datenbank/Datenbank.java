@@ -802,7 +802,7 @@ public class Datenbank {
         int rundennr = selectAktuelleRunde(spielID);
         int art = selectAktuelleHaelfte(spielID);
 
-        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' gewinner = '" + gewinner + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
+        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' ,gewinner = '" + gewinner + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
     }
 
     /**
@@ -1306,12 +1306,8 @@ public class Datenbank {
                 if (rS.getInt(1) != 0) {
                     spieler.setWurf(selectDurchgang(kennung));
                     spieler.getBecher().setAnzahlWuerfe(rS.getInt(1));
-                }
-
-
+               }
             }
-
-
 
             return spieler;
         }
@@ -1329,8 +1325,8 @@ public class Datenbank {
     public void updateSpieler(String kennung, int strafpunkte) throws SQLException, IOException {
 
         PreparedStatement ps = verbindung.prepareStatement(
-                "UPDATE t_spieler" +
-                        "SET strafpunkte = ?" +
+                "UPDATE t_spieler " +
+                        "SET strafpunkte= ?" +
                         "WHERE kennung= '" + kennung + "'");
         ps.setInt(1, strafpunkte);
         //ps.setString(2, kennung);

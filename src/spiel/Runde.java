@@ -1,27 +1,35 @@
 package spiel;
 
 
+import Datenbank.Datenbank;
+import gui.GUI;
+
 import javax.swing.*;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.SortedMap;
 
 /**
  * Created by KNapret on 23.05.2016.
  */
 public class Runde {
 
-    //private GUI gui;
+    private GUI gui;
     private Stock stock;
     private Spieler beginner;
     private List<Spieler> teilnehmer;
 
     /**
      * Constructor Runde
-     *
-     * @param stock    - Der Stock der jeweiligen Runde
+     *  @param stock    - Der Stock der jeweiligen Runde
      * @param beginner - Wird initial durch Auswuerfeln festgelegt. Danach immer der Verlierer der letzten Runde
+     * @param gui
      */
-    public Runde(Stock stock, Spieler beginner) {
+    public Runde(Stock stock, Spieler beginner, GUI gui) {
+        this.gui = gui;
         this.stock = stock;
         this.beginner = beginner;
 
@@ -109,10 +117,24 @@ public class Runde {
                 "\n Verlierer hat "+verlierer.getStrafpunkte()+" bekommen";
         JOptionPane.showMessageDialog(null, ausgabe);
 
+
+
         //Resetten der würfe, damit weitergespielt werden kann, wird später vond er GUI gemacht!
         for(Spieler s: teilnehmer){
             s.getBecher().resetWurf();
         }
+        //ToDO: Richtige Anzahl an kassierten Strafpunkten ausgeben
+        try {
+            int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
+            gui.sendeUpdateCounter(teilnehmer.size());
+            Datenbank.getInstance().insertRundenergebnis(spielID, verlierer.getName(), gewinner.getName());
+            Datenbank.getInstance().insertRunde(spielID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        gui.sendeUpdateSignal(gewinner.getName()+" mit "+gewinner.getLetztesBild()+" || "+ verlierer.getName()+" mit "+verlierer.getLetztesBild()+". Bekommt: "+verlierer.getStrafpunkte());
 
     }
 
@@ -133,9 +155,35 @@ public class Runde {
         if (this.stock.getStrafpunkte() == 0) {
             gewinner.popStrafpunkte(anzahl);
             verlierer.pushStrafpunkte(anzahl);
+            try {
+
+                Datenbank.getInstance().updateSpieler(gewinner.getName(),gewinner.getStrafpunkte());
+                Datenbank.getInstance().updateSpieler(verlierer.getName(),verlierer.getStrafpunkte());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         } else {
             verlierer.pushStrafpunkte(stock.popStrafpunkt(anzahl));
+            try {
+                int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
+                Datenbank.getInstance().updateStock(anzahl,spielID);
+                Datenbank.getInstance().updateSpieler(verlierer.getName(),verlierer.getStrafpunkte());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
+
+
 
 
     }

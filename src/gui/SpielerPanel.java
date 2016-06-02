@@ -198,7 +198,6 @@ public class SpielerPanel extends JPanel {
         wuerfelAnsicht.add(w3, 2);
 
 
-
         wuerfel.add(becher, "becher");
         wuerfel.add(wuerfelAnsicht, "wuerfel");
 
@@ -237,7 +236,7 @@ public class SpielerPanel extends JPanel {
          */
         becher.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (spieler.getBecher().getAnzahlWuerfe() < 2) {
+                if (spieler.getBecher().getAnzahlWuerfe() < 3) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen: KNA
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     System.out.println(spieler.getLetztesBild());
@@ -287,12 +286,21 @@ public class SpielerPanel extends JPanel {
                     w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
+                    System.out.println("Speiler Würfe:" + spieler.getBecher().getAnzahlWuerfe());
 
                     if (spieler.getBecher().getAnzahlWuerfe() == 3) {
+
                         wuerfeln.setEnabled(false);
+                        System.out.println("Button disabled!");
+
                         try {
                             Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spieler.getName()));
                             spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
+                            spielfeld.setCounter(spielfeld.getCounter() - 1);
+                            spielfeld.getGui().sendeUpdateCounter(spielfeld.getCounter());
+                            if (spielfeld.getCounter() == 0) {
+                                spielfeld.getHaelfte().getRunde().auswertenBilder();
+                            }
                             //ToDo: Name des nächsten Spielers anzeigen!
                         } catch (SQLException e1) {
                             e1.printStackTrace();
@@ -300,7 +308,6 @@ public class SpielerPanel extends JPanel {
                             e1.printStackTrace();
                         }
                     }
-
 
 
                 } else {
@@ -386,9 +393,9 @@ public class SpielerPanel extends JPanel {
 
                         try {
                             //ToDo: Würfel und fertig des Spielers mitschicken! KNA
-                            if(spieler.getBecher().getAnzahlWuerfe()==1){
-                                Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
-                            }
+//                            if(spieler.getBecher().getAnzahlWuerfe()==1){
+//                                Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
+//                            }
 
                             Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
                             spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
@@ -397,9 +404,9 @@ public class SpielerPanel extends JPanel {
                             e1.printStackTrace();
                         } catch (ClassNotFoundException e1) {
                             e1.printStackTrace();
-                        } catch (IOException e1) {
+                        } /*catch (IOException e1) {
                             e1.printStackTrace();
-                        }
+                        }*/
 
                         spielfeld.setCounter(spielfeld.getCounter() - 1);
                         spielfeld.getGui().sendeUpdateCounter(spielfeld.getCounter());
@@ -477,6 +484,22 @@ public class SpielerPanel extends JPanel {
         add(wuerfel);
         add(jPBox);
         add(buttons);
+
+        if (spieler.getBecher().getAnzahlWuerfe() == 0) {
+            try {
+                if(Datenbank.getInstance().selectAktuelleHaelfte(Datenbank.getInstance().selectSpielID(spieler.getName())) != 0){
+                    Datenbank.getInstance().insertDurchgang(spieler.getName(), spieler.getBecher().getWuerfelArray());
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     /**
@@ -595,7 +618,7 @@ public class SpielerPanel extends JPanel {
         auslageCount++;
 
 
-        if (auslageCount == 3){
+        if (auslageCount == 3) {
 
 
            /* try {

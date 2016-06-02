@@ -45,7 +45,7 @@ public class Spielfeld extends JPanel {
 
         this.gui = gui;
         infobereich = new Infobereich(this);
-        haelfte = new Haelfte();
+        haelfte = new Haelfte(this.gui);
         teilnehmer = new ArrayList<>();
 
         jPOben = new JPanel(new FlowLayout());

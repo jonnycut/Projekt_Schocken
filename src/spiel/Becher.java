@@ -51,7 +51,7 @@ public class Becher implements Comparable<Becher> {
 
         wuerfeln();
 
-        this.anzahlWuerfe = 1;
+        this.anzahlWuerfe = 0;
     }
 
     /**
@@ -119,6 +119,7 @@ public class Becher implements Comparable<Becher> {
         for (Wuerfel w : this.wuerfelArray) {
             w.wuerfeln();
         }
+        System.out.println("kai: Habe gewürfelt");
 
         sortiere();
 

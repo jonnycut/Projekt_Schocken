@@ -1,6 +1,7 @@
 package spiel;
 
 import Datenbank.Datenbank;
+import gui.GUI;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
  */
 public class Haelfte {
 
+    private GUI gui;
     private Stock stock;
     private Runde runde;
     private Spieler verlierer;
@@ -25,11 +27,11 @@ public class Haelfte {
      *
      * </pre>
      */
-    public Haelfte(){
+    public Haelfte(GUI gui){
         //ToDo: Art der Häfte wird wo festgelegt?
-
+        this.gui = gui;
         this.stock = new Stock();
-        this.runde = new Runde(this.stock,this.verlierer);
+        this.runde = new Runde(this.stock,this.verlierer,this.gui);
         this.verlierer =null;
         this.art = 0;
 
