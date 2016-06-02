@@ -15,14 +15,16 @@ import java.awt.*;
 public class Statistik extends JPanel {
 
     private String spielername = "";
-    private int gewonneneRunden;
-    private int verloreneHaelften;
-    private int verloreneSpiele;
-    private int anzahlSchock;
-    private int anzahlStrasse;
-    private int anzahlGenaral;
-    private int anzahlEinfacherWurf;
-    private int anzahlSchockAus;
+    private JLabel jLProfilbild;
+    private JLabel jLName;
+    private JLabel jLGewonneneRunden;
+    private JLabel jLVerloreneHaelften;
+    private JLabel jLVerloreneSpiele;
+    private JLabel jLSchock;
+    private JLabel jLStrasse;
+    private JLabel jLGenaral;
+    private JLabel jLEinfacherWurf;
+    private JLabel jLSchockAus;
 
 
     public Statistik(GUI gui) {
@@ -47,20 +49,106 @@ public class Statistik extends JPanel {
         //-------------------------------------MITTE-PANEL-------------------------------------------------------------
 
         JPanel mitte = new JPanel();
+        mitte.setLayout(new BoxLayout(mitte, BoxLayout.Y_AXIS));
         mitte.setBackground(Color.DARK_GRAY);
-        JLabel jLMitte = new JLabel(Grafik.LOGO1);
-        mitte.add(jLMitte);
+        mitte.setPreferredSize(new Dimension(1020, 600));
+
+        JPanel jPName = new JPanel(new FlowLayout());
+        jPName.setBackground(Color.DARK_GRAY);
+        jLName = new JLabel("TEST NAME");
+        jLName.setBackground(Color.BLACK);
+        jLName.setFont(new Font("Arial", Font.BOLD, 25));
+        jLName.setForeground(Color.RED);
+
+        jPName.add(jLName);
+        mitte.add(jPName);
+
+        JPanel jPProfilbild = new JPanel(new FlowLayout());
+        jPProfilbild.setBackground(Color.DARK_GRAY);
+        //jPProfilbild.setPreferredSize(new Dimension(200,200));
+        jLProfilbild = new JLabel();
+        jLProfilbild.setIcon(Grafik.AVATAR_BB8);
+        jLProfilbild.setBackground(Color.WHITE);
+        jLProfilbild.setPreferredSize(new Dimension(150, 150));
+
+        jPProfilbild.add(jLProfilbild);
+        mitte.add(jPProfilbild);
+
+        JPanel jPGewonneneRunden = new JPanel(new FlowLayout());
+        jPGewonneneRunden.setBackground(Color.DARK_GRAY);
+        JLabel jLGew = new JLabel("Gewonnene Runden:  ");
+        jLGew.setBackground(Color.BLACK);
+        jLGew.setForeground(Color.WHITE);
+        jLGew.setFont(new Font("Arial", Font.BOLD, 15));
+        jPGewonneneRunden.add(jLGew);
+
+        jLGewonneneRunden = new JLabel("666");
+        jLGewonneneRunden.setBackground(Color.DARK_GRAY);
+        jLGewonneneRunden.setForeground(Color.RED);
+        jLGewonneneRunden.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPGewonneneRunden.add(jLGewonneneRunden);
+        mitte.add(jPGewonneneRunden);
+
+        JPanel jPVerloreneHaelften = new JPanel(new FlowLayout());
+        jPVerloreneHaelften.setBackground(Color.DARK_GRAY);
+        JLabel jLHaelfte = new JLabel("Gewonnene Hälften:  ");
+        jLHaelfte.setBackground(Color.BLACK);
+        jLHaelfte.setForeground(Color.WHITE);
+        jLHaelfte.setFont(new Font("Arial", Font.BOLD, 15));
+        jPVerloreneHaelften.add(jLHaelfte);
+
+        jLVerloreneHaelften = new JLabel("666");
+        jLVerloreneHaelften.setBackground(Color.DARK_GRAY);
+        jLVerloreneHaelften.setForeground(Color.RED);
+        jLVerloreneHaelften.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPVerloreneHaelften.add(jLVerloreneHaelften);
+        mitte.add(jPVerloreneHaelften);
+
+        JPanel jPVerloreneSpiele = new JPanel(new FlowLayout());
+        jPVerloreneSpiele.setBackground(Color.DARK_GRAY);
+        JLabel jLSpiele = new JLabel("Verlorene Spiele:  ");
+        jLSpiele.setBackground(Color.BLACK);
+        jLSpiele.setForeground(Color.WHITE);
+        jLSpiele.setFont(new Font("Arial", Font.BOLD, 15));
+        jPVerloreneSpiele.add(jLSpiele);
+
+        jLVerloreneSpiele = new JLabel("666");
+        jLVerloreneSpiele.setBackground(Color.DARK_GRAY);
+        jLVerloreneSpiele.setForeground(Color.RED);
+        jLVerloreneSpiele.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPVerloreneSpiele.add(jLVerloreneSpiele);
+        mitte.add(jPVerloreneSpiele);
+
+        JPanel jPSchock = new JPanel(new FlowLayout());
+        jPSchock.setBackground(Color.DARK_GRAY);
+        JLabel jLSch = new JLabel("Anzahl Schock:  ");
+        jLSch.setBackground(Color.BLACK);
+        jLSch.setForeground(Color.WHITE);
+        jLSch.setFont(new Font("Arial", Font.BOLD, 15));
+        jPSchock.add(jLSch);
+
+        jLSchock = new JLabel("666");
+        jLSchock.setBackground(Color.DARK_GRAY);
+        jLSchock.setForeground(Color.RED);
+        jLSchock.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPSchock.add(jLSchock);
+        mitte.add(jPSchock);
+
+
+
+
+
+
+
+
+
 
         jp.add(mitte, BorderLayout.CENTER);
 
-
-        //-------------------------------------RECHTS-PANEL------------------------------------------------------------
-
-        JPanel rechts = new JPanel();
-        rechts.setPreferredSize(new Dimension(240, 0));
-        rechts.setBackground(Color.BLACK);
-
-        jp.add(rechts, BorderLayout.EAST);
 
 
         //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
@@ -103,22 +191,6 @@ public class Statistik extends JPanel {
 
         return this;
     }
-
-
-
-    //        JPanel north = new JPanel(new BorderLayout(1, 2));
-//        north.setPreferredSize(new Dimension(300, 50));
-//        JLabel jLname = new JLabel(spieler.getName());
-//        JLabel jLBild = new JLabel(spieler.getProfilBild());
-//        north.add(jLname);
-//        north.add(jLBild);
-//        add(north, BorderLayout.NORTH);
-//
-//
-//        JPanel center = new JPanel(new GridLayout(8, 2));
-//        JLabel jLgRunden = new JLabel("gewonnene Runden");
-//        center.add(jLgRunden);
-//        center.add(new JLabel());
 
 }
 

@@ -103,7 +103,7 @@ public class GUI extends JFrame {
                 zustand = 1;
 
                 //TEST für die Statistik
-                //zustand = 2;
+                zustand = 2;
 
                 updateView();
             }
