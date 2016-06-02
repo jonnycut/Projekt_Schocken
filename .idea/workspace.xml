@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Infobereich.java" afterPath="$PROJECT_DIR$/src/gui/Infobereich.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Spielfeld.java" afterPath="$PROJECT_DIR$/src/gui/Spielfeld.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -36,11 +37,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.5931624">
+              <caret line="148" column="43" selection-start-line="148" selection-start-column="43" selection-end-line="148" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -80,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Infobereich.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Infobereich.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.50598294">
-              <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="62" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -132,8 +133,8 @@
         <option value="$PROJECT_DIR$/src/Grafik/Grafik.java" />
         <option value="$PROJECT_DIR$/src/gui/Statistik.java" />
         <option value="$PROJECT_DIR$/src/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
         <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
+        <option value="$PROJECT_DIR$/src/gui/Spielfeld.java" />
       </list>
     </option>
   </component>
@@ -618,13 +619,7 @@
       <workItem from="1464819228621" duration="843000" />
       <workItem from="1464820102353" duration="1791000" />
       <workItem from="1464843000468" duration="18506000" />
-      <workItem from="1464861555746" duration="1439000" />
-    </task>
-    <task id="LOCAL-00041" summary="Flurry: Aktiver Spieler Rahmen">
-      <created>1464781669182</created>
-      <option name="number" value="00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1464781669182</updated>
+      <workItem from="1464861555746" duration="1937000" />
     </task>
     <task id="LOCAL-00042" summary="Doku bis SpielerPanel aktualisiert!&#10;Bitte ToDos durchgehen!">
       <created>1464784696617</created>
@@ -914,11 +909,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464862793700</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="&#10;Allegmein Design &#10;">
+      <created>1464863000736</created>
+      <option name="number" value="00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1464863000736</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115537000" />
+    <option name="totallyTimeSpent" value="116035000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1425,18 +1426,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="62" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Infobereich.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50598294">
-          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.5931624">
+          <caret line="148" column="43" selection-start-line="148" selection-start-column="43" selection-end-line="148" selection-end-column="43" />
           <folding />
         </state>
       </provider>

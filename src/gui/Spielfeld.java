@@ -141,10 +141,13 @@ public class Spielfeld extends JPanel {
         try {
             spielID = Datenbank.getInstance().selectSpielID(gui.getBesitzerName());
             System.out.println(spielID);
+            JPanel jPSpielleiter = new JPanel(new FlowLayout());
+            jPSpielleiter.setBackground(Color.DARK_GRAY);
             JLabel spielleiter = new JLabel("Spielleiter ist:  " + Datenbank.getInstance().selectSpielleiterKennung(spielID));
             spielleiter.setForeground(Color.RED);
             spielleiter.setBackground(Color.BLACK);
-            jPStock.add(spielleiter,BorderLayout.SOUTH);
+            jPSpielleiter.add(spielleiter);
+            jPStock.add(jPSpielleiter,BorderLayout.SOUTH);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
