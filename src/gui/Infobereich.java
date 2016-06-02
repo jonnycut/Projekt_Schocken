@@ -30,7 +30,7 @@ public class Infobereich extends JPanel {
      * Constructor des Infobereiches.
      * Erwartet ein Spielfeld, damit er weis, zu wem er gehört
      * </pre>
-     * @param spielfeld
+     * @param spielfeld Das aktuelle Spielfeld
      * @see Spielfeld
      */
     public Infobereich(Spielfeld spielfeld){
@@ -67,7 +67,7 @@ public class Infobereich extends JPanel {
 
     /**
      * Erzeugt ein JLabel um allen Spielern Informationen zukommen zu lassen.
-     * @param infos String beinhaltet den Informationstext der angezeigt werden soll.<br></br>
+     * @param infos String beinhaltet den Informationstext der angezeigt werden soll.
      * Es wird zum Schluss wieder in den Infobereich eingefügt.
      */
     public void setInfos(String infos) {

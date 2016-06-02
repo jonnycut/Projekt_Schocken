@@ -101,8 +101,8 @@ public class Wuerfel implements Serializable,Comparable<Wuerfel> {
     }
 
     /**
-     * Weist dem Wuerfel eine Zufallszahl zwischen 1 und 6 zu<br></br>
-     * und setzt die Grafik des Wuerfels entsprechend.<br></br>
+     * Weist dem Wuerfel eine Zufallszahl zwischen 1 und 6 zu
+     * und setzt die Grafik des Wuerfels entsprechend.
      * Ist wuerfel.draussen = true, wird der Würfel nicht verändert.
      */
 
@@ -130,9 +130,9 @@ public class Wuerfel implements Serializable,Comparable<Wuerfel> {
      *
      * </pre>
      * @param w2 - Object: ein anderer Wuerfel
-     * @return Int - <br></br>  negativ:     wuerfel < w2 <br></br>
-     *               positiv:   wuerfel > w2 <br></br>
-     *               0:         wuefel = w2 <br></br>
+     * @return Int -  negativ: wuerfel -lt- w2
+     *               positiv:   wuerfel -gt- w2
+     *               0:         wuefel = w2
      *
      */
     @Override

@@ -31,9 +31,13 @@ public class Statistik extends JPanel {
     private JLabel jLName;
 
     /**
-     *  Für die bis jetzt gewonnenen Runde
+     *  Für die bis jetzt gewonnenen Runden
      */
     private JLabel jLGewonneneRunden;
+
+    /**
+     *  Für die bis jetzt verlorrenden Runden
+     */
     private JLabel jLVerlorenRunden;
 
     /**
@@ -146,7 +150,7 @@ public class Statistik extends JPanel {
         jLVerRunde.setBackground(Color.BLACK);
         jLVerRunde.setForeground(Color.WHITE);
         jLVerRunde.setFont(new Font("Arial", Font.BOLD, 15));
-        jPVerloreneRunde.add(jLGew);
+        jPVerloreneRunde.add(jLVerRunde);
 
         jLVerlorenRunden = new JLabel("TEST");
         jLVerlorenRunden.setBackground(Color.DARK_GRAY);
@@ -329,7 +333,7 @@ public class Statistik extends JPanel {
     /**
      * Hohlt die Werte aus der Datenbank und schreibt diese in die jeweiligen JLabel
      * @param spieler von welchem Spieler die Statistik akzuallisiert werden soll
-     * @return
+     * @return Statistik ist die akutelle Statistik
      */
     public Statistik updateStatistik(String spieler) {
         ArrayList<Integer> statArray = new ArrayList<>();
@@ -360,8 +364,8 @@ public class Statistik extends JPanel {
     }
     /**Liefert die beiden Spieler die mit einander Verglichen werden sollen
      *
-     * @return
-     * @throws SQLException
+     * @return String[] Ein StringArray mit den Wurfwerten aus der Datenbank
+     * @throws SQLException Fehler halt!!!!
      */
     public String[] vergleicheStatistik() throws SQLException {
         Integer wertung = 0;

@@ -27,18 +27,18 @@ public class Stock {
     /**
      * Liefert die aktuellen Strafpunkte auf dem Stock
      *
-     * @return
+     * @return strafpunkte int Wert der Strafpunkte
      */
     public int getStrafpunkte() {
         return this.strafpunkte;
     }
 
     /**
-     * Reduziert die Strafpunkte des Stocks um die ubergebene Anzahl und gibt diese zurück.<br></br>
-     * Wenn die anzahl > strafpunkte auf dem Stock, werden nur die übrigen zurückgegeben.
+     * Reduziert die Strafpunkte des Stocks um die ubergebene Anzahl und gibt diese zurück.
+     * Wenn die anzahl -gt- strafpunkte auf dem Stock, werden nur die übrigen zurückgegeben.
      *
      * @param anzahl Int
-     * @return
+     * @return anzahl int = anzahl
      */
     public int popStrafpunkt(int anzahl) {
 

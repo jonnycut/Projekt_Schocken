@@ -32,6 +32,7 @@ public class Client {
      * Der Konstruktor erzeugt einen Client, der sich mit dem Server verbindet.
      *
      * @param gui GUI ist die aktuelle GUI.
+     * @param ip String mit der IP-Addresse.
      */
     public Client(String ip, GUI gui) {
         this.gui = gui;
@@ -93,8 +94,9 @@ public class Client {
     }
 
     /**
-     * Sendet das UpdateSignal '#Info' ueber das Netzwerk an den Server<br>>/br>
+     * Sendet das UpdateSignal '#Info' ueber das Netzwerk an den Server
      * Falls das Schreiben in den Stream fehlschlägt, erscheint eine Consolenfehlermeldung.
+     *
      * @param info String - StatusInfo, die im Infobereich angezeigt wird
      */
     public void sendeUpdate(String info) {
@@ -111,14 +113,16 @@ public class Client {
     }
 
     /**
-     * Sendet daas CounterUpdateSymbol über das Netzwerk an den Server <br></br>
+     * Sendet daas CounterUpdateSymbol über das Netzwerk an den Server
      * Gefolgt von dem Wert, auf den der Counter zu setzen ist.
      * Falls das Schreiben in den Stream fehlschlägt, erscheint eine Consolenfehlermeldung.
-     * @param counter
+     *
+     * @param counter int Wert auf den der Counter gesetzt wird.
      */
-    public void sendeUpdateCounter(int counter){{
+    public void sendeUpdateCounter(int counter) {
+
         try {
-            writer.write("@"+counter);
+            writer.write("@" + counter);
             writer.newLine();
             writer.flush();
             System.out.println("CounterSignal gesendet");

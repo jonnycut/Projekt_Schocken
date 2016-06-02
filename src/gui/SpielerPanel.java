@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 /**
  * Created by U.F.O. on 23.05.2016.
- * <p>
+ *
  * <pre>
  * Spielerpanel
  *
@@ -107,7 +107,7 @@ public class SpielerPanel extends JPanel {
      * Sendet über Spielfeld.updateSpielfeld(String) eine Nachricht, dass er gerade aktiv ist.
      *
      * Fügt die nötigen ActionListener hinzu (Würfeln, Würfel, Becher und fertig).
-     * Fügt die Würfel des Spielers in das entsprechende JPanel ein (wenn Wuerfel.draussen = true -> Auslage, sonst wuerfelAnsicht)
+     * Fügt die Würfel des Spielers in das entsprechende JPanel ein (wenn Wuerfel.draussen = true - Auslage, sonst wuerfelAnsicht)
      *
      * </pre>
      *

@@ -41,7 +41,7 @@ public class Spieler implements Comparable<Spieler> {
      */
     private Icon profilBild;
     /**
-     * Das jeweils letzt geworfene Bild des Spielers<br></br>
+     * Das jeweils letzt geworfene Bild des Spielers
      * {Schock aus | Schock | General | Straße | Zahl}
      */
     private String letztesBild;
@@ -113,7 +113,7 @@ public class Spieler implements Comparable<Spieler> {
     /**
      * Setzt Spieler.fertig auf den angegebenen Wert
      *
-     *
+     *@param fertig boolean
      */
     public void setFertig(boolean fertig) {
         this.fertig = fertig;
@@ -259,7 +259,7 @@ public class Spieler implements Comparable<Spieler> {
      * Nutzt Becher.compareTo(becher2)</pre>
      *
      * @param s2 Object Spieler, mit dem verglichen wird
-     * @return int - negativ, wenn dieser Spieler einen schlechteren Wurf hat,<br></br>
+     * @return int - negativ, wenn dieser Spieler einen schlechteren Wurf hat,
      * positiv, wenn dieser Spieler einen besseren Wurf hat.
      * 0 bei Gleichstand
      */
@@ -273,9 +273,9 @@ public class Spieler implements Comparable<Spieler> {
      * <pre>
      *
      * Vergleicht zwei Spieler anhand ihrer Strafpunkte.
-     * Gibt int > 0 zurueck, Wenn s1 mehr Strafpunkte als s2 hat
+     * Gibt int -gt- 0 zurueck, Wenn s1 mehr Strafpunkte als s2 hat
      * Gibt int = 0 zurueck, wenn beide Spieler gleich viele Strafpunkte haben
-     * Gibt int < 0 zurueck, wenn s1 weniger Strafpunkte als s2 hat</pre>
+     * Gibt int -lt- 0 zurueck, wenn s1 weniger Strafpunkte als s2 hat</pre>
      */
     public static final Comparator<Spieler>
 

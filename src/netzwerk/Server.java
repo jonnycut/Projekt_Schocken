@@ -14,7 +14,7 @@ import java.util.Vector;
 public class Server {
 
     /**
-     *  Die aktuelle Liste aller angemeldeten Clients am Server
+     * Die aktuelle Liste aller angemeldeten Clients am Server
      */
     private List<User> users = new Vector<>();
 
@@ -58,13 +58,14 @@ public class Server {
      * Ist ein Private Methode für die Nachriten und Steuersignal Verteilung im Netzwerk.
      * </pre>
      *
-     * @param user Liste von Usern um allen die Chatnachricht oder das Steuersignal zu schicken
+     * @param user      Liste von Usern um allen die Chatnachricht oder das Steuersignal zu schicken
+     * @param nachricht String die Nachricht für die User
      */
     private void neueNachricht(User user, String nachricht) {
 //        System.out.println(nachricht);
         for (User u : users) {
-           // if (u != user)
-                u.sendeNachricht(nachricht);
+            // if (u != user)
+            u.sendeNachricht(nachricht);
         }
     }
 
@@ -114,6 +115,7 @@ public class Server {
                 }
             }.start();
         }
+
         /**
          * <pre>
          * Diese Methode übermitelt die Chatnachrichten an alle Clients die auf dem Server sind

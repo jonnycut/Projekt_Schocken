@@ -75,7 +75,7 @@ public class GUI extends JFrame {
      * Initial wird ein Button mit Logo angezeigt der ActionListener schaltet
      * den Zustand weiter und führt die updteView() Methode aus.
      *
-     * @see this#updateView()
+     * @see GUI#updateView()
      */
     public GUI() {
 
@@ -168,7 +168,6 @@ public class GUI extends JFrame {
      * ist gesendet
      * </pre>
      *
-     * @param
      * @see Client#sendeUpdate(String)
      * @see Spielfeld#updateTeilnehmerListe()
      */

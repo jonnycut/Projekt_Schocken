@@ -50,6 +50,8 @@ public class Haelfte {
      * Danach wird der aktuelle Verlierer auf NULL gesetzt
      *
      * </pre>
+     *
+     * @param gui Die aktuelle GUI
      */
     public Haelfte(GUI gui) {
         //ToDo: Art der Häfte wird wo festgelegt?

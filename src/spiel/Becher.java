@@ -217,15 +217,15 @@ public class Becher implements Comparable<Becher> {
      * <pre>CompareTo(ein anderer Becher)
      *  Vergleicht einen Becher mit einem anderen Becher (b2)
      *  Wertigkeit:
-     *  Schock > General > Strasse > Zahl
+     *  Schock - General - Strasse - Zahl
      *  Sind beide Bilder gleich (z.B. beide Schock)
      *  wird anhand der hoechsten zaehlbaren Zahl entschieden:
-     *  Schock 6 > Schock 3 | General 3 > General 2 | Strasse 456 > Strasse 345 | Zahl 521 > Zahl 421
+     *  Schock 6 - Schock 3 | General 3 - General 2 | Strasse 456 - Strasse 345 | Zahl 521 - Zahl 421
      * </pre>
      *
      * @param b2 Object Becher, mit dem verglichen wird
-     * @return Int - negative Zahl: Becher < b2 <br></br>
-     * positive Zahl: Becher > b2
+     * @return Int - negative Zahl: Becher -gt- b2
+     * positive Zahl: Becher -gt- b2
      * 0 :            Becher = b2
      * ToDo: Anzahl Wuerfe auswerten
      */

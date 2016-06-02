@@ -43,7 +43,7 @@ public class Runde {
      * Constructor Runde
      *  @param stock    - Der Stock der jeweiligen Runde
      * @param beginner - Wird initial durch Auswuerfeln festgelegt. Danach immer der Verlierer der letzten Runde
-     * @param gui
+     * @param gui Die aktuelle GUI
      */
     public Runde(Stock stock, Spieler beginner, GUI gui) {
         this.gui = gui;
@@ -71,7 +71,7 @@ public class Runde {
     }
 
     /**
-     * Liefert die Maximalanzahl der Würfe, die in der Runde gemacht werden dürfen <br></br>
+     * Liefert die Maximalanzahl der Würfe, die in der Runde gemacht werden dürfen
      * Wird durch den Beginner der Runde vorgelegt
      *
      * @return Int - {1 - 3}
@@ -85,8 +85,8 @@ public class Runde {
      *
      * sortiert die Teilnehmerliste absteigend
      * nach Werigkeit der Bilder.
-     * Der 1. der Liste ist der Gewinner -> Gibt Anzahl Strafsteine vor,
-     * der letzte der Verlierer -> erhält Anzahl Strafsteine.
+     * Der 1. der Liste ist der Gewinner - Gibt Anzahl Strafsteine vor,
+     * der letzte der Verlierer - erhält Anzahl Strafsteine.
      * Verteilung der Steine wird durch Aufruf von
      * verteileStrafpunkte(Spieler, Spieler)
      * vorgenommen.
@@ -172,7 +172,7 @@ public class Runde {
      * <pre>
      *     Verteilt die Strafchips der Runde.
      *     Wenn [ANZAHL] noch auf Stock, bekommt der Verlierer diese
-     *     Wenn [ANZAHL] < StockChips: Verlierer bekommt übrige Chips
+     *     Wenn [ANZAHL] -st- StockChips: Verlierer bekommt übrige Chips
      *     Wenn Stock = Leer: Verlierer bekommt [ANZAHL] von Gewinner
      *
      *     Schreibt die Veränderungen beim Gewinner, Verlierer und beim Stock in die Datenbank,
