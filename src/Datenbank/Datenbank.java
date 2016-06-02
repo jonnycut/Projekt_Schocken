@@ -1228,9 +1228,9 @@ public class Datenbank {
                 spieler.setAktiv(r.getBoolean(5));
 
             ResultSet rS = stmt.executeQuery("SELECT COUNT(*) FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
-                    "', AND fk_t_runde_rundennr ="+rundenNr+
-                    ", AND fk_t_haelfte_art="+haelfte+
-                    ", AND fk_t_spiel_spiel_id="+spielID);
+                    "' AND fk_t_runde_rundennr ="+rundenNr+
+                    " AND fk_t_hälfte_art="+haelfte+
+                    " AND fk_t_spiel_spiel_id="+spielID);
             if(rS.next()){
                 if(r.getInt(1)!=0){
                     spieler.setWurf(selectDurchgang(kennung));
