@@ -863,7 +863,7 @@ public class Datenbank {
      * @param kennung
      * @throws SQLException
      */
-    private void updateAktiv(String kennung) throws SQLException {
+    public void updateAktiv(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
         boolean flag;
         ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung + "'");
