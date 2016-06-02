@@ -32,7 +32,8 @@ public class Datenbank {
 
     }
 
-    /**Diese Methode fragt per JDialog ab ob ein Datenbank angelegt werden soll oder ob mann sich mit
+    /**
+     * Diese Methode fragt per JDialog ab ob ein Datenbank angelegt werden soll oder ob mann sich mit
      * ein Datenbank verbinden möchte.
      * Beim anlegen einer Datenbank kommt eine fiktive ProgressBar als Information das die DB erstellt wird.
      * Beim verbinden wird die IP-Addresse der Datenbank gefordert mit der man sich verbinden möchte.
@@ -89,7 +90,7 @@ public class Datenbank {
                         }
                         pb.repaint();
                         counter++;
-                        if(counter == 40){
+                        if (counter == 40) {
                             Thread.currentThread().interrupt();
                         }
                     }
@@ -128,7 +129,7 @@ public class Datenbank {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null,"Auf diesem Server existiert keine Datenbank","Fehler",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Auf diesem Server existiert keine Datenbank", "Fehler", JOptionPane.ERROR_MESSAGE);
                     ip = "localhost";
                     dbErstellen();
                 }
@@ -322,8 +323,8 @@ public class Datenbank {
     /**
      * Diese Methode legt einen neuen Spieler in der Relation t_Spieler an.
      *
-     * @param kennung
-     * @param passwort
+     * @param kennung Spielername max. 30 Zeichen
+     * @param passwort Kennwort max. 30 Zeichen
      * @throws SQLException
      */
     public void insertNutzerKennung(String kennung, String passwort) throws SQLException {
@@ -396,11 +397,18 @@ public class Datenbank {
     }
 
     /**
-     * Methode zum anlegen einer Hälfte wobei der Stock initial in der DB auf 13 gesetzt wird
+     * <pre>
+     * Methode zum anlegen einer Hälfte wobei der Stock initial in der DB auf 13 gesetzt wird,
      * wird eine neue Hälfte erstellt werden automatisch die Strafpunkte der Mitspieler auf 0 gesetzt
-     *
+     * Es wird ermittelt welche Hälfte im Moment in der DB vorhanden ist -->nutzt selectAktuelleHaelfte
+     *     - Dieser Wert wird genutz um den letzten Rundenverlierer zu bekommen und als Hälftenverlierer eingesetzt -->nutzt insertHälftenVerlierer
+     *     - Dieser wird dann automatisch der Beginner der neuen Hälfte
+     * Die erste Runde in dieser Hälfte wird direkt mit angelegt
      * @param spielID zur Inendifizierung des Spiels
+     * @see Datenbank#selectAktuelleHaelfte(int)
+     * @see Datenbank#inserthaelftenVerlierer(String, int, int)
      * @throws SQLException
+     * </pre>
      */
     public void insertHaelfte(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
@@ -418,7 +426,7 @@ public class Datenbank {
                     "ON t_ist_client.fk_t_spiel_spiel_id=" + spielID + "))");
 
             stmt.executeUpdate("INSERT INTO t_hälfte (fk_t_spiel_spiel_id,art) VALUES (" + spielID + "," + neueHaelfte + ")");
-            insertersteRunde(spielID, neueHaelfte);
+            insertersteRunde(spielID);
             stmt.executeUpdate("Update t_runde SET rundennr=1 WHERE fk_t_spiel_spiel_id=" + spielID + " AND fk_t_hälfte_art=" + neueHaelfte);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -429,11 +437,11 @@ public class Datenbank {
      * Reduziert die Zahl der Chips auf dem Stock um die Anzahl der Strafpunkte die ein Spieler erhält
      *
      * @param strafpunkte - abzuziehende Punkte vom Stock
-     * @param spielID     - Hälftenzugehörigkeit
-     * @param haelftenArt - aktuelle Hälfte
+     * @param spielID     - in welchem spiel soll der Stock geupdatet  werden
      * @throws SQLException
      */
-    public void updateStock(int strafpunkte, int spielID, int haelftenArt) throws SQLException {
+    public void updateStock(int strafpunkte, int spielID) throws SQLException {
+       int haelftenArt=selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
         try {
             stmt.executeUpdate("Update t_hälfte set Stock= Stock - " + strafpunkte + " Where (fk_t_spiel_spiel_id = " + spielID + " AND art = " + haelftenArt + ")");
@@ -446,8 +454,8 @@ public class Datenbank {
     /**
      * prüft in welchem Spiel sich ein Spieler befindet
      *
-     * @param kennung
-     * @return spielID
+     * @param kennung des Spielers
+     * @return spielID des Spiels in dem sich der Spieler befindet
      * @throws SQLException
      */
     public int selectSpielID(String kennung) throws SQLException {
@@ -464,7 +472,7 @@ public class Datenbank {
     /**
      * über die SpielID kann abgefragt werden in welcher Hälfte sich das Spiel aktuell befindet
      *
-     * @param spiel_ID
+     * @param spiel_ID welches Spiel soll nach der aktuellen Hälfte gefragt werden
      * @return 1 für erste Hälfte , 2 für zweite Hälfte ,3 für Finale
      * @throws SQLException
      */
@@ -485,7 +493,7 @@ public class Datenbank {
     /**
      * einen Spieler auf aktiv setzen erst dann ist der Spieler dran
      *
-     * @param kennung
+     * @param kennung vom Spieler der Aktiv geschalten werden soll
      * @throws SQLException
      */
     public void insertAktiverSpieler(String kennung) throws SQLException {
@@ -502,14 +510,15 @@ public class Datenbank {
      * Methode um den Aktiven Spieler zu ermitteln. Erst werden alle Spieler die zu einem Spiel gehöhren ermittelt.danach
      * wird der aktive spieler aus der Relation gefiltert ( es kann immer nur einen pro spiel geben)
      *
-     * @param spielID
+     * @param spielID des Spiels aus dem man den aktiven Spieler erfahren möchte
      * @return
      * @throws SQLException
      */
     public String selectAktiverSpieler(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         String aktiverSpieler = null;
-        ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= '" + spielID + "') AS \"Spieler im Spiel\" INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
+        ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= '" + spielID +
+                                        "') AS \"Spieler im Spiel\" INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
         if (r.next())
             aktiverSpieler = r.getString(1);
         System.out.println("Spieler " + aktiverSpieler + " ist nun würfelberechtigt");
@@ -534,7 +543,8 @@ public class Datenbank {
     }
 
     /**
-     * Liefert eine Liste von allen Spielern die sich in dem selben Spiel befinden
+     * Liefert eine Liste von allen Spielern die sich in dem selben Spiel befinden diese ist aber unortiert
+     * und nur wichtig bis eine Sitzreihenfolge gefundet wurde
      *
      * @param spielID
      * @return
@@ -557,6 +567,12 @@ public class Datenbank {
         return spielerImSpiel;
     }
 
+    /** Diese Methode liefert die Sitzreihenfolge nach dem Auswürfeln diese ändert sich das gesamte Spiel über nicht mehr
+     *
+     * @param spielID um alle spieler des Spiels zu erfassen
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<String> selectStartAufstellung(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         ResultSet resultSet = stmt.executeQuery("SELECT kennung From t_spieler where kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client where fk_t_spiel_spiel_id = " + spielID + ")order by startwurf DESC");
@@ -575,71 +591,7 @@ public class Datenbank {
         return startaufstellung;
     }
 
-    /**
-     * Fügt der Relation t_spieler die statistik des Spielers als Object hinzu
-     *
-     * @param kennung
-     * @param statistik
-     * @throws SQLException
-     * @throws IOException
-     */
-    public void insertStatistik(String kennung, Map statistik) throws SQLException, IOException {
-        Statement stmt = verbindung.createStatement();
-
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("statistik.ser"));
-        oos.writeObject(statistik);
-        oos.close();
-        System.out.println("Serialisierung der Statistik");
-
-        InputStream is = new FileInputStream("statistik.ser");
-        ResultSet r = stmt.executeQuery("SELECT kennung FROM t_spieler WHERE kennung='" + kennung + "'");
-
-        if (r.next()) {
-            PreparedStatement ps = verbindung.prepareStatement("UPDATE t_spieler" +
-                    " SET statistik= ?" +
-                    " WHERE kennung= '" + kennung + "'");
-            ps.setBinaryStream(1, is);
-            ps.executeUpdate();
-
-        }
-
-    }
-
-    /**
-     * Liefert die Statistik der Spieler aus der DB
-     *
-     * @param kennung
-     * @return
-     * @throws SQLException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public Map selectStatistik(String kennung) throws SQLException, IOException, ClassNotFoundException {
-        Statement stmt = verbindung.createStatement();
-        Map<String, Integer> statistik = null;
-        ResultSet r = stmt.executeQuery(
-                "SELECT statistik" +
-                        " FROM t_spieler" +
-                        " WHERE kennung='" + kennung + "'"
-        );
-        if (r.next()) {
-            InputStream fis = r.getBinaryStream(1);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            statistik = (Map) ois.readObject();
-            ois.close();
-            fis.close();
-        }
-       /* Set set = statistik.entrySet();
-        Iterator iterator = set.iterator();
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            System.out.print("key: " + mentry.getKey() + " & Value: ");
-            System.out.println(mentry.getValue());
-        }*/
-        return statistik;
-    }
-
-    /**
+   /**
      * fügt der aktuellen Hälfte im Spiel eine neue Runde hinzu und fügt dieser automatisch den Beginner zu
      *
      * @param spielID zu welchem Spiel soll die Runde hinzugefügt werden
@@ -658,35 +610,6 @@ public class Datenbank {
             stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + nächsterbeginner + "')");
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * erstellt die erste Runde in einer neuen Hälfte
-     *
-     * @param spielID
-     * @param haelfte
-     * @throws SQLException
-     */
-    public void insertersteRunde(int spielID, int haelfte) throws SQLException {
-        Statement stmt = verbindung.createStatement();
-        int neueRunde = selectAktuelleRunde(spielID) + 1;
-        String ersterBeginner = selectersterBeginner(spielID);
-        String haelftenverlierer = selectHaelftenVerlierer(spielID, haelfte - 1);
-
-        //1.Runde erstellen
-        if (haelfte == 1) {
-            try {
-                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + haelftenverlierer + "')");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -710,9 +633,9 @@ public class Datenbank {
     }
 
     /**
-     * Liefert die Spielleiterkennung eines Spiels
+     * Liefert die Spielleiterkennung des eigenen Spiels
      *
-     * @param spielID
+     * @param spielID  um den richtigen Spielleiter zu selektieren
      * @return
      * @throws SQLException
      */
@@ -727,17 +650,6 @@ public class Datenbank {
         }
         return spielleiter;
     }
-
-    public void updateAktiv(String kennung) throws SQLException {
-        Statement stmt = verbindung.createStatement();
-        boolean flag;
-        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung + "'");
-        if (r.next()) {
-            flag = (!r.getBoolean(1));
-            stmt.executeUpdate("Update t_spieler SET aktiv = " + flag + " Where kennung = '" + kennung + "'");
-        }
-    }
-
 
     /**
      * Methode zum aktualisieren des Spielstatus
@@ -763,25 +675,13 @@ public class Datenbank {
     }
 
     /**
-     * prüft ob sich bereits 2 Spieler im Spiel befinden
+     * Setzt nach durchspielen einer Runde den Verlierer und den Gewinner dieser Runde
      *
-     * @return
+     * @param spielID   aktuelles SPiel in der sich diese Runde befindet
+     * @param verlierer der Spieler mit dem niedrigsten Wurf
+     * @param gewinner  der Spieler mit dem höchsten Wurf
      * @throws SQLException
      */
-    public boolean selectStarteSpiel() throws SQLException {
-        Statement stmt = verbindung.createStatement();
-        boolean check = false;
-        ResultSet r = stmt.executeQuery("SELECT count(*) from t_ist_client WHERE fk_t_spiel_spiel_id=" + selectOffenesSpiel());
-
-        if (r.next()) {
-            if (r.getInt(1) < 1) {
-                check = true;
-                System.out.println("Dein Spiel kann ab jetzt gestartet werden");
-            }
-        }
-        return check;
-    }
-
     public void insertRundenergebnis(int spielID, String verlierer, String gewinner) throws SQLException {
         Statement stmt = verbindung.createStatement();
         int rundennr = selectAktuelleRunde(spielID);
@@ -790,6 +690,14 @@ public class Datenbank {
         stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' gewinner = '" + gewinner + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
     }
 
+    /**
+     * Sucht sich alle Spieler die sich aktuell in einem Spiel befinden zieht sich die Reihenfolge wie die Spieler am
+     * Tisch sitzen und schaltet bei diesen das Boolean Aktiv in der Datenbank weiter. Hierdurch wird eine Würfelreihenfolge
+     * generiert ohne das die Panels der Spiler verändert wird
+     *
+     * @param spielID des aktuellen spiels um nur die Sitzreihenfolge eines Spiels zu bekommen
+     * @throws SQLException
+     */
     public void schalteWeiter(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
         java.util.List<String> spieler = new ArrayList<>();
@@ -813,9 +721,23 @@ public class Datenbank {
         updateAktiv(spieler.get(1));
     }
 
-    public void insertOrUpdateDurchgang(String kennung, int spielID, int haelfte, int rundennr) throws SQLException, IOException, ClassNotFoundException {
+    /**
+     * Fügt einen Wurf des Spielers in die Datenbank ein
+     * über die Kennung des Spielers wird die SspielID des Spiels in dem er sich befindet gesucht -->nutzt selectSpielID
+     * Mit dieser SpielID wird die aktuelle Hälfte und RundeNr. gesucht --> nutzt selectAktuelleHaelfte und select AktuelleRunde
+     * Die Würfel werden aus dem tempoären Spieler als einzelne Objekte in jeweils einen Stream geschrieben und als BYTEA in die Datenbank geschrieben
+     * Im ResultSet werden die Zeilen gezählt die sich für den Spieler im aktuellen Durchgang befinden.
+     *
+     * @param kennung Spielerkennung vom Spieler der Würfelt
+     * @throws SQLException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public void insertDurchgang(String kennung) throws SQLException, IOException, ClassNotFoundException {
         Statement stmt = verbindung.createStatement();
-
+        int spielID = selectSpielID(kennung);
+        int haelfte = selectAktuelleHaelfte(spielID);
+        int rundennr = selectAktuelleRunde(spielID);
         Spieler tmp = selectSpieler(kennung);
         Object wuerfel1 = tmp.getBecher().getWuerfelArray()[0];
         Object wuerfel2 = tmp.getBecher().getWuerfelArray()[1];
@@ -844,237 +766,112 @@ public class Datenbank {
         InputStream is3 = new ByteArrayInputStream(baos2.toByteArray());
 
 
-        ResultSet r = stmt.executeQuery("SELECT wuerfel_1 FROM t_durchgang" +
+        ResultSet r = stmt.executeQuery("SELECT count(zaehler) FROM t_durchgang" +
                 " WHERE fk_t_spieler_kennung = '" + kennung + "' AND fk_t_spiel_spiel_id = " + spielID +
                 " AND fk_t_hälfte_art = " + haelfte +
                 " AND fk_t_runde_rundennr = " + rundennr);
 
 
         if (r.next()) {
-            PreparedStatement ps = verbindung.prepareStatement(
-                    "UPDATE t_durchgang  SET wuerfel_1= ? " +
-                            " WHERE fk_t_spieler_kennung= '" + kennung + "'");
-            ps.setBinaryStream(1, is);
-            ps.executeUpdate();
-        } else {
-            PreparedStatement ps = verbindung.prepareStatement(
-                    "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel_1, wuerfel_2, wuerfel_3)" +
-                            " VALUES(?,?,?,?,?,?,?)");
+            if (r.getInt(1) == 0) {
 
-            ps.setString(1, kennung);
-            ps.setInt(2, spielID);
-            ps.setInt(3, haelfte);
-            ps.setInt(4, rundennr);
-            ps.setBinaryStream(5, is);
-            ps.setBinaryStream(6, is);
-            ps.setBinaryStream(7, is);
-            ps.executeUpdate();
+                PreparedStatement ps = verbindung.prepareStatement(
+                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
+                                " VALUES(?,?,?,?,?,?,?,?)");
 
-        }
-
-        ResultSet r2 = stmt.executeQuery("SELECT wuerfel_2 FROM t_durchgang" +
-                " WHERE fk_t_spieler_kennung = '" + kennung + "' AND fk_t_spiel_spiel_id = " + spielID +
-                " AND fk_t_hälfte_art = " + haelfte +
-                " AND fk_t_runde_rundennr = " + rundennr);
-
-
-        if (r.next()) {
-            PreparedStatement ps = verbindung.prepareStatement(
-                    "UPDATE t_durchgang  SET wuerfel_2= ? " +
-                            " WHERE fk_t_spieler_kennung= '" + kennung + "'");
-            ps.setBinaryStream(1, is2);
-            ps.executeUpdate();
-        }
-
-        ResultSet r3 = stmt.executeQuery("SELECT wuerfel_3 FROM t_durchgang" +
-                " WHERE fk_t_spieler_kennung = '" + kennung + "' AND fk_t_spiel_spiel_id = " + spielID +
-                " AND fk_t_hälfte_art = " + haelfte +
-                " AND fk_t_runde_rundennr = " + rundennr);
-
-
-        if (r.next()) {
-            PreparedStatement ps = verbindung.prepareStatement(
-                    "UPDATE t_durchgang  SET wuerfel_3= ? " +
-                            " WHERE fk_t_spieler_kennung= '" + kennung + "'");
-            ps.setBinaryStream(1, is3);
-            ps.executeUpdate();
-        }
-
-
-    }
-
-
-    //-----------------------------------------Kai seine Methoden-------------------------------------------------------
-
-    /**
-     * <pre>
-     *  Waehlt das Profilbild des Spielers mit der Uebergebenen Spielerkennung aus.
-     *  Bekommt einen BinaryStream aus der Datenbank und wandelt diesen in ein Icon um,
-     *  welches dann zurueckgegeben wird.
-     * </pre>
-     *
-     * @param text - String Spielerkennung
-     * @return Icon Das Profilbild des Spielers
-     * @throws SQLException
-     * @throws IOException
-     * @see ImageIO
-     */
-    public Icon selectProfilBild(String text) throws SQLException, IOException {
-        Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery("SELECT profilbild" +
-                        " FROM t_spieler" +
-                        " WHERE kennung='" + text + "'"
-        );
-        if (r.next()) {
-            Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
-            return icon;
-        }
-
-
-        return null;
-    }
-
-    /**
-     * <pre>
-     * Fuegt ein Grafik.ICON in die Datenbank ein.
-     * Wandelt das uebergebene Icon in ein BufferedImage und zeichnet das uebergebene Icon
-     * mithilfe der Graphics Klasse.
-     * Dieses BufferedImage wird dann als ByteArray in die Datenbank geschrieben.
-     * </pre>
-     *
-     * @param text Name des Bildes
-     * @param icon Object Grafik.ICON
-     * @throws SQLException Because Fuck u
-     * @throws IOException  Because Fuck u more
-     * @see Graphics
-     * @see BufferedImage
-     */
-
-    public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
-
-        // Im Internet gefunden... StackOverflow...
-        BufferedImage image = new BufferedImage(
-                icon.getIconWidth(),
-                icon.getIconHeight(),
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = image.createGraphics();
-// paint the Icon to the BufferedImage.
-        icon.paintIcon(null, g, 0, 0);
-        g.dispose();
-
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", baos);
-        InputStream is = new ByteArrayInputStream(baos.toByteArray());
-
-        Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery(
-                "SELECT kennung" +
-                        " FROM t_spieler" +
-                        " WHERE kennung='" + text + "'"
-
-        );
-
-        if (r.next()) {
-            PreparedStatement ps = verbindung.prepareStatement(
-                    "UPDATE t_spieler" +
-                            " SET profilbild= ?" +
-                            " WHERE kennung= '" + text + "'");
-            ps.setBinaryStream(1, is);
-            ps.executeUpdate();
-        } else {
-            PreparedStatement ps = verbindung.prepareStatement(
-                    "INSERT INTO t_spieler VALUES (?,?)"
-            );
-            ps.setString(1, text);
-            ps.setBinaryStream(2, is);
-            ps.executeUpdate();
-        }
-
-    }
-
-
-    /**
-     * Holt den Spieler mit der uebergebenen Spielerkennung aus der Datenbank, erstellt
-     * ein neues Spieler Object, setzt Strafpunkte und die Statistik und gibt dieses zurueck.
-     *
-     * @param kennung Spielerkennung des gewuenschten Spielers
-     * @return Spieler Object
-     * @throws SQLException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * @see Spieler
-     */
-    public Spieler selectSpieler(String kennung) throws SQLException, IOException, ClassNotFoundException {
-        Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery(
-                "SELECT *" +
-                        " FROM t_spieler" +
-                        " WHERE kennung='" + kennung + "'"
-        );
-        if (r.next()) {
-            Spieler spieler = new Spieler(r.getString(1), new ImageIcon(ImageIO.read(r.getBinaryStream(4))));
-            if (r.getString(7) != null)
-                spieler.setStrafpunkte(Integer.parseInt(r.getString(7)));
-
-            if (r.getBytes(8) != null) {
-                InputStream fis = r.getBinaryStream(8);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                HashMap<String, Integer> statistik = (HashMap<String, Integer>) ois.readObject();
-                ois.close();
-                fis.close();
-                spieler.setStatistik(statistik);
+                ps.setString(1, kennung);
+                ps.setInt(2, spielID);
+                ps.setInt(3, haelfte);
+                ps.setInt(4, rundennr);
+                ps.setBinaryStream(5, is);
+                ps.setBinaryStream(6, is2);
+                ps.setBinaryStream(7, is3);
+                ps.setInt(8, 1);
+                ps.executeUpdate();
             }
-            if (r.getBoolean(5))
-                spieler.setAktiv(r.getBoolean(5));
+            if (r.getInt(1) == 1) {
+                PreparedStatement ps = verbindung.prepareStatement(
+                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
+                                " VALUES(?,?,?,?,?,?,?,?)");
 
+                ps.setString(1, kennung);
+                ps.setInt(2, spielID);
+                ps.setInt(3, haelfte);
+                ps.setInt(4, rundennr);
+                ps.setBinaryStream(5, is);
+                ps.setBinaryStream(6, is2);
+                ps.setBinaryStream(7, is3);
+                ps.setInt(8, 2);
+                ps.executeUpdate();
+            }
+            if (r.getInt(1) == 2) {
+                PreparedStatement ps = verbindung.prepareStatement(
+                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
+                                " VALUES(?,?,?,?,?,?,?,?)");
 
-            return spieler;
+                ps.setString(1, kennung);
+                ps.setInt(2, spielID);
+                ps.setInt(3, haelfte);
+                ps.setInt(4, rundennr);
+                ps.setBinaryStream(5, is);
+                ps.setBinaryStream(6, is2);
+                ps.setBinaryStream(7, is3);
+                ps.setInt(8, 3);
+                ps.executeUpdate();
+            }
         }
-        return null;
     }
 
+    //-------------------------------------------Private Methoden-----------------------------------------------------------
     /**
-     * Fuerht ein Update der Attribute des Spielers mit der uebergebenen Kennung aus.
-     * Nutzt die insertStatistik(Map) Methode
+     * erstellt die erste Runde in einer neuen Hälfte überpüft hierbei um welche Hälfte es sich handelt um
+     * automatisch den Beginner dieser Runde hinzuzufügen. Handelt es sich um die ertse Hälfte wird der Spieler der das
+     * Auswürfeln gewonnen hat der Rundenbeginner.--> Nutzt hierfür die Methode selectersterBeginner .
+     * Andernfalls immer der Spieler der die vorherige Runde verloren hat-->Nutzt hierfür die Methode selectnaechsterBeginner
      *
-     * @param kennung     String - Kennung des zu aktualisierenden Spielers
-     * @param strafpunkte Int - Wert der zu setzenden Strafpunkte
-     * @param statistik   Map[String, Integer] - Die zu setzende Statistik
+     *
+     * @param spielID um die die Runde zu indentifizieren
+     * @see Datenbank#selectersterBeginner(int)
+     * @see Datenbank#selectnaechsterBeginner(int)
      * @throws SQLException
-     * @throws IOException
      */
-    public void updateSpieler(String kennung, int strafpunkte, Map<String, Integer> statistik) throws SQLException, IOException {
-
-        PreparedStatement ps = verbindung.prepareStatement(
-                "UPDATE t_spieler" +
-                        "SET strafpunkte= ?" +
-                        "WHERE kennung= '" + kennung + "'");
-        ps.setInt(1, strafpunkte);
-        ps.setString(2, kennung);
-        ps.executeUpdate();
-
-        insertStatistik(kennung, statistik);
-
-
-    }
-
-   /* public void updateSpielerWuerfel(Wuerfel[] wuerfel){
-
-        PreparedStatement ps = verbindung.createStatement(
-                "UPDATE t_spieler"+
-                        "SET w1= ?"+
-                        "SET w2= ?"+
-                        "SET w3"=
-        );
-    }*/
-
-    public void updatePasswort(String name, String passwort) throws SQLException {
+    private void insertersteRunde(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
+        int haelfte=selectAktuelleHaelfte(spielID);
+        int neueRunde = selectAktuelleRunde(spielID) + 1;
+        String ersterBeginner = selectersterBeginner(spielID);
+        String haelftenverlierer = selectHaelftenVerlierer(spielID, haelfte - 1);
 
-        stmt.executeUpdate("UPDATE t_spieler SET passwort = '" + passwort + "' WHERE kennung = '" + name + "'");
+        //1.Runde erstellen
+        if (haelfte == 1) {
+            try {
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + haelftenverlierer + "')");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
-//-------------------------------------------Private Methoden-----------------------------------------------------------
+    /**
+     * dreht das Aktiv Boolean in der Datenbank wird
+     *
+     * @param kennung
+     * @throws SQLException
+     */
+    private void updateAktiv(String kennung) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        boolean flag;
+        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung + "'");
+        if (r.next()) {
+            flag = (!r.getBoolean(1));
+            stmt.executeUpdate("Update t_spieler SET aktiv = " + flag + " Where kennung = '" + kennung + "'");
+        }
+    }
 
     /**
      * @param spielID --> in welchem SPiel befindet sich die Hälfte
@@ -1264,132 +1061,175 @@ public class Datenbank {
     }
 
 
+    //-----------------------------------------Kai seine Methoden-------------------------------------------------------
+
+    /**
+     * <pre>
+     *  Waehlt das Profilbild des Spielers mit der Uebergebenen Spielerkennung aus.
+     *  Bekommt einen BinaryStream aus der Datenbank und wandelt diesen in ein Icon um,
+     *  welches dann zurueckgegeben wird.
+     * </pre>
+     *
+     * @param text - String Spielerkennung
+     * @return Icon Das Profilbild des Spielers
+     * @throws SQLException
+     * @throws IOException
+     * @see ImageIO
+     */
+
+    public Icon selectProfilBild(String text) throws SQLException, IOException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery("SELECT profilbild" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
+        );
+        if (r.next()) {
+            Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
+            return icon;
+        }
+
+
+        return null;
+    }
+
+    /**
+     * <pre>
+     * Fuegt ein Grafik.ICON in die Datenbank ein.
+     * Wandelt das uebergebene Icon in ein BufferedImage und zeichnet das uebergebene Icon
+     * mithilfe der Graphics Klasse.
+     * Dieses BufferedImage wird dann als ByteArray in die Datenbank geschrieben.
+     * </pre>
+     *
+     * @param text Name des Bildes
+     * @param icon Object Grafik.ICON
+     * @throws SQLException Because Fuck u
+     * @throws IOException  Because Fuck u more
+     * @see Graphics
+     * @see BufferedImage
+     */
+
+    public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
+
+        // Im Internet gefunden... StackOverflow...
+        BufferedImage image = new BufferedImage(
+                icon.getIconWidth(),
+                icon.getIconHeight(),
+                BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.createGraphics();
+// paint the Icon to the BufferedImage.
+        icon.paintIcon(null, g, 0, 0);
+        g.dispose();
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", baos);
+        InputStream is = new ByteArrayInputStream(baos.toByteArray());
+
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery(
+                "SELECT kennung" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
+
+        );
+
+        if (r.next()) {
+            PreparedStatement ps = verbindung.prepareStatement(
+                    "UPDATE t_spieler" +
+                            " SET profilbild= ?" +
+                            " WHERE kennung= '" + text + "'");
+            ps.setBinaryStream(1, is);
+            ps.executeUpdate();
+        } else {
+            PreparedStatement ps = verbindung.prepareStatement(
+                    "INSERT INTO t_spieler VALUES (?,?)"
+            );
+            ps.setString(1, text);
+            ps.setBinaryStream(2, is);
+            ps.executeUpdate();
+        }
+
+    }
+
+
+    /**
+     * Holt den Spieler mit der uebergebenen Spielerkennung aus der Datenbank, erstellt
+     * ein neues Spieler Object, setzt Strafpunkte und die Statistik und gibt dieses zurueck.
+     *
+     * @param kennung Spielerkennung des gewuenschten Spielers
+     * @return Spieler Object
+     * @throws SQLException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @see Spieler
+     */
+    public Spieler selectSpieler(String kennung) throws SQLException, IOException, ClassNotFoundException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery(
+                "SELECT *" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + kennung + "'"
+        );
+        if (r.next()) {
+            Spieler spieler = new Spieler(r.getString(1), new ImageIcon(ImageIO.read(r.getBinaryStream(4))));
+            if (r.getString(7) != null)
+                spieler.setStrafpunkte(Integer.parseInt(r.getString(7)));
+
+            if (r.getBytes(8) != null) {
+                InputStream fis = r.getBinaryStream(8);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                HashMap<String, Integer> statistik = (HashMap<String, Integer>) ois.readObject();
+                ois.close();
+                fis.close();
+                spieler.setStatistik(statistik);
+            }
+            if (r.getBoolean(5))
+                spieler.setAktiv(r.getBoolean(5));
+
+
+            return spieler;
+        }
+        return null;
+    }
+
+    /**
+     * Fuerht ein Update der Attribute des Spielers mit der uebergebenen Kennung aus.
+     * Nutzt die insertStatistik(Map) Methode
+     *
+     * @param kennung     String - Kennung des zu aktualisierenden Spielers
+     * @param strafpunkte Int - Wert der zu setzenden Strafpunkte
+     * @param statistik   Map[String, Integer] - Die zu setzende Statistik
+     * @throws SQLException
+     * @throws IOException
+     */
+    public void updateSpieler(String kennung, int strafpunkte, Map<String, Integer> statistik) throws SQLException, IOException {
+
+        PreparedStatement ps = verbindung.prepareStatement(
+                "UPDATE t_spieler" +
+                        "SET strafpunkte= ?" +
+                        "WHERE kennung= '" + kennung + "'");
+        ps.setInt(1, strafpunkte);
+        ps.setString(2, kennung);
+        ps.executeUpdate();
+
+
+
+    }
+
+   /* public void updateSpielerWuerfel(Wuerfel[] wuerfel){
+
+        PreparedStatement ps = verbindung.createStatement(
+                "UPDATE t_spieler"+
+                        "SET w1= ?"+
+                        "SET w2= ?"+
+                        "SET w3"=
+        );
+    }*/
+
+    public void updatePasswort(String name, String passwort) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+
+        stmt.executeUpdate("UPDATE t_spieler SET passwort = '" + passwort + "' WHERE kennung = '" + name + "'");
+    }
 }
-//    //---------------------------------------------------------------------------------------------------------------------
-//
-//    /**
-//     * Diese Methode l�scht eine Tabelle, falls sie existiert, andernfalls tut sie nichts.
-//     *
-//     * @param tabellenName Der Name der Tabelle, die gel�scht werden soll.
-//     * @throws SQLException Wenn beim Erstellen der Verbindung ein Fehler passiert.
-//     */
-//    public void dropIfExist(String tabellenName) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//
-//        try {
-//            stmt.executeUpdate("DROP TABLE " + tabellenName
-//            );
-//        } catch (SQLException e) {
-//            if (!e.getSQLState().equals("42P01"))
-//                e.printStackTrace();
-//        }
-//    }
-//
-//    public void insertOrUpdate(String name, int number) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//
-//        try {
-//            stmt.executeUpdate(
-//                    "INSERT INTO test " + " VALUES ('" + name + "', " + number + ")"
-//            );
-//        } catch (SQLException e) {
-//            stmt.executeUpdate(
-//                    "UPDATE  test" +
-//                            " SET number=" + number +
-//                            " WHERE name='" + name + "'"
-//            );
-//        }
-//
-//    }
-//
-//    public void printTable(String tableName) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//        ResultSet r = stmt.executeQuery(
-//                "SELECT * FROM " + tableName
-//        );
-//        ResultSetMetaData rm = r.getMetaData();
-//        //Tabellenkopf->Spaltennamen
-//        int col = rm.getColumnCount();
-//        int[] max = new int[col];
-//        List<List<String>> tabelle = new ArrayList<>(col);
-//        for (int i = 0; i < col; i++) {
-//            List<String> spalte = new ArrayList<>();
-//            String s = rm.getColumnLabel(i + 1);
-//            spalte.add(s);
-//            tabelle.add(spalte);
-//            max[i] = s.length();
-//
-//        }
-//        //Tabelleneintr�ge
-//        if (r.next())
-//            do {
-//                for (int i = 0; i < col; i++) {
-//                    String s = r.getString(i + 1);
-//                    if (s == null) s = "null";
-//                    tabelle.get(i).add(s);
-//                    max[i] = Math.max(max[i], s.length());
-//                }
-//            } while (r.next());
-//        r.close();
-//        //Ausgabe
-//        for (int i = 0; i < tabelle.get(0).size(); i++) {
-//            String s = "";
-//            for (int j = 0; j < col; j++)
-//                s += "|" + String.format("%-" + max[j] + "s", tabelle.get(j).get(i));
-//
-//            System.out.println(s + "|");
-//        }
-//
-//    }
-//
-//    public void createTableMitBlob(String tableName) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//        //Anweisung an die datenbank schicken
-//        stmt.executeUpdate("CREATE TABLE " + tableName + " (" +
-//                        " name VARCHAR," +
-//                        " blob BYTEA," +
-//                        " PRIMARY KEY (name)," +
-//                        " FOREIGN KEY (name) REFERENCES test(name)" +
-//                        " )"
-//        );
-//    }
-//
-//    public void insertOrUpdateBlob(String name, InputStream is) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//        ResultSet r = stmt.executeQuery(
-//                "SELECT name" +
-//                        " FROM blob" +
-//                        " WHERE name='" + name + "'"
-//
-//        );
-//
-//        if (r.next()) {
-//            PreparedStatement ps = verbindung.prepareStatement(
-//                    "UPDATE blob" +
-//                            " SET blob= ?" +
-//                            " WHERE name= '" + name + "'");
-//            ps.setBinaryStream(1, is);
-//            ps.executeUpdate();
-//        } else {
-//            PreparedStatement ps = verbindung.prepareStatement(
-//                    "INSERT INTO blob VALUES (?,?)"
-//            );
-//            ps.setString(1, name);
-//            ps.setBinaryStream(2, is);
-//            ps.executeUpdate();
-//        }
-//
-//    }
-//
-//    public InputStream getBlob(String name) throws SQLException {
-//        Statement stmt = verbindung.createStatement();
-//        ResultSet r = stmt.executeQuery(
-//                "SELECT blob" +
-//                        " FROM blob" +
-//                        " WHERE name='" + name + "'"
-//        );
-//        if (r.next())
-//            return r.getBinaryStream(1);
-//        return null;
-//    }
-//
+

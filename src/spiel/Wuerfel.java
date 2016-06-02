@@ -3,6 +3,7 @@ package spiel;
 import Grafik.Grafik;
 
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * Created by KNapret on 23.05.2016.
@@ -11,7 +12,7 @@ import javax.swing.*;
  * </pre>
  *
  */
-public class Wuerfel implements Comparable<Wuerfel> {
+public class Wuerfel implements Serializable,Comparable<Wuerfel> {
     private int wert;
     private boolean draussen;
     private Icon grafik;
