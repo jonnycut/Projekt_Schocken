@@ -282,6 +282,11 @@ public class Statistik extends JPanel {
 
     //------------------------------------------METHODEN---------------------------------------------------------------
 
+    /**
+     * Hohlt die Werte aus der Datenbank und schreibt diese in die jeweiligen JLabel
+     * @param spieler von welchem Spieler die Statistik akzuallisiert werden soll
+     * @return
+     */
     public Statistik updateStatistik(String spieler) {
         ArrayList<Integer> statArray = new ArrayList<>();
         try {

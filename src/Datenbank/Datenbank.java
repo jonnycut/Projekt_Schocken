@@ -9,10 +9,8 @@ package Datenbank;
 
 import spiel.Spieler;
 import spiel.Wuerfel;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.xml.transform.Result;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -31,7 +29,7 @@ public class Datenbank {
     public Datenbank() {
 
     }
-
+//----------------------------------------------------statische Methoden------------------------------------------------
     /**
      * Diese Methode fragt per JDialog ab ob ein Datenbank angelegt werden soll oder ob mann sich mit
      * ein Datenbank verbinden möchte.
@@ -152,25 +150,6 @@ public class Datenbank {
         }
     }
 
-
-//    public static void dbErstellen() {
-//        Datenbank db = null;
-//        try {
-//            db = Datenbank.getInstance();
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Datenbanktreiber nicht gefunden");
-//        } catch (SQLException e) {
-//            if (e.getMessage().startsWith("Datenbank existiert nicht"))
-//                try {
-//                    db = Datenbank.getInstance("db_schocken2");
-//                } catch (SQLException e1) {
-//                    System.out.println(e1.getMessage());
-//                    e1.printStackTrace();
-//                }
-//
-//        }
-//    }
-
     public static Datenbank getInstance() throws ClassNotFoundException, SQLException {
         //wenn die datenbank das erstemal geladen wird
         if (datenbank == null) {
@@ -282,7 +261,7 @@ public class Datenbank {
         return true;
     }
 
-//----------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------puplic Mezthoden-----------------------------------------------------
 
     /**
      * Methode zum Anmelden
@@ -347,7 +326,7 @@ public class Datenbank {
 
     /**
      * Ermöglicht die Teilnahme an einem offenen Spiel beim hinzufügen des 8 Spielers wird
-     * die Spalte Status in der Relation t_Spiel automatisch auf 2(begonnen) gesetzt. Ist kein oddenes Spiel vorhanden
+     * die Spalte Status in der Relation t_Spiel automatisch auf 2(begonnen) gesetzt. Ist kein offenes Spiel vorhanden
      * wird dieser Teilnehmer zum Spielleiter und öffnet ein neues Spiel
      *
      * @param teilnehmer = Kennung des Spielers
@@ -451,6 +430,7 @@ public class Datenbank {
         System.out.println("Bin aus der Schleife raus!");
         return wuerfelArray;
     }
+
     /**
      * <pre>
      * Methode zum anlegen einer Hälfte wobei der Stock initial in der DB auf 13 gesetzt wird,
@@ -488,6 +468,12 @@ public class Datenbank {
         }
     }
 
+    /**
+     * Liefert die Werte für die Statistik
+     * @param kennung vom Spieler dessen Statistikwerte gesucht werden sollen
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<Integer> selectStatistik(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
         ArrayList<Integer> statistik = new ArrayList<>();
@@ -553,7 +539,29 @@ public class Datenbank {
         }
     }
 
+    /**
+     * liefert nur die Spieler mit Strafpunkten ist notwendig wenn der Stock leer ist
+     * @param spielID
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<String> spielermitStrafpunkten(int spielID) throws SQLException {
+    Statement stmt = verbindung.createStatement();
+    ResultSet resultSet = stmt.executeQuery("SELECT kennung,strafpunkte FROM (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id ="+spielID+
+                                            ") AS \"Spieler im Spiel\"INNER JOIN t_spieler ON fk_t_spieler_kennung=kennung Where Strafpunkte>0 ORDER by strafpunkte ");
+    ArrayList<String> spielerImSpielmitStrafpunkten = new ArrayList<String>();
+    ResultSetMetaData metadata = resultSet.getMetaData();
+    int numberOfColumns = metadata.getColumnCount();
 
+    while (resultSet.next()) {
+        int i = 1;
+        while (i <= numberOfColumns) {
+            spielerImSpielmitStrafpunkten.add(resultSet.getString(i++));
+        }
+        System.out.println("Spieler " + resultSet.getString(1) + " zum Spiel" + spielID + " hinzugefügt");
+    }
+    return spielerImSpielmitStrafpunkten;
+}
     /**
      *
      * @param spielID von dem Siel welches den Stockstatus liefern soll
@@ -1204,7 +1212,6 @@ public class Datenbank {
     }
 
 
-    //-----------------------------------------Kai seine Methoden-------------------------------------------------------
 
     /**
      * <pre>
@@ -1368,16 +1375,13 @@ public class Datenbank {
 
     }
 
-   /* public void updateSpielerWuerfel(Wuerfel[] wuerfel){
 
-        PreparedStatement ps = verbindung.createStatement(
-                "UPDATE t_spieler"+
-                        "SET w1= ?"+
-                        "SET w2= ?"+
-                        "SET w3"=
-        );
-    }*/
-
+    /**
+     * ändert das Passwort in der DB
+     * @param name Kennung des Spielers
+     * @param passwort neues Passwort
+     * @throws SQLException
+     */
     public void updatePasswort(String name, String passwort) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
