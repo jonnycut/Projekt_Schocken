@@ -5,6 +5,8 @@ package gui;
 import Grafik.Grafik;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -138,12 +140,93 @@ public class Statistik extends JPanel {
         jPSchock.add(jLSchock);
         mitte.add(jPSchock);
 
+        JPanel jPStrasse = new JPanel(new FlowLayout());
+        jPStrasse.setBackground(Color.DARK_GRAY);
+        JLabel jPStr = new JLabel("Anzahl Strasse:  ");
+        jPStr.setBackground(Color.BLACK);
+        jPStr.setForeground(Color.WHITE);
+        jPStr.setFont(new Font("Arial", Font.BOLD, 15));
+        jPStrasse.add(jPStr);
+
+        jLStrasse = new JLabel("666");
+        jLStrasse.setBackground(Color.DARK_GRAY);
+        jLStrasse.setForeground(Color.RED);
+        jLStrasse.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPStrasse.add(jLStrasse);
+        mitte.add(jPSchock);
+
+        JPanel jPGenaral = new JPanel(new FlowLayout());
+        jPGenaral.setBackground(Color.DARK_GRAY);
+        JLabel jPGen = new JLabel("Anzahl General:  ");
+        jPGen.setBackground(Color.BLACK);
+        jPGen.setForeground(Color.WHITE);
+        jPGen.setFont(new Font("Arial", Font.BOLD, 15));
+        jPGenaral.add(jPGen);
+
+        jLGenaral = new JLabel("666");
+        jLGenaral.setBackground(Color.DARK_GRAY);
+        jLGenaral.setForeground(Color.RED);
+        jLGenaral.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPStrasse.add(jLGenaral);
+        mitte.add(jPGenaral);
+
+        JPanel jPEinfacherWurf = new JPanel(new FlowLayout());
+        jPEinfacherWurf.setBackground(Color.DARK_GRAY);
+        JLabel jPWurf = new JLabel("Anzahl Einfacherwurf:  ");
+        jPWurf.setBackground(Color.BLACK);
+        jPWurf.setForeground(Color.WHITE);
+        jPWurf.setFont(new Font("Arial", Font.BOLD, 15));
+        jPEinfacherWurf.add(jPWurf);
+
+        jLEinfacherWurf = new JLabel("666");
+        jLEinfacherWurf.setBackground(Color.DARK_GRAY);
+        jLEinfacherWurf.setForeground(Color.RED);
+        jLEinfacherWurf.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPEinfacherWurf.add(jLEinfacherWurf);
+        mitte.add(jPEinfacherWurf);
+
+        JPanel jPSchockAus = new JPanel(new FlowLayout());
+        jPSchockAus.setBackground(Color.DARK_GRAY);
+        JLabel jPSchAus = new JLabel("Anzahl SchockAus:  ");
+        jPSchAus.setBackground(Color.BLACK);
+        jPSchAus.setForeground(Color.WHITE);
+        jPSchAus.setFont(new Font("Arial", Font.BOLD, 15));
+        jPSchockAus.add(jPSchAus);
+
+        jLSchockAus = new JLabel("666");
+        jLSchockAus.setBackground(Color.DARK_GRAY);
+        jLSchockAus.setForeground(Color.RED);
+        jLSchockAus.setFont(new Font("Arial", Font.BOLD, 15));
+
+        jPSchockAus.add(jLSchockAus);
+        mitte.add(jPSchockAus);
 
 
 
 
 
 
+
+
+
+
+        JPanel jBPWeiter = new JPanel(new FlowLayout());
+        JButton jBWeiter = new JButton("Weiter");
+
+        ActionListener weiter = new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                gui.setZustand(1);
+                gui.updateView();
+            }
+        };
+
+        jBWeiter.addActionListener(weiter);
+        jBPWeiter.add(jBWeiter);
+        mitte.add(jBPWeiter);
 
 
 
@@ -188,6 +271,8 @@ public class Statistik extends JPanel {
     //------------------------------------------METHODEN---------------------------------------------------------------
 
     public Statistik updateStatistik(String spieler){
+
+        //ToDo: Hier kannst du die JLabel updaten mit Werten aus der DB
 
         return this;
     }

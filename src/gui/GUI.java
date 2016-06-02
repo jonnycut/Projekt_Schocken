@@ -260,9 +260,10 @@ public class GUI extends JFrame {
         this.besitzerName = besitzerName;
     }
 
-    public void setStatistik(Statistik statistik){
+    public void setStatistik(String spielerName){
 
-        this.statistik = statistik;
+        statistik.updateStatistik(spielerName);
+
     }
 
     /**

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Anmeldung.java" afterPath="$PROJECT_DIR$/src/gui/Anmeldung.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/GUI.java" afterPath="$PROJECT_DIR$/src/gui/GUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Statistik.java" afterPath="$PROJECT_DIR$/src/gui/Statistik.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -62,8 +63,8 @@
       <file leaf-file-name="Statistik.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Statistik.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6803419">
-              <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
+            <state vertical-scroll-proportion="2.0051281">
+              <caret line="204" column="29" selection-start-line="204" selection-start-column="29" selection-end-line="204" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="122" column="22" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
+              <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -85,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="105" column="16" selection-start-line="105" selection-start-column="16" selection-end-line="105" selection-end-column="16" />
+              <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -223,9 +224,9 @@
         <option value="$PROJECT_DIR$/src/gui/Infobereich.java" />
         <option value="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
         <option value="$PROJECT_DIR$/src/Datenbank/Datenbank.java" />
-        <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/gui/GUI.java" />
+        <option value="$PROJECT_DIR$/src/gui/Anmeldung.java" />
         <option value="$PROJECT_DIR$/src/gui/Statistik.java" />
       </list>
     </option>
@@ -710,13 +711,7 @@
       <workItem from="1464808731141" duration="8788000" />
       <workItem from="1464819228621" duration="843000" />
       <workItem from="1464820102353" duration="1791000" />
-      <workItem from="1464843000468" duration="15529000" />
-    </task>
-    <task id="LOCAL-00031" summary="Flurry: Dokumentiere alle meine FUCKIN Klassen, so eine Hurensohn Scheiße hier!">
-      <created>1464725902808</created>
-      <option name="number" value="00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1464725902808</updated>
+      <workItem from="1464843000468" duration="16551000" />
     </task>
     <task id="LOCAL-00032" summary="Guten Nacht ihr Säcke &#10;Was ich euch noch sagen wollte&#10;https://www.youtube.com/watch?v=ViXdO4nnVpY">
       <created>1464730973907</created>
@@ -1006,11 +1001,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464854975154</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="SpielerPanel Z313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt&#10;&#10;Infobereich Doku und in Z83-87 Änderung damit die Info mittig steht&#10;&#10;Administration Doku&#10;Anmeldung Doku&#10;&#10;Ladebalken für die DB erstellung in der erstelleDB()&#10;&#10;GUI Doku&#10;&#10;SpielerPanel weiter Doku&#10;&#10;Statistik Design angefangen&#10;&#10;erstelleDB() über arbeitet">
+      <created>1464858564661</created>
+      <option name="number" value="00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1464858564661</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111121000" />
+    <option name="totallyTimeSpent" value="112143000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1584,26 +1585,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="16" selection-start-line="105" selection-start-column="16" selection-end-line="105" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_51/src.zip!/javax/swing/BoxLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="464" column="0" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="122" column="22" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1678,10 +1663,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Anmeldung.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Statistik.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6803419">
-          <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
+        <state vertical-scroll-proportion="2.0051281">
+          <caret line="204" column="29" selection-start-line="204" selection-start-column="29" selection-end-line="204" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

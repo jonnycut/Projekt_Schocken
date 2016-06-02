@@ -177,6 +177,9 @@ public class Anmeldung extends JPanel {
                         jBStart.setEnabled(true);
                         gui.setBesitzerName(jTName.getText());
                         pruefeSpiel();
+                        gui.setStatistik(jTName.getText());
+                        gui.setZustand(2);
+                        gui.updateView();
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
