@@ -89,6 +89,7 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setBackground(Color.BLACK);
 
         JPanel start = new JPanel(new BorderLayout());
 
@@ -133,6 +134,7 @@ public class GUI extends JFrame {
         jPOben.setBackground(Color.BLACK);
         add(jPOben, BorderLayout.NORTH);
 
+        jp.setBackground(Color.BLACK);
         add(jp, BorderLayout.CENTER);
 
         JPanel jPUnten = new JPanel();
@@ -147,7 +149,7 @@ public class GUI extends JFrame {
         jPRechts.setBackground(Color.BLACK);
         add(jPRechts, BorderLayout.EAST);
 
-        setSize(1024, 768);
+        setSize(1030, 770);
         setLocationRelativeTo(null);
         setVisible(true);
     }
