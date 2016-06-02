@@ -6,16 +6,29 @@ import javax.swing.*;
 import java.io.Serializable;
 
 /**
- * Created by KNapret on 23.05.2016.
+ *
  * <pre>
  * Wuerfelklasse
  * </pre>
+ * @author KNapret
  *
  */
 public class Wuerfel implements Serializable,Comparable<Wuerfel> {
+    /**
+     * Der Wert eines Würfels {1-6}
+     */
     private int wert;
+    /**
+     * Boolean Wert, ob der Würfel ausgelegt ist
+     */
     private boolean draussen;
+    /**
+     * Das Bild des Würfels
+     */
     private Icon grafik;
+    /**
+     * Alle nötigen Bilder eines Würfels
+     */
     private Icon[] bilder ={Grafik.WUERFEL_1, Grafik.WUERFEL_2, Grafik.WUERFEL_3,Grafik.WUERFEL_4,Grafik.WUERFEL_5,Grafik.WUERFEL_6};
 
     /**
@@ -89,7 +102,8 @@ public class Wuerfel implements Serializable,Comparable<Wuerfel> {
 
     /**
      * Weist dem Wuerfel eine Zufallszahl zwischen 1 und 6 zu<br></br>
-     * und setzt die Grafik des Wuerfels entsprechend.
+     * und setzt die Grafik des Wuerfels entsprechend.<br></br>
+     * Ist wuerfel.draussen = true, wird der Würfel nicht verändert.
      */
 
     public void wuerfeln() {
@@ -101,6 +115,10 @@ public class Wuerfel implements Serializable,Comparable<Wuerfel> {
 
     }
 
+    /**
+     * Gibt der Wert des Würfels als String zurück
+     * @return wert String Object
+     */
     public String toString(){
         return ""+this.wert;
     }

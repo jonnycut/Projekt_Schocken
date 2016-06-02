@@ -6,37 +6,63 @@ import java.sql.SQLException;
 import java.util.Date;
 
 /**
- * Created by KNapret on 23.05.2016.
+ * Klasse Stock - dient zur Datenhaltung
+ *
+ * @author KNapret
  */
 public class Stock {
-
+    /**
+     * Die Strafpunkte des Stocks
+     */
     private int strafpunkte;
 
-    public Stock(){
+    /**
+     * Die Strafpunkte des Stocks werden initial auf 0 gesetzt
+     */
+    public Stock() {
 
         this.strafpunkte = 0;
     }
 
-    public int getStrafpunkte(){
+    /**
+     * Liefert die aktuellen Strafpunkte auf dem Stock
+     *
+     * @return
+     */
+    public int getStrafpunkte() {
         return this.strafpunkte;
     }
 
-    public int popStrafpunkt(int anzahl){
+    /**
+     * Reduziert die Strafpunkte des Stocks um die ubergebene Anzahl und gibt diese zurück.<br></br>
+     * Wenn die anzahl > strafpunkte auf dem Stock, werden nur die übrigen zurückgegeben.
+     *
+     * @param anzahl Int
+     * @return
+     */
+    public int popStrafpunkt(int anzahl) {
 
-        if(this.strafpunkte>= anzahl){
-            this.strafpunkte-=anzahl;
+        if (this.strafpunkte >= anzahl) {
+            this.strafpunkte -= anzahl;
             return anzahl;
 
-        }else if(this.strafpunkte<anzahl){
+        } else if (this.strafpunkte < anzahl) {
             int puffer = strafpunkte;
             strafpunkte = 0;
             return puffer;
-        }else{
+        } else {
             return 0;
         }
 
 
     }
+
+    /**
+     * Liest die aktuellen Strafpunkte aus der Datenbank und stetzt diese.
+     *
+     * @param spielID Int- Kennung des Spiels
+     * @see Datenbank#selectStockStatus(int)
+     */
 
     public void updateStock(int spielID) {
 

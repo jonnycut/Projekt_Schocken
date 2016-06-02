@@ -5,12 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by KNapret on 23.05.2016.
+ *
  * <pre>
  *     Becherklasse
  *     Enthaelt wuerfel
  *     kenn die Anzahl seiner Wuerfe
  * </pre>
+ * @author KNapret
  */
 public class Becher implements Comparable<Becher> {
     /**
@@ -83,6 +84,12 @@ public class Becher implements Comparable<Becher> {
         return this.anzahlWuerfe;
     }
 
+
+    /**
+     * Setzt die Anzahl der getätigten Würfe zurück
+     * Wird beim Auswürfeln benötigt
+     * @see Spieler#beginnerWuerfeln()
+     */
     public void resetWurf() {
         this.anzahlWuerfe = 0;
     }
@@ -151,6 +158,14 @@ public class Becher implements Comparable<Becher> {
 
 
     }
+
+    /**
+     * Setzt die Anzahl der gemachten Würfe
+     * wird beim Neuerstellen eines Spielers durch ein Netzwerkupdate benötigt
+     *
+     * @param anzahlWuerfe Int - Anzahl der getätigten Würfe.
+     * @see Datenbank.Datenbank#selectSpieler(String)
+     */
 
     public void setAnzahlWuerfe(int anzahlWuerfe){
         this.anzahlWuerfe=anzahlWuerfe;

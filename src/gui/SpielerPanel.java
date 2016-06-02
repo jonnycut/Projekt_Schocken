@@ -620,7 +620,7 @@ public class SpielerPanel extends JPanel {
 
         if (auslageCount == 3) {
 
-
+            //Testzwecke
            /* try {
                 Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
                 spielfeld.getGui().sendeUpdateCounter(spielfeld.getCounter()-1);

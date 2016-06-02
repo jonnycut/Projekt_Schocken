@@ -13,13 +13,30 @@ import java.util.List;
 import java.util.SortedMap;
 
 /**
- * Created by KNapret on 23.05.2016.
+ * Klasse der Runde, Dient zur Datenhaltung
+ * @author KNapret
  */
 public class Runde {
-
+    /**
+     * Die GUI, zu der diese Hälfte gehöt
+     * @see GUI
+     */
     private GUI gui;
+    /**
+     * Der Stock der Hälfte, zu dem die Runde gehört.
+     * @see Stock
+     */
     private Stock stock;
+    /**
+     * Der Beginner der Runde
+     * @see Spieler
+     */
     private Spieler beginner;
+    /**
+     * Eine Liste aller Teilnehmer der Runde,
+     * wird zum Auswerten benötigt.
+     *
+     */
     private List<Spieler> teilnehmer;
 
     /**
@@ -35,10 +52,12 @@ public class Runde {
 
     }
 
+    /**
+     * Setzt die Teilnehmerliste einer Runde
+     * @param teilnehmer List{Spieler} - Die Liste der Spieler, die an der Runde teilnehmen
+     */
     public void setTeilnehmer(List<Spieler> teilnehmer) {
         this.teilnehmer = teilnehmer;
-        if(teilnehmer.size()>0)
-            this.beginner = teilnehmer.get(teilnehmer.size()-1);
     }
 
     /**
@@ -70,10 +89,21 @@ public class Runde {
      * der letzte der Verlierer -> erhält Anzahl Strafsteine.
      * Verteilung der Steine wird durch Aufruf von
      * verteileStrafpunkte(Spieler, Spieler)
-     * vorgenommen
+     * vorgenommen.
+     *
+     * Nach dem Auswerten und Verteilen der Strafsteine, wird der Verlierer
+     * und der Gewinner der Runde in die DB geschrieben.
+     *
+     * Danach wird eine neue Häflte angelegt und der SpielCounter resettet.
+     * Am Ende wird das NetzwerkUpdateSignal zusammen mit der Info, wer gewonnen und wer
+     * verloren hat gesendet.
      *
      * Wird durch das Spielfeld genutzt</pre>
      * @see gui.Spielfeld
+     * @see Datenbank#inserthaelftenVerlierer(String, int, int)
+     * @see Datenbank#updateSpieler(String, int)
+     * @see GUI#sendeUpdateCounter(int)
+     * @see GUI#sendeUpdateSignal(String)
      */
     public void auswertenBilder() {
         Spieler gewinner = null;
@@ -123,7 +153,7 @@ public class Runde {
         for(Spieler s: teilnehmer){
             s.getBecher().resetWurf();
         }
-        //ToDO: Richtige Anzahl an kassierten Strafpunkten ausgeben
+
         try {
             int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
             gui.sendeUpdateCounter(teilnehmer.size());
@@ -144,6 +174,9 @@ public class Runde {
      *     Wenn [ANZAHL] noch auf Stock, bekommt der Verlierer diese
      *     Wenn [ANZAHL] < StockChips: Verlierer bekommt übrige Chips
      *     Wenn Stock = Leer: Verlierer bekommt [ANZAHL] von Gewinner
+     *
+     *     Schreibt die Veränderungen beim Gewinner, Verlierer und beim Stock in die Datenbank,
+     *
      * </pre>
      *
      * @param gewinner  Object Spieler - Gewinner der Runde
@@ -188,20 +221,4 @@ public class Runde {
 
     }
 
-    //testmethode
-    public boolean pruefeFertig() {
-        int counter = 0;
-
-        for (Spieler s : teilnehmer) {
-            if (s.getFertig() == true)
-                counter++;
-        }
-
-        if (counter == teilnehmer.size()) {
-            auswertenBilder();
-            return true;
-        } else
-            return false;
-
-    }
 }

@@ -83,7 +83,8 @@ public class Client {
     }
 
     /**
-     * Sendet das UpdateSignal '#Info' ueber das Netzwerk an den Server
+     * Sendet das UpdateSignal '#Info' ueber das Netzwerk an den Server<br>>/br>
+     * Falls das Schreiben in den Stream fehlschlägt, erscheint eine Consolenfehlermeldung.
      * @param info String - StatusInfo, die im Infobereich angezeigt wird
      */
     public void sendeUpdate(String info){
@@ -99,6 +100,12 @@ public class Client {
         }
     }
 
+    /**
+     * Sendet daas CounterUpdateSymbol über das Netzwerk an den Server <br></br>
+     * Gefolgt von dem Wert, auf den der Counter zu setzen ist.
+     * Falls das Schreiben in den Stream fehlschlägt, erscheint eine Consolenfehlermeldung.
+     * @param counter
+     */
     public void sendeUpdateCounter(int counter){
         try {
             writer.write("@"+counter);

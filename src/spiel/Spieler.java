@@ -9,27 +9,53 @@ import java.util.HashMap;
 
 
 /**
- * Created by KNapret on 23.05.2016.
+ *
  * <pre>
  * Hauptklasse des Spielers
  *
  * Enthaelt alle noetigen Daten eines Spielers
  *
  * </pre>
+ * @author KNapret
+ * @see java.lang.Comparable
  */
 public class Spieler implements Comparable<Spieler> {
-
+    /**
+     * Der Becher des Spielers
+     * @see Becher
+     */
     private Becher becher;
 
-
-
+    /**
+     * Anzahl der Strafpunkte des Spielers
+     */
     private int strafpunkte;
-    private int haelfte;
+
+    /**
+     * Der Startwurf, der beim Auswürfeln gewürfelt wird
+     * @see Spieler#beginnerWuerfeln()
+     */
     public int startwurf;
+    /**
+     * Das Profilbild des Spielers
+     */
     private Icon profilBild;
+    /**
+     * Das jeweils letzt geworfene Bild des Spielers<br></br>
+     * {Schock aus | Schock | General | Straße | Zahl}
+     */
     private String letztesBild;
+    /**
+     * Der Spielername
+     */
     private String name;
+    /**
+     * Ob ein Spieler fertig ist
+     */
     private boolean fertig = false;
+    /**
+     * Ob ein Spieler aktiv ist ( gerade am zug
+     */
     private boolean aktiv = false;
 
 
@@ -45,7 +71,6 @@ public class Spieler implements Comparable<Spieler> {
         this.becher = new Becher();
         this.profilBild = profilBild;
         this.strafpunkte = 0;
-        this.haelfte = 0;
         this.letztesBild = becher.getBild();
         this.name = name;
 
@@ -69,10 +94,18 @@ public class Spieler implements Comparable<Spieler> {
         return this.fertig;
     }
 
+    /**
+     * Setzt einen Spieler aktiv oder inaktiv
+     * @param aktiv boolean {true | false}
+     */
     public void setAktiv(boolean aktiv){
         this.aktiv = aktiv;
     }
 
+    /**
+     * Liefert, ob ein Spieler aktiv ist
+     * @return aktiv boolean {true | false}
+     */
     public boolean getAktiv(){
         return this.aktiv;
     }
@@ -131,7 +164,7 @@ public class Spieler implements Comparable<Spieler> {
      * Nutzt die wuerfeln() Methode des Bechers
      * Ändert das Attribut letztesBild auf den aktuellen Wert
      * </pre>
-     * @see Becher
+     * @see Becher#wuerfeln()
      */
     public void wuerfeln() {
         this.becher.wuerfeln();
@@ -144,7 +177,8 @@ public class Spieler implements Comparable<Spieler> {
     /**
      * <pre>
      * Würfelmethode für das initiale Auswürfeln des Beginners.
-     * Schreint das Attribut Startwurf in die Datenbank</pre>
+     * Schreibt das Attribut Startwurf in die Datenbank</pre>
+     * @see Datenbank#insertStartwurf(String, int)
      *
      */
     public void beginnerWuerfeln() {
@@ -163,10 +197,18 @@ public class Spieler implements Comparable<Spieler> {
         }
     }
 
+    /**
+     * Liefert den Startwurf des Spielers
+     * @return startwurf int - dreistellige Int Zahl
+     */
     public int getStartwurf(){
         return this.startwurf;
     }
 
+    /**
+     * Setzt den Startwurf des Spielers
+     * @param startwurf int - dreistellig, absteigend sortiert, muss mit einem Würfel darstellbar sein (z.B. 631 | 521)
+     */
     public void setStartwurf(int startwurf){
         this.startwurf=startwurf;
     }
@@ -191,6 +233,21 @@ public class Spieler implements Comparable<Spieler> {
     public void pushStrafpunkte(int anzahl) {
 
         this.strafpunkte += anzahl;
+    }
+
+    /**
+     * <pre>
+     *  Setzt dem Becher des Spielers ein neues WuerfelArray als Wurf.
+     * Nutzt Becher.setWurf(Wuerfel[]), diese sortiert und setzt Becher.Bild.
+     * Danach wird Spieler.letztesBild = Becher.getBild();
+     * </pre>
+     *
+     * @param wuerfelArray - Ein Array aus 3 Object Wuerfel
+     * @see Becher#setWurf(Wuerfel[])
+     */
+    public void setWurf(Wuerfel[] wuerfelArray){
+        this.becher.setWurf(wuerfelArray);
+        this.letztesBild = becher.getBild();
     }
 
 
@@ -236,21 +293,6 @@ public class Spieler implements Comparable<Spieler> {
             return o1.getBecher().compareTo(o2.getBecher());
         }
     };
-
-    /**
-     * <pre>
-     *  Setzt dem Becher des Spielers ein neues WuerfelArray als Wurf.
-     * Nutzt Becher.setWurf(Wuerfel[]), diese sortiert und setzt Becher.Bild.
-     * Danach wird Spieler.letztesBild = Becher.getBild();
-     * </pre>
-     *
-     * @param wuerfelArray - Ein Array aus 3 Object Wuerfel
-     * @see Becher#setWurf(Wuerfel[])
-     */
-    public void setWurf(Wuerfel[] wuerfelArray){
-        this.becher.setWurf(wuerfelArray);
-        this.letztesBild = becher.getBild();
-    }
 
     /**
      * <pre>
