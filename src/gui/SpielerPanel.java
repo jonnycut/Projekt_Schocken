@@ -170,7 +170,6 @@ public class SpielerPanel extends JPanel {
         //-> Entsprechender Wuerfel wird mit leerem Button ersetzt (Design)
 
         ActionListener wuerfelListener = new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 JButton pufferBtn = (JButton) e.getSource();
                 int btnIndex = Integer.parseInt(pufferBtn.getName());
@@ -236,7 +235,6 @@ public class SpielerPanel extends JPanel {
         Wenn der Spieler bereits die maximale Wurfanzahl erreicht hat, erscheint ein Fehlermeldung
          */
         becher.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 if (spieler.getBecher().getWurf() < 2) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen: KNA
@@ -259,7 +257,6 @@ public class SpielerPanel extends JPanel {
 
          */
         wuerfeln.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
 
                 if (spieler.getBecher().getWurf() < 3) {
@@ -305,7 +302,6 @@ public class SpielerPanel extends JPanel {
         Danach wird ein Update des Spielers an die Datenbank geschickt.
          */
         ActionListener fertigListener = new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println(spieler.getLetztesBild());
@@ -313,43 +309,57 @@ public class SpielerPanel extends JPanel {
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
     //ToDo:hier abfangen, dass das nur beim Auswürfeln passiert
-                int myPos=0;
 
-                //Fehler war: myPos wurde mit spielfeld.getTeilnehmer().indexOf(spieler) gesucht.
-                //da die Liste Panels enthält und keine Spieler wurde immer -1 zurückgegeben
+                try {
+                    int spielID = Datenbank.getInstance().selectSpielID(spieler.getName());
 
-                for(SpielerPanel sp : spielfeld.getTeilnehmer()){
-                    if(sp.getSpieler().getName().equals(spieler.getName())){
-                        myPos = spielfeld.getTeilnehmer().indexOf(sp);
+                    if(Datenbank.getInstance().selectAktuelleHaelfte(spielID) == 0){
+
+                        int myPos = 0;
+                        String nextPlayer = "";
+
+                        //Fehler war: myPos wurde mit spielfeld.getTeilnehmer().indexOf(spieler) gesucht.
+                        //da die Liste Panels enthält und keine Spieler wurde immer -1 zurückgegeben
+
+                        for(SpielerPanel sp : spielfeld.getTeilnehmer()){
+                            if(sp.getSpieler().getName().equals(spieler.getName())){
+                                myPos = spielfeld.getTeilnehmer().indexOf(sp);
+                            }
+                        }
+
+                        if(myPos+1 < spielfeld.getTeilnehmer().size()){
+
+                            nextPlayer= spielfeld.getTeilnehmer().get(myPos+1).getSpieler().getName();
+
+                            try {
+                                Datenbank.getInstance().updateAktiv(nextPlayer);
+                                Datenbank.getInstance().updateAktiv(spieler.getName());
+
+                            } catch (SQLException e1) {
+                                e1.printStackTrace();
+                            } catch (ClassNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName()+"wurf: "+spieler.getStartwurf()+"-"+nextPlayer +" ist nun dran...");
+
+                        }else{
+                            try {
+                                Datenbank.getInstance().updateAktiv(spieler.getName());
+                            } catch (SQLException e1) {
+                                e1.printStackTrace();
+                            } catch (ClassNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+
+                            spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei");
+                        }
                     }
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
                 }
-                String nextPlayer = "";
-
-                if(myPos+1 < spielfeld.getTeilnehmer().size()){
-
-                    nextPlayer= spielfeld.getTeilnehmer().get(myPos+1).getSpieler().getName();
-                    try {
-                        Datenbank.getInstance().updateAktiv(nextPlayer);
-                        Datenbank.getInstance().updateAktiv(spieler.getName());
-                    } catch (SQLException e1) {
-                        e1.printStackTrace();
-                    } catch (ClassNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-
-                    spielfeld.getGui().sendeUpdateSignal(spieler.getName()+"wurf: "+spieler.getStartwurf()+"-"+nextPlayer +" ist nun dran...");
-                }else{
-                    try {
-                        Datenbank.getInstance().updateAktiv(spieler.getName());
-                    } catch (SQLException e1) {
-                        e1.printStackTrace();
-                    } catch (ClassNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-                    spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei");
-                }
-
-
  //ToDo: Ende nur Auswürfeln
 
                 if (aufgedeckt == true) {
@@ -370,11 +380,8 @@ public class SpielerPanel extends JPanel {
 //                    e1.printStackTrace();
 //                }
 
-
                 spielfeld.pruefeFertig();
                 spieler.setAktiv(false);
-
-
             }
         };
 
