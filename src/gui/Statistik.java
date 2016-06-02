@@ -2,11 +2,10 @@ package gui;
 
 
 
-import Datenbank.Datenbank;
-        import spiel.Spieler;
+import Grafik.Grafik;
+import javax.swing.*;
+import java.awt.*;
 
-        import javax.swing.*;
-        import java.awt.*;
 
 /**
  * Created by U.F.O. on 23.05.2016.
@@ -15,8 +14,7 @@ import Datenbank.Datenbank;
  */
 public class Statistik extends JPanel {
 
-    private GUI gui;
-    private String spielername ="";
+    private String spielername = "";
     private int gewonneneRunden;
     private int verloreneHaelften;
     private int verloreneSpiele;
@@ -27,29 +25,45 @@ public class Statistik extends JPanel {
     private int anzahlSchockAus;
 
 
-
-    private Statistik(Spieler spieler, GUI gui) {
-        super();
-        this.gui = gui;
-        spielername = spieler.getName();
+    public Statistik(GUI gui) {
 
         //-------------------------------------GRUND-PANEL-------------------------------------------------------------
 
         JPanel jp = new JPanel(new BorderLayout());
         jp.setBackground(Color.BLACK);
 
+
         //-------------------------------------OBEN-PANEL--------------------------------------------------------------
 
         JPanel oben = new JPanel();
         oben.setBackground(Color.BLACK);
-        JLabel jLoben = new JLabel("Statistik von .. " + spielername + " ..");
+        JLabel jLoben = new JLabel("Statistik von .." + spielername + "..");
         jLoben.setForeground(Color.WHITE);
         oben.add(jLoben);
 
         jp.add(oben, BorderLayout.NORTH);
 
-        //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
 
+        //-------------------------------------MITTE-PANEL-------------------------------------------------------------
+
+        JPanel mitte = new JPanel();
+        mitte.setBackground(Color.DARK_GRAY);
+        JLabel jLMitte = new JLabel(Grafik.LOGO1);
+        mitte.add(jLMitte);
+
+        jp.add(mitte, BorderLayout.CENTER);
+
+
+        //-------------------------------------RECHTS-PANEL------------------------------------------------------------
+
+        JPanel rechts = new JPanel();
+        rechts.setPreferredSize(new Dimension(240, 0));
+        rechts.setBackground(Color.BLACK);
+
+        jp.add(rechts, BorderLayout.EAST);
+
+
+        //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
         JPanel unten = new JPanel(new GridLayout(1, 3));
         unten.setBackground(Color.BLACK);
 
@@ -78,27 +92,43 @@ public class Statistik extends JPanel {
         jp.add(unten, BorderLayout.SOUTH);
 
 
+        //-------------------------------------SUPER-PANEL-------------------------------------------------------------
+
+        add(jp, BorderLayout.CENTER);
+    }
+
+    //------------------------------------------METHODEN---------------------------------------------------------------
+
+    public Statistik updateStatistik(String spieler){
+
+        return this;
+    }
+
+
+
+    //        JPanel north = new JPanel(new BorderLayout(1, 2));
+//        north.setPreferredSize(new Dimension(300, 50));
+//        JLabel jLname = new JLabel(spieler.getName());
+//        JLabel jLBild = new JLabel(spieler.getProfilBild());
+//        north.add(jLname);
+//        north.add(jLBild);
+//        add(north, BorderLayout.NORTH);
+//
+//
+//        JPanel center = new JPanel(new GridLayout(8, 2));
+//        JLabel jLgRunden = new JLabel("gewonnene Runden");
+//        center.add(jLgRunden);
+//        center.add(new JLabel());
+
+}
 
 
 
 
-        JPanel north = new JPanel(new BorderLayout(1, 2));
-        north.setPreferredSize(new Dimension(300, 50));
-        JLabel jLname = new JLabel(spieler.getName());
-        JLabel jLBild = new JLabel(spieler.getProfilBild());
-        north.add(jLname);
-        north.add(jLBild);
-        add(north, BorderLayout.NORTH);
-
-
-        JPanel center = new JPanel(new GridLayout(8, 2));
-        JLabel jLgRunden = new JLabel("gewonnene Runden");
-        center.add(jLgRunden);
-        center.add(new JLabel());
 
 
 
-    }}
+
 
 
 

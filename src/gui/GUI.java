@@ -23,7 +23,7 @@ public class GUI extends JFrame {
     /**
      * Zustand der GUI um die verschiedenen Ansichen zu schalten
      */
-    private int zustand = 1;
+    private int zustand = 0;
 
     /**
      * Das GrundPanel
@@ -53,7 +53,7 @@ public class GUI extends JFrame {
     /**
     * Der Statistikbildschirm
     */
-    //private Statistik statistik = new Statistik();
+    private Statistik statistik;
 
     /**
      * Der Spielbildschirm
@@ -85,6 +85,7 @@ public class GUI extends JFrame {
         anmeldung = new Anmeldung(this);
         registrierung = new Registrierung(this);
         administration = new Administration(this);
+        statistik = new Statistik(this);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -98,6 +99,12 @@ public class GUI extends JFrame {
         // Schaltet um auf den Anmeldebildschirm
         ActionListener acl = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                zustand = 1;
+
+                //TEST für die Statistik
+                //zustand = 2;
+
                 updateView();
             }
         };
@@ -110,13 +117,14 @@ public class GUI extends JFrame {
         JPanel anmeldungP = anmeldung;
         JPanel registrierungP = registrierung;
         JPanel administrationP = administration;
+        JPanel statistikP = statistik;
         JPanel spielfeldP = spielfeld;
-
 
         jp.add(start, "Start");
         jp.add(anmeldungP, "Anmeldung");
         jp.add(registrierungP, "Registrierung");
         jp.add(administrationP, "Administration");
+        jp.add(statistikP, "Statistik");
         jp.add(spielfeldP, "Spielfeld");
 
         //-------------------------------------SUPER-FRAME-------------------------------------------------------------
@@ -154,7 +162,7 @@ public class GUI extends JFrame {
                 break;
             case 2:
                 //ToDo: Statistik vom Spieler anzeigen
-                System.out.println(" Statistik vom Spieler");
+                ((CardLayout) jp.getLayout()).show(jp, "Statistik");
                 break;
             case 3:
                 ((CardLayout) jp.getLayout()).show(jp, "Registrierung");
@@ -250,6 +258,11 @@ public class GUI extends JFrame {
     public void setBesitzerName(String besitzerName) {
 
         this.besitzerName = besitzerName;
+    }
+
+    public void setStatistik(Statistik statistik){
+
+        this.statistik = statistik;
     }
 
     /**
