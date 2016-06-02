@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Anmeldung.java" afterPath="$PROJECT_DIR$/src/gui/Anmeldung.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/GUI.java" afterPath="$PROJECT_DIR$/src/gui/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Statistik.java" afterPath="$PROJECT_DIR$/src/gui/Statistik.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="" />
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -711,13 +706,7 @@
       <workItem from="1464808731141" duration="8788000" />
       <workItem from="1464819228621" duration="843000" />
       <workItem from="1464820102353" duration="1791000" />
-      <workItem from="1464843000468" duration="16551000" />
-    </task>
-    <task id="LOCAL-00032" summary="Guten Nacht ihr Säcke &#10;Was ich euch noch sagen wollte&#10;https://www.youtube.com/watch?v=ViXdO4nnVpY">
-      <created>1464730973907</created>
-      <option name="number" value="00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1464730973907</updated>
+      <workItem from="1464843000468" duration="16589000" />
     </task>
     <task id="LOCAL-00033" summary="Es ist nun 2:00 Uhr ich hab noch ein bisschen Datenbankscheiß gemacht&#10;@Flurry schau mal in das Datenbankpackage da liegt ein png drin welches ich automatisch über IntelliJ erstellt habe ist doch was für unsere Abgabe am Freitag bzgl des überarbeitetem UML">
       <created>1464739285809</created>
@@ -1007,15 +996,21 @@
       <option name="project" value="LOCAL" />
       <updated>1464858564661</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="&#10;Statistik Design Grundgerüst fertig&#10;">
+      <created>1464859610330</created>
+      <option name="number" value="00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1464859610330</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112143000" />
+    <option name="totallyTimeSpent" value="112181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1083,7 +1078,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Guten Nacht ihr Säcke &#10;Was ich euch noch sagen wollte&#10;https://www.youtube.com/watch?v=ViXdO4nnVpY" />
     <MESSAGE value="Es ist nun 2:00 Uhr ich hab noch ein bisschen Datenbankscheiß gemacht&#10;@Flurry schau mal in das Datenbankpackage da liegt ein png drin welches ich automatisch über IntelliJ erstellt habe ist doch was für unsere Abgabe am Freitag bzgl des überarbeitetem UML" />
     <MESSAGE value="Flurry: JavaDoc Doku bearbeitet" />
     <MESSAGE value="Flurry: Buttons SP" />
@@ -1108,7 +1102,8 @@
     <MESSAGE value="SpielerPanel Z313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt&#10;&#10;Infobereich Doku und in Z83-87 Änderung damit die Info mittig steht&#10;&#10;Administration Doku&#10;Anmeldung Doku&#10;&#10;Ladebalken für die DB erstellung in der erstelleDB()&#10;&#10;GUI Doku&#10;&#10;SpielerPanel weiter Doku" />
     <MESSAGE value="SpielerPanel Z313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt&#10;&#10;Infobereich Doku und in Z83-87 Änderung damit die Info mittig steht&#10;&#10;Administration Doku&#10;Anmeldung Doku&#10;&#10;Ladebalken für die DB erstellung in der erstelleDB()&#10;&#10;GUI Doku&#10;&#10;SpielerPanel weiter Doku&#10;&#10;erstelleDB() über arbeitet" />
     <MESSAGE value="SpielerPanel Z313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt&#10;&#10;Infobereich Doku und in Z83-87 Änderung damit die Info mittig steht&#10;&#10;Administration Doku&#10;Anmeldung Doku&#10;&#10;Ladebalken für die DB erstellung in der erstelleDB()&#10;&#10;GUI Doku&#10;&#10;SpielerPanel weiter Doku&#10;&#10;Statistik Design angefangen&#10;&#10;erstelleDB() über arbeitet" />
-    <option name="LAST_COMMIT_MESSAGE" value="SpielerPanel Z313-355&#10;Aktiv weiterschalten NUR wenn es keine aktuelle Hälfte gibt&#10;&#10;Infobereich Doku und in Z83-87 Änderung damit die Info mittig steht&#10;&#10;Administration Doku&#10;Anmeldung Doku&#10;&#10;Ladebalken für die DB erstellung in der erstelleDB()&#10;&#10;GUI Doku&#10;&#10;SpielerPanel weiter Doku&#10;&#10;Statistik Design angefangen&#10;&#10;erstelleDB() über arbeitet" />
+    <MESSAGE value="&#10;Statistik Design Grundgerüst fertig&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;Statistik Design Grundgerüst fertig&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
