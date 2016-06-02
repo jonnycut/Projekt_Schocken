@@ -214,6 +214,8 @@ public class Statistik extends JPanel {
 
 
         JPanel jBPWeiter = new JPanel(new FlowLayout());
+        jBPWeiter.setPreferredSize(new Dimension(1020,50));
+        jBPWeiter.setBackground(Color.BLACK);
         JButton jBWeiter = new JButton("Weiter");
 
         ActionListener weiter = new ActionListener() {
