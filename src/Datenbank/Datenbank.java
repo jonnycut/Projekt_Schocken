@@ -129,6 +129,7 @@ public class Datenbank {
                     e.printStackTrace();
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null,"Auf diesem Server existiert keine Datenbank","Fehler",JOptionPane.ERROR_MESSAGE);
+                    ip = "localhost";
                     dbErstellen();
                 }
             }
