@@ -15,6 +15,7 @@ import Datenbank.Datenbank;
  */
 public class Statistik extends JPanel {
 
+    private GUI gui;
     private String spielername ="";
     private int gewonneneRunden;
     private int verloreneHaelften;
@@ -27,11 +28,59 @@ public class Statistik extends JPanel {
 
 
 
-    private Statistik(Spieler spieler) {
+    private Statistik(Spieler spieler, GUI gui) {
         super();
-        spielername=spieler.getName();
+        this.gui = gui;
+        spielername = spieler.getName();
 
-        setLayout(new BorderLayout());
+        //-------------------------------------GRUND-PANEL-------------------------------------------------------------
+
+        JPanel jp = new JPanel(new BorderLayout());
+        jp.setBackground(Color.BLACK);
+
+        //-------------------------------------OBEN-PANEL--------------------------------------------------------------
+
+        JPanel oben = new JPanel();
+        oben.setBackground(Color.BLACK);
+        JLabel jLoben = new JLabel("Statistik von .. " + spielername + " ..");
+        jLoben.setForeground(Color.WHITE);
+        oben.add(jLoben);
+
+        jp.add(oben, BorderLayout.NORTH);
+
+        //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
+
+        JPanel unten = new JPanel(new GridLayout(1, 3));
+        unten.setBackground(Color.BLACK);
+
+        JPanel jPProjekt = new JPanel();
+        jPProjekt.setBackground(Color.BLACK);
+        JLabel jLProjekt = new JLabel("Projekt: SCHOCKEN");
+        jLProjekt.setForeground(Color.WHITE);
+        jPProjekt.add(jLProjekt);
+
+        JPanel jPGruppe = new JPanel();
+        jPGruppe.setBackground(Color.BLACK);
+        JLabel jLPGruppe = new JLabel("Projektgruppe: U.F.O");
+        jLPGruppe.setForeground(Color.WHITE);
+        jPGruppe.add(jLPGruppe);
+
+        JPanel jPFsbw = new JPanel(new FlowLayout());
+        jPFsbw.setBackground(Color.BLACK);
+        JLabel jLFsbw = new JLabel("FSBwIT 2016");
+        jLFsbw.setForeground(Color.WHITE);
+        jPFsbw.add(jLFsbw);
+
+        unten.add(jPProjekt);
+        unten.add(jPGruppe);
+        unten.add(jPFsbw);
+
+        jp.add(unten, BorderLayout.SOUTH);
+
+
+
+
+
 
         JPanel north = new JPanel(new BorderLayout(1, 2));
         north.setPreferredSize(new Dimension(300, 50));

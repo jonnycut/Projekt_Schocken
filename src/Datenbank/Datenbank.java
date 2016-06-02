@@ -128,7 +128,8 @@ public class Datenbank {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,"Auf diesem Server existiert keine Datenbank","Fehler",JOptionPane.ERROR_MESSAGE);
+                    dbErstellen();
                 }
             }
 
