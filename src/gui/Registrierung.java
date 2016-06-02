@@ -82,7 +82,7 @@ public class Registrierung extends JPanel {
         JPanel jPTPasswort = new JPanel();
         jPTPasswort.setBackground(Color.DARK_GRAY);
         JPasswordField jTPasswort = new JPasswordField(20);
-        jTPasswort.setDocument(new JTextFieldLimit(30));
+        jTPasswort.setDocument(new JTextFieldLimit(15));
         jPTPasswort.add(jTPasswort);
 
         JPanel jPPasswortW = new JPanel(new FlowLayout());

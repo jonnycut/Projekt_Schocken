@@ -1,12 +1,16 @@
 package gui;
 
 
-
+import Datenbank.Datenbank;
 import Grafik.Grafik;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 /**
@@ -16,7 +20,7 @@ import java.awt.event.ActionListener;
  */
 public class Statistik extends JPanel {
 
-    private String spielername = "";
+
     private JLabel jLProfilbild;
     private JLabel jLName;
     private JLabel jLGewonneneRunden;
@@ -53,7 +57,7 @@ public class Statistik extends JPanel {
         JPanel mitte = new JPanel();
         mitte.setLayout(new BoxLayout(mitte, BoxLayout.Y_AXIS));
         mitte.setBackground(Color.DARK_GRAY);
-        mitte.setPreferredSize(new Dimension(600, 600));
+        mitte.setPreferredSize(new Dimension(450, 710));
 
         JPanel jPName = new JPanel(new FlowLayout());
         jPName.setBackground(Color.DARK_GRAY);
@@ -83,7 +87,7 @@ public class Statistik extends JPanel {
         jLGew.setFont(new Font("Arial", Font.BOLD, 15));
         jPGewonneneRunden.add(jLGew);
 
-        jLGewonneneRunden = new JLabel("666");
+        jLGewonneneRunden = new JLabel("TEST");
         jLGewonneneRunden.setBackground(Color.DARK_GRAY);
         jLGewonneneRunden.setForeground(Color.RED);
         jLGewonneneRunden.setFont(new Font("Arial", Font.BOLD, 15));
@@ -99,7 +103,7 @@ public class Statistik extends JPanel {
         jLHaelfte.setFont(new Font("Arial", Font.BOLD, 15));
         jPVerloreneHaelften.add(jLHaelfte);
 
-        jLVerloreneHaelften = new JLabel("666");
+        jLVerloreneHaelften = new JLabel("TEST");
         jLVerloreneHaelften.setBackground(Color.DARK_GRAY);
         jLVerloreneHaelften.setForeground(Color.RED);
         jLVerloreneHaelften.setFont(new Font("Arial", Font.BOLD, 15));
@@ -115,7 +119,7 @@ public class Statistik extends JPanel {
         jLSpiele.setFont(new Font("Arial", Font.BOLD, 15));
         jPVerloreneSpiele.add(jLSpiele);
 
-        jLVerloreneSpiele = new JLabel("666");
+        jLVerloreneSpiele = new JLabel("TEST");
         jLVerloreneSpiele.setBackground(Color.DARK_GRAY);
         jLVerloreneSpiele.setForeground(Color.RED);
         jLVerloreneSpiele.setFont(new Font("Arial", Font.BOLD, 15));
@@ -131,7 +135,7 @@ public class Statistik extends JPanel {
         jLSch.setFont(new Font("Arial", Font.BOLD, 15));
         jPSchock.add(jLSch);
 
-        jLSchock = new JLabel("666");
+        jLSchock = new JLabel("TEST");
         jLSchock.setBackground(Color.DARK_GRAY);
         jLSchock.setForeground(Color.RED);
         jLSchock.setFont(new Font("Arial", Font.BOLD, 15));
@@ -147,7 +151,7 @@ public class Statistik extends JPanel {
         jPStr.setFont(new Font("Arial", Font.BOLD, 15));
         jPStrasse.add(jPStr);
 
-        jLStrasse = new JLabel("666");
+        jLStrasse = new JLabel("TEST");
         jLStrasse.setBackground(Color.DARK_GRAY);
         jLStrasse.setForeground(Color.RED);
         jLStrasse.setFont(new Font("Arial", Font.BOLD, 15));
@@ -163,12 +167,12 @@ public class Statistik extends JPanel {
         jPGen.setFont(new Font("Arial", Font.BOLD, 15));
         jPGenaral.add(jPGen);
 
-        jLGenaral = new JLabel("666");
+        jLGenaral = new JLabel("TEST");
         jLGenaral.setBackground(Color.DARK_GRAY);
         jLGenaral.setForeground(Color.RED);
         jLGenaral.setFont(new Font("Arial", Font.BOLD, 15));
 
-        jPStrasse.add(jLGenaral);
+        jPGenaral.add(jLGenaral);
         mitte.add(jPGenaral);
 
         JPanel jPEinfacherWurf = new JPanel(new FlowLayout());
@@ -179,7 +183,7 @@ public class Statistik extends JPanel {
         jPWurf.setFont(new Font("Arial", Font.BOLD, 15));
         jPEinfacherWurf.add(jPWurf);
 
-        jLEinfacherWurf = new JLabel("666");
+        jLEinfacherWurf = new JLabel("TEST");
         jLEinfacherWurf.setBackground(Color.DARK_GRAY);
         jLEinfacherWurf.setForeground(Color.RED);
         jLEinfacherWurf.setFont(new Font("Arial", Font.BOLD, 15));
@@ -195,7 +199,7 @@ public class Statistik extends JPanel {
         jPSchAus.setFont(new Font("Arial", Font.BOLD, 15));
         jPSchockAus.add(jPSchAus);
 
-        jLSchockAus = new JLabel("666");
+        jLSchockAus = new JLabel("TEST");
         jLSchockAus.setBackground(Color.DARK_GRAY);
         jLSchockAus.setForeground(Color.RED);
         jLSchockAus.setFont(new Font("Arial", Font.BOLD, 15));
@@ -204,16 +208,8 @@ public class Statistik extends JPanel {
         mitte.add(jPSchockAus);
 
 
-
-
-
-
-
-
-
-
         JPanel jBPWeiter = new JPanel(new FlowLayout());
-        jBPWeiter.setPreferredSize(new Dimension(1020,20));
+        jBPWeiter.setPreferredSize(new Dimension(1020, 20));
         jBPWeiter.setBackground(Color.BLACK);
         JButton jBWeiter = new JButton("Weiter");
 
@@ -230,9 +226,7 @@ public class Statistik extends JPanel {
         mitte.add(jBPWeiter);
 
 
-
         jp.add(mitte, BorderLayout.CENTER);
-
 
 
         //-------------------------------------UNTEN-PANEL-------------------------------------------------------------
@@ -271,9 +265,29 @@ public class Statistik extends JPanel {
 
     //------------------------------------------METHODEN---------------------------------------------------------------
 
-    public Statistik updateStatistik(String spieler){
+    public Statistik updateStatistik(String spieler) {
+        ArrayList<Integer> statArray = new ArrayList<>();
+        try {
+            jLProfilbild.setIcon(Datenbank.getInstance().selectProfilBild(spieler));
+            jLName.setText(spieler);
+            statArray = Datenbank.getInstance().selectStatistik(spieler);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        //ToDo: Hier kannst du die JLabel updaten mit Werten aus der DB
+        jLGewonneneRunden.setText(""+statArray.remove(0));
+        jLVerloreneHaelften.setText(""+statArray.remove(0));
+        jLVerloreneSpiele.setText(""+statArray.remove(0));
+//        jLSchock.setText(""+statArray.remove(1));
+//        jLStrasse.setText(""+statArray.remove(1));
+//        jLGenaral.setText(""+statArray.remove(1));
+//        jLEinfacherWurf.setText(""+statArray.remove(1));
+//        jLSchockAus.setText(""+statArray.remove(1));
+
 
         return this;
     }

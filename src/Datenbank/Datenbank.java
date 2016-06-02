@@ -329,7 +329,7 @@ public class Datenbank {
     /**
      * Diese Methode legt einen neuen Spieler in der Relation t_Spieler an.
      *
-     * @param kennung Spielername max. 30 Zeichen
+     * @param kennung  Spielername max. 30 Zeichen
      * @param passwort Kennwort max. 30 Zeichen
      * @throws SQLException
      */
@@ -487,6 +487,49 @@ public class Datenbank {
         }
     }
 
+    public ArrayList<Integer> selectStatistik(String kennung) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        ArrayList<Integer> statistik=new ArrayList<>();
+
+        ResultSet gewonneneRunden = stmt.executeQuery("Select Count(gewinner) from t_runde where gewinner='" + kennung + "'");
+        if (gewonneneRunden.next()){
+            statistik.add(gewonneneRunden.getInt(1));
+        }
+
+        ResultSet verloreneHaelften = stmt.executeQuery("Select Count(verlierer) from t_hälfte where verlierer='" + kennung + "'");
+        if(verloreneHaelften.next()){
+            statistik.add(verloreneHaelften.getInt(1));
+        }
+        ResultSet verloreneSpiele = stmt.executeQuery("Select count(verlierer) from t_spiel WHERE verlierer='" + kennung + "'");
+        if(verloreneSpiele.next()){
+            statistik.add(verloreneSpiele.getInt(1));
+        }
+
+        ResultSet anzahlSchock;
+        //        if(anzahlSchock.next()){
+//            statistik.add(anzahlSchock.getInt(1));
+//        }
+
+        ResultSet anzahlGeneraele;
+        //        if(anzahlGeneraele.next()){
+//            statistik.add(anzahlGeneraele.getInt(1));
+//        }
+
+        ResultSet einfacherWurf;
+        //        if(einfacherWurf.next()){
+//            statistik.add(einfacherWurf.getInt(1));
+//        }
+
+        ResultSet schockAus;
+//        if(schockAus.next()){
+//            statistik.add(schockAus.getInt(1));
+//        }
+
+
+
+        return statistik;
+    }
+
     /**
      * Reduziert die Zahl der Chips auf dem Stock um die Anzahl der Strafpunkte die ein Spieler erhält
      *
@@ -495,7 +538,7 @@ public class Datenbank {
      * @throws SQLException
      */
     public void updateStock(int strafpunkte, int spielID) throws SQLException {
-       int haelftenArt=selectAktuelleHaelfte(spielID);
+        int haelftenArt = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
         try {
             stmt.executeUpdate("Update t_hälfte set Stock= Stock - " + strafpunkte + " Where (fk_t_spiel_spiel_id = " + spielID + " AND art = " + haelftenArt + ")");
@@ -508,9 +551,9 @@ public class Datenbank {
     public int selectStockStatus(int spielID) throws SQLException {
         int haelfte = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery("SELECT stock FROM t_hälfte WHERE fk_t_spiel_spiel_id="+spielID+" AND art = "+haelfte);
+        ResultSet r = stmt.executeQuery("SELECT stock FROM t_hälfte WHERE fk_t_spiel_spiel_id=" + spielID + " AND art = " + haelfte);
 
-        if(r.next())
+        if (r.next())
             return r.getInt(1);
         else
             return -1;
@@ -584,7 +627,7 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
         String aktiverSpieler = null;
         ResultSet r = stmt.executeQuery("SELECT Kennung FROM  (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id= '" + spielID +
-                                        "') AS \"Spieler im Spiel\" INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
+                "') AS \"Spieler im Spiel\" INNER JOIN t_spieler ON kennung=fk_t_spieler_kennung WHERE Aktiv=TRUE ");
         if (r.next())
             aktiverSpieler = r.getString(1);
         System.out.println("Spieler " + aktiverSpieler + " ist nun würfelberechtigt");
@@ -1255,12 +1298,12 @@ public class Datenbank {
             if (r.getBoolean(5))
                 spieler.setAktiv(r.getBoolean(5));
 
-            ResultSet rS = stmt.executeQuery("SELECT COUNT(*) FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
-                    "' AND fk_t_runde_rundennr ="+rundenNr+
-                    " AND fk_t_hälfte_art="+haelfte+
-                    " AND fk_t_spiel_spiel_id="+spielID);
-            if(rS.next()){
-                if(rS.getInt(1)!=0){
+            ResultSet rS = stmt.executeQuery("SELECT COUNT(*) FROM t_durchgang WHERE fk_t_spieler_kennung ='" + kennung +
+                    "' AND fk_t_runde_rundennr =" + rundenNr +
+                    " AND fk_t_hälfte_art=" + haelfte +
+                    " AND fk_t_spiel_spiel_id=" + spielID);
+            if (rS.next()) {
+                if (rS.getInt(1) != 0) {
                     spieler.setWurf(selectDurchgang(kennung));
                     spieler.getBecher().setAnzahlWuerfe(rS.getInt(1));
                 }

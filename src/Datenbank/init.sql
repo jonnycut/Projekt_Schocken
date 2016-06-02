@@ -21,6 +21,7 @@ CREATE TABLE t_Spiel(
   Spiel_ID SERIAL,
   fk_t_Spielleiter_Kennung VARCHAR(30),
   Status INT  DEFAULT 1,
+  verlierer VARCHAR(30),
   Zeit TIMESTAMP NOT NULL DEFAULT current_timestamp,
   CONSTRAINT PK_t_Spiel PRIMARY KEY (Spiel_ID)  ,
   CONSTRAINT FK_t_Spiel FOREIGN KEY (fk_t_Spielleiter_Kennung) REFERENCES t_Spielleiter(fk_t_Spieler_Kennung)
