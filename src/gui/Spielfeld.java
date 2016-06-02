@@ -66,7 +66,7 @@ public class Spielfeld extends JPanel {
                     //Datenbank.getInstance().updateSpielstatus(Datenbank.getInstance().selectOffenesSpiel(), 2);
                     Datenbank.getInstance().updateAktiv(gui.getBesitzerName());
                     gui.sendeUpdateSignal(" Das Spiel wurde gestartet." + gui.getBesitzerName() + " beginnt das Auswürfeln...");
-                    //netzwerkUpdate("lokales Update");
+                    //updateSpielfeld("lokales Update");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
@@ -226,9 +226,30 @@ public class Spielfeld extends JPanel {
     }
 
 
+    /**<pre>
+     *
+     * !!!!!DIESE METHODE SOLLTE NUR DURCH EIN ERHALTENES UPDATESIGNAL AUFGERUFEN WERDEN!!!!!!!!
+     *
+     *
+     * Fürt ein Update des Spielfeldes durch.
+     * Hierzu werden alle Spielerpanels entfernt,
+     * durch Nutzung der updateTeilnehmer(); die
+     * Teilnehmerliste aus der Datenbank aktualisiert und neue Panels erstellt.
+     *
+     * der übergebene String in den Infobereich
+     * geschrieben, der Infobereich aktualisiert,
+     * der Stock wird aktualisiert, die Ansicht des Spielfeldes neu aufgebaut und das
+     * JPanel revalidiert.
+     *
+     *
+     * </pre>
+     *
+     *
+     * @param info String - Wird in den Infobereich geschrieben
+     * @see Spielfeld#updateTeilnehmerListe()
+     */
 
-
-    public void netzwerkUpdate(String info){
+    public void updateSpielfeld(String info){
         jPUnten.removeAll();
         updateTeilnehmerListe();
         infobereich.setInfos(info);
@@ -250,6 +271,7 @@ public class Spielfeld extends JPanel {
      *
      * @see spiel.Runde
      */
+
     public void pruefeFertig() {
         int counter = 0;
         for (SpielerPanel s : teilnehmer) {

@@ -102,7 +102,7 @@ public class SpielerPanel extends JPanel {
     /**<pre>
      * Constructor für das SpielerPanel. Setzt die Runde, den Spieler und das Spielfeld,
      * Prüft ob der Spieler des Panels gerade Aktiv ist und erstellt bei true einen roten Rahmen.
-     * Sendet über Spielfeld.netzwerkUpdate(String) eine Nachricht, dass er gerade aktiv ist.
+     * Sendet über Spielfeld.updateSpielfeld(String) eine Nachricht, dass er gerade aktiv ist.
      *
      * Fügt die nötigen ActionListener hinzu (Würfeln, Würfel, Becher und fertig).
      * Fügt die Würfel des Spielers in das entsprechende JPanel ein (wenn Wuerfel.draussen = true -> Auslage, sonst wuerfelAnsicht)
@@ -118,7 +118,7 @@ public class SpielerPanel extends JPanel {
         this.spielfeld = spielfeld;
 
         /*
-        Bei Aktivem Spieler einen Rahmen ziehen und ein netzwerkUpdate senden
+        Bei Aktivem Spieler einen Rahmen ziehen und ein updateSpielfeld senden
          */
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -239,7 +239,7 @@ public class SpielerPanel extends JPanel {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen: KNA
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                     System.out.println(spieler.getLetztesBild());
-                    System.out.println(spieler.getBecher().getWuerfel()[0] + "-" + spieler.getBecher().getWuerfel()[1] + "-" + spieler.getBecher().getWuerfel()[2]);
+                    System.out.println(spieler.getBecher().getSortierteWuerfel()[0] + "-" + spieler.getBecher().getSortierteWuerfel()[1] + "-" + spieler.getBecher().getSortierteWuerfel()[2]);
                     aufgedeckt = true;
                 } else {
 
@@ -519,7 +519,7 @@ public class SpielerPanel extends JPanel {
      * @param pufferBtn JButton - Der Button, der bewegt wird
      * @param btnIndex int - an welche Stelle der Button gelegt wird
      * @param wuerfelListener - ActionListener - Damit die Wuerfel nicht mehr angeklickt werden koennen
-     *@see Spielfeld#netzwerkUpdate(String)
+     *@see Spielfeld#updateSpielfeld(String)
      */
 
     public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener){
@@ -567,7 +567,7 @@ public class SpielerPanel extends JPanel {
             e.printStackTrace();
         }
 
-        spielfeld.netzwerkUpdate(""+spieler.getName() + " hat eine " + ausgelegterWert +" ausgelegt.");
+        spielfeld.updateSpielfeld("" + spieler.getName() + " hat eine " + ausgelegterWert + " ausgelegt.");
     }
 
     /**<pre>

@@ -1,7 +1,6 @@
 package spiel;
 
 import Datenbank.Datenbank;
-import sun.security.provider.ConfigFile;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -204,7 +203,7 @@ public class Spieler implements Comparable<Spieler> {
 
         this.becher.wuerfeln();
         this.becher.resetWurf();
-        Wuerfel[] temp = becher.getWuerfel();
+        Wuerfel[] temp = becher.getSortierteWuerfel();
         this.startwurf = (int) (temp[0].getWert() * Math.pow(10, 2)) + temp[1].getWert() * 10 + temp[2].getWert();
 
         try {

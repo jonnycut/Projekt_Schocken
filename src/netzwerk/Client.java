@@ -48,7 +48,7 @@ public class Client {
                         String zeile;
                         while ((zeile = reader.readLine()) != null){
                             if(zeile.contains("#")){
-                                gui.getSpielfeld().netzwerkUpdate(zeile.substring(1));
+                                gui.getSpielfeld().updateSpielfeld(zeile.substring(1));
                             }
 
                             else

@@ -13,9 +13,26 @@ import java.util.List;
  * </pre>
  */
 public class Becher implements Comparable<Becher> {
+    /**
+     * Liste der Würfel, die zum Ausweten genutzt wird.
+     * durch Wuerfel.sortiere(), wird diese Liste immer absteoigend sortiert
+     * w1 w2 w3 sind daduch immer an unterschiedlichen Positionen.
+     */
     private List<Wuerfel> wuerfel = new ArrayList<>();
+    /**
+     * Die eigentliche Datenstruktur der Würfel,
+     * in der die Würfel feste Positionen haben
+     */
     private Wuerfel[] wuerfelArray = new Wuerfel[3];
+    /**
+     * Enthält das Bild des Wurfes
+     * {Schock aus | Schock | General | Straße | Zahl}
+     */
     private String bild;
+
+    /**
+     * Anzahl der durchgeführten Würfe, wird bei Becher.wuerfeln() hochgezählt
+     */
     private int wurf;
 
     /**
@@ -46,6 +63,13 @@ public class Becher implements Comparable<Becher> {
         return bild;
     }
 
+    /**
+     * <pre>
+     *     Liefert das unsortierte WuerfelArray des Bechers,
+     *     Die Würfel sind immer an der selben Position.
+     * </pre>
+     * @return Wuerfel {w1,w2,w3}
+     */
     public Wuerfel[] getWuerfelArray(){
         return this.wuerfelArray;
     }
@@ -64,11 +88,13 @@ public class Becher implements Comparable<Becher> {
     }
 
     /**
-     * Getter fuer das Wuerfelarray
+     * Getter fuer das sortierte Wuerfelarray
+     * Nur für Vergleich der Würfe geeignet, da Würfel immer
+     * unterschiedliche Positionen haben!!
      *
      * @return Wuerfel[3]
      */
-    public Wuerfel[] getWuerfel() {
+    public Wuerfel[] getSortierteWuerfel() {
         sortiere();
         return wuerfel.toArray(new Wuerfel[3]);
     }
@@ -100,6 +126,7 @@ public class Becher implements Comparable<Becher> {
 
     /**<pre>
      * Setzt das wuerfelArray auf das übergebene Array,
+     * Ersetzt die alte Würfelliste durch neue, welche die neuen Würfel enthält.
      * ruft sortiere() auf umd die Wuerfelliste zu sortieren
      * und das aktuelle Bild zu bestimmen.
      *
@@ -113,6 +140,10 @@ public class Becher implements Comparable<Becher> {
      */
     public void setWurf(Wuerfel[] wuerfelArray) {
         this.wuerfelArray=wuerfelArray;
+        this.wuerfel = new ArrayList<Wuerfel>();
+        for(Wuerfel w : wuerfelArray){
+            wuerfel.add(w);
+        }
 
         sortiere();
 
@@ -182,7 +213,7 @@ public class Becher implements Comparable<Becher> {
     public int compareTo(Becher b2) {
         sortiere();
         Wuerfel[] w1 = this.wuerfel.toArray(new Wuerfel[3]);
-        Wuerfel[] w2 = b2.getWuerfel();
+        Wuerfel[] w2 = b2.getSortierteWuerfel();
         String vergleich = bild + "-" + b2.getBild();
 
         switch (vergleich) {

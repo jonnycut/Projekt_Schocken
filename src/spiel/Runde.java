@@ -1,10 +1,7 @@
 package spiel;
 
 
-import sun.security.provider.ConfigFile;
-
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -86,7 +83,7 @@ public class Runde {
                 verteileStrafpunkte(gewinner,verlierer,13);
                 break;
             case "Schock":
-                verteileStrafpunkte(gewinner, verlierer, gewinner.getBecher().getWuerfel()[0].getWert());
+                verteileStrafpunkte(gewinner, verlierer, gewinner.getBecher().getSortierteWuerfel()[0].getWert());
                 break;
             case "General":
                 verteileStrafpunkte(gewinner, verlierer, 3);
@@ -102,9 +99,9 @@ public class Runde {
         }
 
         //TestAusgabe, fliegt später raus:
-        String wuerfelG = "" + gewinner.getBecher().getWuerfel()[0].getWert() + "-" + gewinner.getBecher().getWuerfel()[1].getWert() + "-" + gewinner.getBecher().getWuerfel()[2].getWert();
-        String wuerfelV = "" + verlierer.getBecher().getWuerfel()[0].getWert() + "-" + verlierer.getBecher().getWuerfel()[1].getWert() + "-" + verlierer.getBecher().getWuerfel()[2].getWert();
-        String wuerfelM = "" +teilnehmer.get(1).getBecher().getWuerfel()[0].getWert()+"-"+teilnehmer.get(1).getBecher().getWuerfel()[1].getWert()+"-"+teilnehmer.get(1).getBecher().getWuerfel()[2].getWert();
+        String wuerfelG = "" + gewinner.getBecher().getSortierteWuerfel()[0].getWert() + "-" + gewinner.getBecher().getSortierteWuerfel()[1].getWert() + "-" + gewinner.getBecher().getSortierteWuerfel()[2].getWert();
+        String wuerfelV = "" + verlierer.getBecher().getSortierteWuerfel()[0].getWert() + "-" + verlierer.getBecher().getSortierteWuerfel()[1].getWert() + "-" + verlierer.getBecher().getSortierteWuerfel()[2].getWert();
+        String wuerfelM = "" +teilnehmer.get(1).getBecher().getSortierteWuerfel()[0].getWert()+"-"+teilnehmer.get(1).getBecher().getSortierteWuerfel()[1].getWert()+"-"+teilnehmer.get(1).getBecher().getSortierteWuerfel()[2].getWert();
 
         String ausgabe = "Gewinner: " + gewinner.getName() + " mit: " + gewinner.getLetztesBild() + "(" + wuerfelG + ")" +
                 "\n Mitte: " +teilnehmer.get(1).getName() + "mit: " +teilnehmer.get(1).getLetztesBild()+"("+wuerfelM+")"+
