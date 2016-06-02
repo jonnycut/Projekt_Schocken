@@ -2,7 +2,6 @@ package gui;
 
 import Datenbank.Datenbank;
 import Grafik.Grafik;
-import spiel.Runde;
 import spiel.Spieler;
 import spiel.Wuerfel;
 import javax.swing.*;
@@ -33,58 +32,72 @@ public class SpielerPanel extends JPanel {
      * Das Spielfeld des Panles
      */
     private Spielfeld spielfeld;
+
     /**
      * Das SpielerObject des SpielerPanels
      */
     private Spieler spieler;
+
     /**
      * Boolean, ob der Becher offen oder geschlossen ist.
      */
     private boolean aufgedeckt = false;
+
     /**
      * Das JPanel der Auslage, welches die rausgelegten Würfel enthält
      */
     private JPanel auslage;
+
     /**
      * Zähler für die herausgelegten würfel, Wenn =3 ist der Spieler automatisch fertig
      */
     private int auslageCount=0;
+
     /**
      * JPanel, welches die Würfel im Becher enthält
      */
     private JPanel wuerfel;
+
     /**
      *  JButton für den Würfelbecher
      */
     private JButton becher;
+
     /**
      * JPanel, welches die Würfel im Becher enthält
      */
     private JPanel wuerfelAnsicht;
+
     /**
      * JButton für Würfel 1
      */
     private JButton w1;
+
     /**
      * JButton für Würfel 2
      */
     private JButton w2;
+
     /**
      * JButton für Würfel 3
      */
     private JButton w3;
+
     /**
      * JPanel, welches die Strafpunkte des Spielers enthält
      */
     private JPanel strafpunkte;
+
     /**
      * JButton, der das Würfeln auslöst
      */
     private JButton wuerfeln;
+
     /**
      * JButton, für fertig
      */
     private JButton fertig;
+
 
     /**<pre>
      * Constructor für das SpielerPanel. Setzt die Runde, den Spieler und das Spielfeld,
@@ -110,12 +123,8 @@ public class SpielerPanel extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(180, 530));
-
-
-
 
         this.auslage = new JPanel(new GridLayout(1,3));
         auslage.setBackground(Color.BLACK);
@@ -138,7 +147,6 @@ public class SpielerPanel extends JPanel {
         this.becher = becherBtn;
         becher.setEnabled(false);
 
-
         //Wuerfelansicht bauen
         this.wuerfelAnsicht = new JPanel(new GridLayout(1,3));
         wuerfelAnsicht.setBackground(Color.BLACK);
@@ -151,20 +159,17 @@ public class SpielerPanel extends JPanel {
         w1.setEnabled(false);
         w1.setName("0");
 
-
         this.w2 = new JButton(spieler.getBecher().getWuerfelArray()[1].getGrafik());
         w2.setBackground(Color.LIGHT_GRAY);
         w2.setBorder(new LineBorder(Color.BLACK, 1));
         w2.setEnabled(false);
         w2.setName("1");
 
-
         this.w3 = new JButton(spieler.getBecher().getWuerfelArray()[2].getGrafik());
         w3.setBackground(Color.LIGHT_GRAY);
         w3.setBorder(new LineBorder(Color.BLACK, 1));
         w3.setEnabled(false);
         w3.setName("2");
-
 
         //WuerfelListener um einen Wuerfel vom Becher in die Auslage zu legen
         //-> Entsprechender Wuerfel wird mit leerem Button ersetzt (Design)
@@ -180,9 +185,6 @@ public class SpielerPanel extends JPanel {
                 //Datenbank.getInstance().upd
 
             }
-
-
-
         };
 
         w1.addActionListener(wuerfelListener);
@@ -204,11 +206,8 @@ public class SpielerPanel extends JPanel {
         if(spieler.getBecher().getWuerfelArray()[2].getDraussen())
             wuerfelRaus(w3,2,wuerfelListener);
 
-
-
         wuerfel.add(becher,"becher");
         wuerfel.add(wuerfelAnsicht, "wuerfel");
-
 
         this.strafpunkte = new JPanel();
         strafpunkte.setLayout(new FlowLayout());
@@ -246,15 +245,13 @@ public class SpielerPanel extends JPanel {
 
                     JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
                 }
-
             }
         });
 
         /*
-         Zeigt den Becher an und ruft die Spieler.wuerfeln() methode auf.
-         Danach werden die richtigen Grafiken der Buttons gesetzt
-         Wenn dies der letzte Wurf war, wird der Würfelbutton disabled
-
+         * Zeigt den Becher an und ruft die Spieler.wuerfeln() methode auf.
+         * Danach werden die richtigen Grafiken der Buttons gesetzt
+         * Wenn dies der letzte Wurf war, wird der Würfelbutton disabled
          */
         wuerfeln.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -289,10 +286,7 @@ public class SpielerPanel extends JPanel {
                 } else {
 
                     JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
-
                 }
-
-
             }
         });
 
@@ -387,7 +381,6 @@ public class SpielerPanel extends JPanel {
 
         fertig.addActionListener(fertigListener);
 
-
         if(spieler.getAktiv() == true){
             setBorder(new LineBorder(Color.RED, 3));
             if(spieler.getName().equals(spielfeld.getGui().getBesitzerName()))
@@ -408,7 +401,6 @@ public class SpielerPanel extends JPanel {
         jLSpielerName.setForeground(Color.WHITE);
 
         name.add(jLSpielerName);
-
 
         JPanel profilbild = new JPanel();
         profilbild.setLayout(new BoxLayout(profilbild, BoxLayout.Y_AXIS));
@@ -445,7 +437,6 @@ public class SpielerPanel extends JPanel {
         add(wuerfel);
         add(jPBox);
         add(buttons);
-
     }
 
     /**
@@ -453,6 +444,7 @@ public class SpielerPanel extends JPanel {
      * @return spieler Spieler Object - der Spieler des Panels
      */
     public Spieler getSpieler() {
+
         return spieler;
     }
 
@@ -576,7 +568,6 @@ public class SpielerPanel extends JPanel {
         }
 
         spielfeld.netzwerkUpdate(""+spieler.getName() + " hat eine " + ausgelegterWert +" ausgelegt.");
-
     }
 
     /**<pre>
@@ -595,19 +586,20 @@ public class SpielerPanel extends JPanel {
     }
 
     /**
-     * Liefert den Becher des Panels
-     * @return becher JButton Object - Der Becher Button des Panels
-     */
-
-    /**
      * Liefert den JButton Becher des Panels
      * @return becher JButton Object
      */
     public JButton getBecher() {
+
         return becher;
     }
 
+    /**
+     * Setzt den JButton Becher des Panels
+     * @param becher JButton Object
+     */
     public void setBecher(JButton becher) {
+
         this.becher = becher;
     }
 

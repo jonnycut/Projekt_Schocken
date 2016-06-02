@@ -1,9 +1,7 @@
 package gui;
 
-import Datenbank.Datenbank;
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
 /**
  * Created by U.F.O on 23.05.2016.
@@ -18,7 +16,6 @@ public class Infobereich extends JPanel {
      */
     private Spielfeld spielfeld;
 
-    //ToDo: Bin mir nicht sicher, was was ist! KNA
     /**
      * Das JPanel in dem das JLabel mit der Information steckt.
      */
