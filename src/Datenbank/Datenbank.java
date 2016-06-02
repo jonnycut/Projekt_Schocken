@@ -105,7 +105,7 @@ public class Datenbank {
             } catch (SQLException e) {
                 if (e.getMessage().startsWith("Datenbank existiert nicht"))
                     try {
-                        db = Datenbank.getInstance("db_schocken2");
+                        db = Datenbank.getInstance("db_uvo");
                     } catch (SQLException e1) {
                         System.out.println(e1.getMessage());
                         e1.printStackTrace();
@@ -176,7 +176,7 @@ public class Datenbank {
         if (renew) {
             String host = ip;
             int port = 5432;
-            String database = "db_schocken2";
+            String database = "db_uvo";
 
             try {
                 Socket socket = new Socket(host, port);
