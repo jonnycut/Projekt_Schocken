@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="Weiterschalten beim Auswürfeln läuft nun!">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/spiel/Becher.java" afterPath="$PROJECT_DIR$/src/spiel/Becher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/netzwerk/Client.java" afterPath="$PROJECT_DIR$/src/netzwerk/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/spiel/Runde.java" afterPath="$PROJECT_DIR$/src/spiel/Runde.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/spiel/Spieler.java" afterPath="$PROJECT_DIR$/src/spiel/Spieler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/SpielerPanel.java" afterPath="$PROJECT_DIR$/src/gui/SpielerPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Spielfeld.java" afterPath="$PROJECT_DIR$/src/gui/Spielfeld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="2788788c-9c6b-481f-9d9d-fa06a2d2911d" name="Default" comment="" />
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -192,8 +183,8 @@
       <file leaf-file-name="Spielfeld.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6165803">
-              <caret line="245" column="7" selection-start-line="245" selection-start-column="7" selection-end-line="245" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.7633851">
+              <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -751,13 +742,7 @@
       <workItem from="1464802233552" duration="4191000" />
       <workItem from="1464809556214" duration="9055000" />
       <workItem from="1464853196035" duration="19000" />
-      <workItem from="1464853260275" duration="4859000" />
-    </task>
-    <task id="LOCAL-00006" summary="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art">
-      <created>1464687373052</created>
-      <option name="number" value="00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1464687373052</updated>
+      <workItem from="1464853260275" duration="5298000" />
     </task>
     <task id="LOCAL-00007" summary="Flurry: Am Netzwerk herum werkeln oder so etwas in der Art">
       <created>1464691428998</created>
@@ -1047,11 +1032,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464824017274</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Kommentare eingefügt,&#10;unpassender Methodenname &quot;NetzwerkUpdate&quot; in &quot;updateSpielfeld&quot; geändert,&#10;Methoden des Bechers um die Würfel zu bekommen angepasst!">
+      <created>1464861046678</created>
+      <option name="number" value="00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1464861046679</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95996000" />
+    <option name="totallyTimeSpent" value="96435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1114,7 +1105,8 @@
     <MESSAGE value="test mit invalidate();  ohne spielerbereich" />
     <MESSAGE value="Weiterschalten beim Auswürfeln funktioniert nun.&#10;ToDo: Buttons werden beim weiterschalten noch nicht enabled, kann aber am Testkonstrunkt (alle clients auf der selben Maschine) liegen" />
     <MESSAGE value="Weiterschalten beim Auswürfeln läuft nun!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Weiterschalten beim Auswürfeln läuft nun!" />
+    <MESSAGE value="Kommentare eingefügt,&#10;unpassender Methodenname &quot;NetzwerkUpdate&quot; in &quot;updateSpielfeld&quot; geändert,&#10;Methoden des Bechers um die Würfel zu bekommen angepasst!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kommentare eingefügt,&#10;unpassender Methodenname &quot;NetzwerkUpdate&quot; in &quot;updateSpielfeld&quot; geändert,&#10;Methoden des Bechers um die Würfel zu bekommen angepasst!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1860,8 +1852,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Spielfeld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6165803">
-          <caret line="245" column="7" selection-start-line="245" selection-start-column="7" selection-end-line="245" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.7633851">
+          <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
           <folding />
         </state>
       </provider>
