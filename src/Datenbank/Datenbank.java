@@ -32,6 +32,13 @@ public class Datenbank {
 
     }
 
+    /**Diese Methode fragt per JDialog ab ob ein Datenbank angelegt werden soll oder ob mann sich mit
+     * ein Datenbank verbinden möchte.
+     * Beim anlegen einer Datenbank kommt eine fiktive ProgressBar als Information das die DB erstellt wird.
+     * Beim verbinden wird die IP-Addresse der Datenbank gefordert mit der man sich verbinden möchte.
+     *
+     * @author DFleuren
+     */
     public static void dbErstellen() {
         Datenbank db = null;
 
@@ -44,7 +51,54 @@ public class Datenbank {
                 JOptionPane.QUESTION_MESSAGE,
                 null, optionen, optionen[0]);
 
-        if (n == JOptionPane.YES_OPTION)
+        if (n == JOptionPane.YES_OPTION) {
+
+            Thread ladebalkenThread = new Thread(new Runnable() {
+                public void run() {
+
+                    JProgressBar pb = new JProgressBar(0, 100);
+                    pb.setPreferredSize(new Dimension(300, 20));
+                    pb.setString("Erstelle DB ...");
+                    pb.setStringPainted(true);
+                    pb.setValue(0);
+                    pb.setIndeterminate(true);
+
+                    JPanel JPCenter = new JPanel();
+                    JPCenter.add(pb);
+
+                    JDialog dialog = new JDialog((JFrame) null, "Datenbank wird erstellt");
+                    dialog.setModal(false);
+                    dialog.add(JPCenter, BorderLayout.CENTER);
+                    dialog.pack();
+                    dialog.setVisible(true);
+
+                    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                    dialog.setLocationRelativeTo(null);
+                    dialog.setLocation((dim.width - dialog.getSize().width) / 2,
+                            (dim.height - dialog.getSize().height) / 2);
+                    dialog.toFront();
+
+                    int counter = 0;
+
+                    while (!Thread.currentThread().interrupted()) {
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            dialog.dispose();
+                            Thread.currentThread().interrupt();
+                        }
+                        pb.repaint();
+                        counter++;
+                        if(counter == 40){
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                    dialog.dispose();
+                }
+            });
+
+            ladebalkenThread.start();
+
             try {
                 db = Datenbank.getInstance();
             } catch (ClassNotFoundException e) {
@@ -58,6 +112,7 @@ public class Datenbank {
                         e1.printStackTrace();
                     }
             }
+        }
 
         if (n == JOptionPane.NO_OPTION) {
             JLabel jLText = new JLabel("IP Adresse des DB Servers");
@@ -673,10 +728,10 @@ public class Datenbank {
 
     public void updateAktiv(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        boolean flag ;
-        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung+"'");
+        boolean flag;
+        ResultSet r = stmt.executeQuery("Select aktiv from t_spieler WHERE kennung = '" + kennung + "'");
         if (r.next()) {
-            flag=(!r.getBoolean(1));
+            flag = (!r.getBoolean(1));
             stmt.executeUpdate("Update t_spieler SET aktiv = " + flag + " Where kennung = '" + kennung + "'");
         }
     }
@@ -735,9 +790,8 @@ public class Datenbank {
 
     public void schalteWeiter(int spielID) throws SQLException {
         Statement stmt = verbindung.createStatement();
-        java.util.List<String> spieler=new ArrayList<>();
-        java.util.List<Boolean> spielerAktiv=new ArrayList<>();
-
+        java.util.List<String> spieler = new ArrayList<>();
+        java.util.List<Boolean> spielerAktiv = new ArrayList<>();
 
 
         ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung,startwurf FROM t_spieler WHERE kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client WHERE fk_t_spiel_spiel_id =7)  ORDER BY startwurf DESC");
@@ -746,11 +800,11 @@ public class Datenbank {
             spielerAktiv.add(rs.getBoolean("aktiv"));
         }
         System.out.println(spieler.toString());
-        while(!spielerAktiv.get(0)){
-            Boolean tempBool=spielerAktiv.remove(0);
-            String temp=spieler.remove(0);
-            spieler.add(spieler.size(),temp);
-            spielerAktiv.add(spielerAktiv.size(),tempBool);
+        while (!spielerAktiv.get(0)) {
+            Boolean tempBool = spielerAktiv.remove(0);
+            String temp = spieler.remove(0);
+            spieler.add(spieler.size(), temp);
+            spielerAktiv.add(spielerAktiv.size(), tempBool);
         }
         System.out.println(spieler.toString());
         updateAktiv(spieler.get(0));
@@ -800,9 +854,7 @@ public class Datenbank {
                             " WHERE fk_t_spieler_kennung= '" + kennung + "'");
             ps.setBinaryStream(1, is);
             ps.executeUpdate();
-        }
-        else
-        {
+        } else {
             PreparedStatement ps = verbindung.prepareStatement(
                     "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel_1, wuerfel_2, wuerfel_3)" +
                             " VALUES(?,?,?,?,?,?,?)");
@@ -847,54 +899,54 @@ public class Datenbank {
         }
 
 
+    }
+
+
+    //-----------------------------------------Kai seine Methoden-------------------------------------------------------
+
+    /**
+     * <pre>
+     *  Waehlt das Profilbild des Spielers mit der Uebergebenen Spielerkennung aus.
+     *  Bekommt einen BinaryStream aus der Datenbank und wandelt diesen in ein Icon um,
+     *  welches dann zurueckgegeben wird.
+     * </pre>
+     *
+     * @param text - String Spielerkennung
+     * @return Icon Das Profilbild des Spielers
+     * @throws SQLException
+     * @throws IOException
+     * @see ImageIO
+     */
+    public Icon selectProfilBild(String text) throws SQLException, IOException {
+        Statement stmt = verbindung.createStatement();
+        ResultSet r = stmt.executeQuery("SELECT profilbild" +
+                        " FROM t_spieler" +
+                        " WHERE kennung='" + text + "'"
+        );
+        if (r.next()) {
+            Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
+            return icon;
         }
 
 
-        //-----------------------------------------Kai seine Methoden-------------------------------------------------------
+        return null;
+    }
 
-        /**
-         * <pre>
-         *  Waehlt das Profilbild des Spielers mit der Uebergebenen Spielerkennung aus.
-         *  Bekommt einen BinaryStream aus der Datenbank und wandelt diesen in ein Icon um,
-         *  welches dann zurueckgegeben wird.
-         * </pre>
-         *
-         * @param text - String Spielerkennung
-         * @return Icon Das Profilbild des Spielers
-         * @throws SQLException
-         * @throws IOException
-         * @see ImageIO
-         */
-        public Icon selectProfilBild(String text)throws SQLException, IOException {
-            Statement stmt = verbindung.createStatement();
-            ResultSet r = stmt.executeQuery("SELECT profilbild" +
-                            " FROM t_spieler" +
-                            " WHERE kennung='" + text + "'"
-            );
-            if (r.next()) {
-                Icon icon = new ImageIcon(ImageIO.read(r.getBinaryStream(1)));
-                return icon;
-            }
-
-
-            return null;
-        }
-
-        /**
-         * <pre>
-         * Fuegt ein Grafik.ICON in die Datenbank ein.
-         * Wandelt das uebergebene Icon in ein BufferedImage und zeichnet das uebergebene Icon
-         * mithilfe der Graphics Klasse.
-         * Dieses BufferedImage wird dann als ByteArray in die Datenbank geschrieben.
-         * </pre>
-         *
-         * @param text Name des Bildes
-         * @param icon Object Grafik.ICON
-         * @throws SQLException Because Fuck u
-         * @throws IOException  Because Fuck u more
-         * @see Graphics
-         * @see BufferedImage
-         */
+    /**
+     * <pre>
+     * Fuegt ein Grafik.ICON in die Datenbank ein.
+     * Wandelt das uebergebene Icon in ein BufferedImage und zeichnet das uebergebene Icon
+     * mithilfe der Graphics Klasse.
+     * Dieses BufferedImage wird dann als ByteArray in die Datenbank geschrieben.
+     * </pre>
+     *
+     * @param text Name des Bildes
+     * @param icon Object Grafik.ICON
+     * @throws SQLException Because Fuck u
+     * @throws IOException  Because Fuck u more
+     * @see Graphics
+     * @see BufferedImage
+     */
 
     public void insertProfilbild(String text, Icon icon) throws SQLException, IOException {
 

@@ -1,7 +1,9 @@
 import Datenbank.Datenbank;
+import com.sun.deploy.ui.ProgressDialog;
 import gui.GUI;
 import Grafik.Grafik;
 import gui.SpielerPanel;
+import gui.TestGUI;
 import netzwerk.Client;
 import spiel.Runde;
 import spiel.Spieler;
@@ -9,6 +11,8 @@ import spiel.Stock;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.*;
 import java.sql.SQLException;
@@ -20,7 +24,7 @@ import java.util.List;
 /**
  * Created by U.F.O. on 23.05.2016.
  *
- * @author  KNapret(Uwe) / DFleuren(Flurry) / EHampel(Opa)
+ * @author KNapret(Uwe) / DFleuren(Flurry) / EHampel(Opa)
  */
 public class Main {
     //testAttribute
@@ -29,13 +33,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
-
-
-
         Datenbank.dbErstellen();
+
         new GUI();
+
+        //new TestGUI();
+
+
+
+
+
 //
 //
 //        try {
@@ -89,3 +96,4 @@ public class Main {
     }
 
 }
+
