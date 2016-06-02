@@ -1232,7 +1232,7 @@ public class Datenbank {
                     " AND fk_t_hälfte_art="+haelfte+
                     " AND fk_t_spiel_spiel_id="+spielID);
             if(rS.next()){
-                if(r.getInt(1)!=0){
+                if(rS.getInt(1)!=0){
                     spieler.setWurf(selectDurchgang(kennung));
                     spieler.getBecher().setAnzahlWuerfe(r.getInt(1));
                 }
