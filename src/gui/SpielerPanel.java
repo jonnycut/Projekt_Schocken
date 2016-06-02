@@ -273,6 +273,7 @@ public class SpielerPanel extends JPanel {
                             spieler.wuerfeln();
                             Datenbank.getInstance().insertDurchgang(spieler.getName(), spieler.getBecher().getWuerfelArray());
                             spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " hat gewürfelt");
+
                         }
 
                     } catch (SQLException e1) {
@@ -286,6 +287,7 @@ public class SpielerPanel extends JPanel {
                     w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
+
                     if (spieler.getBecher().getAnzahlWuerfe() == 3) {
                         wuerfeln.setEnabled(false);
                         try {
@@ -298,6 +300,8 @@ public class SpielerPanel extends JPanel {
                             e1.printStackTrace();
                         }
                     }
+
+
 
                 } else {
 

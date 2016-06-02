@@ -416,15 +416,25 @@ public class Datenbank {
 
         Wuerfel[] wuerfelArray = new Wuerfel[3];
 
-
         int spielID = selectSpielID(kennung);
         int haelfte = selectAktuelleHaelfte(spielID);
         int rundenNr = selectAktuelleRunde(spielID);
+        int letzter =0;
+
+        ResultSet rSC = stmt.executeQuery("SELECT COUNT(zaehler) FROM t_durchgang WHERE fk_t_spieler_kennung ='" + kennung +
+                "' AND fk_t_runde_rundennr =" + rundenNr +
+                " AND fk_t_hälfte_art=" + haelfte +
+                " AND fk_t_spiel_spiel_id=" + spielID);
+
+        if(rSC.next()){
+            letzter=rSC.getInt(1);
+        }
 
         ResultSet rS = stmt.executeQuery("SELECT wuerfel1, wuerfel2, wuerfel3 FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
                 "' AND fk_t_runde_rundennr ="+rundenNr+
                 " AND fk_t_hälfte_art="+haelfte+
-                " AND fk_t_spiel_spiel_id="+spielID);
+                " AND fk_t_spiel_spiel_id="+spielID+
+                " AND zaehler ="+letzter);
 
 
         if(rS.next()){
@@ -825,7 +835,7 @@ public class Datenbank {
         oos3.writeObject(wuerfel3);
         oos3.close();
 
-        InputStream is3 = new ByteArrayInputStream(baos2.toByteArray());
+        InputStream is3 = new ByteArrayInputStream(baos3.toByteArray());
 
 
         ResultSet r = stmt.executeQuery("SELECT count(zaehler) FROM t_durchgang" +
