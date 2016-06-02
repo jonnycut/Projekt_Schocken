@@ -61,8 +61,8 @@
       <file leaf-file-name="Statistik.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Statistik.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5811966">
-              <caret line="68" column="48" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.5521368">
+              <caret line="43" column="45" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -709,13 +709,7 @@
       <workItem from="1464808731141" duration="8788000" />
       <workItem from="1464819228621" duration="843000" />
       <workItem from="1464820102353" duration="1791000" />
-      <workItem from="1464843000468" duration="17215000" />
-    </task>
-    <task id="LOCAL-00036" summary="Flurry: JavaDoc Doku bearbeitet">
-      <created>1464771160038</created>
-      <option name="number" value="00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1464771160038</updated>
+      <workItem from="1464843000468" duration="17396000" />
     </task>
     <task id="LOCAL-00037" summary="Flurry: JavaDoc Doku bearbeitet">
       <created>1464771246706</created>
@@ -1005,11 +999,17 @@
       <option name="project" value="LOCAL" />
       <updated>1464859799596</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="&#10;Statistik Design Grundgerüst fertig&#10;">
+      <created>1464860246094</created>
+      <option name="number" value="00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1464860246094</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112807000" />
+    <option name="totallyTimeSpent" value="112988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1618" height="1066" extended-state="6" />
@@ -1679,8 +1679,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Statistik.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5811966">
-          <caret line="68" column="48" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.5521368">
+          <caret line="43" column="45" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

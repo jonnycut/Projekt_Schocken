@@ -41,7 +41,7 @@ public class Statistik extends JPanel {
 
         JPanel oben = new JPanel();
         oben.setBackground(Color.BLACK);
-        JLabel jLoben = new JLabel("Statistik von .." + spielername + "..");
+        JLabel jLoben = new JLabel("Statistik");
         jLoben.setForeground(Color.WHITE);
         oben.add(jLoben);
 
