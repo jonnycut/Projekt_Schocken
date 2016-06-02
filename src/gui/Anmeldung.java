@@ -97,15 +97,13 @@ public class Anmeldung extends JPanel {
 
         JButton jBStart = new JButton("START");
 
-        // Nur drückbar wenn die DB Abfrage erfolgreich war
+        // Nur drückbar wenn die DB Abfrage nach dem Spieler erfolgreich war
         jBStart.setEnabled(false);
         JPanel jBPStart = new JPanel(new FlowLayout());
         jBPStart.setBackground(Color.DARK_GRAY);
         jBPStart.add(jBStart);
 
-        /* Führt die Methode starteSpiel() aus und schaltet die Ansicht auf das Spielfeld um.
-         * Fügt den Spieler in der Datenbank als Teilnehmer hinzu.
-         */
+        // Erzeugt ein neues Spielfeld und schaltet dann die Ansicht auf das Spielfeld um.
         ActionListener startButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.setSpielfeld(new Spielfeld(gui));
@@ -113,6 +111,7 @@ public class Anmeldung extends JPanel {
                 gui.updateView();
             }
         };
+
         jBStart.addActionListener(startButton);
 
         JPanel jBPok = new JPanel(new FlowLayout());
@@ -156,6 +155,7 @@ public class Anmeldung extends JPanel {
          * Wenn NEIN: Kommt eine Fehlermeldeung.
          * Wenn JA: Wird das passende Profilbild aus der Datenbank geholt und angezeigt.
          *          Der StartButton wird freigegeben.
+         *          Fürt die Methode pruufeSpiel()aus.
          */
         ActionListener okButton = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -176,8 +176,8 @@ public class Anmeldung extends JPanel {
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
                         gui.setBesitzerName(jTName.getText());
-                        System.out.println("Flurry:  " + gui.getBesitzerName());
                         pruefeSpiel();
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch", "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
@@ -226,6 +226,11 @@ public class Anmeldung extends JPanel {
         loesche.setBackground(Color.DARK_GRAY);
         JButton jBdbLoeschen = new JButton("Datenbank löschen");
 
+        /* Es öffnet sich ein Abfragefenster für das Passwort("root") vom DBAdmin.
+         * Prüft aus einem Dialogfeld ob das eingegeben Passwort übereinstimmt.
+         *      Wenn NEIN: Kommt eine Fehlermeldung.
+         *      Wenn JA: Wird die Methode der Datenbank dropDB() aausgeführt und die Datenbank wird gelöscht.
+         */
         ActionListener loescheDB = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -256,8 +261,6 @@ public class Anmeldung extends JPanel {
         jBdbLoeschen.addActionListener(loescheDB);
         loesche.add(jBdbLoeschen);
         mitteRechts.add(loesche);
-
-
 
         JPanel untenRechts = new JPanel();
         untenRechts.setBackground(Color.DARK_GRAY);
@@ -360,18 +363,19 @@ public class Anmeldung extends JPanel {
     //------------------------------------------METHODEN---------------------------------------------------------------
 
     /**<pre>
-     * Prüft über die Datenbank, ob bereits ein Spiel  existiert, oder ob eine neues erstellt werden soll.
+     * Prüft über die Datenbank, ob bereits ein Spiel existiert, oder ob eine neues erstellt werden soll.
      * Mit der SpielID wird der Spielleiter ermittelt und es wird eine neues Netzwerk erstellt mit Client oder Server mit Client.
      * </pre>
-     *
      */
     public void pruefeSpiel() {
 
         try {
             Datenbank.getInstance().insertTeilnehmer(jTName.getText());
+
             int spielID = Datenbank.getInstance().selectOffenesSpiel();
             String spielleiter = Datenbank.getInstance().selectSpielleiterKennung(spielID);
             String[] serverIP = {""};
+
             if (spielleiter.equals(jTName.getText())) {
 
                 new Thread() {
@@ -390,6 +394,7 @@ public class Anmeldung extends JPanel {
                     }
                 }.start();
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -215,7 +215,6 @@ public class Administration extends JPanel{
 
     //----------------------------------------INNEREKLASSEN-----------------------------------------------------------
 
-
     /**
      * Diese Klasse ist für die Beschänkung der JTextfield verandwortlich.
      * So dass nur eine Maxanzahl von Zeichen eingetragen werden darf/ kann.
