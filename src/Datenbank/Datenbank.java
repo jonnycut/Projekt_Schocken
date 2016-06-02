@@ -541,7 +541,7 @@ public class Datenbank {
         int haelftenArt = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
         try {
-            stmt.executeUpdate("Update t_hälfte set Stock= Stock - " + strafpunkte + " Where (fk_t_spiel_spiel_id = " + spielID + " AND art = " + haelftenArt + ")");
+            stmt.executeUpdate("Update t_hälfte set Stock= (Stock - " + strafpunkte + ") Where (fk_t_spiel_spiel_id = " + spielID + " AND art = " + haelftenArt + ")");
 
         } catch (SQLException e) {
             e.printStackTrace();
