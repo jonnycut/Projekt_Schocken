@@ -66,8 +66,7 @@ public class Statistik extends JPanel {
         mitte.add(jPName);
 
         JPanel jPProfilbild = new JPanel(new FlowLayout());
-        jPProfilbild.setBackground(Color.DARK_GRAY);
-        //jPProfilbild.setPreferredSize(new Dimension(200,200));
+        jPProfilbild.setBackground(Color.BLACK);
         jLProfilbild = new JLabel();
         jLProfilbild.setIcon(Grafik.AVATAR_BB8);
         jLProfilbild.setBackground(Color.WHITE);
@@ -214,7 +213,7 @@ public class Statistik extends JPanel {
 
 
         JPanel jBPWeiter = new JPanel(new FlowLayout());
-        jBPWeiter.setPreferredSize(new Dimension(1020,50));
+        jBPWeiter.setPreferredSize(new Dimension(1020,20));
         jBPWeiter.setBackground(Color.BLACK);
         JButton jBWeiter = new JButton("Weiter");
 
