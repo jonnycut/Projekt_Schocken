@@ -175,6 +175,7 @@ public class Anmeldung extends JPanel {
                         jBProfil.setIcon(Datenbank.getInstance().selectProfilBild(jTName.getText()));
                         jBPProfil.add(jBProfil);
                         jBStart.setEnabled(true);
+                        ok.setEnabled(false);
                         gui.setBesitzerName(jTName.getText());
                         pruefeSpiel();
                         gui.setStatistik(jTName.getText());

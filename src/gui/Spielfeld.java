@@ -28,6 +28,7 @@ public class Spielfeld extends JPanel {
     private Infobereich infobereich;
     private Haelfte haelfte;
     private List<SpielerPanel> teilnehmer;
+    private int counter = 0;
 
     private JPanel jPOben; // BorderLayout.NORTH beinhaltet den Spielstart Button
     private JPanel jPMitte; // BoderLayout.CENTER beinhaltet den Infobereich
@@ -69,6 +70,9 @@ public class Spielfeld extends JPanel {
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
+
+                counter = teilnehmer.size();
+                gui.sendeUpdateCounter(counter);
             }
         };
 
@@ -313,5 +317,14 @@ public class Spielfeld extends JPanel {
 
     public Haelfte getHaelfte(){
         return this.haelfte;
+    }
+
+    public void setCounter(int count){
+        this.counter = count;
+        System.out.println("Aktueller Counter nun: "+counter);
+    }
+
+    public int getCounter(){
+       return this.counter;
     }
 }

@@ -4,6 +4,7 @@ import Datenbank.Datenbank;
 import Grafik.Grafik;
 import spiel.Spieler;
 import spiel.Wuerfel;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 
 /**
  * Created by U.F.O. on 23.05.2016.
- *
+ * <p>
  * <pre>
  * Spielerpanel
  *
@@ -51,7 +52,7 @@ public class SpielerPanel extends JPanel {
     /**
      * Zähler für die herausgelegten würfel, Wenn =3 ist der Spieler automatisch fertig
      */
-    private int auslageCount=0;
+    private int auslageCount = 0;
 
     /**
      * JPanel, welches die Würfel im Becher enthält
@@ -59,7 +60,7 @@ public class SpielerPanel extends JPanel {
     private JPanel wuerfel;
 
     /**
-     *  JButton für den Würfelbecher
+     * JButton für den Würfelbecher
      */
     private JButton becher;
 
@@ -99,7 +100,8 @@ public class SpielerPanel extends JPanel {
     private JButton fertig;
 
 
-    /**<pre>
+    /**
+     * <pre>
      * Constructor für das SpielerPanel. Setzt die Runde, den Spieler und das Spielfeld,
      * Prüft ob der Spieler des Panels gerade Aktiv ist und erstellt bei true einen roten Rahmen.
      * Sendet über Spielfeld.updateSpielfeld(String) eine Nachricht, dass er gerade aktiv ist.
@@ -109,11 +111,11 @@ public class SpielerPanel extends JPanel {
      *
      * </pre>
      *
-     * @param spieler Spieler Object - Spieler des Panels
+     * @param spieler   Spieler Object - Spieler des Panels
      * @param spielfeld Spielfeld Object - Das Spielfeld des Panels
      */
 
-    public SpielerPanel(Spieler spieler, Spielfeld spielfeld){
+    public SpielerPanel(Spieler spieler, Spielfeld spielfeld) {
         this.spieler = spieler;
         this.spielfeld = spielfeld;
 
@@ -126,15 +128,15 @@ public class SpielerPanel extends JPanel {
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(180, 530));
 
-        this.auslage = new JPanel(new GridLayout(1,3));
+        this.auslage = new JPanel(new GridLayout(1, 3));
         auslage.setBackground(Color.BLACK);
 
         //Platzhalter in Auslage einfuegen
-        for (int i = 0; i <3 ; i++) {
+        for (int i = 0; i < 3; i++) {
             JButton auslage1 = new JButton();
             auslage1.setEnabled(false);
             auslage1.setBackground(Color.DARK_GRAY);
-            auslage1.setPreferredSize(new Dimension(100,100));
+            auslage1.setPreferredSize(new Dimension(100, 100));
             auslage1.setBorder(new LineBorder(Color.BLACK, 1));
             auslage.add(auslage1);
         }
@@ -148,9 +150,9 @@ public class SpielerPanel extends JPanel {
         becher.setEnabled(false);
 
         //Wuerfelansicht bauen
-        this.wuerfelAnsicht = new JPanel(new GridLayout(1,3));
+        this.wuerfelAnsicht = new JPanel(new GridLayout(1, 3));
         wuerfelAnsicht.setBackground(Color.BLACK);
-        wuerfelAnsicht.setBorder(new LineBorder(Color.BLACK,1));
+        wuerfelAnsicht.setBorder(new LineBorder(Color.BLACK, 1));
 
         //WuerfelButtons mit dem entsprechenden Bild und Text versehen
         this.w1 = new JButton(spieler.getBecher().getWuerfelArray()[0].getGrafik());
@@ -180,7 +182,7 @@ public class SpielerPanel extends JPanel {
                 int btnIndex = Integer.parseInt(pufferBtn.getName());
 
                 //Wegen Mehrfachnutzung in Methode ausgelagert
-                wuerfelRaus(pufferBtn,btnIndex,this);
+                wuerfelRaus(pufferBtn, btnIndex, this);
 
             }
         };
@@ -195,16 +197,9 @@ public class SpielerPanel extends JPanel {
         wuerfelAnsicht.add(w2, 1);
         wuerfelAnsicht.add(w3, 2);
 
-        //bereits rausgelegte Wuerfel aus dem Becher nehmen und in der Auslage anzeigen.
 
-        if(spieler.getBecher().getWuerfelArray()[0].getDraussen())
-            wuerfelRaus(w1,0,wuerfelListener);
-        if(spieler.getBecher().getWuerfelArray()[1].getDraussen())
-            wuerfelRaus(w2,1,wuerfelListener);
-        if(spieler.getBecher().getWuerfelArray()[2].getDraussen())
-            wuerfelRaus(w3,2,wuerfelListener);
 
-        wuerfel.add(becher,"becher");
+        wuerfel.add(becher, "becher");
         wuerfel.add(wuerfelAnsicht, "wuerfel");
 
         this.strafpunkte = new JPanel();
@@ -215,7 +210,7 @@ public class SpielerPanel extends JPanel {
         jLStrafpunkteTitel.setForeground(Color.RED);
         strafpunkte.add(jLStrafpunkteTitel);
 
-        JLabel jLStrafpunkte = new JLabel(""+this.spieler.getStrafpunkte());
+        JLabel jLStrafpunkte = new JLabel("" + this.spieler.getStrafpunkte());
         jLStrafpunkte.setForeground(Color.WHITE);
         strafpunkte.add(jLStrafpunkte);
 
@@ -225,6 +220,15 @@ public class SpielerPanel extends JPanel {
         wuerfeln.setEnabled(false);
         this.fertig = new JButton("FERTIG");
         fertig.setEnabled(false);
+
+        //bereits rausgelegte Wuerfel aus dem Becher nehmen und in der Auslage anzeigen.
+
+        if (spieler.getBecher().getWuerfelArray()[0].getDraussen())
+            wuerfelRaus(w1, 0, wuerfelListener);
+        if (spieler.getBecher().getWuerfelArray()[1].getDraussen())
+            wuerfelRaus(w2, 1, wuerfelListener);
+        if (spieler.getBecher().getWuerfelArray()[2].getDraussen())
+            wuerfelRaus(w3, 2, wuerfelListener);
 
         /*
         Hebt den Becher des Spielers an und zeigt die darunterliegenden Würfel.
@@ -261,15 +265,14 @@ public class SpielerPanel extends JPanel {
                     aufgedeckt = false;
 
                     try {
-                        if(Datenbank.getInstance().selectAktuelleHaelfte(Datenbank.getInstance().selectSpielID(spieler.getName())) == 0){
+                        if (Datenbank.getInstance().selectAktuelleHaelfte(Datenbank.getInstance().selectSpielID(spieler.getName())) == 0) {
                             spieler.beginnerWuerfeln();
                             ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
                             wuerfeln.setEnabled(false);
-                        }
-                        else {
+                        } else {
                             spieler.wuerfeln();
                             Datenbank.getInstance().insertDurchgang(spieler.getName(), spieler.getBecher().getWuerfelArray());
-                            spielfeld.getGui().sendeUpdateSignal(spieler.getName() +" hat gewürfelt");
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " hat gewürfelt");
                         }
 
                     } catch (SQLException e1) {
@@ -283,11 +286,11 @@ public class SpielerPanel extends JPanel {
                     w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
-                    if (spieler.getBecher().getAnzahlWuerfe() == 3){
+                    if (spieler.getBecher().getAnzahlWuerfe() == 3) {
                         wuerfeln.setEnabled(false);
                         try {
                             Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spieler.getName()));
-                            spielfeld.getGui().sendeUpdateSignal(spieler.getName()+" ist fertig...");
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
                             //ToDo: Name des nächsten Spielers anzeigen!
                         } catch (SQLException e1) {
                             e1.printStackTrace();
@@ -320,7 +323,7 @@ public class SpielerPanel extends JPanel {
                 try {
                     int spielID = Datenbank.getInstance().selectSpielID(spieler.getName());
 
-                    if(Datenbank.getInstance().selectAktuelleHaelfte(spielID) == 0){
+                    if (Datenbank.getInstance().selectAktuelleHaelfte(spielID) == 0) {
 
                         int myPos = 0;
                         String nextPlayer = "";
@@ -328,15 +331,15 @@ public class SpielerPanel extends JPanel {
                         //Fehler war: myPos wurde mit spielfeld.getTeilnehmer().indexOf(spieler) gesucht.
                         //da die Liste Panels enthält und keine Spieler wurde immer -1 zurückgegeben
 
-                        for(SpielerPanel sp : spielfeld.getTeilnehmer()){
-                            if(sp.getSpieler().getName().equals(spieler.getName())){
+                        for (SpielerPanel sp : spielfeld.getTeilnehmer()) {
+                            if (sp.getSpieler().getName().equals(spieler.getName())) {
                                 myPos = spielfeld.getTeilnehmer().indexOf(sp);
                             }
                         }
 
-                        if(myPos+1 < spielfeld.getTeilnehmer().size()){
+                        if (myPos + 1 < spielfeld.getTeilnehmer().size()) {
 
-                            nextPlayer= spielfeld.getTeilnehmer().get(myPos+1).getSpieler().getName();
+                            nextPlayer = spielfeld.getTeilnehmer().get(myPos + 1).getSpieler().getName();
 
                             try {
                                 Datenbank.getInstance().updateAktiv(nextPlayer);
@@ -348,66 +351,79 @@ public class SpielerPanel extends JPanel {
                                 e1.printStackTrace();
                             }
 
-                            spielfeld.getGui().sendeUpdateSignal(spieler.getName()+"wurf: "+spieler.getStartwurf()+"-"+nextPlayer +" ist nun dran...");
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName() + "wurf: " + spieler.getStartwurf() + "-" + nextPlayer + " ist nun dran...");
 
-                        }else{
+                        } else {
                             try {
                                 Datenbank.getInstance().updateAktiv(spieler.getName());
                                 Datenbank.getInstance().insertHaelfte(spielID);
-                                Datenbank.getInstance().updateSpielstatus(spielID,2);
+                                Datenbank.getInstance().updateSpielstatus(spielID, 2);
                             } catch (SQLException e1) {
                                 e1.printStackTrace();
                             } catch (ClassNotFoundException e1) {
                                 e1.printStackTrace();
                             }
 
-                            spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei und die "+spielfeld.getHaelfte().getArt()+" beginnt...");
+                            spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei und die " + spielfeld.getHaelfte().getArt() + " beginnt...");
                         }
+
+                        //ende Auswuerfeln------------------------------------------------------------------------------------------------------
+
+                    } else {
+                        //Bei aufgedecktem Becher fliegen mit Klick auf Fertig alle Würfel in die Auslage
+                        if (aufgedeckt == true) {
+                            for (int i = 0; i < 3; i++) {
+
+                                if (!wuerfelAnsicht.getComponent(i).getName().equals("leer")) {
+                                    wuerfelRaus((JButton) wuerfelAnsicht.getComponent(i), i, wuerfelListener);
+                                }
+                            }
+                        }
+
+                        try {
+                            //ToDo: Würfel und fertig des Spielers mitschicken! KNA
+                            if(spieler.getBecher().getAnzahlWuerfe()==1){
+                                Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
+                            }
+
+                            Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
+                            //ToDo: Nächsten spieler im Infobereich anzeigen!
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        } catch (ClassNotFoundException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        spielfeld.setCounter(spielfeld.getCounter() - 1);
+                        spielfeld.getGui().sendeUpdateCounter(spielfeld.getCounter());
+                        if (spielfeld.getCounter() == 0) {
+                            spielfeld.getHaelfte().getRunde().auswertenBilder();
+                        }
+
+                        //spieler.setAktiv(false);
                     }
 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
-                }//ende Auswuerfeln------------------------------------------------------------------------------------------------------
-
-
-                //Bei aufgedecktem Becher fliegen mit Klick auf Fertig alle Würfel in die Auslage
-                if (aufgedeckt == true) {
-                    for (int i = 0; i < 3; i++) {
-
-                        if (!wuerfelAnsicht.getComponent(i).getName().equals("leer")) {
-                            wuerfelRaus((JButton) wuerfelAnsicht.getComponent(i), i, wuerfelListener);
-                        }
-                    }
                 }
 
-                try {
-                    //ToDo: Würfel und fertig des Spielers mitschicken! KNA
 
-                    Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
-                    spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
-                    //ToDo: Nächsten spieler im Infobereich anzeigen!
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-
-                spielfeld.pruefeFertig();
-                //spieler.setAktiv(false);
             }
         };
 
         fertig.addActionListener(fertigListener);
 
-        if(spieler.getAktiv() == true){
+        if (spieler.getAktiv() == true) {
             setBorder(new LineBorder(Color.RED, 3));
-            if(spieler.getName().equals(spielfeld.getGui().getBesitzerName()))
+            if (spieler.getName().equals(spielfeld.getGui().getBesitzerName()))
                 buttonEnable();
             spielfeld.getInfobereich().setInfos(spieler.getName() + " ist dran...");
-        }
-        else{
+        } else {
             setBorder(new LineBorder(Color.BLACK, 2));
         }
 
@@ -461,6 +477,7 @@ public class SpielerPanel extends JPanel {
 
     /**
      * Liefert den Spieler des Panels
+     *
      * @return spieler Spieler Object - der Spieler des Panels
      */
     public Spieler getSpieler() {
@@ -473,27 +490,25 @@ public class SpielerPanel extends JPanel {
      * Loescht die Wuerfel in der Auslage und im Wuerfelbereich, sowie die Strafpunkte
      * und schreibt diese neu.
      */
-        //ToDo: Da alle Panels immer neu erstellt werden, brauchen wir das eigentlich nicht....KNA
-
-    public void updatePanel(){
+    //ToDo: Da alle Panels immer neu erstellt werden, brauchen wir das eigentlich nicht....KNA
+    public void updatePanel() {
 
         strafpunkte.removeAll();
         strafpunkte.add(new JLabel("" + this.spieler.getStrafpunkte()));
         this.revalidate();
         Wuerfel[] wuerfelArray = spieler.getBecher().getWuerfelArray();
-        JButton[] btnArray = {w1,w2,w3};
+        JButton[] btnArray = {w1, w2, w3};
 
 
-
-        for(int i =0; i<3;i++){
+        for (int i = 0; i < 3; i++) {
 
             btnArray[i].setIcon(wuerfelArray[i].getGrafik());
 
-            if(wuerfelArray[i].getDraussen()){
+            if (wuerfelArray[i].getDraussen()) {
                 auslage.remove(i);
-                auslage.add(btnArray[i],i);
+                auslage.add(btnArray[i], i);
 
-            }else{
+            } else {
                 wuerfelAnsicht.remove(i);
                 wuerfelAnsicht.add(btnArray[i], i);
 
@@ -503,29 +518,29 @@ public class SpielerPanel extends JPanel {
         auslage.revalidate();
         wuerfelAnsicht.revalidate();
 
-        if(aufgedeckt)
-            ((CardLayout)wuerfel.getLayout()).show(wuerfel, "wuerfel");
+        if (aufgedeckt)
+            ((CardLayout) wuerfel.getLayout()).show(wuerfel, "wuerfel");
         else
 
-            ((CardLayout)wuerfel.getLayout()).show(wuerfel, "becher");
+            ((CardLayout) wuerfel.getLayout()).show(wuerfel, "becher");
 
     }
 
     /**
      * Wechselt die Ansicht des Wuerfelfeldes
+     *
      * @param view String {wuerfel | becher}
      * @throws IllegalArgumentException
      */
-    public void changeView(String view) throws IllegalArgumentException{
-        if(view.equals("wuerfel")||wuerfel.equals("becher"))
-            ((CardLayout) wuerfel.getLayout()).show(wuerfel,view);
+    public void changeView(String view) throws IllegalArgumentException {
+        if (view.equals("wuerfel") || wuerfel.equals("becher"))
+            ((CardLayout) wuerfel.getLayout()).show(wuerfel, view);
         else
             throw new IllegalArgumentException("Argument darf nur {wuerfel || becher} sein");
-            return;
+        return;
     }
 
     /**
-     *
      * <pre>
      * Legt die Wuerfel vom Wuerfelbereich in die Auslage.
      * Setzt das Attribut {draussen} auf true, damit diese Wuerfel nicht mehr gewuerfelt werden
@@ -536,13 +551,14 @@ public class SpielerPanel extends JPanel {
      * (Spieler hat Würfel rausgelegt)über das Netzwerk,
      *
      * </pre>
-     * @param pufferBtn JButton - Der Button, der bewegt wird
-     * @param btnIndex int - an welche Stelle der Button gelegt wird
+     *
+     * @param pufferBtn       JButton - Der Button, der bewegt wird
+     * @param btnIndex        int - an welche Stelle der Button gelegt wird
      * @param wuerfelListener - ActionListener - Damit die Wuerfel nicht mehr angeklickt werden koennen
-     *@see Spielfeld#updateSpielfeld(String)
+     * @see Spielfeld#updateSpielfeld(String)
      */
 
-    public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener){
+    public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener) {
         String ausgelegterWert = "";
         auslage.remove(btnIndex);
         auslage.add(pufferBtn, btnIndex);
@@ -554,50 +570,55 @@ public class SpielerPanel extends JPanel {
         JButton pufferBtn2 = new JButton();
         pufferBtn2.setName("leer");
         pufferBtn2.setBackground(Color.BLACK);
-        pufferBtn2.setBorder(new LineBorder(Color.BLACK,1));
+        pufferBtn2.setBorder(new LineBorder(Color.BLACK, 1));
         wuerfelAnsicht.add(pufferBtn2, btnIndex);
         wuerfelAnsicht.revalidate();
 
         //Rausgelegten wuerfel auf draussen= true, damit dieser nicht mehr gewuerfelt wird
 
-        if(pufferBtn.equals(w1)){
+        if (pufferBtn.equals(w1)) {
             spieler.getBecher().getWuerfelArray()[0].setDraussen(true);
-            ausgelegterWert =""+spieler.getBecher().getWuerfelArray()[0].getWert();
+            ausgelegterWert = "" + spieler.getBecher().getWuerfelArray()[0].getWert();
 
-        }else if(pufferBtn.equals(w2)){
+        } else if (pufferBtn.equals(w2)) {
             spieler.getBecher().getWuerfelArray()[1].setDraussen(true);
-            ausgelegterWert =""+spieler.getBecher().getWuerfelArray()[1].getWert();
-        }else{
+            ausgelegterWert = "" + spieler.getBecher().getWuerfelArray()[1].getWert();
+        } else {
             spieler.getBecher().getWuerfelArray()[2].setDraussen(true);
-            ausgelegterWert =""+spieler.getBecher().getWuerfelArray()[2].getWert();
+            ausgelegterWert = "" + spieler.getBecher().getWuerfelArray()[2].getWert();
         }
         spieler.getBecher().sortiere();
         auslageCount++;
 
 
-        if(auslageCount==3)
-            wuerfeln.setEnabled(false);
+        if (auslageCount == 3){
 
-        try {
-            Datenbank.getInstance().updateSpieler(spieler.getName(), spieler.getStrafpunkte());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+           /* try {
+                Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
+                spielfeld.getGui().sendeUpdateCounter(spielfeld.getCounter()-1);
+                Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spieler.getName()));
+                //changed
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }*/
+
+            this.wuerfeln.setEnabled(false);
         }
 
-        spielfeld.updateSpielfeld("" + spieler.getName() + " hat eine " + ausgelegterWert + " ausgelegt.");
     }
 
-    /**<pre>
+    /**
+     * <pre>
      * Enabled alle Buttons des Panels,
      * wird genutzt, wenn der Spieler aktiv ist
      * </pre>
-     *
      */
-    public void buttonEnable(){
+    public void buttonEnable() {
         becher.setEnabled(true);
         wuerfeln.setEnabled(true);
         fertig.setEnabled(true);
@@ -608,6 +629,7 @@ public class SpielerPanel extends JPanel {
 
     /**
      * Liefert den JButton Becher des Panels
+     *
      * @return becher JButton Object
      */
     public JButton getBecher() {
@@ -617,6 +639,7 @@ public class SpielerPanel extends JPanel {
 
     /**
      * Setzt den JButton Becher des Panels
+     *
      * @param becher JButton Object
      */
     public void setBecher(JButton becher) {

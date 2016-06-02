@@ -49,6 +49,9 @@ public class Client {
                         while ((zeile = reader.readLine()) != null){
                             if(zeile.contains("#")){
                                 gui.getSpielfeld().updateSpielfeld(zeile.substring(1));
+                            }else if (zeile.contains("@")){
+                                System.out.println("updateCounter: " +zeile.substring(1));
+                                gui.getSpielfeld().setCounter(Integer.parseInt(zeile.substring(1)));
                             }
 
                             else
@@ -92,6 +95,18 @@ public class Client {
             System.out.println("UpdateSignal gesendet");
         } catch (IOException e) {
             System.out.println("UpdateSignal nicht moeglich");
+            e.printStackTrace();
+        }
+    }
+
+    public void sendeUpdateCounter(int counter){
+        try {
+            writer.write("@"+counter);
+            writer.newLine();
+            writer.flush();
+            System.out.println("CounterSignal gesendet");
+        } catch (IOException e) {
+            System.out.println("CountSignal nicht möglich");
             e.printStackTrace();
         }
     }

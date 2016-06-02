@@ -304,6 +304,13 @@ public class GUI extends JFrame {
             this.client.sendeUpdate(info);
     }
 
+    public void sendeUpdateCounter(int counter) {
+        if (this.client == null)
+            System.out.println("client nicht gefunden");
+        else
+            this.client.sendeUpdateCounter(counter);
+    }
+
     /**
      * Setzt den Client der GUI
      *

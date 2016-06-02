@@ -137,6 +137,13 @@ public class Datenbank {
             if (eingabe == JOptionPane.CANCEL_OPTION) {
                 System.exit(0);
             }
+            if (eingabe == JOptionPane.CLOSED_OPTION) {
+                System.exit(0);
+            }
+        }
+
+        if (n == JOptionPane.CANCEL_OPTION) {
+            System.exit(0);
         }
 
         if (n == JOptionPane.CLOSED_OPTION) {
@@ -408,7 +415,7 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
 
         Wuerfel[] wuerfelArray = new Wuerfel[3];
-        int stelle = 0;
+
 
         int spielID = selectSpielID(kennung);
         int haelfte = selectAktuelleHaelfte(spielID);
@@ -420,11 +427,15 @@ public class Datenbank {
                 " AND fk_t_spiel_spiel_id="+spielID);
 
 
-        while(rS.next()){
-            ObjectInputStream oIS = new ObjectInputStream(new ByteArrayInputStream(rS.getBytes(stelle+1)));
-            wuerfelArray[stelle] = (Wuerfel) oIS.readObject();
-            System.out.println("Wuerfel "+stelle+"ist erstellt: "+wuerfelArray[stelle]);
-            stelle++;
+        if(rS.next()){
+            for (int stelle =0 ; stelle < 3; stelle++) {
+
+                ObjectInputStream oIS = new ObjectInputStream(new ByteArrayInputStream(rS.getBytes(stelle+1)));
+                wuerfelArray[stelle] = (Wuerfel) oIS.readObject();
+                System.out.println("Wuerfel "+stelle+"ist erstellt: "+wuerfelArray[stelle]);
+
+            }
+
         }
         System.out.println("Bin aus der Schleife raus!");
         return wuerfelArray;
@@ -755,10 +766,10 @@ public class Datenbank {
         java.util.List<Boolean> spielerAktiv = new ArrayList<>();
 
 
-        ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung,startwurf FROM t_spieler WHERE kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client WHERE fk_t_spiel_spiel_id =7)  ORDER BY startwurf DESC");
+        ResultSet rs = stmt.executeQuery("SELECT aktiv,kennung,startwurf FROM t_spieler WHERE kennung IN(SELECT fk_t_spieler_kennung FROM t_ist_client WHERE fk_t_spiel_spiel_id = "+ spielID +")  ORDER BY startwurf DESC");
         while (rs.next()) {
-            spieler.add(rs.getString("kennung"));
-            spielerAktiv.add(rs.getBoolean("aktiv"));
+            spieler.add(rs.getString(2));
+            spielerAktiv.add(rs.getBoolean(1));
         }
         System.out.println(spieler.toString());
         while (!spielerAktiv.get(0)) {
@@ -1241,7 +1252,7 @@ public class Datenbank {
             if(rS.next()){
                 if(rS.getInt(1)!=0){
                     spieler.setWurf(selectDurchgang(kennung));
-                    spieler.getBecher().setAnzahlWuerfe(r.getInt(1));
+                    spieler.getBecher().setAnzahlWuerfe(rS.getInt(1));
                 }
 
 
@@ -1266,7 +1277,7 @@ public class Datenbank {
 
         PreparedStatement ps = verbindung.prepareStatement(
                 "UPDATE t_spieler" +
-                        "SET strafpunkte= ?" +
+                        "SET strafpunkte = ?" +
                         "WHERE kennung= '" + kennung + "'");
         ps.setInt(1, strafpunkte);
         //ps.setString(2, kennung);
