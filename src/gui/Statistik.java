@@ -53,11 +53,11 @@ public class Statistik extends JPanel {
         JPanel mitte = new JPanel();
         mitte.setLayout(new BoxLayout(mitte, BoxLayout.Y_AXIS));
         mitte.setBackground(Color.DARK_GRAY);
-        mitte.setPreferredSize(new Dimension(1020, 600));
+        mitte.setPreferredSize(new Dimension(600, 600));
 
         JPanel jPName = new JPanel(new FlowLayout());
         jPName.setBackground(Color.DARK_GRAY);
-        jLName = new JLabel("TEST NAME");
+        jLName = new JLabel("NAME");
         jLName.setBackground(Color.BLACK);
         jLName.setFont(new Font("Arial", Font.BOLD, 25));
         jLName.setForeground(Color.RED);
@@ -68,7 +68,7 @@ public class Statistik extends JPanel {
         JPanel jPProfilbild = new JPanel(new FlowLayout());
         jPProfilbild.setBackground(Color.BLACK);
         jLProfilbild = new JLabel();
-        jLProfilbild.setIcon(Grafik.AVATAR_BB8);
+        jLProfilbild.setIcon(Grafik.LOGO);
         jLProfilbild.setBackground(Color.WHITE);
         jLProfilbild.setPreferredSize(new Dimension(150, 150));
 

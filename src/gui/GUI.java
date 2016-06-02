@@ -129,7 +129,24 @@ public class GUI extends JFrame {
 
         //-------------------------------------SUPER-FRAME-------------------------------------------------------------
 
-        add(jp);
+        JPanel jPOben = new JPanel();
+        jPOben.setBackground(Color.BLACK);
+        add(jPOben, BorderLayout.NORTH);
+
+        add(jp, BorderLayout.CENTER);
+
+        JPanel jPUnten = new JPanel();
+        jPUnten.setBackground(Color.BLACK);
+        add(jPUnten, BorderLayout.SOUTH);
+
+        JPanel jPLinks = new JPanel();
+        jPLinks.setBackground(Color.BLACK);
+        add(jPLinks, BorderLayout.WEST);
+
+        JPanel jPRechts = new JPanel();
+        jPRechts.setBackground(Color.BLACK);
+        add(jPRechts, BorderLayout.EAST);
+
         setSize(1024, 768);
         setLocationRelativeTo(null);
         setVisible(true);

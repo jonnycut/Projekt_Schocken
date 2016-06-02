@@ -66,7 +66,7 @@ public class Grafik {
 
     //------------------------------------------------GRAFIKEN---------------------------------------------------------
 
-    //public static final Icon LOGO = new ImageIcon(Grafik.class.getResource("logo.jpg"));
+    public static final Icon LOGO = new ImageIcon(Grafik.class.getResource("logo.jpg"));
 
     public static final Icon LOGO1 = new ImageIcon(Grafik.class.getResource("logo.png"));
 
