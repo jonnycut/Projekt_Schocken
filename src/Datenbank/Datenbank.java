@@ -415,17 +415,18 @@ public class Datenbank {
         int rundenNr = selectAktuelleRunde(spielID);
 
         ResultSet rS = stmt.executeQuery("SELECT wuerfel1, wuerfel2, wuerfel3 FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
-                "', AND fk_t_runde_rundennr ="+rundenNr+
-                ", AND fk_t_haelfte_art="+haelfte+
-                ", AND fk_t_spiel_spiel_id="+spielID);
+                "' AND fk_t_runde_rundennr ="+rundenNr+
+                " AND fk_t_hälfte_art="+haelfte+
+                " AND fk_t_spiel_spiel_id="+spielID);
+
 
         while(rS.next()){
-            ObjectInputStream oIS = new ObjectInputStream(new ByteArrayInputStream(rS.getBytes(1)));
+            ObjectInputStream oIS = new ObjectInputStream(new ByteArrayInputStream(rS.getBytes(stelle+1)));
             wuerfelArray[stelle] = (Wuerfel) oIS.readObject();
             System.out.println("Wuerfel "+stelle+"ist erstellt: "+wuerfelArray[stelle]);
             stelle++;
         }
-
+        System.out.println("Bin aus der Schleife raus!");
         return wuerfelArray;
     }
     /**
@@ -486,7 +487,7 @@ public class Datenbank {
     public int selectStockStatus(int spielID) throws SQLException {
         int haelfte = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery("SELECT stock FROM t_hälfte WHERE fk_t_spielid="+spielID+", AND art = "+haelfte);
+        ResultSet r = stmt.executeQuery("SELECT stock FROM t_hälfte WHERE fk_t_spiel_spiel_id="+spielID+" AND art = "+haelfte);
 
         if(r.next())
             return r.getInt(1);
@@ -1268,7 +1269,7 @@ public class Datenbank {
                         "SET strafpunkte= ?" +
                         "WHERE kennung= '" + kennung + "'");
         ps.setInt(1, strafpunkte);
-        ps.setString(2, kennung);
+        //ps.setString(2, kennung);
         ps.executeUpdate();
 
 

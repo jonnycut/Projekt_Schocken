@@ -255,7 +255,7 @@ public class SpielerPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (spieler.getBecher().getAnzahlWuerfe() < 3) {
-                    //ToDo: MaxWuerfe anhand des Beginners begrenzen KNA
+                    //ToDo: MaxWuerfe anhand des Beginners begrenzen KNA -> Opa's Abfrage
 
                     ((CardLayout) wuerfel.getLayout()).show(wuerfel, "becher");
                     aufgedeckt = false;
@@ -268,7 +268,8 @@ public class SpielerPanel extends JPanel {
                         }
                         else {
                             spieler.wuerfeln();
-                            Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
+                            Datenbank.getInstance().insertDurchgang(spieler.getName(), spieler.getBecher().getWuerfelArray());
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName() +" hat gewürfelt");
                         }
 
                     } catch (SQLException e1) {
@@ -282,8 +283,19 @@ public class SpielerPanel extends JPanel {
                     w1.setIcon(spieler.getBecher().getWuerfelArray()[0].getGrafik());
                     w2.setIcon(spieler.getBecher().getWuerfelArray()[1].getGrafik());
                     w3.setIcon(spieler.getBecher().getWuerfelArray()[2].getGrafik());
-                    if (spieler.getBecher().getAnzahlWuerfe() == 3)
+                    if (spieler.getBecher().getAnzahlWuerfe() == 3){
                         wuerfeln.setEnabled(false);
+                        try {
+                            Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spieler.getName()));
+                            spielfeld.getGui().sendeUpdateSignal(spieler.getName()+" ist fertig...");
+                            //ToDo: Name des nächsten Spielers anzeigen!
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        } catch (ClassNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+
                 } else {
 
                     JOptionPane.showMessageDialog(null, "Keine Wuerfe mehr verfügbar, bitte drücken Sie Fertig");
@@ -303,7 +315,7 @@ public class SpielerPanel extends JPanel {
                 spieler.setFertig(true);
                 wuerfeln.setEnabled(false);
                 fertig.setEnabled(false);
-    //ToDo:hier abfangen, dass das nur beim Auswürfeln passiert
+
 
                 try {
                     int spielID = Datenbank.getInstance().selectSpielID(spieler.getName());
@@ -342,6 +354,7 @@ public class SpielerPanel extends JPanel {
                             try {
                                 Datenbank.getInstance().updateAktiv(spieler.getName());
                                 Datenbank.getInstance().insertHaelfte(spielID);
+                                Datenbank.getInstance().updateSpielstatus(spielID,2);
                             } catch (SQLException e1) {
                                 e1.printStackTrace();
                             } catch (ClassNotFoundException e1) {
@@ -351,13 +364,15 @@ public class SpielerPanel extends JPanel {
                             spielfeld.getGui().sendeUpdateSignal("Auswürfeln vorbei und die "+spielfeld.getHaelfte().getArt()+" beginnt...");
                         }
                     }
+
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
-                }
- //ToDo: Ende nur Auswürfeln
+                }//ende Auswuerfeln------------------------------------------------------------------------------------------------------
 
+
+                //Bei aufgedecktem Becher fliegen mit Klick auf Fertig alle Würfel in die Auslage
                 if (aufgedeckt == true) {
                     for (int i = 0; i < 3; i++) {
 
@@ -367,17 +382,20 @@ public class SpielerPanel extends JPanel {
                     }
                 }
 
-//                try {
-//                    //ToDo: Würfel und fertig des Spielers mitschicken! KNA
-//                    Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
-//                } catch (SQLException e1) {
-//                    e1.printStackTrace();
-//                } catch (ClassNotFoundException e1) {
-//                    e1.printStackTrace();
-//                }
+                try {
+                    //ToDo: Würfel und fertig des Spielers mitschicken! KNA
+
+                    Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
+                    spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
+                    //ToDo: Nächsten spieler im Infobereich anzeigen!
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
 
                 spielfeld.pruefeFertig();
-                spieler.setAktiv(false);
+                //spieler.setAktiv(false);
             }
         };
 
@@ -525,12 +543,13 @@ public class SpielerPanel extends JPanel {
      */
 
     public void wuerfelRaus(JButton pufferBtn, int btnIndex, ActionListener wuerfelListener){
-        String ausgelegterWert="";
+        String ausgelegterWert = "";
         auslage.remove(btnIndex);
         auslage.add(pufferBtn, btnIndex);
 
         wuerfelAnsicht.remove(pufferBtn);
         pufferBtn.removeActionListener(wuerfelListener);
+
 
         JButton pufferBtn2 = new JButton();
         pufferBtn2.setName("leer");
@@ -558,7 +577,7 @@ public class SpielerPanel extends JPanel {
 
         if(auslageCount==3)
             wuerfeln.setEnabled(false);
-        //ToDo: Gesamtes Updaten, inkl der Würfel schicken. KNA
+
         try {
             Datenbank.getInstance().updateSpieler(spieler.getName(), spieler.getStrafpunkte());
         } catch (SQLException e) {
