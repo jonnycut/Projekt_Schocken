@@ -20,7 +20,6 @@ public class Main {
 
         Datenbank.dbErstellen();
         new GUI();
-
     }
 
 }

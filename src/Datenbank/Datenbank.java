@@ -403,7 +403,7 @@ public class Datenbank {
 
         ResultSet rSC = stmt.executeQuery("SELECT COUNT(zaehler) FROM t_durchgang WHERE fk_t_spieler_kennung ='" + kennung +
                 "' AND fk_t_runde_rundennr =" + rundenNr +
-                " AND fk_t_hälfte_art=" + haelfte +
+                " AND fk_t_haelfte_art=" + haelfte +
                 " AND fk_t_spiel_spiel_id=" + spielID);
 
         if(rSC.next()){
@@ -412,7 +412,7 @@ public class Datenbank {
 
         ResultSet rS = stmt.executeQuery("SELECT wuerfel1, wuerfel2, wuerfel3 FROM t_durchgang WHERE fk_t_spieler_kennung ='"+kennung+
                 "' AND fk_t_runde_rundennr ="+rundenNr+
-                " AND fk_t_hälfte_art="+haelfte+
+                " AND fk_t_haelfte_art="+haelfte+
                 " AND fk_t_spiel_spiel_id="+spielID+
                 " AND zaehler ="+letzter);
 
@@ -450,19 +450,19 @@ public class Datenbank {
         int abgeschlosseneHaelfte = selectAktuelleHaelfte(spielID);
         int neueHaelfte = selectAktuelleHaelfte(spielID) + 1;
         if (neueHaelfte > 1) {
-            ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_runde WHERE fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + abgeschlosseneHaelfte);
+            ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_runde WHERE fk_t_spiel_spiel_id = " + spielID + " AND fk_t_haelfte_art=" + abgeschlosseneHaelfte);
             if (r.next()) {
                 inserthaelftenVerlierer(r.getString(1), spielID, abgeschlosseneHaelfte);
             }
         }
         try {
             stmt.executeUpdate("Update t_spieler SET Strafpunkte = 0 Where Kennung IN(Select fk_t_spieler_kennung from " +
-                    "((t_Spiel INNER JOIN t_hälfte ON t_hälfte.fk_t_spiel_spiel_id=" + spielID + ")INNER JOIN t_ist_client " +
+                    "((t_Spiel INNER JOIN t_haelfte ON t_haelfte.fk_t_spiel_spiel_id=" + spielID + ")INNER JOIN t_ist_client " +
                     "ON t_ist_client.fk_t_spiel_spiel_id=" + spielID + "))");
 
-            stmt.executeUpdate("INSERT INTO t_hälfte (fk_t_spiel_spiel_id,art) VALUES (" + spielID + "," + neueHaelfte + ")");
+            stmt.executeUpdate("INSERT INTO t_haelfte (fk_t_spiel_spiel_id,art) VALUES (" + spielID + "," + neueHaelfte + ")");
             insertersteRunde(spielID);
-            stmt.executeUpdate("Update t_runde SET rundennr=1 WHERE fk_t_spiel_spiel_id=" + spielID + " AND fk_t_hälfte_art=" + neueHaelfte);
+            stmt.executeUpdate("Update t_runde SET rundennr=1 WHERE fk_t_spiel_spiel_id=" + spielID + " AND fk_t_haelfte_art=" + neueHaelfte);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -487,7 +487,7 @@ public class Datenbank {
             statistik.add(verloreneRunden.getInt(1));
         }
 
-        ResultSet verloreneHaelften = stmt.executeQuery("Select Count(verlierer) from t_hälfte where verlierer='" + kennung + "'");
+        ResultSet verloreneHaelften = stmt.executeQuery("Select Count(verlierer) from t_haelfte where verlierer='" + kennung + "'");
         if (verloreneHaelften.next()) {
             statistik.add(verloreneHaelften.getInt(1));
         }
@@ -532,7 +532,7 @@ public class Datenbank {
         int haelftenArt = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
         try {
-            stmt.executeUpdate("Update t_hälfte set Stock= (Stock - " + strafpunkte + ") Where (fk_t_spiel_spiel_id = " + spielID + " AND art = " + haelftenArt + ")");
+            stmt.executeUpdate("Update t_haelfte set Stock= (Stock - " + strafpunkte + ") Where (fk_t_spiel_spiel_id = " + spielID + " AND art = " + haelftenArt + ")");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -571,7 +571,7 @@ public class Datenbank {
     public int selectStockStatus(int spielID) throws SQLException {
         int haelfte = selectAktuelleHaelfte(spielID);
         Statement stmt = verbindung.createStatement();
-        ResultSet r = stmt.executeQuery("SELECT stock FROM t_hälfte WHERE fk_t_spiel_spiel_id=" + spielID + " AND art = " + haelfte);
+        ResultSet r = stmt.executeQuery("SELECT stock FROM t_haelfte WHERE fk_t_spiel_spiel_id=" + spielID + " AND art = " + haelfte);
 
         if (r.next())
             return r.getInt(1);
@@ -609,7 +609,7 @@ public class Datenbank {
         Statement stmt = verbindung.createStatement();
         int aktuelleHaelfte = 0;
 
-        ResultSet r = stmt.executeQuery("Select art from t_hälfte where fk_t_spiel_spiel_id = " + spiel_ID + " Order By art DESC limit 1");
+        ResultSet r = stmt.executeQuery("Select art from t_haelfte where fk_t_spiel_spiel_id = " + spiel_ID + " Order By art DESC limit 1");
 
         if (r.next()) {
             aktuelleHaelfte = r.getInt(1);
@@ -737,7 +737,7 @@ public class Datenbank {
 
         //weitere Runden erstellen
         try {
-            stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + nächsterbeginner + "')");
+            stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_haelfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + nächsterbeginner + "')");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -799,8 +799,8 @@ public class Datenbank {
     /**
      * Methode zum aktualisieren des Spielstatus
      *
-     * @param spielID--> des Spiels welches akzualisiert werden soll
-     * @param status-->  2 für es wird gespielt; 3 für Spiel beendet
+     * @param spielID  des Spiels welches akzualisiert werden soll
+     * @param status  2 für es wird gespielt; 3 für Spiel beendet
      * @throws SQLException
      */
     public void updateSpielstatus(int spielID, int status) throws SQLException {
@@ -838,7 +838,7 @@ public class Datenbank {
         int rundennr = selectAktuelleRunde(spielID);
         int art = selectAktuelleHaelfte(spielID);
 
-        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' ,gewinner = '" + gewinner + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_hälfte_art=" + art);
+        stmt.executeUpdate("UPDATE  t_runde SET  verlierer = '" + verlierer + "' ,gewinner = '" + gewinner + "' WHERE rundennr = " + rundennr + " AND fk_t_spiel_spiel_id = " + spielID + " AND fk_t_haelfte_art=" + art);
     }
 
     /**
@@ -874,8 +874,8 @@ public class Datenbank {
 
     /**
      * Fügt einen Wurf des Spielers in die Datenbank ein
-     * über die Kennung des Spielers wird die SspielID des Spiels in dem er sich befindet gesucht -->nutzt selectSpielID
-     * Mit dieser SpielID wird die aktuelle Hälfte und RundeNr. gesucht --> nutzt selectAktuelleHaelfte und select AktuelleRunde
+     * über die Kennung des Spielers wird die SspielID des Spiels in dem er sich befindet gesucht -- nutzt selectSpielID
+     * Mit dieser SpielID wird die aktuelle Hälfte und RundeNr. gesucht -- nutzt selectAktuelleHaelfte und select AktuelleRunde
      * Die Würfel werden aus dem tempoären Spieler als einzelne Objekte in jeweils einen Stream geschrieben und als BYTEA in die Datenbank geschrieben
      * Im ResultSet werden die Zeilen gezählt die sich für den Spieler im aktuellen Durchgang befinden.
      *
@@ -919,7 +919,7 @@ public class Datenbank {
 
         ResultSet r = stmt.executeQuery("SELECT count(zaehler) FROM t_durchgang" +
                 " WHERE fk_t_spieler_kennung = '" + kennung + "' AND fk_t_spiel_spiel_id = " + spielID +
-                " AND fk_t_hälfte_art = " + haelfte +
+                " AND fk_t_haelfte_art = " + haelfte +
                 " AND fk_t_runde_rundennr = " + rundennr);
 
 
@@ -927,7 +927,7 @@ public class Datenbank {
             if (r.getInt(1) == 0) {
 
                 PreparedStatement ps = verbindung.prepareStatement(
-                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
+                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_haelfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
                                 " VALUES(?,?,?,?,?,?,?,?)");
 
                 ps.setString(1, kennung);
@@ -942,7 +942,7 @@ public class Datenbank {
             }
             if (r.getInt(1) == 1) {
                 PreparedStatement ps = verbindung.prepareStatement(
-                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
+                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_haelfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
                                 " VALUES(?,?,?,?,?,?,?,?)");
 
                 ps.setString(1, kennung);
@@ -957,7 +957,7 @@ public class Datenbank {
             }
             if (r.getInt(1) == 2) {
                 PreparedStatement ps = verbindung.prepareStatement(
-                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_hälfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
+                        "INSERT INTO t_durchgang(fk_t_spieler_kennung, fk_t_spiel_spiel_id, fk_t_haelfte_art, fk_t_runde_rundennr, wuerfel1, wuerfel2, wuerfel3,zaehler)" +
                                 " VALUES(?,?,?,?,?,?,?,?)");
 
                 ps.setString(1, kennung);
@@ -996,13 +996,13 @@ public class Datenbank {
         //1.Runde erstellen
         if (haelfte == 1) {
             try {
-                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_haelfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + ersterBeginner + "')");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_hälfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + haelftenverlierer + "')");
+                stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_haelfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + haelftenverlierer + "')");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -1034,7 +1034,7 @@ public class Datenbank {
         String verlierer = null;
         Statement stmt = verbindung.createStatement();
 
-        ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_hälfte WHERE fk_t_spiel_spiel_id =" + spielID + " AND art=" + haelfte);
+        ResultSet r = stmt.executeQuery("SELECT verlierer FROM t_haelfte WHERE fk_t_spiel_spiel_id =" + spielID + " AND art=" + haelfte);
 
         if (r.next()) {
             verlierer = r.getString(1);
@@ -1055,7 +1055,7 @@ public class Datenbank {
         int haelfte = selectAktuelleHaelfte(spielID);
 
 
-        ResultSet r = stmt.executeQuery("SELECT max(rundennr) FROM t_runde WHERE fk_t_spiel_spiel_id= " + spielID + " AND fk_t_hälfte_art=" + haelfte);
+        ResultSet r = stmt.executeQuery("SELECT max(rundennr) FROM t_runde WHERE fk_t_spiel_spiel_id= " + spielID + " AND fk_t_haelfte_art=" + haelfte);
 
         if (r.next()) {
             rundennr = r.getInt(1);
@@ -1132,7 +1132,7 @@ public class Datenbank {
      * @return true wenn der Spieler berechtigt ist ein neues Spiel anzulgen
      * @throws SQLException
      */
-    private boolean prüfeSpielleiterStatus(String kennung) throws SQLException {
+    private boolean pruefeSpielleiterStatus(String kennung) throws SQLException {
         Statement stmt = verbindung.createStatement();
         ResultSet r = stmt.executeQuery("SELECT * From t_spiel where fk_t_spielleiter_kennung= " + "'" + kennung + "'");
 
@@ -1160,7 +1160,7 @@ public class Datenbank {
      */
     private void insertSpiel(String spielleiter) throws SQLException {
 
-        if (prüfeSpielleiterStatus(spielleiter)) {
+        if (pruefeSpielleiterStatus(spielleiter)) {
 
             Statement stmt = verbindung.createStatement();
 
@@ -1207,7 +1207,7 @@ public class Datenbank {
     private void inserthaelftenVerlierer(String verlierer, int spielID, int art) throws SQLException {
         Statement stmt = verbindung.createStatement();
 
-        stmt.executeUpdate("UPDATE t_hälfte SET verlierer = '" + verlierer + "' WHERE fk_t_spiel_spiel_id = " + spielID + " AND art=" + art);
+        stmt.executeUpdate("UPDATE t_haelfte SET verlierer = '" + verlierer + "' WHERE fk_t_spiel_spiel_id = " + spielID + " AND art=" + art);
 
     }
 
@@ -1335,7 +1335,7 @@ public class Datenbank {
 
             ResultSet rS = stmt.executeQuery("SELECT COUNT(*) FROM t_durchgang WHERE fk_t_spieler_kennung ='" + kennung +
                     "' AND fk_t_runde_rundennr =" + rundenNr +
-                    " AND fk_t_hälfte_art=" + haelfte +
+                    " AND fk_t_haelfte_art=" + haelfte +
                     " AND fk_t_spiel_spiel_id=" + spielID);
             if (rS.next()) {
                 if (rS.getInt(1) != 0) {
