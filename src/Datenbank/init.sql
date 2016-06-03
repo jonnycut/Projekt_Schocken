@@ -17,7 +17,7 @@ CREATE TABLE t_Spieler(
   IP VARCHAR(15) ,
   Profilbild BYTEA,
   Aktiv BOOLEAN DEFAULT FALSE ,
-  Abbrüche INT DEFAULT 0,
+  Abbrueche INT DEFAULT 0,
   Strafpunkte INT DEFAULT 0,
   Startwurf INT,
   CONSTRAINT PK_t_spieler PRIMARY KEY (Kennung)
@@ -63,12 +63,12 @@ CREATE TABLE t_ist_client(
 -- Der Stock ist der Speicher für die Strafpunkte die die Spieler anhand iherer Rundenergebnisse und gewürfelten Bilder erhalten beim Update werden diese vom Stock abgezogen
 -- PK setz sich aus der Spiel_ID und der Hälftenart zusammen um sicherzustellen das es meherer Hälften in ein und dem Selben Spiel geben kann
 -- FK der Fremdschlüssel aus der Relation t_Spiel kaskadierendes Löschen und Updaten
-CREATE TABLE t_Hälfte(
+CREATE TABLE t_Haelfte(
   Art INT,
   fk_t_Spiel_Spiel_ID INT ,
   Verlierer VARCHAR(30),
   Stock INT DEFAULT 13,
-  CONSTRAINT PK_t_Hälfte PRIMARY KEY(Art,fk_t_Spiel_Spiel_ID) ,
+  CONSTRAINT PK_t_Haelfte PRIMARY KEY(Art,fk_t_Spiel_Spiel_ID) ,
   CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY  (fk_t_Spiel_Spiel_ID)REFERENCES t_Spiel(Spiel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 --Relation t_Runde wird angelegt
@@ -79,13 +79,13 @@ CREATE TABLE t_Hälfte(
 CREATE TABLE t_Runde(
   RundenNr INT,
   fk_t_Spiel_Spiel_ID INT,
-  fk_t_Hälfte_Art INT,
+  fk_t_Haelfte_Art INT,
   Beginner VARCHAR(30),
   Verlierer VARCHAR(30),
   Gewinner VARCHAR(30),
 
-  CONSTRAINT PK_t_Runde PRIMARY KEY (RundenNr,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art),
-  CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY (fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art)REFERENCES t_hälfte(fk_t_spiel_spiel_ID,Art) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT PK_t_Runde PRIMARY KEY (RundenNr,fk_t_Spiel_Spiel_ID,fk_t_Haelfte_Art),
+  CONSTRAINT FK_t_Spiel_Spiel_ID FOREIGN KEY (fk_t_Spiel_Spiel_ID,fk_t_Haelfte_Art)REFERENCES t_haelfte(fk_t_spiel_spiel_ID,Art) ON UPDATE CASCADE ON DELETE CASCADE
 );
 --die Relation t_Durchgang wird angelegt
 --In dieser Tabelle haben wir eine Schlüsselkonstellation die sich durch die Abhängigkeiten der übergordneten Relationen
@@ -96,15 +96,15 @@ CREATE TABLE t_Runde(
 CREATE TABLE t_Durchgang(
   fk_t_Spieler_Kennung VARCHAR(30),
   fk_t_Spiel_Spiel_ID INT,
-  fk_t_Hälfte_Art INT,
+  fk_t_Haelfte_Art INT,
   fk_t_Runde_RundenNr INT,
   Wuerfel1 BYTEA,
   Wuerfel2 BYTEA,
   Wuerfel3 BYTEA,
   zaehler INT DEFAULT 1,
 
-  CONSTRAINT PK_t_Durchgang PRIMARY KEY (zaehler,fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr),
-  CONSTRAINT FK_t_Runde FOREIGN KEY (fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,fk_t_Runde_RundenNr) REFERENCES t_runde(fk_t_Spiel_Spiel_ID,fk_t_Hälfte_Art,RundenNr)
+  CONSTRAINT PK_t_Durchgang PRIMARY KEY (zaehler,fk_t_Spieler_Kennung,fk_t_Spiel_Spiel_ID,fk_t_Haelfte_Art,fk_t_Runde_RundenNr),
+  CONSTRAINT FK_t_Runde FOREIGN KEY (fk_t_Spiel_Spiel_ID,fk_t_Haelfte_Art,fk_t_Runde_RundenNr) REFERENCES t_runde(fk_t_Spiel_Spiel_ID,fk_t_Haelfte_Art,RundenNr)
 
 ) ;
 
