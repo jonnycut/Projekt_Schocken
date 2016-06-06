@@ -38,17 +38,32 @@ public class Stock {
      * Wenn die anzahl -gt- strafpunkte auf dem Stock, werden nur die übrigen zurückgegeben.
      *
      * @param anzahl Int
+     * @param spielID
      * @return anzahl int = anzahl
      */
-    public int popStrafpunkt(int anzahl) {
+    public int popStrafpunkt(int anzahl, int spielID) {
 
         if (this.strafpunkte >= anzahl) {
             this.strafpunkte -= anzahl;
+            try {
+                Datenbank.getInstance().updateStock(anzahl,spielID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             return anzahl;
 
         } else if (this.strafpunkte < anzahl) {
             int puffer = strafpunkte;
             strafpunkte = 0;
+            try {
+                Datenbank.getInstance().updateStock(puffer,spielID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             return puffer;
         } else {
             return 0;

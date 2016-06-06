@@ -136,6 +136,8 @@ public class Runde {
                 System.out.println("Fehler im letzten Bild");
         }
 
+
+
         //TestAusgabe, fliegt später raus:
         String wuerfelG = "" + gewinner.getBecher().getSortierteWuerfel()[0].getWert() + "-" + gewinner.getBecher().getSortierteWuerfel()[1].getWert() + "-" + gewinner.getBecher().getSortierteWuerfel()[2].getWert();
         String wuerfelV = "" + verlierer.getBecher().getSortierteWuerfel()[0].getWert() + "-" + verlierer.getBecher().getSortierteWuerfel()[1].getWert() + "-" + verlierer.getBecher().getSortierteWuerfel()[2].getWert();
@@ -154,16 +156,37 @@ public class Runde {
             s.getBecher().resetWurf();
         }
 
-        try {
-            int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
-            gui.sendeUpdateCounter(teilnehmer.size());
-            Datenbank.getInstance().insertRundenergebnis(spielID, verlierer.getName(), gewinner.getName());
-            Datenbank.getInstance().insertRunde(spielID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        if(verlierer.getStrafpunkte()==13){
+            try {
+
+                int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
+                Datenbank.getInstance().insertRundenergebnis(spielID, verlierer.getName(), gewinner.getName());
+                Datenbank.getInstance().insertHaelfte(spielID);
+                gui.getSpielfeld().getHaelfte().updateHaelfte(spielID);
+                gui.getSpielfeld().setCounter(teilnehmer.size());
+                gui.sendeUpdateCounter(gui.getSpielfeld().getCounter());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }else{
+
+            try {
+                int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
+                gui.sendeUpdateCounter(teilnehmer.size());
+                Datenbank.getInstance().insertRundenergebnis(spielID, verlierer.getName(), gewinner.getName());
+                Datenbank.getInstance().insertRunde(spielID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
         }
+
         gui.sendeUpdateSignal(gewinner.getName()+" mit "+gewinner.getLetztesBild()+" || "+ verlierer.getName()+" mit "+verlierer.getLetztesBild()+". Bekommt: "+verlierer.getStrafpunkte());
 
     }
@@ -186,8 +209,8 @@ public class Runde {
     public void verteileStrafpunkte(Spieler gewinner, Spieler verlierer, int anzahl) {
         //ToDo: Schock Aus = RundenEnde
         if (this.stock.getStrafpunkte() == 0) {
-            gewinner.popStrafpunkte(anzahl);
-            verlierer.pushStrafpunkte(anzahl);
+
+            verlierer.pushStrafpunkte(gewinner.popStrafpunkte(anzahl));
             try {
 
                 Datenbank.getInstance().updateSpieler(gewinner.getName(),gewinner.getStrafpunkte());
@@ -202,10 +225,11 @@ public class Runde {
 
 
         } else {
-            verlierer.pushStrafpunkte(stock.popStrafpunkt(anzahl));
+
             try {
                 int spielID = Datenbank.getInstance().selectSpielID(verlierer.getName());
-                Datenbank.getInstance().updateStock(anzahl,spielID);
+                verlierer.pushStrafpunkte(stock.popStrafpunkt(anzahl,spielID));
+
                 Datenbank.getInstance().updateSpieler(verlierer.getName(),verlierer.getStrafpunkte());
             } catch (SQLException e) {
                 e.printStackTrace();

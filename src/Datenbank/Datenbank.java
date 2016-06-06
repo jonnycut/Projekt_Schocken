@@ -7,6 +7,7 @@ package Datenbank;
  */
 
 
+import jdk.nashorn.internal.objects.annotations.Where;
 import spiel.Spieler;
 import spiel.Wuerfel;
 import javax.imageio.ImageIO;
@@ -468,6 +469,21 @@ public class Datenbank {
         }
     }
 
+    public  int selectMaxWuerfe(int spielID) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int haelfte=selectAktuelleHaelfte(spielID);
+        int rundennr = selectAktuelleRunde(spielID);
+        String rundenbeginner = selectnaechsterBeginner(spielID);
+        int maxWuerfe=0;
+
+        ResultSet r = stmt.executeQuery("SELECT  zaehler FROM t_durchgang WHERE fk_t_spieler_kennung='"+rundenbeginner+"' AND fk_t_spiel_spiel_id="+spielID+
+                " AND fk_t_haelfte_art="+haelfte+" AND fk_t_runde_rundennr="+rundennr+" Order by zaehler DESC limit 1");
+        if(r.next()){
+            maxWuerfe=r.getInt(1);
+        }
+        return maxWuerfe;
+    }
+
     /**
      * Liefert die Werte für die Statistik
      * @param kennung vom Spieler dessen Statistikwerte gesucht werden sollen
@@ -547,8 +563,8 @@ public class Datenbank {
      */
     public ArrayList<String> spielermitStrafpunkten(int spielID) throws SQLException {
     Statement stmt = verbindung.createStatement();
-    ResultSet resultSet = stmt.executeQuery("SELECT kennung,strafpunkte FROM (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id ="+spielID+
-                                            ") AS \"Spieler im Spiel\"INNER JOIN t_spieler ON fk_t_spieler_kennung=kennung Where Strafpunkte>0 ORDER by strafpunkte ");
+    ResultSet resultSet = stmt.executeQuery("SELECT kennung,strafpunkte FROM (SELECT fk_t_spieler_kennung FROM t_ist_client Where fk_t_spiel_spiel_id =" + spielID +
+            ") AS \"Spieler im Spiel\"INNER JOIN t_spieler ON fk_t_spieler_kennung=kennung Where Strafpunkte>0 ORDER by strafpunkte ");
     ArrayList<String> spielerImSpielmitStrafpunkten = new ArrayList<String>();
     ResultSetMetaData metadata = resultSet.getMetaData();
     int numberOfColumns = metadata.getColumnCount();
@@ -735,6 +751,10 @@ public class Datenbank {
         int haelfte = selectAktuelleHaelfte(spielID);
         // insertRundenergebnis(spielID, );
 
+
+
+        updateAktiv(selectAktiverSpieler(spielID));
+        insertAktiverSpieler(nächsterbeginner);
         //weitere Runden erstellen
         try {
             stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_haelfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + nächsterbeginner + "')");
@@ -973,7 +993,75 @@ public class Datenbank {
         }
     }
 
+    public void updateDurchgang(String kennung, Wuerfel[] wuerfelArray) throws SQLException, IOException {
+        Statement stmt = verbindung.createStatement();
+        int spielID = selectSpielID(kennung);
+        int haelfte = selectAktuelleHaelfte(spielID);
+        int rundennr = selectAktuelleRunde(spielID);
+        int aktuellerDurchgang = selectAktuellerDurchgang(kennung,spielID,haelfte,rundennr);
+
+        Object wuerfel1 = wuerfelArray[0];
+        Object wuerfel2 = wuerfelArray[1];
+        Object wuerfel3 = wuerfelArray[2];
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(wuerfel1);
+        oos.close();
+
+        InputStream is = new ByteArrayInputStream(baos.toByteArray());
+
+        ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+        ObjectOutputStream oos2 = new ObjectOutputStream(baos2);
+        oos2.writeObject(wuerfel2);
+        oos2.close();
+
+        InputStream is2 = new ByteArrayInputStream(baos2.toByteArray());
+
+        ByteArrayOutputStream baos3 = new ByteArrayOutputStream();
+        ObjectOutputStream oos3 = new ObjectOutputStream(baos3);
+        oos3.writeObject(wuerfel3);
+        oos3.close();
+
+        InputStream is3 = new ByteArrayInputStream(baos3.toByteArray());
+
+       PreparedStatement ps = verbindung.prepareStatement("UPDATE t_durchgang SET wuerfel1=? ,wuerfel2=? ,wuerfel3=? Where fk_t_spieler_kennung=?"+
+               " AND fk_t_spiel_spiel_id =? AND fk_t_haelfte_art =? AND fk_t_runde_rundennr=? AND zaehler=?");
+
+        ps.setBinaryStream(1,is);
+        ps.setBinaryStream(2,is2);
+        ps.setBinaryStream(3, is3);
+        ps.setString(4, kennung);
+        ps.setInt(5, spielID);
+        ps.setInt(6, haelfte);
+        ps.setInt(7,rundennr);
+        ps.setInt(8,aktuellerDurchgang);
+        ps.executeUpdate();
+
+        System.out.println("Durchgang geupdatet!!");
+
+
+    }
+
+
     //-------------------------------------------Private Methoden-----------------------------------------------------------
+    private int selectAktuellerDurchgang(String kennung,int spielID,int haelfte,int rundennr) throws SQLException {
+        Statement stmt = verbindung.createStatement();
+        int zaehler=0;
+
+        ResultSet r = stmt.executeQuery("Select zaehler from t_durchgang Where fk_t_spieler_kennung ='"+kennung+"' AND fk_t_spiel_spiel_id ="+ spielID +" AND fk_t_haelfte_art ="+haelfte+" AND fk_t_runde_rundennr="+rundennr+"Order by zaehler DESC limit 1");
+
+        if(r.next()){
+            zaehler=r.getInt(1);
+        }
+        return zaehler;
+    }
+
+
+
+
+
     /**
      * erstellt die erste Runde in einer neuen Hälfte überpüft hierbei um welche Hälfte es sich handelt um
      * automatisch den Beginner dieser Runde hinzuzufügen. Handelt es sich um die ertse Hälfte wird der Spieler der das
@@ -1003,6 +1091,7 @@ public class Datenbank {
         } else {
             try {
                 stmt.executeUpdate("INSERT INTO t_runde (rundennr,fk_t_spiel_spiel_id,fk_t_haelfte_art,beginner) VALUES('" + neueRunde + "','" + spielID + "','" + haelfte + "','" + haelftenverlierer + "')");
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }

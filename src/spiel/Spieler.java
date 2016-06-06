@@ -218,9 +218,17 @@ public class Spieler implements Comparable<Spieler> {
      *
      * @param anzahl Anzahl der Strafpunkte, die der Spieler abgibt.
      */
-    public void popStrafpunkte(int anzahl) {
+    public int popStrafpunkte(int anzahl) {
+        if(this.strafpunkte<anzahl){
+            int puffer = this.strafpunkte;
+            this.strafpunkte=0;
+            return puffer;
+        }else{
+            this.strafpunkte -= anzahl;
+            return anzahl;
+        }
 
-        this.strafpunkte -= anzahl;
+
 
     }
 

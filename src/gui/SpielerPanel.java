@@ -2,6 +2,7 @@ package gui;
 
 import Datenbank.Datenbank;
 import Grafik.Grafik;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import spiel.Spieler;
 import spiel.Wuerfel;
 
@@ -222,11 +223,11 @@ public class SpielerPanel extends JPanel {
 
         //bereits rausgelegte Wuerfel aus dem Becher nehmen und in der Auslage anzeigen.
 
-        if (spieler.getBecher().getWuerfelArray()[0].getDraussen())
+        if (this.spieler.getBecher().getWuerfelArray()[0].getDraussen())
             wuerfelRaus(w1, 0, wuerfelListener);
-        if (spieler.getBecher().getWuerfelArray()[1].getDraussen())
+        if (this.spieler.getBecher().getWuerfelArray()[1].getDraussen())
             wuerfelRaus(w2, 1, wuerfelListener);
-        if (spieler.getBecher().getWuerfelArray()[2].getDraussen())
+        if (this.spieler.getBecher().getWuerfelArray()[2].getDraussen())
             wuerfelRaus(w3, 2, wuerfelListener);
 
         /*
@@ -255,7 +256,17 @@ public class SpielerPanel extends JPanel {
          * Wenn dies der letzte Wurf war, wird der Würfelbutton disabled
          */
         wuerfeln.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
+
+                try {
+                    //ToDo: If(spieler.getName != rundenbeginner)
+                    int maxWuerfe = Datenbank.getInstance().selectMaxWuerfe(Datenbank.getInstance().selectSpielID(spieler.getName()));
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
 
                 if (spieler.getBecher().getAnzahlWuerfe() < 3) {
                     //ToDo: MaxWuerfe anhand des Beginners begrenzen KNA -> Opa's Abfrage
@@ -356,6 +367,7 @@ public class SpielerPanel extends JPanel {
                                 Datenbank.getInstance().updateAktiv(nextPlayer);
                                 Datenbank.getInstance().updateAktiv(spieler.getName());
 
+
                             } catch (SQLException e1) {
                                 e1.printStackTrace();
                             } catch (ClassNotFoundException e1) {
@@ -397,6 +409,7 @@ public class SpielerPanel extends JPanel {
 //                                Datenbank.getInstance().insertDurchgang(spieler.getName(),spieler.getBecher().getWuerfelArray());
 //                            }
 
+                            Datenbank.getInstance().updateDurchgang(spieler.getName(), spieler.getBecher().getWuerfelArray());
                             Datenbank.getInstance().schalteWeiter(Datenbank.getInstance().selectSpielID(spielfeld.getGui().getBesitzerName()));
                             spielfeld.getGui().sendeUpdateSignal(spieler.getName() + " ist fertig...");
                             //ToDo: Nächsten spieler im Infobereich anzeigen!
@@ -406,7 +419,9 @@ public class SpielerPanel extends JPanel {
                             e1.printStackTrace();
                         } /*catch (IOException e1) {
                             e1.printStackTrace();
-                        }*/
+                        }*/ catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
 
                         spielfeld.setCounter(spielfeld.getCounter() - 1);
                         spielfeld.getGui().sendeUpdateCounter(spielfeld.getCounter());
@@ -485,7 +500,7 @@ public class SpielerPanel extends JPanel {
         add(jPBox);
         add(buttons);
 
-        if (spieler.getBecher().getAnzahlWuerfe() == 0) {
+        if (spieler.getBecher().getAnzahlWuerfe() == 0&& spielfeld.getGui().getBesitzerName().equals(spieler.getName())) {
             try {
                 if(Datenbank.getInstance().selectAktuelleHaelfte(Datenbank.getInstance().selectSpielID(spieler.getName())) != 0){
                     Datenbank.getInstance().insertDurchgang(spieler.getName(), spieler.getBecher().getWuerfelArray());
